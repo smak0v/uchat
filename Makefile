@@ -47,7 +47,7 @@ endef
 #=================================RULES=======================================#
 all: install
 
-install: $(SQLITE) $(LIBMXD) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
+install: $(LIBMXD) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
 
 $(LIBMXD): $(LIBMXA)
 
@@ -111,10 +111,12 @@ $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
 
 SQL_D = src/sqlite3
 
-$(SQLITE): 
-	@make -s $(SQL_D)
+# $(SQLITE): 
+# 		@make -sC $(SQL_D)/Makefile
 
 SQL_LIB = $(SQL_D)/sqlite3lib.a
+# 
+# SQL_OBJ = src/sqlite3/sqli
 
 
 #==================================OBJ========================================#
@@ -125,7 +127,7 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c
+SERVER_SRCS				= main.c 
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -134,7 +136,7 @@ $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(SQL_LIB) $(COMMON_OBJS) \
 										$(SERVER_OBJS) $(SQL_LIB) -L $(LIBMXD) -lmx -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 

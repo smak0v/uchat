@@ -8,9 +8,9 @@ SQLITE_LIB = sqlite3lib
 
 SQLITE = $(SQLITE_LIB).a
 
-all: sql
+all: install
 
-sql: $(SQLITE)
+install: $(SQLITE)
 
 $(SQLITE): $(SQLITE_OBJ)
 	cp sqlite3.h ../../inc

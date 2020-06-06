@@ -1,6 +1,6 @@
 // #include "uchat.h"
 #include <stdio.h>
-#include "sqlite3.h"
+#include "uchat.h"
 
 int main(int argc, char* argv[]) {
    sqlite3 *db;
