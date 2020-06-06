@@ -47,7 +47,9 @@ endef
 #=================================RULES=======================================#
 all: install
 
-install: $(LIBMXD) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
+install: $(SQL) $(LIBMXD) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
+
+$(SQL): libsqlite3.a
 
 $(LIBMXD): $(LIBMXA)
 
@@ -104,7 +106,7 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c
+SERVER_SRCS				= main.c sqlite3.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
