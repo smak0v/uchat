@@ -47,9 +47,7 @@ endef
 #=================================RULES=======================================#
 all: install
 
-install: $(SQL) $(LIBMXD) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
-
-$(SQL): libsqlite3.a
+install: $(SQLITE) $(LIBMXD) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
 
 $(LIBMXD): $(LIBMXA)
 
@@ -92,11 +90,32 @@ $(COMMON_OBJD)/%.o: $(SRCD)/common/%.c $(INCS)
 $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
 
 
+#*********SQLITE3****#
+# SQL_OBJD 				= $(OBJD)/sqlite3
+# SQL_OBJ_DIRS 			= $(SQL_OBJD)
+# SQL_OBJS 				= $(addprefix $(OBJD)/, $(SQL):%.c=%.o))
+
+#SRC
+# SQL_SRCS 				= sqlite3.c
+# SQL 					= $(addprefix sqlite3/, $(SQL_SRCS))
+# SQL_INC 				= sqlite3.h
+#DEP
+
 
 
 #*****************************************************************************#
 #**********************************SERVER*************************************#
 #*****************************************************************************#
+
+#=================================SQLITE=======================================#
+
+SQL_D = src/sqlite3
+
+$(SQLITE): 
+	@make -s $(SQL_D)
+
+SQL_LIB = $(SQL_D)/sqlite3lib.a
+
 
 #==================================OBJ========================================#
 SERVER_OBJD				= $(OBJD)/server
@@ -106,7 +125,7 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c sqlite3.c
+SERVER_SRCS				= main.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -116,7 +135,7 @@ $(SERVER_OBJ_DIRS):
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-										$(SERVER_OBJS) -L $(LIBMXD) -lmx -o $@
+										$(SERVER_OBJS) $(SQL_LIB) -L $(LIBMXD) -lmx -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)

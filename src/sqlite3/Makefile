@@ -6,7 +6,7 @@ SQLITE_OBJ = sqlite3.o
 
 SQLITE_LIB = sqlite3lib
 
-SQLITE = ../../$(SQLITE_LIB).a
+SQLITE = $(SQLITE_LIB).a
 
 all: sql
 
