@@ -12,27 +12,18 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-
 #include "libmx.h"
-
+#include "client.h"
+#include "server.h"
 
 // Constants
-#define MX_PORT 8080
-#define MX_MAX 80
-
 #define MX_SA struct sockaddr
-
+#define MX_MAX 80
 
 // Structures
 
 
 // Functions
-// Common
-
-
-
-// Server
-
-
-
-// Client
+//Utils
+bool mx_check_port(char *port);
+bool mx_check_ip(char *ip);

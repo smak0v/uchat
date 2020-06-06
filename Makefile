@@ -68,6 +68,26 @@ uninstall: clean
 
 reinstall: uninstall install
 
+#==================================OBJ========================================#
+COMMON_OBJD				= $(OBJD)/common
+
+COMMON_OBJ_DIRS			= $(COMMON_OBJD)
+
+COMMON_OBJS				= $(addprefix $(OBJD)/, $(COMMON:%.c=%.o))
+
+#===================================SRC=======================================#
+COMMON_SRCS				= check_port.c check_ip.c
+
+COMMON					= $(addprefix common/, $(COMMON_SRCS))
+
+#================================DEPENDENCIES=================================#
+$(COMMON_OBJ_DIRS):
+	@mkdir -p $@
+
+$(COMMON_OBJD)/%.o: $(SRCD)/common/%.c $(INCS)
+	$(call compile_dependency, $<, $@)
+
+$(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
 
 
 
@@ -92,18 +112,15 @@ SERVER					= $(addprefix server/, $(SERVER_SRCS))
 $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
-$(SERVER_APP_NAME): $(SERVER_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) \
+$(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
 										$(SERVER_OBJS) -L $(LIBMXD) -lmx -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
-
-$(SERVER_OBJD)/%.o: $(SRCD)/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
-$(SERVER_OBJS): | $(SERVER_OBJ_DIRS)
+$(SERVER_OBJS): | $(SERVER_OBJ_DIRS) $(COMMON_OBJ_DIRS)
 
 
 
@@ -129,15 +146,12 @@ CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 $(CLIENT_OBJ_DIRS):
 	@mkdir -p $@
 
-$(CLIENT_APP_NAME): $(CLIENT_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) \
+$(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
 										$(CLIENT_OBJS) -L $(LIBMXD) -lmx -o $@
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
-
-$(CLIENT_OBJD)/%.o: $(SRCD)/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
-$(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)
+$(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS) $(COMMON_OBJ_DIRS)

@@ -1,6 +1,8 @@
 #include "uchat.h"
 
 void func(int socket_fd) {
+    // TODO Refactor
+
     char buff[MX_MAX];
     int n;
 
@@ -24,8 +26,8 @@ void func(int socket_fd) {
     }
 }
 
-
-int main() {
+int mx_start_server(int port) {
+    // TODO Refactor
     int socket_fd;
     int connection_fd;
     unsigned int len;
@@ -44,7 +46,7 @@ int main() {
 
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = htonl(INADDR_ANY);
-    server_address.sin_port = htons(MX_PORT);
+    server_address.sin_port = htons(port);
 
     if ((bind(socket_fd, (MX_SA*)&server_address, sizeof(server_address))) != 0) {
         mx_print_error_endl("Socket bind failed!");
@@ -73,6 +75,24 @@ int main() {
     func(connection_fd);
 
     close(socket_fd);
+
+    return 0;
+}
+
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        mx_print_error_endl("uchat_server: must take parameter - port to run");
+        mx_print_error_endl("usage: ./uchat_server PORT");
+        exit(1);
+    }
+    else {
+        if (!mx_check_port(argv[1])) {
+            mx_print_error_endl("uchat_server: not valid port");
+            exit(1);
+        }
+
+        mx_start_server(mx_atoi(argv[1]));
+    }
 
     return 0;
 }
