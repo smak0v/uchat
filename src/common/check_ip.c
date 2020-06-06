@@ -36,8 +36,10 @@ bool mx_check_ip(char *ip) {
     if (!ip)
         return false;
 
-    if (!strcmp(ip, "localhost"))
+    if (!strcmp(ip, "localhost")) {
+        mx_strdel(&ip);
         return true;
+    }
 
     checked = check_ip(ip);
 
