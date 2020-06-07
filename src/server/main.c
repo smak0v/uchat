@@ -91,7 +91,19 @@ int main(int argc, char **argv) {
             exit(1);
         }
 
-        mx_start_server(mx_atoi(argv[1]));
+        long int e[50];
+        long int d[50];
+        long int m[50];
+        long int en[50];
+        mx_encryption_key(e, d);
+        for (int i = 0; i < 50; ++i)
+            mx_printint_endl(e[i]);
+        mx_printstr_endl("--------------------");
+        for (int i = 0; i < 50; ++i)
+            mx_printint_endl(d[i]);
+        mx_encrypt("Hello", e, m, en);
+        mx_decrypt(d, m, en);
+        // mx_start_server(mx_atoi(argv[1]));
     }
 
     return 0;
