@@ -1,22 +1,42 @@
-// #include "uchat.h"
 #include <stdio.h>
 #include "uchat.h"
 
-int main(int argc, char* argv[]) {
-   sqlite3 *db;
-   // char *zErrMsg = 0;
-   int rc;
-   if (argc && argv)
-      printf("1");
 
-   rc = sqlite3_open("test.db", &db);
-
-   if( rc ) {
-      fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-      return(0);
-   } else {
-      fprintf(stderr, "Opened database successfully\n");
+static int callback(void *data, int argc, char **argv, char **azColName){
+   int i;
+   fprintf(stderr, "%s: ", (const char*)data);
+   
+   for(i = 0; i<argc; i++){
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
    }
-   sqlite3_close(db);
+   
+   printf("\n");
+   return 0;
+}
+
+int main() {
+   sqlite3 *db = mx_opendb("test.db");
+
+   mx_insert_user_in_db(db, "loh", "pidr");
+   
+
+   t_user *usr = mx_get_usertable(db);
+
+   printf("%d \t %s \t %s \n", usr->user_id, usr->user_login, usr->user_pass);
+   mx_printstr("\n");
+   mx_insert_user_in_db(db, "log", "in");
+
+   // t_user *next = mx_get_user_by_login(db, "log");
+   char *sql = "SELECT * from USER";
+   char *zErrMsg = 0;
+   const char *data = "callback foo";
+
+   int rc = 0;
+   rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+   // printf("%d \t %s \t %s \n", next->user_id, next->user_login, next->user_pass);
+// mx_printstr("suka");
+   mx_closedb(db);
+
 }
 
