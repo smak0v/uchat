@@ -91,17 +91,7 @@ int main(int argc, char **argv) {
             exit(1);
         }
 
-        char *password = "secret_password";
-        char *keyword = "soska";
-
-        char *key = mx_generate_key(password, keyword);
-        key = NULL;
-        // mx_printstr_endl(key);
-        // char *encrypted = mx_encrypt(password, key);
-        // mx_printstr_endl(encrypted);
-        // char *decrypted = mx_decrypt(encrypted, key);
-        // mx_printstr_endl(decrypted);
-        // mx_start_server(mx_atoi(argv[1]));
+        mx_start_server(mx_atoi(argv[1]));
     }
 
     return 0;

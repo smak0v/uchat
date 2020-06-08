@@ -76,7 +76,7 @@ COMMON_OBJ_DIRS			= $(COMMON_OBJD)
 COMMON_OBJS				= $(addprefix $(OBJD)/, $(COMMON:%.c=%.o))
 
 #===================================SRC=======================================#
-COMMON_SRCS				= check_port.c check_ip.c vigenere_cipher.c
+COMMON_SRCS				= check_port.c check_ip.c encryption.c
 
 COMMON					= $(addprefix common/, $(COMMON_SRCS))
 
