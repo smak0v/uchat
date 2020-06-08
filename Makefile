@@ -12,7 +12,7 @@ CC						= clang
 DIR						= uchat
 
 #=================================FLAGS=======================================#
-C_FLAGS					= -std=c11 $(addprefix -W, all extra pedantic error)
+C_FLAGS					= -std=c11 -pthread $(addprefix -W, all extra error)
 
 ADD_FLAGS				= -g
 
@@ -28,7 +28,7 @@ LIBMXI					:= $(LIBMXD)/inc
 #==================================INC========================================#
 INCD					= inc
 
-INC						= uchat.h
+INC						= uchat.h server.h
 
 INCS					= $(addprefix $(INCD)/, $(INC))
 
@@ -104,7 +104,7 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c
+SERVER_SRCS				= main.c threads.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 

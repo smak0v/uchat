@@ -1,38 +1,54 @@
 #include "uchat.h"
+#include "server.h"
 
-void func(int socket_fd) {
-    // TODO Refactor
-
+void *mx_communicate(void *data) {
+    t_comm *connection = (t_comm *)data;
     char buff[MX_MAX];
-    int n;
+    int socket_fd = connection->socket_fd;
+    int connection_fd = connection->connection_fd;
+    char *status = connection->status;
 
-    while(1) {
+    socket_fd = 0;
+    free(connection);
+    while (1) {
         bzero(buff, MX_MAX);
-        read(socket_fd, buff, sizeof(buff));
-        mx_printstr_endl(buff);
-
-        bzero(buff, MX_MAX);
-        n = 0;
-
-        while ((buff[n++] = getchar()) != '\n')
-            ;
-
-        write(socket_fd, buff, sizeof(buff));
-
-        if (strncmp("exit", buff, 4) == 0) {
-            mx_printstr_endl("Server Exit!");
-            break;
+        read(connection_fd, buff, sizeof(buff));
+        if (mx_strcmp(buff, "exit\n") == 0) {
+            close(connection_fd);
+            *status = 0;
+            printf("Connection closed\n");
+            pthread_exit(NULL);
         }
+        mx_printstr_endl(buff);
+        // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
+    }
+}
+
+void accept_clients(int socket_fd) {
+    int connection_fd;
+    unsigned int len;
+    struct sockaddr_in cli;
+    pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
+    char *status = malloc(sizeof(char) * MX_MAX_THREADS);;
+
+    mx_memset(status, 0, MX_MAX_THREADS);
+    while (1) {
+        printf("Ready for new client\n");
+        len = sizeof(cli);
+        connection_fd = accept(socket_fd, (MX_SA*)&cli, &len);
+        if (connection_fd < 0) {
+            mx_print_error_endl("Server acccept failed!");
+            exit(1);
+        }
+        else
+            mx_thread_manager(&threads, &status, socket_fd, connection_fd);
     }
 }
 
 int mx_start_server(int port) {
     // TODO Refactor
     int socket_fd;
-    int connection_fd;
-    unsigned int len;
     struct sockaddr_in server_address;
-    struct sockaddr_in cli;
 
     socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (socket_fd < 0) {
@@ -62,17 +78,7 @@ int mx_start_server(int port) {
     else
         mx_printstr_endl("Server listening!");
 
-    len = sizeof(cli);
-
-    connection_fd = accept(socket_fd, (MX_SA*)&cli, &len);
-    if (connection_fd < 0) {
-        mx_print_error_endl("Server acccept failed!");
-        exit(1);
-    }
-    else
-        mx_printstr_endl("server acccept the client!");
-
-    func(connection_fd);
+    accept_clients(socket_fd);
 
     close(socket_fd);
 
@@ -94,5 +100,5 @@ int main(int argc, char **argv) {
         mx_start_server(mx_atoi(argv[1]));
     }
 
-    return 0;
+    pthread_exit(NULL);
 }
