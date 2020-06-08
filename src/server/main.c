@@ -91,18 +91,16 @@ int main(int argc, char **argv) {
             exit(1);
         }
 
-        long int e[50];
-        long int d[50];
-        long int m[50];
-        long int en[50];
-        mx_encryption_key(e, d);
-        for (int i = 0; i < 50; ++i)
-            mx_printint_endl(e[i]);
-        mx_printstr_endl("--------------------");
-        for (int i = 0; i < 50; ++i)
-            mx_printint_endl(d[i]);
-        mx_encrypt("Hello", e, m, en);
-        mx_decrypt(d, m, en);
+        char *password = "secret_password";
+        char *keyword = "soska";
+
+        char *key = mx_generate_key(password, keyword);
+        key = NULL;
+        // mx_printstr_endl(key);
+        // char *encrypted = mx_encrypt(password, key);
+        // mx_printstr_endl(encrypted);
+        // char *decrypted = mx_decrypt(encrypted, key);
+        // mx_printstr_endl(decrypted);
         // mx_start_server(mx_atoi(argv[1]));
     }
 
