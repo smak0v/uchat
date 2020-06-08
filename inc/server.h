@@ -6,7 +6,6 @@
 typedef struct communication t_comm;
 
 struct communication {
-    int socket_fd;
     int connection_fd;
     char *status;
 };
@@ -14,5 +13,5 @@ struct communication {
 
 //FUNCTIONS
 void mx_thread_manager(pthread_t **threads_prt, char **status_ptr,
-                        int socket_fd, int connection_fd);
+                       int connection_fd);
 void *mx_communicate(void *data);

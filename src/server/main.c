@@ -4,11 +4,9 @@
 void *mx_communicate(void *data) {
     t_comm *connection = (t_comm *)data;
     char buff[MX_MAX];
-    int socket_fd = connection->socket_fd;
     int connection_fd = connection->connection_fd;
     char *status = connection->status;
 
-    socket_fd = 0;
     free(connection);
     while (1) {
         bzero(buff, MX_MAX);
@@ -41,7 +39,7 @@ void accept_clients(int socket_fd) {
             exit(1);
         }
         else
-            mx_thread_manager(&threads, &status, socket_fd, connection_fd);
+            mx_thread_manager(&threads, &status, connection_fd);
     }
 }
 
