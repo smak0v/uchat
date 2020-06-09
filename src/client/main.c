@@ -57,6 +57,8 @@ int mx_start_client(char *ip, int port) {
 }
 
 int main(int argc, char **argv) {
+    int status = MX_SUCCESS;
+
     if (argc < 3) {
         mx_print_error("uchat: must take two parameters -");
         mx_print_error_endl("server IP address and port");
@@ -72,9 +74,8 @@ int main(int argc, char **argv) {
             mx_print_error_endl("uchat: not valid port");
             exit(1);
         }
-
-        mx_start_client(argv[1], mx_atoi(argv[2]));
+        status = mx_init_client(argc, argv);
+        // mx_start_client(argv[1], mx_atoi(argv[2]));
     }
-
-    return 0;
+    return status;
 }

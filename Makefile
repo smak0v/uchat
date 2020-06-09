@@ -18,6 +18,10 @@ ADD_FLAGS				= -g
 
 LINKER_FLAGS			=
 
+GTK_CFLAGS 				= `pkg-config --cflags gtk+-3.0`
+
+GTK_LIBS				= `pkg-config --libs gtk+-3.0`
+
 #=================================LIBMX=======================================#
 LIBMXD					= libmx
 
@@ -40,7 +44,7 @@ SRCD					= src
 
 #================================FUNCTIONS====================================#
 define compile_dependency
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) -c $(1) -o $(2) -I $(INCD) -I $(LIBMXI)
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(GTK_CFLAGS) -c $(1) -o $(2) -I $(INCD) -I $(LIBMXI)
 	@printf "\r\33[2K$(DIR)\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
 endef
 
@@ -138,7 +142,7 @@ CLIENT_OBJ_DIRS			= $(CLIENT_OBJD)
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c
+CLIENT_SRCS				= main.c init.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -148,7 +152,7 @@ $(CLIENT_OBJ_DIRS):
 
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-										$(CLIENT_OBJS) -L $(LIBMXD) -lmx -o $@
+							$(CLIENT_OBJS) -L $(LIBMXD) -lmx -o $@ $(GTK_LIBS)
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
