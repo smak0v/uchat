@@ -114,7 +114,7 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c dbfunc.c
+SERVER_SRCS				= main.c dbfunc.c db_user.c create_table.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
