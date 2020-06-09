@@ -4,10 +4,11 @@
 int main() {
    sqlite3 *db = mx_opendb("test.db");
 
-   mx_insert_user_in_db(db, "admin1", "privet1111");
-   mx_insert_user_in_db(db, "adm2", "poka2222");
-   mx_insert_user_in_db(db, "adm3", "admin3333");
+   mx_add_user(db, "admin1", "privet1111");
+   mx_add_user(db, "adm2", "poka2222");
+   mx_add_user(db, "adm3", "admin3333");
    
+   mx_printstr("=============================== USER TABLE\n\n");
 
    // t_user *usr = mx_get_usertable(db);
 
@@ -18,7 +19,7 @@ int main() {
 
    mx_print_db(db, "USER");
    // printf("%d \t %s \t %s \n", next->user_id, next->user_login, next->user_pass);
-   mx_printstr("===============================\n\n");
+   mx_printstr("===============================deleted adm2 and del admin1\n\n");
 
    mx_delete_user_by_login(db, "adm2");
    mx_print_db(db, "USER");
@@ -27,6 +28,13 @@ int main() {
    mx_printstr("===============================\n\n");
    
    mx_print_db(db, "USER");
+
+   mx_printstr("=============================== GROUP_MEMBER TABLE\n\n");
+   mx_add_group_member(db, 1, 123);
+   mx_add_group_member(db, 2, 222);
+   mx_add_group_member(db, 3, 333333);
+
+   mx_print_db(db, "GROUP_MEMBERS");
 
    mx_closedb(db);
 
