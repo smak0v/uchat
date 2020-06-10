@@ -16,6 +16,7 @@
 #include "libmx.h"
 #include "client.h"
 #include "server.h"
+#include "json.h"
 
 // Constants
 #define MX_SA struct sockaddr

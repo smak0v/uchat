@@ -10,8 +10,7 @@ struct communication {
     char *status;
 };
 
-
 //FUNCTIONS
-void mx_thread_manager(pthread_t **threads_prt, char **status_ptr,
+void mx_thread_manager(pthread_t **threads_ptr, char **status_ptr,
                        int connection_fd);
 void *mx_communicate(void *data);
