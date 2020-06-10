@@ -5,8 +5,10 @@ void mx_add_group_member(sqlite3 *db, int user_id, int group_id) {
 	int rv = 0;
 
 	rv = sqlite3_prepare_v2(db, 
-		"INSERT INTO GROUP_MEMBERS(USER_ID, GROUP_ID)VALUES(?1, ?2);",
+		"INSERT INTO GROUP_MEMBERS(USER_ID, GROUP_ID)VALUES(?1, ?2);"
+		"INSERT INTO GRP(GROUP_ID)VALUES(?3);",
 		-1, &stmt, NULL);
+		// INSERT INTO GROUP(GROUP_ID)VALUES(?2);",
 	if (rv == SQLITE_ERROR) {
 		fprintf(stderr, "Can't insert group member into db: %s\n", 
 				sqlite3_errmsg(db));
@@ -18,6 +20,7 @@ void mx_add_group_member(sqlite3 *db, int user_id, int group_id) {
 		fprintf(stderr, "Can't insert group member into db: %s\n", 
 				sqlite3_errmsg(db));
 	sqlite3_finalize(stmt);
+	mx_add_group(db, group_id);
 }
 
 static t_gr_members *for_get_member(sqlite3_stmt *stmt) {
@@ -75,4 +78,5 @@ void mx_update_gr_members(sqlite3 *db, int group_member_id,
 	if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
 		fprintf(stderr, "Can't update user in db: %s\n", sqlite3_errmsg(db));
 	sqlite3_finalize(stmt);
+	mx_add_group(db, group_id);
 }

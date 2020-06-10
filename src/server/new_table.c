@@ -17,8 +17,8 @@ void mx_new_table_group_members(sqlite3 *database) {
 }
 
 void mx_new_table_group(sqlite3 *database) {
-	sqlite3_exec(database, "CREATE TABLE GROUP(" \
-				 "GROUP_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);", 
+	sqlite3_exec(database, "CREATE TABLE GRP(" \
+				 "GROUP_ID INTEGER PRIMARY KEY NOT NULL);", 
 				  0, 0, 0);
 }
 

@@ -46,8 +46,12 @@ void mx_delete_by_user_id(sqlite3 *db, int user_id); // del group member by user
 void mx_update_gr_members(sqlite3 *db, int group_member_id,
 							int user_id, int group_id);
 
-
 //GROUP table
+void mx_add_group(sqlite3 *db, int group_id);
+void mx_delete_group_id(sqlite3 *db, int group_id);
+void mx_update_group_id(sqlite3 *db, int group_id, int new_id); 
+// int mx_get_group_id(sqlite3 *db, int group_id);
+int mx_get_group_id(sqlite3 *db);
 
 // DIALOG table
 t_dialog *mx_get_by_dialog_id(sqlite3 *db, int dialog_id); // returns t_dialog data from dialog table
