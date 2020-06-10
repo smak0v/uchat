@@ -46,7 +46,7 @@ void accept_clients(int socket_fd) {
 
 int mx_start_server(int port) {
     int socket_fd;
-    struct sockaddr_in server_address;
+    struct sockaddr_in server_addr;
 
     socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (socket_fd < 0) {
