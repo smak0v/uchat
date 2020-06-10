@@ -14,7 +14,7 @@ DIR						= uchat
 #=================================FLAGS=======================================#
 C_FLAGS					= -std=c11 $(addprefix -W, all extra pedantic error)
 
-ADD_FLAGS				= -g
+ADD_FLAGS				= -g -Ijson-c
 
 LINKER_FLAGS			=
 
@@ -104,7 +104,7 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c
+SERVER_SRCS				= main.c threads.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -114,7 +114,8 @@ $(SERVER_OBJ_DIRS):
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-										$(SERVER_OBJS) -L $(LIBMXD) -lmx -o $@
+										$(SERVER_OBJS) -L $(LIBMXD) -lmx \
+										-Ljson-c -ljson-c  -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)

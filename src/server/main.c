@@ -1,40 +1,52 @@
 #include "uchat.h"
 
-void mx_handle_connection(int socket_fd) {
+void *mx_communicate(void *data) {
+    t_comm *connection = (t_comm *)data;
     char buff[MX_MAX];
-    int n;
+    int connection_fd = connection->connection_fd;
+    char *status = connection->status;
 
+    free(connection);
     while (1) {
         bzero(buff, MX_MAX);
-        read(socket_fd, buff, sizeof(buff));
-        mx_printstr_endl(buff);
-
-        bzero(buff, MX_MAX);
-        n = 0;
-
-        while ((buff[n++] = getchar()) != '\n')
-            ;
-
-        write(socket_fd, buff, sizeof(buff));
-
-        if (strncmp("exit", buff, 4) == 0) {
-            mx_printstr_endl("Server Exit!");
-            break;
+        read(connection_fd, buff, sizeof(buff));
+        if (mx_strcmp(buff, "exit\n") == 0) {
+            close(connection_fd);
+            *status = 0;
+            printf("Connection closed\n");
+            pthread_exit(NULL);
         }
+        mx_printstr_endl(buff);
+        // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
+    }
+}
+
+void accept_clients(int socket_fd) {
+    int connection_fd;
+    unsigned int len;
+    struct sockaddr_in client_addr;
+    pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
+    char *status = malloc(sizeof(char) * MX_MAX_THREADS);
+
+    mx_memset(status, 0, MX_MAX_THREADS);
+    while (1) {
+        printf("Ready for new client\n");
+        len = sizeof(client_addr);
+        connection_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
+        if (connection_fd < 0)
+            mx_terminate("Server acccept failed!");
+        mx_thread_manager(&threads, &status, connection_fd);
     }
 }
 
 int mx_start_server(int port) {
     int socket_fd;
-    int connection_fd;
-    unsigned int client_addr_len;
     struct sockaddr_in server_addr;
-    struct sockaddr_in client_addr;
 
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         mx_terminate("Socket creation failed!");
     mx_printstr_endl("Socket successfully created!");
-    
+
     bzero(&server_addr, sizeof(server_addr));
 
     server_addr.sin_family = AF_INET;
@@ -49,13 +61,7 @@ int mx_start_server(int port) {
         mx_terminate("Listen failed!");
     mx_printstr_endl("Server listening!");
 
-    client_addr_len = sizeof(client_addr);
-    connection_fd = accept(socket_fd, (MX_SA *)&client_addr, &client_addr_len);
-    if (connection_fd < 0)
-        mx_terminate("Server acccept failed!");
-    mx_printstr_endl("Server acccept the client!");
-
-    mx_handle_connection(connection_fd);
+    accept_clients(socket_fd);
 
     close(socket_fd);
 

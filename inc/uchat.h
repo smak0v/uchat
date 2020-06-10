@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <pthread.h>
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -15,6 +16,7 @@
 #include "libmx.h"
 #include "client.h"
 #include "server.h"
+#include "json.h"
 
 // Constants
 #define MX_SA struct sockaddr
