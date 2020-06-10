@@ -19,7 +19,7 @@ ADD_FLAGS				= -g
 LINKER_FLAGS			=
 
 #=================================LIBMX=======================================#
-LIBMXD					= libmx
+LIBMXD					= libs/libmx
 
 LIBMXA					:= $(LIBMXD)/libmx.a
 
