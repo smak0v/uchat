@@ -21,9 +21,13 @@ typedef struct s_dialog {
 } t_dialog;
 
 typedef struct s_msg {
+	int id;
 	int group_id;
 	int sender;
 	char *msg;
+	int time;
+	bool edited;
+	bool read;
 } t_msg;
 
 
@@ -69,7 +73,12 @@ void mx_update_by_dialog_id(sqlite3 *db, int dialog_id,
 							int user_id1, int user_id2); // update by dialog_id user1 user2; 
 
 // MSG table
-t_msg *mx_add_msg(sqlite3 *db, char *msg_body, int group_id, int sender); // need to edit!!!
+// t_msg *mx_add_msg(sqlite3 *db, char *msg_body, int group_id, int sender); // need to edit!!!
+void mx_add_msg(sqlite3 *db, t_msg *m); // need to edit!!!
+// char *mx_get_msg_by_id(sqlite3 *db, int id); // returns msg by ID 
+t_msg *mx_get_msg_by_id(sqlite3 *db, int id); // returns msg by ID 
+void mx_delete_msg_by_id(sqlite3 *db, int id);
+void mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id);
 
 // UTILS
 void mx_print_db(sqlite3 *db, char *table); // print TABLE NAME 

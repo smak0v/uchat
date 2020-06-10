@@ -7,8 +7,50 @@ int main() {
    // mx_add_user(db, "admin1", "privet1111");
    // mx_add_user(db, "adm2", "poka2");
    // mx_add_user(db, "adm3", "admin3333");
-   mx_add_msg(db, "sorok dva", 1, 123);
+   t_msg *m = malloc(sizeof(t_msg));
+   m->group_id = 2;
+   m->sender = 123;
+   m->msg = strdup("hello");
+   m->time = 213;
+   m->edited = true;
+   m->read = false;
+
+   t_msg *next = malloc(sizeof(t_msg));
+
+   next->group_id = 1337;
+   next->sender = 1338;
+   next->msg = strdup("Hi! What's up ????");
+   next->time = 1232131;
+   next->edited = false;
+   next->read = true;
+
+   mx_add_msg(db, m);
+   mx_add_msg(db, next);
    mx_print_db(db, "MSG");
+
+   t_msg *new = mx_get_msg_by_id(db, 2);
+   mx_printint(new->id);
+   mx_printstr("\n");
+   mx_printint(new->group_id);
+   mx_printstr("\n");
+   mx_printint(new->sender);
+   mx_printstr("\n");
+   mx_printstr_endl(new->msg);
+   mx_printint(new->time);
+   mx_printstr("\n");
+   mx_printint(new->edited);
+   mx_printstr("\n");
+   mx_printint(new->read);
+   mx_printstr("\n");
+
+   mx_delete_msg_by_id(db, 1);
+   mx_print_db(db, "MSG");
+   mx_update_msg_by_id(db, m, 2);
+   mx_print_db(db, "MSG");
+
+
+
+
    // mx_printstr("===============================\n\n");
    // int i = mx_get_user_id_by_login(db, "adm2");
    // mx_printint(i);
