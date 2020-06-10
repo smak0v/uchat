@@ -12,14 +12,14 @@ CC						= clang
 DIR						= uchat
 
 #=================================FLAGS=======================================#
-C_FLAGS					= -std=c11 $(addprefix -W, all extra pedantic error)
+C_FLAGS					= -std=c11 -pthread $(addprefix -W, all extra error)
 
 ADD_FLAGS				= -g -Ijson-c
 
 LINKER_FLAGS			=
 
 #=================================LIBMX=======================================#
-LIBMXD					= libmx
+LIBMXD					= libs/libmx
 
 LIBMXA					:= $(LIBMXD)/libmx.a
 
@@ -28,7 +28,7 @@ LIBMXI					:= $(LIBMXD)/inc
 #==================================INC========================================#
 INCD					= inc
 
-INC						= uchat.h
+INC						= uchat.h server.h
 
 INCS					= $(addprefix $(INCD)/, $(INC))
 

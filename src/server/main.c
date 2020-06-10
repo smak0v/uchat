@@ -1,16 +1,18 @@
 #include "uchat.h"
+#include "server.h"
 
 void *mx_communicate(void *data) {
     t_comm *connection = (t_comm *)data;
     char buff[MX_MAX];
     int connection_fd = connection->connection_fd;
     char *status = connection->status;
+    int bytes_read = 0;
 
     free(connection);
     while (1) {
         bzero(buff, MX_MAX);
-        read(connection_fd, buff, sizeof(buff));
-        if (mx_strcmp(buff, "exit\n") == 0) {
+        bytes_read = read(connection_fd, buff, sizeof(buff));
+        if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
             close(connection_fd);
             *status = 0;
             printf("Connection closed\n");
@@ -60,7 +62,7 @@ int mx_start_server(int port) {
     if ((listen(socket_fd, 5)) != 0)
         mx_terminate("Listen failed!");
     mx_printstr_endl("Server listening!");
-
+  
     accept_clients(socket_fd);
 
     close(socket_fd);
@@ -79,5 +81,5 @@ int main(int argc, char **argv) {
         mx_start_server(mx_atoi(argv[1]));
     }
 
-    return 0;
+    pthread_exit(NULL);
 }
