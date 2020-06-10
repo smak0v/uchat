@@ -1,5 +1,4 @@
 #include "uchat.h"
-#include "server.h"
 
 static int get_free_thread(char *status, int *counter) {
     for (int j = 0; j < MX_MAX_THREADS; j++)
@@ -19,7 +18,8 @@ t_comm *init_data(int connection_fd, char *status) {
     return data;
 }
 
-void mx_thread_manager(pthread_t **threads_ptr, char **status_ptr, int connection_fd) {
+void mx_thread_manager(pthread_t **threads_ptr,
+                       char **status_ptr, int connection_fd) {
     t_comm *data = NULL;
     int counter = 0;
     int free_thread = -1;

@@ -26,21 +26,18 @@ void *mx_communicate(void *data) {
 void accept_clients(int socket_fd) {
     int connection_fd;
     unsigned int len;
-    struct sockaddr_in cli;
+    struct sockaddr_in client_addr;
     pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
-    char *status = malloc(sizeof(char) * MX_MAX_THREADS);;
+    char *status = malloc(sizeof(char) * MX_MAX_THREADS);
 
     mx_memset(status, 0, MX_MAX_THREADS);
     while (1) {
         printf("Ready for new client\n");
-        len = sizeof(cli);
-        connection_fd = accept(socket_fd, (MX_SA*)&cli, &len);
-        if (connection_fd < 0) {
-            mx_print_error_endl("Server acccept failed!");
-            exit(1);
-        }
-        else
-            mx_thread_manager(&threads, &status, connection_fd);
+        len = sizeof(client_addr);
+        connection_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
+        if (connection_fd < 0)
+            mx_terminate("Server acccept failed!");
+        mx_thread_manager(&threads, &status, connection_fd);
     }
 }
 
@@ -48,18 +45,10 @@ int mx_start_server(int port) {
     int socket_fd;
     struct sockaddr_in server_addr;
 
-    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (socket_fd < 0) {
-        mx_print_error_endl("Socket creation failed!");
-        exit(1);
-    }
-    else
-        mx_printstr_endl("Socket successfully created!");
-
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         mx_terminate("Socket creation failed!");
     mx_printstr_endl("Socket successfully created!");
-    
+
     bzero(&server_addr, sizeof(server_addr));
 
     server_addr.sin_family = AF_INET;
@@ -70,6 +59,10 @@ int mx_start_server(int port) {
         mx_terminate("Socket bind failed!");
     mx_printstr_endl("Socket successfully binded!");
 
+    if ((listen(socket_fd, 5)) != 0)
+        mx_terminate("Listen failed!");
+    mx_printstr_endl("Server listening!");
+  
     accept_clients(socket_fd);
 
     close(socket_fd);
