@@ -37,11 +37,13 @@ static int callback(void *data, int argc, char **argv, char **azColName){
 }
 
 void mx_print_db(sqlite3 *db, char *table) {
-
     char *sql = mx_strjoin("SELECT * from ", table);
     char *zErrMsg = 0;
     const char *data = table;
     int rc = 0;
 
+   mx_printstr("===============================\n\n");
     rc = sqlite3_exec(db, sql, callback, (void *)data, &zErrMsg);
+   mx_printstr("===============================\n");
+
 }
