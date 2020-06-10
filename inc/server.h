@@ -3,7 +3,7 @@
 #include "sqlite3.h"
 
 typedef struct s_user {
-	unsigned int user_id;
+	int user_id;
 	const char *user_login;
 	const char *user_pass;
 } t_user;
@@ -33,7 +33,9 @@ void mx_delete_user_by_id(sqlite3 *db, int user_id); // del user by user_id
 // GROUP_MEMBERS table 
 t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, char *gr_member_id); // returns t_gr_members data from db 
 void mx_add_group_member(sqlite3 *db, int user_id, int group_id); // add group member in db
-
+void mx_delete_by_gr_mem_id(sqlite3 *db, int group_members_id); // del group member by group_members_id
+void mx_delete_by_gr_id(sqlite3 *db, int group_id); // del group member by group_id
+void mx_delete_by_user_id(sqlite3 *db, int user_id); // del group member by user_id;
 
 //GROUP table
 
