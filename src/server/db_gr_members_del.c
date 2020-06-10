@@ -7,6 +7,7 @@ void mx_delete_by_gr_mem_id(sqlite3 *db, int group_members_id) {
 	rv = sqlite3_prepare_v2(db, 
 		"DELETE FROM GROUP_MEMBERS WHERE GROUP_MEMBERS_ID = ?1;",
 		-1, &stmt, NULL);
+	// also need to del from GROUP AND USERS
 	sqlite3_bind_int(stmt, 1, group_members_id);
 	if (rv == SQLITE_ERROR) {
 		fprintf(stderr, "Can't delete group_member_id from db: %s\n",
@@ -23,7 +24,8 @@ void mx_delete_by_user_id(sqlite3 *db, int user_id) {
 	sqlite3_stmt *stmt;
 
 	rv = sqlite3_prepare_v2(db, 
-		"DELETE FROM GROUP_MEMBERS WHERE USER_ID = ?1;",
+		"DELETE FROM GROUP_MEMBERS WHERE USER_ID = ?1;\
+		DELETE FROM USER WHERE USER_ID = ?1",
 		-1, &stmt, NULL);
 	sqlite3_bind_int(stmt, 1, user_id);
 	if (rv == SQLITE_ERROR) {
@@ -41,7 +43,8 @@ void mx_delete_by_gr_id(sqlite3 *db, int group_id) {
 	sqlite3_stmt *stmt;
 
 	rv = sqlite3_prepare_v2(db, 
-		"DELETE FROM GROUP_MEMBERS WHERE GROUP_ID = ?1;",
+		"DELETE FROM GROUP_MEMBERS WHERE GROUP_ID = ?1;\
+		DELETE FROM GROUP WHERE GROUP_ID = ?1",
 		-1, &stmt, NULL);
 	sqlite3_bind_int(stmt, 1, group_id);
 	if (rv == SQLITE_ERROR) {

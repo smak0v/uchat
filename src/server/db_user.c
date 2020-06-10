@@ -73,13 +73,13 @@ t_user *mx_get_user_by_login(sqlite3 *db, char *user_login) {
     return for_get_user(stmt);
 }
 
-t_user *mx_get_user_by_user_id(sqlite3 *db, char *user_id) {
+t_user *mx_get_user_by_user_id(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt;
     int rv = 0;
 
     sqlite3_prepare_v2(db, "SELECT * FROM USER WHERE USER_ID = ?1",
         -1, &stmt, NULL);
-    sqlite3_bind_text(stmt, 1, user_id, -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 1, user_id);
     if (rv != SQLITE_OK) {
 		fprintf(stderr, "Can't get user from db: %s\n", sqlite3_errmsg(db));
 		return NULL;

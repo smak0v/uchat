@@ -29,29 +29,35 @@ int main() {
    
    // mx_print_db(db, "USER");
 
-   mx_printstr("=============================== GROUP_MEMBER TABLE\n\n");
+   // mx_printstr("=============================== GROUP_MEMBER TABLE\n\n");
    mx_add_group_member(db, 1, 123);
    mx_add_group_member(db, 2, 222);
    mx_add_group_member(db, 3, 333333);
 
    mx_print_db(db, "GROUP_MEMBERS");
 
-   // mx_printstr("=============================== GROUP_MEMBER TABLE\n\n");
+   mx_printstr("=============================== GROUP_MEMBER TABLE\n\n");
    // mx_delete_by_gr_mem_id(db, 2);
    // mx_print_db(db, "GROUP_MEMBERS");
    // mx_printstr("=============================== GROUP_MEMBER TABLE add 1 mem and dell 2-3 \n\n");
-   
+   mx_add_dialog(db, 2, 3);
+   mx_add_dialog(db, 1, 3);
    // mx_add_group_member(db, 1234, 1);
 
    // mx_print_db(db, "GROUP_MEMBERS");
 
-   mx_delete_by_gr_id(db, 333333);
-   mx_delete_by_user_id(db, 2);
-   mx_printstr("=============================== GROUP_MEMBER TABLE end \n\n");
+   // mx_delete_by_gr_id(db, 333333);
+   // mx_delete_by_user_id(db, 2);
+   // mx_printstr("=============================== GROUP_MEMBER TABLE end \n\n");
 
 
    mx_print_db(db, "GROUP_MEMBERS");
-   // mx_printstr("=============================== \n\n");
+   mx_printstr("=============================== \n\n");
+   // mx_update_by_dialog_id(db, 2, 12, 3);
+   mx_update_gr_members(db, 2, 123, 777);
+   mx_print_db(db, "GROUP_MEMBERS");
+   // mx_print_db(db, "DIALOG");
+
 
    mx_closedb(db);
 
