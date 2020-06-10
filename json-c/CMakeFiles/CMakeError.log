@@ -1,0 +1,191 @@
+Determining if the include file endian.h exists failed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_304ab/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_304ab.dir/build.make CMakeFiles/cmTC_304ab.dir/build
+Building C object CMakeFiles/cmTC_304ab.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_304ab.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: 'endian.h' file not found
+#include <endian.h>
+         ^~~~~~~~~~
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_304ab.dir/CheckIncludeFile.c.o] Error 1
+make: *** [cmTC_304ab/fast] Error 2
+
+
+
+Determining if the _isnan exist failed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_64b9a/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_64b9a.dir/build.make CMakeFiles/cmTC_64b9a.dir/build
+Building C object CMakeFiles/cmTC_64b9a.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_64b9a.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: use of undeclared identifier '_isnan'
+  return ((int*)(&_isnan))[argc];
+                  ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_64b9a.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTC_64b9a/fast] Error 2
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _isnan
+  return ((int*)(&_isnan))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the _finite exist failed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_00892/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_00892.dir/build.make CMakeFiles/cmTC_00892.dir/build
+Building C object CMakeFiles/cmTC_00892.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_00892.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: use of undeclared identifier '_finite'
+  return ((int*)(&_finite))[argc];
+                  ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_00892.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTC_00892/fast] Error 2
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <float.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _finite
+  return ((int*)(&_finite))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the _doprnt exist failed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_57925/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_57925.dir/build.make CMakeFiles/cmTC_57925.dir/build
+Building C object CMakeFiles/cmTC_57925.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_57925.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: use of undeclared identifier '_doprnt'; did you mean 'fdopen'?
+  return ((int*)(&_doprnt))[argc];
+                  ^~~~~~~
+                  fdopen
+/usr/include/stdio.h:214:7: note: 'fdopen' declared here
+FILE    *fdopen(int, const char *) __DARWIN_ALIAS_STARTING(__MAC_10_6, __IPHONE_2_0, __DARWIN_ALIAS(fdopen));
+         ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_57925.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTC_57925/fast] Error 2
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _doprnt
+  return ((int*)(&_doprnt))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the uselocale exist failed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f1c34/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_f1c34.dir/build.make CMakeFiles/cmTC_f1c34.dir/build
+Building C object CMakeFiles/cmTC_f1c34.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_f1c34.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: use of undeclared identifier 'uselocale'; did you mean 'setlocale'?
+  return ((int*)(&uselocale))[argc];
+                  ^~~~~~~~~
+                  setlocale
+/usr/include/locale.h:53:8: note: 'setlocale' declared here
+char            *setlocale(int, const char *);
+                 ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_f1c34.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTC_f1c34/fast] Error 2
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <locale.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef uselocale
+  return ((int*)(&uselocale))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Performing C SOURCE FILE Test HAS_GNU_WARNING_LONG failed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3d3e6/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_3d3e6.dir/build.make CMakeFiles/cmTC_3d3e6.dir/build
+Building C object CMakeFiles/cmTC_3d3e6.dir/src.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE  -DHAS_GNU_WARNING_LONG   -o CMakeFiles/cmTC_3d3e6.dir/src.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c:3:9: warning: missing terminating '"' character [-Winvalid-pp-token]
+__asm__(".section .gnu.json_object_get
+        ^
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c:3:9: error: expected string literal in 'asm'
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c:5:7: warning: missing terminating '"' character [-Winvalid-pp-token]
+        .text");
+             ^
+/Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c:6:38: error: expected ';' after top-level asm block
+int main(int c, char *v) { return 0;}
+                                     ^
+                                     ;
+2 warnings and 2 errors generated.
+make[1]: *** [CMakeFiles/cmTC_3d3e6.dir/src.c.o] Error 1
+make: *** [cmTC_3d3e6/fast] Error 2
+
+
+Source file was:
+
+extern void json_object_get();
+__asm__(".section .gnu.json_object_get
+	.ascii "Please link against libjson-c instead of libjson"
+	.text");
+int main(int c, char *v) { return 0;}
+
+Performing C SOURCE FILE Test BSYMBOLIC_WORKS failed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8deee/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_8deee.dir/build.make CMakeFiles/cmTC_8deee.dir/build
+Building C object CMakeFiles/cmTC_8deee.dir/src.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE  -DBSYMBOLIC_WORKS   -o CMakeFiles/cmTC_8deee.dir/src.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_8deee
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8deee.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DBSYMBOLIC_WORKS -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_8deee.dir/src.c.o  -o cmTC_8deee -lm -Wl,-Bsymbolic-functions 
+ld: unknown option: -Bsymbolic-functions
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make[1]: *** [cmTC_8deee] Error 1
+make: *** [cmTC_8deee/fast] Error 2
+
+
+Source file was:
+
+	int main (void)
+	{
+	  return 0;
+	}
+	

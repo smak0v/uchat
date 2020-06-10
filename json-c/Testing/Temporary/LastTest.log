@@ -1,0 +1,335 @@
+Start testing: Jun 10 20:07 EEST
+----------------------------------------------------------
+1/22 Testing: test1
+1/22 Test: test1
+Command: "/Users/admin/Desktop/json-c/tests/test1.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test1" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"test1" end time: Jun 10 20:07 EEST
+"test1" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/22 Testing: test2
+2/22 Test: test2
+Command: "/Users/admin/Desktop/json-c/tests/test2.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test2" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"test2" end time: Jun 10 20:07 EEST
+"test2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/22 Testing: test4
+3/22 Test: test4
+Command: "/Users/admin/Desktop/json-c/tests/test4.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test4" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test4" end time: Jun 10 20:07 EEST
+"test4" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/22 Testing: testReplaceExisting
+4/22 Test: testReplaceExisting
+Command: "/Users/admin/Desktop/json-c/tests/testReplaceExisting.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"testReplaceExisting" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"testReplaceExisting" end time: Jun 10 20:07 EEST
+"testReplaceExisting" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/22 Testing: test_cast
+5/22 Test: test_cast
+Command: "/Users/admin/Desktop/json-c/tests/test_cast.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_cast" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_cast" end time: Jun 10 20:07 EEST
+"test_cast" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/22 Testing: test_charcase
+6/22 Test: test_charcase
+Command: "/Users/admin/Desktop/json-c/tests/test_charcase.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_charcase" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_charcase" end time: Jun 10 20:07 EEST
+"test_charcase" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/22 Testing: test_compare
+7/22 Test: test_compare
+Command: "/Users/admin/Desktop/json-c/tests/test_compare.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_compare" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_compare" end time: Jun 10 20:07 EEST
+"test_compare" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/22 Testing: test_deep_copy
+8/22 Test: test_deep_copy
+Command: "/Users/admin/Desktop/json-c/tests/test_deep_copy.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_deep_copy" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_deep_copy" end time: Jun 10 20:07 EEST
+"test_deep_copy" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/22 Testing: test_double_serializer
+9/22 Test: test_double_serializer
+Command: "/Users/admin/Desktop/json-c/tests/test_double_serializer.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_double_serializer" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_double_serializer" end time: Jun 10 20:07 EEST
+"test_double_serializer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/22 Testing: test_float
+10/22 Test: test_float
+Command: "/Users/admin/Desktop/json-c/tests/test_float.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_float" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_float" end time: Jun 10 20:07 EEST
+"test_float" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/22 Testing: test_int_add
+11/22 Test: test_int_add
+Command: "/Users/admin/Desktop/json-c/tests/test_int_add.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_int_add" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_int_add" end time: Jun 10 20:07 EEST
+"test_int_add" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/22 Testing: test_json_pointer
+12/22 Test: test_json_pointer
+Command: "/Users/admin/Desktop/json-c/tests/test_json_pointer.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_json_pointer" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_json_pointer" end time: Jun 10 20:07 EEST
+"test_json_pointer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/22 Testing: test_locale
+13/22 Test: test_locale
+Command: "/Users/admin/Desktop/json-c/tests/test_locale.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_locale" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_locale" end time: Jun 10 20:07 EEST
+"test_locale" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/22 Testing: test_null
+14/22 Test: test_null
+Command: "/Users/admin/Desktop/json-c/tests/test_null.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_null" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_null" end time: Jun 10 20:07 EEST
+"test_null" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/22 Testing: test_parse
+15/22 Test: test_parse
+Command: "/Users/admin/Desktop/json-c/tests/test_parse.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_parse" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_parse" end time: Jun 10 20:07 EEST
+"test_parse" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/22 Testing: test_parse_int64
+16/22 Test: test_parse_int64
+Command: "/Users/admin/Desktop/json-c/tests/test_parse_int64.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_parse_int64" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_parse_int64" end time: Jun 10 20:07 EEST
+"test_parse_int64" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/22 Testing: test_printbuf
+17/22 Test: test_printbuf
+Command: "/Users/admin/Desktop/json-c/tests/test_printbuf.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_printbuf" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_printbuf" end time: Jun 10 20:07 EEST
+"test_printbuf" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/22 Testing: test_set_serializer
+18/22 Test: test_set_serializer
+Command: "/Users/admin/Desktop/json-c/tests/test_set_serializer.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_set_serializer" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_set_serializer" end time: Jun 10 20:07 EEST
+"test_set_serializer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/22 Testing: test_set_value
+19/22 Test: test_set_value
+Command: "/Users/admin/Desktop/json-c/tests/test_set_value.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_set_value" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+12.300000000000001
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_set_value" end time: Jun 10 20:07 EEST
+"test_set_value" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/22 Testing: test_util_file
+20/22 Test: test_util_file
+Command: "/Users/admin/Desktop/json-c/tests/test_util_file.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_util_file" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"test_util_file" end time: Jun 10 20:07 EEST
+"test_util_file" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/22 Testing: test_visit
+21/22 Test: test_visit
+Command: "/Users/admin/Desktop/json-c/tests/test_visit.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_visit" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+ERROR: invalid return value from json_c_visit userfunc: 100
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_visit" end time: Jun 10 20:07 EEST
+"test_visit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+22/22 Testing: test_object_iterator
+22/22 Test: test_object_iterator
+Command: "/Users/admin/Desktop/json-c/tests/test_object_iterator.test"
+Directory: /Users/admin/Desktop/json-c-build/tests
+"test_object_iterator" start time: Jun 10 20:07 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_object_iterator" end time: Jun 10 20:07 EEST
+"test_object_iterator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 10 20:07 EEST

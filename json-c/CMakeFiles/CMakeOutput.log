@@ -1,0 +1,997 @@
+The system is: Darwin - 17.7.0 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /Library/Developer/CommandLineTools/usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is AppleClang, found in "/Users/admin/Desktop/json-c-build/CMakeFiles/3.15.5/CompilerIdC/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3ae2a/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_3ae2a.dir/build.make CMakeFiles/cmTC_3ae2a.dir/build
+Building C object CMakeFiles/cmTC_3ae2a.dir/testCCompiler.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc    -o CMakeFiles/cmTC_3ae2a.dir/testCCompiler.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_3ae2a
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ae2a.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_3ae2a.dir/testCCompiler.c.o  -o cmTC_3ae2a 
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_82b38/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_82b38.dir/build.make CMakeFiles/cmTC_82b38.dir/build
+Building C object CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -v -Wl,-v -o CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o   -c /usr/local/Cellar/cmake/3.15.5/share/cmake/Modules/CMakeCCompilerABI.c
+Apple LLVM version 10.0.0 (clang-1000.10.44.4)
+Target: x86_64-apple-darwin17.7.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
+ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple x86_64-apple-macosx10.13.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mthread-model posix -mdisable-fp-elim -fno-strict-return -masm-verbose -munwind-tables -target-cpu penryn -dwarf-column-info -debugger-tuning=lldb -target-linker-version 409.12 -v -coverage-notes-file /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.gcno -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0 -fdebug-compilation-dir /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -stack-protector 1 -fblocks -fencode-extended-block-signature -fobjc-runtime=macosx-10.13.0 -fmax-type-align=16 -fdiagnostics-show-option -o CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o -x c /usr/local/Cellar/cmake/3.15.5/share/cmake/Modules/CMakeCCompilerABI.c
+clang -cc1 version 10.0.0 (clang-1000.10.44.4) default target x86_64-apple-darwin17.7.0
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/local/include
+ /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include
+ /Library/Developer/CommandLineTools/usr/include
+ /usr/include
+ /System/Library/Frameworks (framework directory)
+ /Library/Frameworks (framework directory)
+End of search list.
+Linking C executable cmTC_82b38
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_82b38.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o  -o cmTC_82b38 
+Apple LLVM version 10.0.0 (clang-1000.10.44.4)
+Target: x86_64-apple-darwin17.7.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.13.0 -o cmTC_82b38 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a
+@(#)PROGRAM:ld  PROJECT:ld64-409.12
+BUILD 17:47:51 Sep 25 2018
+configured to support archs: armv6 armv7 armv7s arm64 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
+Library search paths:
+	/usr/lib
+	/usr/local/lib
+Framework search paths:
+	/Library/Frameworks/
+	/System/Library/Frameworks/
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/local/include]
+    add: [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include]
+    add: [/Library/Developer/CommandLineTools/usr/include]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include]
+  collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/local/include;/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include;/Library/Developer/CommandLineTools/usr/include;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_82b38/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_82b38.dir/build.make CMakeFiles/cmTC_82b38.dir/build]
+  ignore line: [Building C object CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc   -v -Wl,-v -o CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o   -c /usr/local/Cellar/cmake/3.15.5/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Apple LLVM version 10.0.0 (clang-1000.10.44.4)]
+  ignore line: [Target: x86_64-apple-darwin17.7.0]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+  ignore line: [clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]]
+  ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple x86_64-apple-macosx10.13.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mthread-model posix -mdisable-fp-elim -fno-strict-return -masm-verbose -munwind-tables -target-cpu penryn -dwarf-column-info -debugger-tuning=lldb -target-linker-version 409.12 -v -coverage-notes-file /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.gcno -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0 -fdebug-compilation-dir /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -stack-protector 1 -fblocks -fencode-extended-block-signature -fobjc-runtime=macosx-10.13.0 -fmax-type-align=16 -fdiagnostics-show-option -o CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o -x c /usr/local/Cellar/cmake/3.15.5/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 10.0.0 (clang-1000.10.44.4) default target x86_64-apple-darwin17.7.0]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include]
+  ignore line: [ /Library/Developer/CommandLineTools/usr/include]
+  ignore line: [ /usr/include]
+  ignore line: [ /System/Library/Frameworks (framework directory)]
+  ignore line: [ /Library/Frameworks (framework directory)]
+  ignore line: [End of search list.]
+  ignore line: [Linking C executable cmTC_82b38]
+  ignore line: [/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_82b38.dir/link.txt --verbose=1]
+  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o  -o cmTC_82b38 ]
+  ignore line: [Apple LLVM version 10.0.0 (clang-1000.10.44.4)]
+  ignore line: [Target: x86_64-apple-darwin17.7.0]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.13.0 -o cmTC_82b38 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
+    arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
+    arg [-demangle] ==> ignore
+    arg [-lto_library] ==> ignore, skip following value
+    arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+    arg [-dynamic] ==> ignore
+    arg [-arch] ==> ignore
+    arg [x86_64] ==> ignore
+    arg [-macosx_version_min] ==> ignore
+    arg [10.13.0] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_82b38] ==> ignore
+    arg [-search_paths_first] ==> ignore
+    arg [-headerpad_max_install_names] ==> ignore
+    arg [-v] ==> ignore
+    arg [CMakeFiles/cmTC_82b38.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lSystem] ==> lib [System]
+    arg [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
+  Library search paths: [;/usr/lib;/usr/local/lib]
+  Framework search paths: [;/Library/Frameworks/;/System/Library/Frameworks/]
+  remove lib [System]
+  remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
+  collapse library dir [/usr/lib] ==> [/usr/lib]
+  collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+  collapse framework dir [/Library/Frameworks/] ==> [/Library/Frameworks]
+  collapse framework dir [/System/Library/Frameworks/] ==> [/System/Library/Frameworks]
+  implicit libs: []
+  implicit dirs: [/usr/lib;/usr/local/lib]
+  implicit fwks: [/Library/Frameworks;/System/Library/Frameworks]
+
+
+Determining if the include file sys/resource.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bbe85/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_bbe85.dir/build.make CMakeFiles/cmTC_bbe85.dir/build
+Building C object CMakeFiles/cmTC_bbe85.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc    -o CMakeFiles/cmTC_bbe85.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_bbe85
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bbe85.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_bbe85.dir/CheckIncludeFile.c.o  -o cmTC_bbe85 
+
+
+
+Determining if the getrusage exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7484e/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_7484e.dir/build.make CMakeFiles/cmTC_7484e.dir/build
+Building C object CMakeFiles/cmTC_7484e.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc    -o CMakeFiles/cmTC_7484e.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_7484e
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7484e.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_7484e.dir/CheckSymbolExists.c.o  -o cmTC_7484e 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/resource.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getrusage
+  return ((int*)(&getrusage))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the include file fcntl.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e0ee5/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_e0ee5.dir/build.make CMakeFiles/cmTC_e0ee5.dir/build
+Building C object CMakeFiles/cmTC_e0ee5.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_e0ee5.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_e0ee5
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e0ee5.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_e0ee5.dir/CheckIncludeFile.c.o  -o cmTC_e0ee5 -lm 
+
+
+
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_df563/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_df563.dir/build.make CMakeFiles/cmTC_df563.dir/build
+Building C object CMakeFiles/cmTC_df563.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_df563.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_df563
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_df563.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_df563.dir/CheckIncludeFile.c.o  -o cmTC_df563 -lm 
+
+
+
+Determining if the include file stdarg.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b19cf/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_b19cf.dir/build.make CMakeFiles/cmTC_b19cf.dir/build
+Building C object CMakeFiles/cmTC_b19cf.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_b19cf.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_b19cf
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b19cf.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_b19cf.dir/CheckIncludeFile.c.o  -o cmTC_b19cf -lm 
+
+
+
+Determining if the include file strings.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_25822/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_25822.dir/build.make CMakeFiles/cmTC_25822.dir/build
+Building C object CMakeFiles/cmTC_25822.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_25822.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_25822
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_25822.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_25822.dir/CheckIncludeFile.c.o  -o cmTC_25822 -lm 
+
+
+
+Determining if the include file string.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1e706/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_1e706.dir/build.make CMakeFiles/cmTC_1e706.dir/build
+Building C object CMakeFiles/cmTC_1e706.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_1e706.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_1e706
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1e706.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_1e706.dir/CheckIncludeFile.c.o  -o cmTC_1e706 -lm 
+
+
+
+Determining if the include file syslog.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7025d/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_7025d.dir/build.make CMakeFiles/cmTC_7025d.dir/build
+Building C object CMakeFiles/cmTC_7025d.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_7025d.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_7025d
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7025d.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_7025d.dir/CheckIncludeFile.c.o  -o cmTC_7025d -lm 
+
+
+
+Determining if files stdlib.h;stdarg.h;string.h;float.h exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4191d/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_4191d.dir/build.make CMakeFiles/cmTC_4191d.dir/build
+Building C object CMakeFiles/cmTC_4191d.dir/STDC_HEADERS.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_4191d.dir/STDC_HEADERS.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CheckIncludeFiles/STDC_HEADERS.c
+Linking C executable cmTC_4191d
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4191d.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_4191d.dir/STDC_HEADERS.c.o  -o cmTC_4191d -lm 
+
+
+
+Determining if the include file unistd.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0b1ea/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_0b1ea.dir/build.make CMakeFiles/cmTC_0b1ea.dir/build
+Building C object CMakeFiles/cmTC_0b1ea.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_0b1ea.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_0b1ea
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0b1ea.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_0b1ea.dir/CheckIncludeFile.c.o  -o cmTC_0b1ea -lm 
+
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e4ad5/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_e4ad5.dir/build.make CMakeFiles/cmTC_e4ad5.dir/build
+Building C object CMakeFiles/cmTC_e4ad5.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_e4ad5.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_e4ad5
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e4ad5.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_e4ad5.dir/CheckIncludeFile.c.o  -o cmTC_e4ad5 -lm 
+
+
+
+Determining if the include file dlfcn.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_16ae6/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_16ae6.dir/build.make CMakeFiles/cmTC_16ae6.dir/build
+Building C object CMakeFiles/cmTC_16ae6.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_16ae6.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_16ae6
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_16ae6.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_16ae6.dir/CheckIncludeFile.c.o  -o cmTC_16ae6 -lm 
+
+
+
+Determining if the include file limits.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ecac8/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_ecac8.dir/build.make CMakeFiles/cmTC_ecac8.dir/build
+Building C object CMakeFiles/cmTC_ecac8.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_ecac8.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_ecac8
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ecac8.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_ecac8.dir/CheckIncludeFile.c.o  -o cmTC_ecac8 -lm 
+
+
+
+Determining if the include file locale.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fef59/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_fef59.dir/build.make CMakeFiles/cmTC_fef59.dir/build
+Building C object CMakeFiles/cmTC_fef59.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_fef59.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_fef59
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fef59.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_fef59.dir/CheckIncludeFile.c.o  -o cmTC_fef59 -lm 
+
+
+
+Determining if the include file memory.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6c2a1/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_6c2a1.dir/build.make CMakeFiles/cmTC_6c2a1.dir/build
+Building C object CMakeFiles/cmTC_6c2a1.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_6c2a1.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_6c2a1
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6c2a1.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_6c2a1.dir/CheckIncludeFile.c.o  -o cmTC_6c2a1 -lm 
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8f8a2/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_8f8a2.dir/build.make CMakeFiles/cmTC_8f8a2.dir/build
+Building C object CMakeFiles/cmTC_8f8a2.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_8f8a2.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_8f8a2
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8f8a2.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_8f8a2.dir/CheckIncludeFile.c.o  -o cmTC_8f8a2 -lm 
+
+
+
+Determining if the include file stdlib.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_87a71/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_87a71.dir/build.make CMakeFiles/cmTC_87a71.dir/build
+Building C object CMakeFiles/cmTC_87a71.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_87a71.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_87a71
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_87a71.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_87a71.dir/CheckIncludeFile.c.o  -o cmTC_87a71 -lm 
+
+
+
+Determining if the include file sys/cdefs.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_afcb2/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_afcb2.dir/build.make CMakeFiles/cmTC_afcb2.dir/build
+Building C object CMakeFiles/cmTC_afcb2.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_afcb2.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_afcb2
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_afcb2.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_afcb2.dir/CheckIncludeFile.c.o  -o cmTC_afcb2 -lm 
+
+
+
+Determining if the include file sys/param.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ddfc8/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_ddfc8.dir/build.make CMakeFiles/cmTC_ddfc8.dir/build
+Building C object CMakeFiles/cmTC_ddfc8.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_ddfc8.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_ddfc8
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ddfc8.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_ddfc8.dir/CheckIncludeFile.c.o  -o cmTC_ddfc8 -lm 
+
+
+
+Determining if the include file sys/stat.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fb516/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_fb516.dir/build.make CMakeFiles/cmTC_fb516.dir/build
+Building C object CMakeFiles/cmTC_fb516.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_fb516.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_fb516
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fb516.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_fb516.dir/CheckIncludeFile.c.o  -o cmTC_fb516 -lm 
+
+
+
+Determining if the include file xlocale.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4dfeb/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_4dfeb.dir/build.make CMakeFiles/cmTC_4dfeb.dir/build
+Building C object CMakeFiles/cmTC_4dfeb.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_4dfeb.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_4dfeb
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4dfeb.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_4dfeb.dir/CheckIncludeFile.c.o  -o cmTC_4dfeb -lm 
+
+
+
+Determining if the INFINITY exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c2d36/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_c2d36.dir/build.make CMakeFiles/cmTC_c2d36.dir/build
+Building C object CMakeFiles/cmTC_c2d36.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_c2d36.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_c2d36
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c2d36.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_c2d36.dir/CheckSymbolExists.c.o  -o cmTC_c2d36 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef INFINITY
+  return ((int*)(&INFINITY))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the isinf exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_524d4/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_524d4.dir/build.make CMakeFiles/cmTC_524d4.dir/build
+Building C object CMakeFiles/cmTC_524d4.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_524d4.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_524d4
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_524d4.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_524d4.dir/CheckSymbolExists.c.o  -o cmTC_524d4 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isinf
+  return ((int*)(&isinf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the isnan exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c2287/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_c2287.dir/build.make CMakeFiles/cmTC_c2287.dir/build
+Building C object CMakeFiles/cmTC_c2287.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_c2287.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_c2287
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c2287.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_c2287.dir/CheckSymbolExists.c.o  -o cmTC_c2287 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isnan
+  return ((int*)(&isnan))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the nan exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d7fbf/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_d7fbf.dir/build.make CMakeFiles/cmTC_d7fbf.dir/build
+Building C object CMakeFiles/cmTC_d7fbf.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_d7fbf.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_d7fbf
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d7fbf.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_d7fbf.dir/CheckSymbolExists.c.o  -o cmTC_d7fbf -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef nan
+  return ((int*)(&nan))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the snprintf exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b030a/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_b030a.dir/build.make CMakeFiles/cmTC_b030a.dir/build
+Building C object CMakeFiles/cmTC_b030a.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_b030a.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_b030a
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b030a.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_b030a.dir/CheckSymbolExists.c.o  -o cmTC_b030a -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef snprintf
+  return ((int*)(&snprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the vasprintf exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_61706/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_61706.dir/build.make CMakeFiles/cmTC_61706.dir/build
+Building C object CMakeFiles/cmTC_61706.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_61706.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_61706
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_61706.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_61706.dir/CheckSymbolExists.c.o  -o cmTC_61706 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vasprintf
+  return ((int*)(&vasprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the vsnprintf exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_43544/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_43544.dir/build.make CMakeFiles/cmTC_43544.dir/build
+Building C object CMakeFiles/cmTC_43544.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_43544.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_43544
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_43544.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_43544.dir/CheckSymbolExists.c.o  -o cmTC_43544 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vsnprintf
+  return ((int*)(&vsnprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the vprintf exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5746e/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_5746e.dir/build.make CMakeFiles/cmTC_5746e.dir/build
+Building C object CMakeFiles/cmTC_5746e.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_5746e.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_5746e
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5746e.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_5746e.dir/CheckSymbolExists.c.o  -o cmTC_5746e -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vprintf
+  return ((int*)(&vprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the open exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3ff9f/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_3ff9f.dir/build.make CMakeFiles/cmTC_3ff9f.dir/build
+Building C object CMakeFiles/cmTC_3ff9f.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_3ff9f.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_3ff9f
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ff9f.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_3ff9f.dir/CheckSymbolExists.c.o  -o cmTC_3ff9f -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <fcntl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef open
+  return ((int*)(&open))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the realloc exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1f31f/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_1f31f.dir/build.make CMakeFiles/cmTC_1f31f.dir/build
+Building C object CMakeFiles/cmTC_1f31f.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_1f31f.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_1f31f
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1f31f.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_1f31f.dir/CheckSymbolExists.c.o  -o cmTC_1f31f -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef realloc
+  return ((int*)(&realloc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the setlocale exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ddfe6/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_ddfe6.dir/build.make CMakeFiles/cmTC_ddfe6.dir/build
+Building C object CMakeFiles/cmTC_ddfe6.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_ddfe6.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_ddfe6
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ddfe6.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_ddfe6.dir/CheckSymbolExists.c.o  -o cmTC_ddfe6 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <locale.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef setlocale
+  return ((int*)(&setlocale))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strcasecmp exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c98f7/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_c98f7.dir/build.make CMakeFiles/cmTC_c98f7.dir/build
+Building C object CMakeFiles/cmTC_c98f7.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_c98f7.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_c98f7
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c98f7.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_c98f7.dir/CheckSymbolExists.c.o  -o cmTC_c98f7 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <strings.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strcasecmp
+  return ((int*)(&strcasecmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strncasecmp exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8d047/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_8d047.dir/build.make CMakeFiles/cmTC_8d047.dir/build
+Building C object CMakeFiles/cmTC_8d047.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_8d047.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_8d047
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8d047.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_8d047.dir/CheckSymbolExists.c.o  -o cmTC_8d047 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <strings.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strncasecmp
+  return ((int*)(&strncasecmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strdup exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_33cd1/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_33cd1.dir/build.make CMakeFiles/cmTC_33cd1.dir/build
+Building C object CMakeFiles/cmTC_33cd1.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_33cd1.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_33cd1
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_33cd1.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_33cd1.dir/CheckSymbolExists.c.o  -o cmTC_33cd1 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strdup
+  return ((int*)(&strdup))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strerror exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_22528/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_22528.dir/build.make CMakeFiles/cmTC_22528.dir/build
+Building C object CMakeFiles/cmTC_22528.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_22528.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_22528
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22528.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_22528.dir/CheckSymbolExists.c.o  -o cmTC_22528 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strerror
+  return ((int*)(&strerror))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the vsyslog exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d3885/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_d3885.dir/build.make CMakeFiles/cmTC_d3885.dir/build
+Building C object CMakeFiles/cmTC_d3885.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_d3885.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_d3885
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3885.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_d3885.dir/CheckSymbolExists.c.o  -o cmTC_d3885 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <syslog.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vsyslog
+  return ((int*)(&vsyslog))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strtoll exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3e61f/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_3e61f.dir/build.make CMakeFiles/cmTC_3e61f.dir/build
+Building C object CMakeFiles/cmTC_3e61f.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_3e61f.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_3e61f
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3e61f.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_3e61f.dir/CheckSymbolExists.c.o  -o cmTC_3e61f -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtoll
+  return ((int*)(&strtoll))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the strtoull exist passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d3665/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_d3665.dir/build.make CMakeFiles/cmTC_d3665.dir/build
+Building C object CMakeFiles/cmTC_d3665.dir/CheckSymbolExists.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_d3665.dir/CheckSymbolExists.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_d3665
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3665.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_d3665.dir/CheckSymbolExists.c.o  -o cmTC_d3665 -lm 
+
+
+File /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtoull
+  return ((int*)(&strtoull))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fc74b/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_fc74b.dir/build.make CMakeFiles/cmTC_fc74b.dir/build
+Building C object CMakeFiles/cmTC_fc74b.dir/CheckIncludeFile.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_fc74b.dir/CheckIncludeFile.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_fc74b
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fc74b.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_fc74b.dir/CheckIncludeFile.c.o  -o cmTC_fc74b -lm 
+
+
+
+Determining size of int passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_42232/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_42232.dir/build.make CMakeFiles/cmTC_42232.dir/build
+Building C object CMakeFiles/cmTC_42232.dir/SIZEOF_INT.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_42232.dir/SIZEOF_INT.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_INT.c
+Linking C executable cmTC_42232
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_42232.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_42232.dir/SIZEOF_INT.c.o  -o cmTC_42232 -lm 
+
+
+
+Determining size of int64_t passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9cf08/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_9cf08.dir/build.make CMakeFiles/cmTC_9cf08.dir/build
+Building C object CMakeFiles/cmTC_9cf08.dir/SIZEOF_INT64_T.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_9cf08.dir/SIZEOF_INT64_T.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_INT64_T.c
+Linking C executable cmTC_9cf08
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9cf08.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_9cf08.dir/SIZEOF_INT64_T.c.o  -o cmTC_9cf08 -lm 
+
+
+
+Determining size of long passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_65dc4/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_65dc4.dir/build.make CMakeFiles/cmTC_65dc4.dir/build
+Building C object CMakeFiles/cmTC_65dc4.dir/SIZEOF_LONG.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_65dc4.dir/SIZEOF_LONG.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_LONG.c
+Linking C executable cmTC_65dc4
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_65dc4.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_65dc4.dir/SIZEOF_LONG.c.o  -o cmTC_65dc4 -lm 
+
+
+
+Determining size of long long passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_880ec/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_880ec.dir/build.make CMakeFiles/cmTC_880ec.dir/build
+Building C object CMakeFiles/cmTC_880ec.dir/SIZEOF_LONG_LONG.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_880ec.dir/SIZEOF_LONG_LONG.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_LONG_LONG.c
+Linking C executable cmTC_880ec
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_880ec.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_880ec.dir/SIZEOF_LONG_LONG.c.o  -o cmTC_880ec -lm 
+
+
+
+Determining size of size_t passed with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e33e0/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_e33e0.dir/build.make CMakeFiles/cmTC_e33e0.dir/build
+Building C object CMakeFiles/cmTC_e33e0.dir/SIZEOF_SIZE_T.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE   -o CMakeFiles/cmTC_e33e0.dir/SIZEOF_SIZE_T.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_SIZE_T.c
+Linking C executable cmTC_e33e0
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e33e0.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_e33e0.dir/SIZEOF_SIZE_T.c.o  -o cmTC_e33e0 -lm 
+
+
+
+Performing C SOURCE FILE Test HAVE_ATOMIC_BUILTINS succeeded with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e2497/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_e2497.dir/build.make CMakeFiles/cmTC_e2497.dir/build
+Building C object CMakeFiles/cmTC_e2497.dir/src.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE  -DHAVE_ATOMIC_BUILTINS   -o CMakeFiles/cmTC_e2497.dir/src.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_e2497
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e2497.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DHAVE_ATOMIC_BUILTINS -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_e2497.dir/src.c.o  -o cmTC_e2497 -lm 
+
+
+Source file was:
+int main() { int i, x = 0; i = __sync_add_and_fetch(&x,1); return x; }
+Performing C SOURCE FILE Test HAVE___THREAD succeeded with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a66f6/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_a66f6.dir/build.make CMakeFiles/cmTC_a66f6.dir/build
+Building C object CMakeFiles/cmTC_a66f6.dir/src.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE  -DHAVE___THREAD   -o CMakeFiles/cmTC_a66f6.dir/src.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_a66f6
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a66f6.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DHAVE___THREAD -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_a66f6.dir/src.c.o  -o cmTC_a66f6 -lm 
+
+
+Source file was:
+__thread int x = 0; int main() { return 0; }
+Performing C SOURCE FILE Test REENTRANT_WORKS succeeded with the following output:
+Change Dir: /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9a3ed/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_9a3ed.dir/build.make CMakeFiles/cmTC_9a3ed.dir/build
+Building C object CMakeFiles/cmTC_9a3ed.dir/src.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc -D_GNU_SOURCE  -DREENTRANT_WORKS   -o CMakeFiles/cmTC_9a3ed.dir/src.c.o   -c /Users/admin/Desktop/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_9a3ed
+/usr/local/Cellar/cmake/3.15.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9a3ed.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc  -DREENTRANT_WORKS -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_9a3ed.dir/src.c.o  -o cmTC_9a3ed -lm 
+
+
+Source file was:
+
+	/* uClibc toolchains without threading barf when _REENTRANT is defined */
+	#define _REENTRANT 1
+	#include <sys/types.h>
+	int main (void)
+	{
+	  return 0;
+	}
+	
