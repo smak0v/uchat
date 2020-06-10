@@ -20,6 +20,13 @@ typedef struct s_dialog {
 	int user_id2;
 } t_dialog;
 
+typedef struct s_msg {
+	int group_id;
+	int sender;
+	char *msg;
+} t_msg;
+
+
 
 sqlite3 *mx_opendb(char *name); // open database.db
 void mx_closedb(sqlite3 *db); // close database.db
@@ -29,6 +36,7 @@ void mx_new_table_group_members(sqlite3 *database); // create table GROUP_MEMBER
 void mx_new_table_group(sqlite3 *database); // create table GROUP
 void mx_new_table_dialog(sqlite3 *database); // create table DIALOG
 void mx_new_table_message(sqlite3 *database); // create table MSG (message history)
+
 // USER table +
 // t_user *mx_get_usertable(sqlite3 *db); // returns struct user from db
 t_user *mx_get_user_by_login(sqlite3 *db, char *user_login); // returns data by user_Login from user table
@@ -60,6 +68,8 @@ void mx_delete_by_dialog_id(sqlite3 *db, int dialog_id); // delete from DIALOG t
 void mx_update_by_dialog_id(sqlite3 *db, int dialog_id, 
 							int user_id1, int user_id2); // update by dialog_id user1 user2; 
 
+// MSG table
+t_msg *mx_add_msg(sqlite3 *db, char *msg_body, int group_id, int sender); // need to edit!!!
 
 // UTILS
 void mx_print_db(sqlite3 *db, char *table); // print TABLE NAME 

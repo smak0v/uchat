@@ -21,19 +21,20 @@ void mx_new_table_group(sqlite3 *database) {
 }
 
 void mx_new_table_dialog(sqlite3 *database) {
-	sqlite3_exec(database, "CREATE TABLE IF NOT EXIST DIALOG(" \
+	sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS DIALOG(" \
 				 "DIALOG_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"\
 				 "USER_ID1 INTEGER NOT NULL," \
 				 "USER_ID2 INTEGER NOT NULL);", 0, 0, 0);
 }
 
 void mx_new_table_message(sqlite3 *database) {
-	sqlite3_exec(database, "CREATE TABLE IF NOT EXIST MSG("\
+	sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS MSG("\
 		"ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"\
 		"GROUP_ID INTEGER NOT NULL,"\
-		"MSG_BODY TEXT NOT NULL,"\
-		"TIME TEXT NOT NULL,"\
 		"SENDER INTEGER NOT NULL,"\
-		"EDITED INTEGER NOT NULLL,"\
-		"READ INTEGER NOT NULL);", 0, 0, 0);
+		"MSG_BODY TEXT NOT NULL);", 0, 0, 0);
+		// "TIME TEXT NOT NULL,"\
+		// "EDITED INTEGER NOT NULLL,"\
+		// "READ INTEGER NOT NULL);", 0, 0, 0);
+
 }
