@@ -45,7 +45,6 @@ void accept_clients(int socket_fd) {
 }
 
 int mx_start_server(int port) {
-    // TODO Refactor
     int socket_fd;
     struct sockaddr_in server_address;
 
@@ -57,25 +56,19 @@ int mx_start_server(int port) {
     else
         mx_printstr_endl("Socket successfully created!");
 
-    bzero(&server_address, sizeof(server_address));
+    if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+        mx_terminate("Socket creation failed!");
+    mx_printstr_endl("Socket successfully created!");
+    
+    bzero(&server_addr, sizeof(server_addr));
 
-    server_address.sin_family = AF_INET;
-    server_address.sin_addr.s_addr = htonl(INADDR_ANY);
-    server_address.sin_port = htons(port);
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    server_addr.sin_port = htons(port);
 
-    if ((bind(socket_fd, (MX_SA*)&server_address, sizeof(server_address))) != 0) {
-        mx_print_error_endl("Socket bind failed!");
-        exit(1);
-    }
-    else
-        mx_printstr_endl("Socket successfully binded!");
-
-    if ((listen(socket_fd, 5)) != 0) {
-        mx_print_error_endl("Listen failed!");
-        exit(1);
-    }
-    else
-        mx_printstr_endl("Server listening!");
+    if ((bind(socket_fd, (MX_SA *)&server_addr, sizeof(server_addr))) != 0)
+        mx_terminate("Socket bind failed!");
+    mx_printstr_endl("Socket successfully binded!");
 
     accept_clients(socket_fd);
 
@@ -89,13 +82,9 @@ int main(int argc, char **argv) {
         mx_print_error_endl("uchat_server: must take parameter - port to run");
         mx_print_error_endl("usage: ./uchat_server PORT");
         exit(1);
-    }
-    else {
-        if (!mx_check_port(argv[1])) {
-            mx_print_error_endl("uchat_server: not valid port");
-            exit(1);
-        }
-
+    } else {
+        if (!mx_check_port(argv[1]))
+            mx_terminate("uchat_server: not valid port");
         mx_start_server(mx_atoi(argv[1]));
     }
 

@@ -106,6 +106,7 @@ bool mx_islower(char c);
 bool mx_isupper(char c);
 int mx_toupper(int c);
 int mx_tolower(int c);
+bool mx_isprime(long int number);
 
 // Memory pack
 void *mx_memset(void *b, int c, size_t len);

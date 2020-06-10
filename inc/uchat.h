@@ -21,6 +21,9 @@
 #define MX_SA struct sockaddr
 #define MX_MAX 80
 
+#define MX_CAESAR_KEY 5
+#define MX_VIGENERE_KEY "UCHAT"
+
 // Structures
 
 
@@ -28,3 +31,8 @@
 //Utils
 bool mx_check_port(char *port);
 bool mx_check_ip(char *ip);
+
+// Encryption (Vigenere + Caesar ciphers combination)
+char *mx_generate_key(char *str, char *key);
+char *mx_encrypt(char *str, char *key);
+char *mx_decrypt(char *str, char *key);
