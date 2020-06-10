@@ -14,6 +14,7 @@ sqlite3 *mx_opendb(char *name) {
  	mx_new_table_user(db);
  	mx_new_table_group(db); 
  	mx_new_table_dialog(db);
+	mx_new_table_message(sqlite3 *database);
 	return db;
 }
 

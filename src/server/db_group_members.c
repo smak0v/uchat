@@ -64,7 +64,6 @@ void mx_update_gr_members(sqlite3 *db, int group_member_id,
 	rv = sqlite3_prepare_v2(db, 
 		"UPDATE GROUP_MEMBERS SET USER_ID = ?1, GROUP_ID = ?2 WHERE GROUP_MEMBERS_ID = ?3;",
 		-1, &stmt, NULL);
-	// need to update USER table USER_ID and LOGIN and PASS 
 	sqlite3_bind_int(stmt, 1, user_id);
 	sqlite3_bind_int(stmt, 2, group_id);
 	sqlite3_bind_int(stmt, 3, group_member_id);

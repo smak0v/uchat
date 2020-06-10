@@ -28,7 +28,7 @@ void mx_new_table_user(sqlite3 *database); // create table USER
 void mx_new_table_group_members(sqlite3 *database); // create table GROUP_MEMBERS
 void mx_new_table_group(sqlite3 *database); // create table GROUP
 void mx_new_table_dialog(sqlite3 *database); // create table DIALOG
-
+void mx_new_table_message(sqlite3 *database); // create table MSG (message history)
 // USER table +
 // t_user *mx_get_usertable(sqlite3 *db); // returns struct user from db
 t_user *mx_get_user_by_login(sqlite3 *db, char *user_login); // returns data by user_Login from user table
