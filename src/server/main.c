@@ -6,12 +6,13 @@ void *mx_communicate(void *data) {
     char buff[MX_MAX];
     int connection_fd = connection->connection_fd;
     char *status = connection->status;
+    int bytes_read = 0;
 
     free(connection);
     while (1) {
         bzero(buff, MX_MAX);
-        read(connection_fd, buff, sizeof(buff));
-        if (mx_strcmp(buff, "exit\n") == 0) {
+        bytes_read = read(connection_fd, buff, sizeof(buff));
+        if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
             close(connection_fd);
             *status = 0;
             printf("Connection closed\n");
