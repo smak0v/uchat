@@ -12,9 +12,9 @@ CC						= clang
 DIR						= uchat
 
 #=================================FLAGS=======================================#
-C_FLAGS					= -std=c11 -pthread $(addprefix -W, all extra error)
+C_FLAGS					= -std=c11 $(addprefix -W, all extra pedantic error)
 
-ADD_FLAGS				= -g -Ilibs/json-c
+ADD_FLAGS				= -g
 
 LINKER_FLAGS			=
 
@@ -25,10 +25,18 @@ LIBMXA					:= $(LIBMXD)/libmx.a
 
 LIBMXI					:= $(LIBMXD)/inc
 
+#=================================JSON-C======================================#
+LIBJSOND				= libs/json-c
+
+LIBJSONA				:= $(LIBJSOND)/libjsonc.a
+
+LIBJSONI				:= $(LIBJSOND)/inc
+
+
 #==================================INC========================================#
 INCD					= inc
 
-INC						= uchat.h server.h
+INC						= uchat.h client.h server.h
 
 INCS					= $(addprefix $(INCD)/, $(INC))
 
@@ -40,14 +48,19 @@ SRCD					= src
 
 #================================FUNCTIONS====================================#
 define compile_dependency
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) -c $(1) -o $(2) -I $(INCD) -I $(LIBMXI)
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) -c $(1) -o $(2) -I $(INCD) -I $(LIBMXI) -I $(LIBJSONI)
 	@printf "\r\33[2K$(DIR)\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
 endef
 
 #=================================RULES=======================================#
 all: install
 
-install: $(LIBMXD) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
+install: $(LIBMXD) $(LIBJSOND) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
+
+$(LIBJSOND): $(LIBJSONA)
+
+$(LIBJSONA):
+	@make -sC $(LIBJSOND)
 
 $(LIBMXD): $(LIBMXA)
 
@@ -56,11 +69,13 @@ $(LIBMXA):
 
 clean:
 	@make -sC $(LIBMXD) $@
+	@make -sC $(LIBJSOND) $@
 	@rm -rf $(OBJD)
 	@printf "$(DIR)/$(OBJD)\t\033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
 	@make -sC $(LIBMXD) $@
+	@make -sC $(LIBJSOND) $@
 	@rm -rf $(SERVER_APP_NAME)
 	@printf "$(SERVER_APP_NAME)\t\033[31;1muninstalled\033[0m\n"
 	@rm -rf $(CLIENT_APP_NAME)
@@ -76,7 +91,7 @@ COMMON_OBJ_DIRS			= $(COMMON_OBJD)
 COMMON_OBJS				= $(addprefix $(OBJD)/, $(COMMON:%.c=%.o))
 
 #===================================SRC=======================================#
-COMMON_SRCS				= check_port.c check_ip.c encryption.c
+COMMON_SRCS				= check_port.c check_ip.c
 
 COMMON					= $(addprefix common/, $(COMMON_SRCS))
 
@@ -95,7 +110,6 @@ $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
 #*****************************************************************************#
 #**********************************SERVER*************************************#
 #*****************************************************************************#
-
 #==================================OBJ========================================#
 SERVER_OBJD				= $(OBJD)/server
 
@@ -113,9 +127,8 @@ $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-										$(SERVER_OBJS) -L $(LIBMXD) -lmx \
-										-Llibs/json-c -ljson-c  -o $@
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) libs/json-c/libjsonc.a $(COMMON_OBJS) \
+						$(SERVER_OBJS) -L $(LIBMXD) -L $(LIBJSOND) -lmx -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
@@ -149,7 +162,7 @@ $(CLIENT_OBJ_DIRS):
 
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-										$(CLIENT_OBJS) -L $(LIBMXD) -lmx -o $@
+					$(CLIENT_OBJS) -L $(LIBMXD) -L $(LIBJSOND) -lmx -o $@
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
