@@ -14,7 +14,7 @@ DIR						= uchat
 #=================================FLAGS=======================================#
 C_FLAGS					= -std=c11 -pthread $(addprefix -W, all extra error)
 
-ADD_FLAGS				= -g -Ijson-c
+ADD_FLAGS				= -g -Ilibs/json-c
 
 LINKER_FLAGS			=
 
@@ -115,7 +115,7 @@ $(SERVER_OBJ_DIRS):
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
 										$(SERVER_OBJS) -L $(LIBMXD) -lmx \
-										-Ljson-c -ljson-c  -o $@
+										-Llibs/json-c -ljson-c  -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
