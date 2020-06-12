@@ -21,6 +21,23 @@
 // 	return usr;
 // }
 
+void mx_change_user_pass(sqlite3 *db, int user_id, char *new_pass) {
+    int rv = 0;
+    sqlite3_stmt *stmt;
+
+    rv = sqlite3_prepare_v2(db, 
+       "UPDATE USER SET PASSWORD = ?1 WHERE USER_ID = ?2;", -1, &stmt, NULL);
+    sqlite3_bind_text(stmt, 1, new_pass, -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, user_id);
+    if (rv == SQLITE_ERROR) {
+        fprintf(stderr, "Can't update pass in db: %s\n", sqlite3_errmsg(db));
+        return ;
+    }
+    if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
+        fprintf(stderr, "Can't update pass in db: %s\n", sqlite3_errmsg(db));
+    sqlite3_finalize(stmt);
+}
+
 void mx_add_user(sqlite3 *db, char *login, char *pass) {
 	sqlite3_stmt *stmt;
 	int rv = 0;

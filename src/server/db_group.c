@@ -37,19 +37,19 @@ void mx_update_grp_by_name(sqlite3 *db, char *group_name, char *new_name) {
 	sqlite3_finalize(stmt);
 }
 
-void mx_delete_grp_by_name(sqlite3 *db, char *grp_name) {
+void mx_delete_grp_by_id(sqlite3 *db, int grp_id) {
 	int rv = 0;
 	sqlite3_stmt *stmt;
 
-	rv = sqlite3_prepare_v2(db, "DELETE FROM GRP WHERE GROUP_NAME = ?1;",
-							-1, &stmt, NULL);
-	sqlite3_bind_text(stmt, 1, grp_name, -1, SQLITE_STATIC);
+	rv = sqlite3_prepare_v2(db, "DELETE FROM GRP WHERE GROUP_ID = ?1;",
+	   -1, &stmt, NULL);
+	sqlite3_bind_int(stmt, 1, grp_id);
 	if (rv == SQLITE_ERROR) {
-		fprintf(stderr, "Can't delete by grp_name: %s\n", sqlite3_errmsg(db));
+		fprintf(stderr, "Can't delete grp: %s\n", sqlite3_errmsg(db));
 		return ;
 	}
 	if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
-		fprintf(stderr, "Can't delete by grp_name: %s\n", sqlite3_errmsg(db));
+		fprintf(stderr, "Can't delete grp: %s\n", sqlite3_errmsg(db));
 	sqlite3_finalize(stmt);
 }
 

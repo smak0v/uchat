@@ -37,19 +37,21 @@ static t_dialog *for_get_dialog(sqlite3_stmt *stmt) {
     d->user_id1 = sqlite3_column_int(stmt, 1);
     d->user_id2 = sqlite3_column_int(stmt, 2);
     sqlite3_finalize(stmt);
-    return d;
+    return d == NULL ? NULL : d;
 }
 
-t_dialog *mx_get_by_dialog_id(sqlite3 *db, int dialog_id) {
+t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2) {
     sqlite3_stmt *stmt;
     int rv = 0;
 
     sqlite3_prepare_v2(db, 
-		"SELECT * FROM DIALOG WHERE DIALOG_ID = ?1",
+    	"SELECT * FROM DIALOG WHERE USER_ID1 = ?1 AND USER_ID2 = ?2",
     	-1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, dialog_id);
+    	// "SELECT * FROM DIALOG WHERE USER_ID1 = ?1, USER_ID2 = ?2",
+    sqlite3_bind_int(stmt, 1, id1);
+    sqlite3_bind_int(stmt, 2, id2);
     if (rv != SQLITE_OK) {
-		fprintf(stderr, "Can't group member user from db: %s\n", 
+		fprintf(stderr, "Can't get dialog: %s\n", 
 				sqlite3_errmsg(db));
 		return NULL;
     }

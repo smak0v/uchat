@@ -56,22 +56,41 @@ t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id) {
     return for_get_member(stmt);
 }
 
-void mx_update_gr_members(sqlite3 *db, int group_member_id,
-							int user_id, int group_id) {
-	int rv = 0;
-	sqlite3_stmt *stmt;
+void mx_rename_grp_by_name(sqlite3 *db, char *name, char *new_name) {
+    int rv = 0;
+    sqlite3_stmt *stmt;
 
-	rv = sqlite3_prepare_v2(db, 
-		"UPDATE GROUP_MEMBERS SET USER_ID = ?1, GROUP_ID = ?2 WHERE GROUP_MEMBERS_ID = ?3;",
-		-1, &stmt, NULL);
-	sqlite3_bind_int(stmt, 1, user_id);
-	sqlite3_bind_int(stmt, 2, group_id);
-	sqlite3_bind_int(stmt, 3, group_member_id);
-	if (rv == SQLITE_ERROR) {
-		fprintf(stderr, "Can't update dialog in db: %s\n", sqlite3_errmsg(db));
-		return ;
-	}
-	if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
-		fprintf(stderr, "Can't update user in db: %s\n", sqlite3_errmsg(db));
-	sqlite3_finalize(stmt);
+    rv = sqlite3_prepare_v2(db, 
+       "UPDATE GRP SET GROUP_NAME = ?1 WHERE GROUP_NAME = ?2;",
+       -1, &stmt, NULL);
+    sqlite3_bind_text(stmt, 1, new_name, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, name, -1, SQLITE_STATIC);
+    if (rv == SQLITE_ERROR) {
+        fprintf(stderr, "Can't update pass in db: %s\n", sqlite3_errmsg(db));
+        return ;
+    }
+    if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
+        fprintf(stderr, "Can't update pass in db: %s\n", sqlite3_errmsg(db));
+    sqlite3_finalize(stmt);
 }
+
+
+// void mx_update_gr_members(sqlite3 *db, int group_member_id,
+// 							int user_id, int group_id) {
+// 	int rv = 0;
+// 	sqlite3_stmt *stmt;
+
+// 	rv = sqlite3_prepare_v2(db, 
+// 		"UPDATE GROUP_MEMBERS SET USER_ID = ?1, GROUP_ID = ?2 WHERE GROUP_MEMBERS_ID = ?3;",
+// 		-1, &stmt, NULL);
+// 	sqlite3_bind_int(stmt, 1, user_id);
+// 	sqlite3_bind_int(stmt, 2, group_id);
+// 	sqlite3_bind_int(stmt, 3, group_member_id);
+// 	if (rv == SQLITE_ERROR) {
+// 		fprintf(stderr, "Can't update dialog in db: %s\n", sqlite3_errmsg(db));
+// 		return ;
+// 	}
+// 	if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
+// 		fprintf(stderr, "Can't update user in db: %s\n", sqlite3_errmsg(db));
+// 	sqlite3_finalize(stmt);
+// }

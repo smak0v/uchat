@@ -27,18 +27,6 @@ void mx_new_table_dialog(sqlite3 *database) {
 				 "USER_ID2 INTEGER NOT NULL);", 0, 0, 0);
 }
 
-// void mx_new_table_message(sqlite3 *database) {
-// 	sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS MSG("\
-// 		"ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"\
-// 		"GROUP_ID INTEGER NOT NULL,"\
-// 		"SENDER INTEGER NOT NULL,"\
-// 		"MSG_BODY TEXT NOT NULL);", 0, 0, 0);
-// 		// "TIME TEXT NOT NULL,"\
-// 		// "EDITED INTEGER NOT NULLL,"\
-// 		// "READ INTEGER NOT NULL);", 0, 0, 0);
-
-// }
-
 void mx_new_table_message(sqlite3 *database) {
 	sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS MSG("\
 		"ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"\
