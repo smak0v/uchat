@@ -1,29 +1,29 @@
 #include "server.h"
 
 void *mx_communicate(void *data) {
-    t_comm *connection = (t_comm *)data;
+    t_comm *connect = (t_comm *)data;
     char buff[MX_MAX];
-    char *status = connection->status;
+    char *status = connect->status;
     int bytes_read = 0;
     char *response = NULL;
 
-    free(connection);
+    free(connect);
     while (1) {
         bzero(buff, MX_MAX);
-        bytes_read = read(connection->connection_fd, buff, sizeof(buff));
+        bytes_read = read(connect->connection_fd, buff, sizeof(buff));
         if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
-            close(connection->connection_fd);
+            close(connect->connection_fd);
             *status = 0;
             printf("Connection closed\n");
             pthread_exit(NULL);
         }
-        response = mx_process_request(buff, connection->clients);
+        response = mx_process_request(buff, connect->clients, connect->db);
         printf("%s\n", response);
         // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
     }
 }
 
-void accept_clients(int socket_fd) {
+void accept_clients(int socket_fd, sqlite3 *db) {
     int connect_fd;
     unsigned int len;
     struct sockaddr_in client_addr;
@@ -37,13 +37,14 @@ void accept_clients(int socket_fd) {
         if (connect_fd < 0)
             mx_terminate("Server acccept failed!");
         mx_thread_manager(&trd_data->threads, &trd_data->status, connect_fd,
-                          &connected_clients);
+                          &connected_clients, db);
     }
 }
 
 int mx_start_server(int port) {
     int socket_fd;
     struct sockaddr_in server_addr;
+    sqlite3 *db = NULL;
 
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         mx_terminate("Socket creation failed!");
@@ -63,7 +64,9 @@ int mx_start_server(int port) {
         mx_terminate("Listen failed!");
     mx_printstr_endl("Server listening!");
   
-    accept_clients(socket_fd);
+    db = mx_opendb("test.db");
+    accept_clients(socket_fd, db);
+    mx_closedb(db);
 
     close(socket_fd);
 
@@ -83,4 +86,3 @@ int main(int argc, char **argv) {
 
     pthread_exit(NULL);
 }
-

@@ -31,7 +31,10 @@ LIBJSOND				= libs/json-c
 LIBJSONA				:= $(LIBJSOND)/libjsonc.a
 
 LIBJSONI				:= $(LIBJSOND)/inc
+#=================================SQLITE======================================#
+SQLITE_D 				= libs/sqlite3
 
+SQLITE_A 				:= $(SQLITE_D)/sqlite3lib.a
 
 #==================================INC========================================#
 INCD					= inc
@@ -55,12 +58,17 @@ endef
 #=================================RULES=======================================#
 all: install
 
-install: $(LIBMXD) $(LIBJSOND) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
+install: $(SQLITE_D) $(LIBMXD) $(LIBJSOND) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
 
 $(LIBJSOND): $(LIBJSONA)
 
 $(LIBJSONA):
 	@make -sC $(LIBJSOND)
+
+$(SQLITE_D): $(SQLITE_A)
+
+$(SQLITE_A):
+	@make -sC $(SQLITE_D)
 
 $(LIBMXD): $(LIBMXA)
 
@@ -68,12 +76,14 @@ $(LIBMXA):
 	@make -sC $(LIBMXD)
 
 clean:
+	@make -sC $(SQLITE_D) $@
 	@make -sC $(LIBMXD) $@
 	@make -sC $(LIBJSOND) $@
 	@rm -rf $(OBJD)
 	@printf "$(DIR)/$(OBJD)\t\033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
+	@make -sC $(SQLITE_D) $@
 	@make -sC $(LIBMXD) $@
 	@make -sC $(LIBJSOND) $@
 	@rm -rf $(SERVER_APP_NAME)
@@ -118,7 +128,11 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c threads.c request_processing.c server_api.c
+SERVER_SRCS				= main.c threads.c request_processing.c server_api.c \
+						dbfunc.c db_user.c db_group_members.c \
+						new_table.c db_user_del.c db_gr_members_del.c \
+						db_dialog.c db_dialog_del.c db_group.c \
+						db_messages.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -127,7 +141,7 @@ $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITE_A) $(COMMON_OBJS) \
 						$(SERVER_OBJS) -L $(LIBMXD) -L $(LIBJSOND) -lmx -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
