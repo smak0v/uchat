@@ -30,6 +30,7 @@ extern "C" {
 #include "json_tokener.h"
 #include "json_util.h"
 #include "linkhash.h"
+#include "json_types.h"
 
 #ifdef __cplusplus
 }

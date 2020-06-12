@@ -1,43 +1,43 @@
-#include "uchat.h"
 #include "server.h"
 
 void *mx_communicate(void *data) {
     t_comm *connection = (t_comm *)data;
     char buff[MX_MAX];
-    int connection_fd = connection->connection_fd;
     char *status = connection->status;
     int bytes_read = 0;
+    char *response = NULL;
 
     free(connection);
     while (1) {
         bzero(buff, MX_MAX);
-        bytes_read = read(connection_fd, buff, sizeof(buff));
+        bytes_read = read(connection->connection_fd, buff, sizeof(buff));
         if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
-            close(connection_fd);
+            close(connection->connection_fd);
             *status = 0;
             printf("Connection closed\n");
             pthread_exit(NULL);
         }
-        mx_printstr_endl(buff);
+        response = mx_process_request(buff, connection->clients);
+        printf("%s\n", response);
         // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
     }
 }
 
 void accept_clients(int socket_fd) {
-    int connection_fd;
+    int connect_fd;
     unsigned int len;
     struct sockaddr_in client_addr;
-    pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
-    char *status = malloc(sizeof(char) * MX_MAX_THREADS);
+    t_threads *trd_data = mx_init_threads();
+    t_list *connected_clients = NULL;
 
-    mx_memset(status, 0, MX_MAX_THREADS);
     while (1) {
         printf("Ready for new client\n");
         len = sizeof(client_addr);
-        connection_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
-        if (connection_fd < 0)
+        connect_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
+        if (connect_fd < 0)
             mx_terminate("Server acccept failed!");
-        mx_thread_manager(&threads, &status, connection_fd);
+        mx_thread_manager(&trd_data->threads, &trd_data->status, connect_fd,
+                          &connected_clients);
     }
 }
 

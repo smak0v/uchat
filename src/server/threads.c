@@ -9,17 +9,30 @@ static int get_free_thread(char *status, int *counter) {
     return 1;
 }
 
-t_comm *init_data(int connection_fd, char *status) {
+static t_comm *init_data(int connection_fd, char *status, t_list **clients) {
     t_comm *data = malloc(sizeof(t_comm));
 
     data->connection_fd = connection_fd;
     data->status = status;
+    data->clients = clients;
 
     return data;
 }
 
-void mx_thread_manager(pthread_t **threads_ptr,
-                       char **status_ptr, int connection_fd) {
+t_threads *mx_init_threads(void) {
+    pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
+    char *status = malloc(sizeof(char) * MX_MAX_THREADS);
+    t_threads *data = malloc(sizeof(t_threads));
+
+    mx_memset(status, 0, MX_MAX_THREADS);
+    data->threads = threads;
+    data->status = status; 
+
+    return data;
+}
+
+void mx_thread_manager(pthread_t **threads_ptr, char **status_ptr, 
+                       int connection_fd, t_list **clients) {
     t_comm *data = NULL;
     int counter = 0;
     int free_thread = -1;
@@ -29,7 +42,7 @@ void mx_thread_manager(pthread_t **threads_ptr,
     while ((free_thread = get_free_thread(*status_ptr, &counter)) != 0)
         printf("%d\n", free_thread);
 
-    data = init_data(connection_fd, &status[counter]);
+    data = init_data(connection_fd, &status[counter], clients);
     status[counter] = 1;
     if (pthread_create(&thr[counter], NULL, mx_communicate, (void *)data) == 0)
         printf("Connected to client!\n");

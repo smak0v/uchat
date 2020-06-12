@@ -118,7 +118,7 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c threads.c
+SERVER_SRCS				= main.c threads.c request_processing.c server_api.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -127,7 +127,7 @@ $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) libs/json-c/libjsonc.a $(COMMON_OBJS) \
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
 						$(SERVER_OBJS) -L $(LIBMXD) -L $(LIBJSOND) -lmx -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
