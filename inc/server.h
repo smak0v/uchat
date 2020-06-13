@@ -44,33 +44,37 @@ void mx_new_table_message(sqlite3 *database); // create table MSG (message histo
 // USER table +
 t_user *mx_get_user_by_login(sqlite3 *db, char *user_login); // returns data by user_Login from user table
 t_user *mx_get_user_by_user_id(sqlite3 *db, int user_id); // returns data by user_id from user table
-void mx_add_user(sqlite3 *db, char *login, char *pass); // add usr in db
-void mx_delete_user_by_login(sqlite3 *db, char *login); // del user by login
-void mx_delete_user_by_id(sqlite3 *db, int user_id); // del user by user_id
-int mx_get_user_id_by_login(sqlite3 *db, char *login); // returns user_id by login
-void mx_change_user_pass(sqlite3 *db, int user_id, char *new_pass); // new: change pass by usr_id
+int mx_add_user(sqlite3 *db, char *login, char *pass); // add usr in db+
+int mx_delete_user_by_login(sqlite3 *db, char *login); // del user by login+
+int mx_delete_user_by_id(sqlite3 *db, int user_id); // del user by user_id+
+int mx_get_user_id_by_login(sqlite3 *db, char *login); // returns user_id by login+
+int mx_change_user_pass(sqlite3 *db, char *login, char *new_pass); // new: change pass by login+
 
 // GROUP_MEMBERS table 
 t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id); // returns t_gr_members data from group members table
-void mx_add_group_member(sqlite3 *db, int user_id, int group_id); // add group member in db
-void mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id); // del user from GROUP_MEMBERS and USER table; +
+int mx_add_group_member(sqlite3 *db, int user_id, int group_id); // add group member in db+
+int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id); // del user from GROUP_MEMBERS and USER table; +
+int mx_get_group_member_by_user_id(sqlite3 *db, int user_id); // return GROUP_MBMBERS_ID by user_id+
 
 //GROUP table
-void mx_add_grp(sqlite3 *db, char *group_name); // add to GRP table
-void mx_delete_grp_by_id(sqlite3 *db, int grp_id); // delete from GRP table 
-void mx_rename_grp_by_name(sqlite3 *db, char *name, char *new_name); // rename GROUP_NAME by GROUP_NAME
-int mx_get_grp_id(sqlite3 *db, char *grp_name); // returns GROUP_ID by GROUP_NAME
+int mx_add_grp(sqlite3 *db, char *group_name); // add to GRP table+
+int mx_delete_grp_by_id(sqlite3 *db, int grp_id); // delete from GRP table +
+int mx_rename_grp_by_name(sqlite3 *db, char *grp_name, char *new_name); // rename GROUP_NAME by GROUP_NAME+
+int mx_get_grp_id(sqlite3 *db, char *grp_name); // returns GROUP_ID by GROUP_NAME+
 
 // DIALOG table
-void mx_add_dialog(sqlite3 *db, int user_id1, int user_id2); // add to DIALOG Ω
-void mx_delete_by_dialog_id(sqlite3 *db, int dialog_id); // delete from DIALOG table by dialog_id
-t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2); // returns USER_1 USER_2 DIALOG_ID
+int mx_add_dialog(sqlite3 *db, int user_id1, int user_id2); // add to DIALOG +
+int mx_delete_by_dialog_id(sqlite3 *db, int dialog_id); // delete from DIALOG table by dialog_id +
+t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2); // returns USER_1 USER_2 DIALOG_ID +
+int mx_get_dialog_id(sqlite3 *db, int id1, int id2); // returns ID by USER_ID1 and USER_ID2 +
+int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2); // del dialog betweem user1 user2 +
 
 // MSG table
-void mx_add_msg(sqlite3 *db, t_msg *m); // need to edit!!!
-t_msg *mx_get_msg_by_id(sqlite3 *db, int id); // returns msg by ID 
-void mx_delete_msg_by_id(sqlite3 *db, int id);
-void mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id);
+int mx_add_msg(sqlite3 *db, t_msg *m); // need to edit!!! +
+t_msg *mx_get_msg_by_id(sqlite3 *db, int id); // returns msg by ID +
+int mx_delete_msg_by_id(sqlite3 *db, int id); // del by id +
+int mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id); // update by id +
+int mx_get_msg(sqlite3 *db, t_msg *m); // return ID from MSG table +
 
 // UTILS
 void mx_print_db(sqlite3 *db, char *table); // print TABLE NAME 

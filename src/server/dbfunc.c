@@ -2,15 +2,13 @@
 
 sqlite3 *mx_opendb(char *name) {
 	sqlite3 *db;
-	int rv;
+	int rv = 0;
 
 	if ((rv = sqlite3_open(name, &db)) != SQLITE_OK)
 		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
 	else
       fprintf(stderr, "Opened database successfully\n");
-	
-	// create table 
- 	mx_new_table_group_members(db); 
+ 	mx_new_table_group_members(db); // create table
  	mx_new_table_user(db);
  	mx_new_table_group(db); 
  	mx_new_table_dialog(db);

@@ -4,18 +4,33 @@
 int main() {
    sqlite3 *db = mx_opendb("test.db");
 
-   mx_add_user(db, "Login", "Password");
+   int i = 0;
+
+   // i = mx_add_dialog(db, 3, 3);
+   // i = mx_add_dialog(db, 3, 1);
+   i = mx_add_user(db, "login", "pass");
+
+   // printf("\t first:%d\n", i);
+   i = mx_add_user(db, "name", "parol");
+   // printf("\t second:%d\n", i);
+   i = mx_add_user(db, "name23", "pass");
 
    mx_print_db(db, "USER");
-   // mx_change_user_pass(db, 1, "parol2.0");
-   mx_add_group_member(db, 1, 2);
-   mx_add_group_member(db, 23123, 12312321);
-   // mx_printint(d->dialog_id);
-   // mx_printint(d->user_id1);
-   // mx_printint(d->user_id2);
-   mx_print_db(db, "GROUP_MEMBERS");
-   mx_delete_user_from_group(db, 23123, 12312321);
-   mx_print_db(db, "GROUP_MEMBERS");
+   t_user *u = mx_get_user_by_login(db, "name223");
+   // t_user *u = mx_get_user_by_user_id(db, 3);
+   // printf("***** login:%s\n", u->user_login);
+      // mx_printstr_endl(u->user_login);
+
+   if (u)
+      mx_printstr_endl(u->user_login);
+   else
+      mx_printstr_endl("not found");
+
+   // printf("***** login:%s\n", b->user_login);
+
+
+
+
 
    mx_closedb(db);
 
