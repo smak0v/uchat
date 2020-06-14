@@ -37,7 +37,7 @@ int mx_add_user(sqlite3 *db, char *login, char *pass) {
 
 static t_user *for_get_user(sqlite3_stmt *stmt) {
     t_user *user = NULL;
-    int rv;
+    int rv = 0;
     
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
         if (rv == SQLITE_ERROR)
@@ -54,7 +54,15 @@ static t_user *for_get_user(sqlite3_stmt *stmt) {
 }
 
 t_user *mx_get_user_by_login(sqlite3 *db, char *user_login) {
-    return mx_get_user_by_user_id(db, mx_get_user_id_by_login(db, user_login));
+   sqlite3_stmt *stmt;
+    int rv = 0;
+
+    rv = sqlite3_prepare_v2(db, "SELECT * FROM USER WHERE LOGIN = ?1",
+       -1, &stmt, NULL);
+    sqlite3_bind_text(stmt, 1, user_login, -1, SQLITE_STATIC);
+    if (rv != SQLITE_OK)
+        return NULL;
+    return for_get_user(stmt);
 }
 
 t_user *mx_get_user_by_user_id(sqlite3 *db, int user_id) {
