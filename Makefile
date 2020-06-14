@@ -128,7 +128,8 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c threads.c request_processing.c server_api.c \
+SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
+						clients_linked_list.c \
 						dbfunc.c db_user.c db_group_members.c \
 						new_table.c db_user_del.c db_gr_members_del.c \
 						db_dialog.c db_dialog_del.c db_group.c \

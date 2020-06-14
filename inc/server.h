@@ -6,10 +6,10 @@
 #define MX_MAX_THREADS 50
 
 //STRUCTURES
-typedef struct communication t_comm;
-typedef struct threads t_threads;
-typedef struct connected_clients t_cli;
-typedef char *(*api_function)(void *, t_list **, sqlite3 *);
+typedef struct s_communication t_comm;
+typedef struct s_metadata t_meta;
+typedef struct s_connected_clients t_cli;
+typedef char *(*api_function)(void *, t_list **, sqlite3 *, int);
 
 //DB
 typedef struct s_user t_user;
@@ -18,22 +18,24 @@ typedef struct s_dialog t_dialog;
 typedef struct s_msg t_msg;
 
 
-struct communication {
+struct s_communication {
     int connection_fd;
     char *status;
     t_list **clients;
 	sqlite3 *db;
 };
 
-struct threads {
+struct s_metadata {
     pthread_t *threads;
     char *status;
 	sqlite3 *db;
+	t_list **clients;
 };
 
-struct connected_clients {
+struct s_connected_clients {
     int connection_fd;
     int user_id;
+	char *username;
 };
 
 struct s_user {
@@ -64,18 +66,24 @@ struct s_msg {
 	bool read;
 };
 
-//FUNCTIONS
-t_threads *mx_init_threads(void);
-void mx_thread_manager(pthread_t **threads_ptr, char **status_ptr, 
-                       int connection_fd, t_list **clients, sqlite3 *db);
+// FUNCTIONS //
+t_meta *mx_init_threads(sqlite3 *db);
+void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
-char *mx_process_request(char *request, t_list **clients, sqlite3 *db);
+char *mx_process_request(char *request, t_list **clients, sqlite3 *db, int fd);
 
 // SERV API
-char *mx_register_user(void *jobj, t_list **clients, sqlite3 *db);
+char *mx_bad_request(void *jobj, t_list **clients, sqlite3 *db, int fd);
+char *mx_register_user(void *jobj, t_list **clients, sqlite3 *db, int fd);
+char *mx_sign_in(void *jobj, t_list **clients, sqlite3 *db, int fd);
 
+// CLIENTS LINKED LIST
+void mx_add_client(t_list **clients, int connection_fd, char *uname, int uid);
+void mx_pop_client(t_list **clients, int connection_fd);
+t_cli *mx_find_client_by_uname(t_list **clients, char *uname);
+t_cli *mx_find_client_by_uid(t_list **clients, int uid);
 
-//DB API
+// DB API
 sqlite3 *mx_opendb(char *name); // open database.db
 void mx_closedb(sqlite3 *db); // close database.db
 

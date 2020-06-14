@@ -17,7 +17,7 @@ void *mx_communicate(void *data) {
             printf("Connection closed\n");
             pthread_exit(NULL);
         }
-        response = mx_process_request(buff, connect->clients, connect->db);
+        response = mx_process_request(buff, connect->clients, connect->db, connect->connection_fd);
         printf("%s\n", response);
         // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
     }
@@ -27,8 +27,7 @@ void accept_clients(int socket_fd, sqlite3 *db) {
     int connect_fd;
     unsigned int len;
     struct sockaddr_in client_addr;
-    t_threads *trd_data = mx_init_threads();
-    t_list *connected_clients = NULL;
+    t_meta *trd_data = mx_init_threads(db);
 
     while (1) {
         printf("Ready for new client\n");
@@ -36,8 +35,7 @@ void accept_clients(int socket_fd, sqlite3 *db) {
         connect_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
         if (connect_fd < 0)
             mx_terminate("Server acccept failed!");
-        mx_thread_manager(&trd_data->threads, &trd_data->status, connect_fd,
-                          &connected_clients, db);
+        mx_thread_manager(connect_fd, &trd_data);
     }
 }
 
