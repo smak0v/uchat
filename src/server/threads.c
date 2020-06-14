@@ -24,12 +24,13 @@ t_meta *mx_init_threads(sqlite3 *db) {
     pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
     char *status = malloc(sizeof(char) * MX_MAX_THREADS);
     t_meta *data = malloc(sizeof(t_meta));
+    t_list *clients = NULL;
 
     mx_memset(status, 0, MX_MAX_THREADS);
     data->threads = threads;
     data->status = status;
     data->db = db;
-    data->clients = NULL;
+    data->clients = &clients;
 
     return data;
 }

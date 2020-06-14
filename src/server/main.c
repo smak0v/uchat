@@ -61,7 +61,7 @@ int mx_start_server(int port) {
     if ((listen(socket_fd, 5)) != 0)
         mx_terminate("Listen failed!");
     mx_printstr_endl("Server listening!");
-  
+
     db = mx_opendb("test.db");
     accept_clients(socket_fd, db);
     mx_closedb(db);

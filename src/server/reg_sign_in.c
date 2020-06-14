@@ -3,11 +3,12 @@
 static int validate_sign_in(sqlite3 *db, const char *name, const char *passw) {
     t_user *user = mx_get_user_by_login(db, (char *)name);
 
-    if (!mx_strcmp((char *)name, user->user_login) 
-        && !mx_strcmp((char *)passw, user->user_pass))
-        return user->user_id;
-    else
+    printf("name: %s, user: %s\n", (char *)name, (char *)user);
+
+    if (!user || mx_strcmp((char *)passw, user->user_pass))
         return -1;
+    else
+        return user->user_id;
 }
 
 static char *add_to_db(sqlite3 *db, char *name, char *passw) {
@@ -62,9 +63,10 @@ char *mx_sign_in(void *jobj, t_list **clients, sqlite3 *db, int fd) {
     if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
         return mx_bad_request(NULL, NULL, NULL, 0);
 
-    if ((uid = validate_sign_in(db, name, pass)) != -1)
+    if ((uid = validate_sign_in(db, name, pass)) == -1) {
+        mx_print_db(db, "USER");
         return "{\"code\": 401}";
-
+    }
     mx_add_client(clients, fd, (char *)name, uid);
     return "{\"code\": 200}";
 }

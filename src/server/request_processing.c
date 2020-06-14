@@ -29,16 +29,17 @@ char *mx_process_request(char *request, t_list **clients, sqlite3 *db, int fd) {
     const char *type = NULL;
 
     if (json_object_get_type(jobj) == json_type_object) {
+        // json_object_object_get_ex(object, "security-code", &secu_code);
         json_object_object_foreach(jobj, key, val) {
             if (json_object_get_type(val) == json_type_string
                 && !mx_strcmp(key, "type"))
                 type = json_object_get_string(val);
-            else 
+            else
                 return mx_bad_request(NULL, NULL, NULL, 0);
             break;
         }
     }
-    else 
+    else
         return mx_bad_request(NULL, NULL, NULL, 0);
 
     return mx_select_method(type)((void *)jobj, clients, db, fd);

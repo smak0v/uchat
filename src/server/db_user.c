@@ -25,7 +25,7 @@ void mx_change_user_pass(sqlite3 *db, int user_id, char *new_pass) {
     int rv = 0;
     sqlite3_stmt *stmt;
 
-    rv = sqlite3_prepare_v2(db, 
+    rv = sqlite3_prepare_v2(db,
        "UPDATE USER SET PASSWORD = ?1 WHERE USER_ID = ?2;", -1, &stmt, NULL);
     sqlite3_bind_text(stmt, 1, new_pass, -1, SQLITE_STATIC);
     sqlite3_bind_int(stmt, 2, user_id);
@@ -59,7 +59,7 @@ void mx_add_user(sqlite3 *db, char *login, char *pass) {
 static t_user *for_get_user(sqlite3_stmt *stmt) {
     t_user *user = NULL;
     int rv;
-    
+
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
         if (rv == SQLITE_ERROR) {
 			fprintf(stderr, "getuser\n");
