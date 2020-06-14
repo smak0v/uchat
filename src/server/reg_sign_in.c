@@ -3,7 +3,7 @@
 static int validate_sign_in(sqlite3 *db, const char *name, const char *passw) {
     t_user *user = mx_get_user_by_login(db, (char *)name);
 
-    printf("name: %s, user: %s\n", (char *)name, (char *)user);
+    printf("name: %s, user: %s\n, pass: %s\n", (char *)name, user->user_login, user->user_pass);
 
     if (!user || mx_strcmp((char *)passw, user->user_pass))
         return -1;
@@ -12,15 +12,15 @@ static int validate_sign_in(sqlite3 *db, const char *name, const char *passw) {
 }
 
 static char *add_to_db(sqlite3 *db, char *name, char *passw) {
-    // int code = mx_add_user(db, (char *)name, (char *)passw);
-    mx_add_user(db, (char *)name, (char *)passw);
+    int code = mx_add_user(db, (char *)name, (char *)passw);
+    // mx_add_user(db, (char *)name, (char *)passw);
 
-    // if (code > 0)
+    if (code > 0)
        return "{\"code\": 200}";
-    // else if (code == -1)
-    //    return "{\"code\": 500}";
-    // else //  code == -2, username already exists
-    //    return "{\"code\": 409}";
+    else if (code == -1)
+       return "{\"code\": 500}";
+    else //  code == -2, username already exists
+       return "{\"code\": 409}";
 }
 
 static int extract_name_passw(json_object *json, const char **name,

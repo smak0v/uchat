@@ -133,7 +133,7 @@ SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
 						dbfunc.c db_user.c db_group_members.c \
 						new_table.c db_user_del.c db_gr_members_del.c \
 						db_dialog.c db_dialog_del.c db_group.c \
-						db_messages.c
+						db_messages.c db_get_messages.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
