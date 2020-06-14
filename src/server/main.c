@@ -5,7 +5,7 @@ void *mx_communicate(void *data) {
     char buff[MX_MAX];
     char *status = connect->status;
     int bytes_read = 0;
-    char *response = NULL;
+    char *response = strdup("OK");
 
     free(connect);
     while (1) {
@@ -17,7 +17,8 @@ void *mx_communicate(void *data) {
             printf("Connection closed\n");
             pthread_exit(NULL);
         }
-        response = mx_process_request(buff, connect->clients, connect->db);
+        // response = mx_process_request(buff, connect->clients, connect->db);
+        mx_recv_file(connect->connection_fd, buff);
         printf("%s\n", response);
         // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
     }

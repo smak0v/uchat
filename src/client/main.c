@@ -12,7 +12,10 @@ void func(int socket_fd) {
         while ((buff[n++] = getchar()) != '\n')
             ;
 
-        write(socket_fd, buff, sizeof(buff));
+        // write(socket_fd, buff, sizeof(buff));
+        buff[n - 1] = '\0';
+        mx_send_file(socket_fd, buff);
+
         // bzero(buff, sizeof(buff));
         // read(socket_fd, buff, sizeof(buff));
         // mx_printstr(buff);
