@@ -44,7 +44,8 @@ SRCD					= src
 
 #================================FUNCTIONS====================================#
 define compile_dependency
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(GTK_CFLAGS) -c $(1) -o $(2) -I $(INCD) -I $(LIBMXI)
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(GTK_CFLAGS) -c $(1) -o $(2) \
+		-I $(INCD) -I $(LIBMXI) -I /usr/local/opt/openssl/include
 	@printf "\r\33[2K$(DIR)\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
 endef
 
@@ -118,7 +119,8 @@ $(SERVER_OBJ_DIRS):
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-										$(SERVER_OBJS) -L $(LIBMXD) -lmx -o $@
+		$(SERVER_OBJS) -L $(LIBMXD) -L /usr/local/opt/openssl/lib \
+		-lmx -lssl -lcrypto  -o $@
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
@@ -142,7 +144,7 @@ CLIENT_OBJ_DIRS			= $(CLIENT_OBJD)
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c init.c
+CLIENT_SRCS				= main.c init.c build_ui_path.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -152,7 +154,8 @@ $(CLIENT_OBJ_DIRS):
 
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-							$(CLIENT_OBJS) -L $(LIBMXD) -lmx -o $@ $(GTK_LIBS)
+		$(CLIENT_OBJS) -L $(LIBMXD) -L /usr/local/opt/openssl/lib \
+		-lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)

@@ -12,6 +12,9 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+
 #include "libmx.h"
 #include "client.h"
 #include "server.h"
