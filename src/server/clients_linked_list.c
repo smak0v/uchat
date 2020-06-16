@@ -2,13 +2,11 @@
 
 void mx_add_client(t_list **clients, int connection_fd, char *uname, int uid) {
     t_cli *client = malloc(sizeof(t_cli));
-    printf("%d, %d, %s\n", connection_fd, uid, uname);
+
     client->connection_fd = connection_fd;
     client->user_id = uid;
     client->username = uname;
-    printf("2\n");
     mx_push_front(clients, (void *)client);
-    printf("3\n");
 }
 
 void mx_pop_client(t_list **clients, int connection_fd) {

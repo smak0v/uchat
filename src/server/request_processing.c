@@ -14,8 +14,8 @@ api_function mx_select_method(const char *type) {
         return mx_register_user;
     else if (!mx_strcmp(type, "S_IN"))
         return mx_sign_in;
-    // else if (!mx_strcmp(type, "NEW_CHAT"))
-    //     return mx_new_chat;
+    else if (!mx_strcmp(type, "S_OUT"))
+        return mx_sign_out;
     // else if (!mx_strcmp(type, "NEW_GROUP"))
     //     return mx_new_group;
     // else if (!mx_strcmp(type, "INVITE"))

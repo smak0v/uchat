@@ -76,6 +76,7 @@ char *mx_process_request(char *request, t_list **clients, sqlite3 *db, int fd);
 char *mx_bad_request(void *jobj, t_list **clients, sqlite3 *db, int fd);
 char *mx_register_user(void *jobj, t_list **clients, sqlite3 *db, int fd);
 char *mx_sign_in(void *jobj, t_list **clients, sqlite3 *db, int fd);
+char *mx_sign_out(void *jobj, t_list **clients, sqlite3 *db, int fd);
 
 // CLIENTS LINKED LIST
 void mx_add_client(t_list **clients, int connection_fd, char *uname, int uid);
