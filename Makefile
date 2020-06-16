@@ -36,9 +36,11 @@ LIBJSONA				:= $(LIBJSOND)/libjsonc.a
 
 LIBJSONI				:= $(LIBJSOND)/inc
 #=================================SQLITE======================================#
-SQLITE_D 				= libs/sqlite3
+SQLITED 				= libs/sqlite3
 
-SQLITE_A 				:= $(SQLITE_D)/sqlite3lib.a
+SQLITEA 				:= $(SQLITED)/sqlite3.a
+
+SQLITEI					:= $(SQLITED)/inc
 
 #==================================INC========================================#
 INCD					= inc
@@ -56,7 +58,7 @@ SRCD					= src
 #================================FUNCTIONS====================================#
 define compile_dependency
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(GTK_CFLAGS) -c $(1) -o $(2) \
-		-I $(INCD) -I $(LIBMXI) -I $(LIBJSONI) \
+		-I $(INCD) -I $(LIBMXI) -I $(LIBJSONI) -I $(SQLITEI) \
 		-I /usr/local/opt/openssl/include
 
 	@printf "\r\33[2K$(DIR)\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
@@ -65,7 +67,7 @@ endef
 #=================================RULES=======================================#
 all: install
 
-install: $(SQLITE_D) $(LIBMXD) $(LIBJSOND) $(CLIENT_APP_NAME) \
+install: $(SQLITED) $(LIBMXD) $(LIBJSOND) $(CLIENT_APP_NAME) \
 		 $(SERVER_APP_NAME)
 
 $(LIBJSOND): $(LIBJSONA)
@@ -73,10 +75,10 @@ $(LIBJSOND): $(LIBJSONA)
 $(LIBJSONA):
 	@make -sC $(LIBJSOND)
 
-$(SQLITE_D): $(SQLITE_A)
+$(SQLITED): $(SQLITEA)
 
-$(SQLITE_A):
-	@make -sC $(SQLITE_D)
+$(SQLITEA):
+	@make -sC $(SQLITED)
 
 $(LIBMXD): $(LIBMXA)
 
@@ -84,14 +86,14 @@ $(LIBMXA):
 	@make -sC $(LIBMXD)
 
 clean:
-	@make -sC $(SQLITE_D) $@
+	@make -sC $(SQLITED) $@
 	@make -sC $(LIBMXD) $@
 	@make -sC $(LIBJSOND) $@
 	@rm -rf $(OBJD)
 	@printf "$(DIR)/$(OBJD)\t\033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
-	@make -sC $(SQLITE_D) $@
+	@make -sC $(SQLITED) $@
 	@make -sC $(LIBMXD) $@
 	@make -sC $(LIBJSOND) $@
 	@rm -rf $(SERVER_APP_NAME)
@@ -143,7 +145,7 @@ SERVER_DB_OBJS			= $(addprefix $(OBJD)/server/db/, $(DB_SRCS:%.c=%.o))
 DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						new_table.c db_user_del.c db_gr_members_del.c \
 						db_dialog.c db_dialog_del.c db_group.c \
-						db_messages.c db_get_messages.c
+						db_messages.c db_get_messages.c db_auth.c
 
 SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
 						clients_linked_list.c sign_out.c
@@ -157,7 +159,7 @@ $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS) $(SERVER_DB_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITE_A) \
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITEA) \
 		$(COMMON_OBJS) $(SERVER_OBJS) $(SERVER_DB_OBJS) -L $(LIBMXD) \
 		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto  -o $@
 

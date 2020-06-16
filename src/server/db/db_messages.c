@@ -27,7 +27,6 @@ int mx_add_msg(sqlite3 *db, t_msg *m) {
     char *string = NULL;
 
     sqlite3_str_appendall(str, "INSERT INTO MSG");
-
     sqlite3_str_appendall(str,
                           "(GROUP_ID, MSG_BODY, SENDER, TIME, EDITED, READ)"
                           "VALUES(?1, ?2, ?3, ?4, ?5, ?6);");
@@ -39,7 +38,7 @@ int mx_add_msg(sqlite3 *db, t_msg *m) {
 
 int mx_delete_msg_by_id(sqlite3 *db, int id) {
     sqlite3_stmt *stmt = NULL;
-    int rv = qlite3_prepare_v2(db, "DELETE FROM MSG WHERE ID = ?1;",
+    int rv = sqlite3_prepare_v2(db, "DELETE FROM MSG WHERE ID = ?1;",
                                 -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, id);
@@ -57,9 +56,9 @@ int mx_delete_msg_by_id(sqlite3 *db, int id) {
 
 int mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id) {
     sqlite3_stmt *stmt = NULL;
-    int rv = sqlite3_prepare_v2(db, "UPDATE MSG SET MSG_BODY = ?1, "\
-                                "EDITED = ?2 WHERE ID = ?3;",
-                                -1, &stmt, NULL);
+    int rv = sqlite3_prepare_v2(db,
+        "UPDATE MSG SET MSG_BODY = ?1, EDITED = ?2 WHERE ID = ?3;",
+        -1, &stmt, NULL);
 
     sqlite3_bind_text(stmt, 1, m->msg, -1, SQLITE_STATIC);
     sqlite3_bind_int(stmt, 2, m->edited);

@@ -6,6 +6,7 @@ void mx_add_client(t_list **clients, int connection_fd, char *uname, int uid) {
     client->connection_fd = connection_fd;
     client->user_id = uid;
     client->username = uname;
+
     mx_push_front(clients, (void *)client);
 }
 
@@ -50,7 +51,7 @@ t_cli *mx_find_client_by_uname(t_list **clients, char *uname) {
 t_cli *mx_find_client_by_uid(t_list **clients, int uid) {
     if (!clients)
         return NULL;
-    
+
     t_list *list = *clients;
 
     while (list) {

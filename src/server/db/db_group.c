@@ -25,8 +25,9 @@ int mx_add_grp(sqlite3 *db, char *group_name) {
 
 int mx_rename_grp_by_name(sqlite3 *db, char *grp_name, char *new_name) {
     sqlite3_stmt *stmt = NULL;
-    int rv = sqlite3_prepare_v2(db, "UPDATE GRP SET GROUP_NAME = ?1 WHERE " \
-                                "GROUP_NAME = ?2;", -1, &stmt, NULL);
+    int rv = sqlite3_prepare_v2(db,
+        "UPDATE GRP SET GROUP_NAME = ?1 WHERE GROUP_NAME = ?2;",
+        -1, &stmt, NULL);
 
     sqlite3_bind_text(stmt, 1, new_name, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 2, grp_name, -1, SQLITE_STATIC);
@@ -44,7 +45,7 @@ int mx_rename_grp_by_name(sqlite3 *db, char *grp_name, char *new_name) {
 
 int mx_delete_grp_by_id(sqlite3 *db, int grp_id) {
     sqlite3_stmt *stmt = NULL;
-    int rv = qlite3_prepare_v2(db, "DELETE FROM GRP WHERE GROUP_ID = ?1;",
+    int rv = sqlite3_prepare_v2(db, "DELETE FROM GRP WHERE GROUP_ID = ?1;",
                                 -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, grp_id);
@@ -62,11 +63,10 @@ int mx_delete_grp_by_id(sqlite3 *db, int grp_id) {
 
 int mx_get_grp_id(sqlite3 *db, char *grp_name) {
     sqlite3_stmt *stmt = NULL;
-    int rv = 0;
     int id = -1;
-
-    rv = sqlite3_prepare_v2(db, "SELECT * FROM GRP WHERE GROUP_NAME = ?1",
+    int rv = sqlite3_prepare_v2(db, "SELECT * FROM GRP WHERE GROUP_NAME = ?1",
                             -1, &stmt, NULL);
+
     sqlite3_bind_text(stmt, 1, grp_name, -1, SQLITE_STATIC);
 
     if (rv != SQLITE_OK)

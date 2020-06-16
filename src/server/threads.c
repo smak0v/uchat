@@ -6,6 +6,7 @@ static int get_free_thread(char *status, int *counter) {
             *counter = j;
             return 0;
         }
+
     return 1;
 }
 
