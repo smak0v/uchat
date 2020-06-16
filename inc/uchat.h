@@ -13,12 +13,18 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+
 #include "libmx.h"
 #include "client.h"
 #include "server.h"
 #include "json.h"
 
 // Constants
+#define MX_SUCCESS 0
+#define MX_FAILURE 1
+
 #define MX_SA struct sockaddr
 #define MX_MAX 80
 
