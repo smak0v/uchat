@@ -2,6 +2,7 @@
 ._.DS_Store
 *.o
 *.out
+*.a
 .vscode
 .idea
 uchat

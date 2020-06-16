@@ -3,7 +3,7 @@ APP_NAME				= libmx.a
 
 CC						= clang
 
-DIR						= libmx
+DIR						= libs/libmx
 
 #=================================FLAGS=======================================#
 C_FLAGS					= -std=c11 $(addprefix -W, all extra error pedantic)
@@ -99,7 +99,7 @@ SRCD					= src
 
 #================================FUNCTIONS====================================#
 define compile_dependency
-	@clang $(C_FLAGS) $(ADD_FLAGS) -c $(1) -o $(2) -I $(INCD)
+	$(CC) $(C_FLAGS) $(ADD_FLAGS) -c $(1) -o $(2) -I $(INCD)
 	@printf "\r\33[2K$(DIR)\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)/%.c=%)"
 endef
 
@@ -113,18 +113,18 @@ $(OBJ_DIRS):
 
 clean:
 	@rm -rf $(OBJD)
-	@printf "$(DIR)/$(OBJD)\t\033[31;1mdeleted\033[0m\n"
+	@printf "$(DIR)/$(OBJD)\t\t\033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
 	@rm -rf $(APP_NAME)
-	@printf "$(APP_NAME)\t\t\033[31;1muninstalled\033[0m\n"
+	@printf "$(APP_NAME)\t\t\t\033[31;1muninstalled\033[0m\n"
 
 reinstall: uninstall install
 
 #================================DEPENDENCIES=================================#
 $(APP_NAME): $(OBJS)
 	@ar rcs $@ $^
-	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
+	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 
 $(OBJD)/%.o: $(SRCD)/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
