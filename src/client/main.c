@@ -2,7 +2,7 @@
 
 void func(int socket_fd) {
     char buff[MX_MAX];
-    int n;
+    int n = 0;
 
     while(1) {
         bzero(buff, sizeof(buff));
@@ -24,7 +24,7 @@ void func(int socket_fd) {
 }
 
 int mx_start_client(char *ip, int port) {
-    int socket_fd;
+    int socket_fd = 0;
     struct sockaddr_in server_address;
 
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
             mx_print_error_endl("uchat: not valid port");
             exit(1);
         }
-        status = mx_init_client(argc, argv);
+        // status = mx_init_client(argc, argv);
         // mx_start_client(argv[1], mx_atoi(argv[2]));
     }
     return status;

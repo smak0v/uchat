@@ -24,8 +24,8 @@ void *mx_communicate(void *data) {
 }
 
 void accept_clients(int socket_fd, sqlite3 *db) {
-    int connect_fd;
-    unsigned int len;
+    int connect_fd = 0;
+    unsigned int len = 0;
     struct sockaddr_in client_addr;
     t_meta *trd_data = mx_init_threads(db);
 
@@ -40,7 +40,7 @@ void accept_clients(int socket_fd, sqlite3 *db) {
 }
 
 int mx_start_server(int port) {
-    int socket_fd;
+    int socket_fd = 0;
     struct sockaddr_in server_addr;
     sqlite3 *db = NULL;
 
