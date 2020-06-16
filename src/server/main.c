@@ -1,49 +1,48 @@
-#include "uchat.h"
 #include "server.h"
 
 void *mx_communicate(void *data) {
-    t_comm *connection = (t_comm *)data;
+    t_comm *connect = (t_comm *)data;
     char buff[MX_MAX];
-    int connection_fd = connection->connection_fd;
-    char *status = connection->status;
+    char *status = connect->status;
     int bytes_read = 0;
+    char *response = NULL;
 
-    free(connection);
+    free(connect);
     while (1) {
         bzero(buff, MX_MAX);
-        bytes_read = read(connection_fd, buff, sizeof(buff));
+        bytes_read = read(connect->connection_fd, buff, sizeof(buff));
         if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
-            close(connection_fd);
+            close(connect->connection_fd);
             *status = 0;
             printf("Connection closed\n");
             pthread_exit(NULL);
         }
-        mx_printstr_endl(buff);
+        response = mx_process_request(buff, connect->clients, connect->db, connect->connection_fd);
+        printf("%s\n", response);
         // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
     }
 }
 
-void accept_clients(int socket_fd) {
-    int connection_fd;
+void accept_clients(int socket_fd, sqlite3 *db) {
+    int connect_fd;
     unsigned int len;
     struct sockaddr_in client_addr;
-    pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
-    char *status = malloc(sizeof(char) * MX_MAX_THREADS);
+    t_meta *trd_data = mx_init_threads(db);
 
-    mx_memset(status, 0, MX_MAX_THREADS);
     while (1) {
         printf("Ready for new client\n");
         len = sizeof(client_addr);
-        connection_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
-        if (connection_fd < 0)
+        connect_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
+        if (connect_fd < 0)
             mx_terminate("Server acccept failed!");
-        mx_thread_manager(&threads, &status, connection_fd);
+        mx_thread_manager(connect_fd, &trd_data);
     }
 }
 
 int mx_start_server(int port) {
     int socket_fd;
     struct sockaddr_in server_addr;
+    sqlite3 *db = NULL;
 
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         mx_terminate("Socket creation failed!");
@@ -62,8 +61,10 @@ int mx_start_server(int port) {
     if ((listen(socket_fd, 5)) != 0)
         mx_terminate("Listen failed!");
     mx_printstr_endl("Server listening!");
-  
-    accept_clients(socket_fd);
+
+    db = mx_opendb("test.db");
+    accept_clients(socket_fd, db);
+    mx_closedb(db);
 
     close(socket_fd);
 
@@ -83,4 +84,3 @@ int main(int argc, char **argv) {
 
     pthread_exit(NULL);
 }
-
