@@ -32,7 +32,7 @@ LIBMXI					:= $(LIBMXD)/inc
 #=================================JSON-C======================================#
 LIBJSOND				= libs/json-c
 
-LIBJSONA				:= $(LIBJSOND)/libjsonc.a
+LIBJSONA				:= $(LIBJSOND)/jsonc.a
 
 LIBJSONI				:= $(LIBJSOND)/inc
 #=================================SQLITE======================================#
@@ -61,7 +61,7 @@ define compile_dependency
 		-I $(INCD) -I $(LIBMXI) -I $(LIBJSONI) -I $(SQLITEI) \
 		-I /usr/local/opt/openssl/include
 
-	@printf "\r\33[2K$(DIR)\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
+	@printf "\r\33[2K$(DIR)\t\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
 endef
 
 #=================================RULES=======================================#
@@ -90,16 +90,16 @@ clean:
 	@make -sC $(LIBMXD) $@
 	@make -sC $(LIBJSOND) $@
 	@rm -rf $(OBJD)
-	@printf "$(DIR)/$(OBJD)\t\033[31;1mdeleted\033[0m\n"
+	@printf "$(DIR)/$(OBJD)\t\t\033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
 	@make -sC $(SQLITED) $@
 	@make -sC $(LIBMXD) $@
 	@make -sC $(LIBJSOND) $@
 	@rm -rf $(SERVER_APP_NAME)
-	@printf "$(SERVER_APP_NAME)\t\033[31;1muninstalled\033[0m\n"
+	@printf "$(SERVER_APP_NAME)\t\t\033[31;1muninstalled\033[0m\n"
 	@rm -rf $(CLIENT_APP_NAME)
-	@printf "$(CLIENT_APP_NAME)\t\t\033[31;1muninstalled\033[0m\n"
+	@printf "$(CLIENT_APP_NAME)\t\t\t\033[31;1muninstalled\033[0m\n"
 
 reinstall: uninstall install
 
@@ -163,7 +163,7 @@ $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS) $(SERVER_DB_OBJS)
 		$(COMMON_OBJS) $(SERVER_OBJS) $(SERVER_DB_OBJS) -L $(LIBMXD) \
 		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto  -o $@
 
-	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
+	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
@@ -202,7 +202,7 @@ $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
 		$(CLIENT_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
 		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
 
-	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
+	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
 	$(call compile_dependency, $<, $@)

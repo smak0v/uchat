@@ -1,55 +1,78 @@
-NAME = libjsonc.a
-SRC = arraylist.c \
-    debug.c \
-    json_c_version.c \
-    json_object.c \
-    json_object_iterator.c \
-    json_pointer.c \
-    json_tokener.c \
-    json_util.c \
-    json_visit.c \
-    libjson.c \
-    linkhash.c \
-    printbuf.c \
-    random_seed.c \
-    strerror_override.c
-SRCS = $(addprefix src/, $(SRC))
-SRCD = src
-OBJD = obj
-OBJS = $(SRC:.c=.o)
-CFLAGS = -std=c11
+#================================COMMON=======================================#
+APP_NAME				= jsonc.a
 
+CC						= clang
 
+DIR						= libs/json-c
+
+#=================================FLAGS=======================================#
+C_FLAGS					= -std=c11
+
+ADD_FLAGS				= -g
+
+LINKER_FLAGS			=
+
+#==================================INC========================================#
+INCD					= inc
+
+INC						= apps_config.h arraylist.h config.h debug.h \
+						  json_c_version.h json_config.h json_inttypes.h \
+						  json_object_iterator.h json_object_private.h \
+						  json_object.h json_pointer.h json_tokener.h \
+						  json_types.h json_util.h json_visit.h json.h \
+						  linkhash.h math_compat.h printbuf.h \
+						  random_seed.h sprintf_compat.h strdup_compat.h \
+						  strerror_override_private.h strerror_override.h \
+						  vasprintf_compat.h
+
+INCS					= $(addprefix $(INCD)/, $(INC))
+
+#===================================OBJ=======================================#
+OBJD					= obj
+
+OBJ_DIRS				= $(OBJD)
+
+OBJS					= $(addprefix $(OBJD)/, $(SRCS:%.c=%.o))
+
+#===================================SRC=======================================#
+SRCS 					= arraylist.c debug.c json_c_version.c json_object.c \
+						  json_pointer.c json_object_iterator.c \
+						  json_tokener.c json_util.c json_visit.c libjson.c \
+						  linkhash.c printbuf.c random_seed.c \
+						  strerror_override.c
+
+SRCD					= src
+
+#================================FUNCTIONS====================================#
+define compile_dependency
+	$(CC) $(C_FLAGS) $(ADD_FLAGS) -c $(1) -o $(2) -I $(INCD)
+	@printf "\r\33[2K$(DIR)\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)/%.c=%)"
+endef
+
+#=================================RULES=======================================#
 all: install
 
-install: $(NAME)
+install: $(APP_NAME) $(INCD)
 
-$(NAME): $(OBJD)
-	@ar -rcs $(NAME) $(OBJS)
-	@mkdir -p $(OBJD)
-	@mv $(OBJS) $(OBJD)
-
-$(OBJD): $(SRCS)
-	@clang -std=c11 -g -c  src/arraylist.c -o arraylist.o -I inc
-	@clang -std=c11 -g -c  src/debug.c -o debug.o -I inc
-	@clang -std=c11 -g -c  src/json_c_version.c -o json_c_version.o -I inc
-	@clang -std=c11 -g -c  src/json_object.c -o json_object.o -I inc
-	@clang -std=c11 -g -c  src/json_object_iterator.c -o json_object_iterator.o -I inc
-	@clang -std=c11 -g -c  src/json_pointer.c -o json_pointer.o -I inc
-	@clang -std=c11 -g -c  src/json_tokener.c -o json_tokener.o -I inc
-	@clang -std=c11 -g -c  src/json_util.c -o json_util.o -I inc
-	@clang -std=c11 -g -c  src/json_visit.c -o json_visit.o -I inc
-	@clang -std=c11 -g -c  src/libjson.c -o libjson.o -I inc
-	@clang -std=c11 -g -c  src/linkhash.c -o linkhash.o -I inc
-	@clang -std=c11 -g -c  src/libjson.c -o libjson.o -I inc
-	@clang -std=c11 -g -c  src/printbuf.c -o printbuf.o -I inc
-	@clang -std=c11 -g -c  src/random_seed.c -o random_seed.o -I inc
-	@clang -std=c11 -g -c  src/strerror_override.c -o strerror_override.o -I inc
-
-uninstall:
-	@rm -rf $(NAME)
+$(OBJ_DIRS):
+	@mkdir -p $@
 
 clean:
-	@rm -rf ./obj
+	@rm -rf $(OBJD)
+	@printf "$(DIR)/$(OBJD)\t\t\033[31;1mdeleted\033[0m\n"
+
+uninstall: clean
+	@rm -rf $(APP_NAME)
+	@printf "$(APP_NAME)\t\t\t\033[31;1muninstalled\033[0m\n"
 
 reinstall: uninstall install
+
+#================================DEPENDENCIES=================================#
+$(APP_NAME): $(OBJS)
+	@ar rcs $@ $^
+	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
+
+$(OBJD)/%.o: $(SRCD)/%.c
+	$(call compile_dependency, $<, $@)
+
+$(OBJS): | $(OBJ_DIRS)
