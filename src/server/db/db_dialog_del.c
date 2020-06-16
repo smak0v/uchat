@@ -19,7 +19,7 @@ int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2) {
 	sqlite3_stmt *stmt;
 	int rv = 0;
 
-	rv = sqlite3_prepare_v2(db, 
+	rv = sqlite3_prepare_v2(db,
 	   "DELETE FROM DIALOG WHERE USER_ID1 = ?1 AND USER_ID2 = ?2",
 	   -1, &stmt, NULL);
 	sqlite3_bind_int(stmt, 1, user_id1);
@@ -33,12 +33,12 @@ int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2) {
 }
 
 
-// void mx_update_by_dialog_id(sqlite3 *db, int dialog_id, 
+// void mx_update_by_dialog_id(sqlite3 *db, int dialog_id,
 // 							int user_id1, int user_id2) {
 // 	int rv = 0;
 // 	sqlite3_stmt *stmt;
 
-// 	rv = sqlite3_prepare_v2(db, 
+// 	rv = sqlite3_prepare_v2(db,
 // 		"UPDATE DIALOG SET USER_ID1 = ?2, USER_ID2 = ?3 WHERE DIALOG_ID = ?1;",
 // 		-1, &stmt, NULL);
 // 	sqlite3_bind_int(stmt, 1, dialog_id);

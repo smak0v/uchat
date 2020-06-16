@@ -3,7 +3,7 @@
 static t_msg *get_msg(sqlite3_stmt *stmt) {
     t_msg *m = NULL;
     int rv = 0;
-    
+
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
         if (rv == SQLITE_ERROR)
 			return NULL;

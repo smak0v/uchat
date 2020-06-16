@@ -9,3 +9,4 @@ uchat.dSYM
 uchat_server
 uchat_server.dSYM
 *.db
+libmx

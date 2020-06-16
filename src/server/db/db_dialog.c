@@ -4,7 +4,7 @@ int mx_add_dialog(sqlite3 *db, int user_id1, int user_id2) {
 	sqlite3_stmt *stmt;
 	int rv = 0;
 
-	rv = sqlite3_prepare_v2(db, 
+	rv = sqlite3_prepare_v2(db,
 		"INSERT INTO DIALOG(USER_ID1, USER_ID2)VALUES(?1, ?2);",
 		-1, &stmt, NULL);
 	if (rv == SQLITE_ERROR)
@@ -20,7 +20,7 @@ int mx_add_dialog(sqlite3 *db, int user_id1, int user_id2) {
 static t_dialog *for_get_dialog(sqlite3_stmt *stmt) {
     t_dialog *d = NULL;
     int rv;
-    
+
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
         if (rv == SQLITE_ERROR) {
 			fprintf(stderr, "get dialog\n");
@@ -41,7 +41,7 @@ t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2) {
     sqlite3_stmt *stmt;
     int rv = 0;
 
-    sqlite3_prepare_v2(db, 
+    sqlite3_prepare_v2(db,
     	"SELECT * FROM DIALOG WHERE USER_ID1 = ?1 AND USER_ID2 = ?2",
     	-1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, id1);

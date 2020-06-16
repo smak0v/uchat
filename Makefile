@@ -65,7 +65,8 @@ endef
 #=================================RULES=======================================#
 all: install
 
-install: $(SQLITE_D) $(LIBMXD) $(LIBJSOND) $(CLIENT_APP_NAME) $(SERVER_APP_NAME)
+install: $(SQLITE_D) $(LIBMXD) $(LIBJSOND) $(CLIENT_APP_NAME) \
+		 $(SERVER_APP_NAME)
 
 $(LIBJSOND): $(LIBJSONA)
 
@@ -130,32 +131,42 @@ $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
 #==================================OBJ========================================#
 SERVER_OBJD				= $(OBJD)/server
 
-SERVER_OBJ_DIRS			= $(SERVER_OBJD)
+DB_OBJD					= $(SERVER_OBJD)/db
+
+SERVER_OBJ_DIRS			= $(SERVER_OBJD) $(DB_OBJD)
 
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
+SERVER_DB_OBJS			= $(addprefix $(OBJD)/server/db/, $(DB_SRCS:%.c=%.o))
+
 #===================================SRC=======================================#
-SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
-						clients_linked_list.c sign_out.c \
-						dbfunc.c db_user.c db_group_members.c \
+DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						new_table.c db_user_del.c db_gr_members_del.c \
 						db_dialog.c db_dialog_del.c db_group.c \
 						db_messages.c db_get_messages.c
 
+SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
+						clients_linked_list.c sign_out.c
+
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
+
+DB						= $(addprefix server/db/, $(DB_SRCS))
 
 #================================DEPENDENCIES=================================#
 $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
-$(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS)
+$(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS) $(SERVER_DB_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITE_A) \
-		$(COMMON_OBJS) $(SERVER_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
-		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto  -o $@
+		$(COMMON_OBJS) $(SERVER_OBJS) $(SERVER_DB_OBJS) -L $(LIBMXD) \
+		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto  -o $@
 
 	@printf "\r\33[2K$@\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
+	$(call compile_dependency, $<, $@)
+
+$(SERVER_OBJD)/db/%.o: $(SRCD)/server/db/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(SERVER_OBJS): | $(SERVER_OBJ_DIRS) $(COMMON_OBJ_DIRS)
