@@ -9,7 +9,6 @@
 
 // Structures
 
-
 // Functions
 int mx_init_client(int argc, char **argv);
 

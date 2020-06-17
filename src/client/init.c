@@ -24,8 +24,6 @@ int mx_init_client(int argc, char **argv) {
     GError *error = NULL;
     char *ui_path = mx_build_ui_path("builder.ui");
     GtkCssProvider *cssProvider = gtk_css_provider_new();
-    // GtkWidget *image = gtk_image_new_from_file (mx_build_ui_path("like.png"));
-
     
     gtk_init(&argc, &argv);
     builder = gtk_builder_new();
@@ -40,7 +38,9 @@ int mx_init_client(int argc, char **argv) {
     pass_entry = GTK_WIDGET(gtk_builder_get_object(builder, "pass_entry"));
     button_log_in = GTK_WIDGET(gtk_builder_get_object(builder, "b_login"));
     button_reg = GTK_WIDGET(gtk_builder_get_object(builder, "b_reg"));
+    
     gtk_css_provider_load_from_path(cssProvider, mx_build_ui_path("ex.css"), NULL);
+
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
                                           GTK_STYLE_PROVIDER(cssProvider),
                                           GTK_STYLE_PROVIDER_PRIORITY_USER);
