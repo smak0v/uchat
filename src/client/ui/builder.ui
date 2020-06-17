@@ -41,6 +41,7 @@
           <object class="GtkEntry" id="name_entry">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="margin_bottom">5</property>
             <property name="max_length">30</property>
             <property name="invisible_char">●</property>
             <signal name="changed" handler="name_entry_changed" swapped="no"/>
@@ -56,6 +57,7 @@
           <object class="GtkEntry" id="pass_entry">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="margin_bottom">5</property>
             <property name="max_length">50</property>
             <property name="visibility">False</property>
             <property name="invisible_char">●</property>
@@ -80,8 +82,10 @@
               <object class="GtkButton" id="b_reg">
                 <property name="label" translatable="yes">Register</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can_focus">False</property>
                 <property name="receives_default">True</property>
+                <property name="margin_right">5</property>
+                <property name="margin_top">5</property>
                 <signal name="clicked" handler="b_reg_clicked" swapped="no"/>
               </object>
               <packing>
@@ -94,8 +98,10 @@
               <object class="GtkButton" id="b_login">
                 <property name="label" translatable="yes">Log in</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can_focus">False</property>
                 <property name="receives_default">True</property>
+                <property name="margin_left">5</property>
+                <property name="margin_top">5</property>
                 <property name="image_position">right</property>
                 <signal name="clicked" handler="b_login_clicked" swapped="no"/>
               </object>

@@ -16,13 +16,14 @@ void entry_changed(GtkEntry *s) {
 
 int mx_init_client(int argc, char **argv) {
     GtkBuilder *builder;
-    GObject *win_log;
-    GObject *name_entry;
-    GObject *pass_entry;
-    GObject *button_log_in;
-    GObject *button_reg;
+    GtkWidget *win_log;
+    GtkWidget *name_entry;
+    GtkWidget *pass_entry;
+    GtkWidget *button_log_in;
+    GtkWidget *button_reg;
     GError *error = NULL;
     char *ui_path = mx_build_ui_path("builder.ui");
+    GtkCssProvider *cssProvider = gtk_css_provider_new();
 
     gtk_init(&argc, &argv);
     builder = gtk_builder_new();
@@ -31,13 +32,19 @@ int mx_init_client(int argc, char **argv) {
         g_clear_error(&error);
         return MX_FAILURE;
     }
+    win_log = GTK_WIDGET(gtk_builder_get_object(builder, "win_log"));
 
-    win_log = gtk_builder_get_object(builder, "win_log");
-    name_entry = gtk_builder_get_object(builder, "name_entry");
-    pass_entry = gtk_builder_get_object(builder, "pass_entry");
-    button_log_in = gtk_builder_get_object(builder, "b_login");
-    button_reg = gtk_builder_get_object(builder, "b_reg");
-
+    name_entry = GTK_WIDGET(gtk_builder_get_object(builder, "name_entry"));
+    pass_entry = GTK_WIDGET(gtk_builder_get_object(builder, "pass_entry"));
+    button_log_in = GTK_WIDGET(gtk_builder_get_object(builder, "b_login"));
+    button_reg = GTK_WIDGET(gtk_builder_get_object(builder, "b_reg"));
+    gtk_css_provider_load_from_path(cssProvider, mx_build_ui_path("ex.css"), NULL);
+//     gtk_style_context_add_provider(gtk_widget_get_style_context(win_log),
+//                                         GTK_STYLE_PROVIDER(cssProvider),
+//                                         GTK_STYLE_PROVIDER_PRIORITY_USER);
+gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                          GTK_STYLE_PROVIDER(cssProvider),
+                                          GTK_STYLE_PROVIDER_PRIORITY_USER);
     g_signal_connect(win_log, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(name_entry, "changed", G_CALLBACK(entry_changed), NULL);
     g_signal_connect(pass_entry, "changed", G_CALLBACK(entry_changed), NULL);
