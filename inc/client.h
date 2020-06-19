@@ -32,5 +32,9 @@ struct s_glade {
     GtkWidget *b_reg; // button register
     // register window
     GtkWidget *w_reg; // window register
-    GtkWidget *button1; // button
+    GtkWidget *r_ename; // entry name
+    GtkWidget *r_epass; // entry pass
+    GtkWidget *b_reg_login; // button log in
+    GtkWidget *b_reg_back; // button back to log in window
+
 };
