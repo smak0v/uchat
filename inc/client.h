@@ -17,7 +17,7 @@ int mx_init_client(int argc, char **argv);
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path); // connect .css
 // void mx_hide_win(GtkWidget *sender, GtkWidget *window); // hide window on G_CALLBACK click
-void mx_hide_win(GtkWidget *sender, GtkWindow *window); // hide window on G_CALLBACK click
+void mx_hide_win(GtkWidget *sender, t_glade *g);
 void mx_create_win_log(t_glade *g); // entry window
 // void mx_create_win_reg(t_glade *g); // register window
 

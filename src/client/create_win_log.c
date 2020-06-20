@@ -12,9 +12,26 @@ static void entry_changed(GtkEntry *s) {
 
 static void back(GtkWidget *sender, t_glade *g) {
     printf("==========Go back!!!!==========\n");
-    gtk_widget_hide(gtk_widget_get_toplevel(sender));
-    mx_create_win_log(g);
-    gtk_widget_show_all(g->w_log);
+    // gint x = 0;
+    // gint y = 0;
+    int x,y;
+    int w,h;
+    sender = NULL;
+
+    gtk_window_get_position(GTK_WINDOW(g->w_reg), &x, &y);
+    gtk_window_get_size(GTK_WINDOW(g->w_reg), &w, &h);
+
+    gtk_widget_hide(g->w_reg);
+
+    // gtk_window_set_position(g->w_log, x, y);
+    gtk_window_resize(GTK_WINDOW(g->w_log), w, h);
+    gtk_window_move(GTK_WINDOW(g->w_log), x, y + 22.35);
+
+    gtk_widget_show_all(GTK_WIDGET(g->w_log));
+
+    // gtk_widget_hide(gtk_widget_get_toplevel(sender));
+    // mx_create_win_log(g);
+    // gtk_widget_show_all(g->w_log);
 }
 
 static void create_win_reg(t_glade *g) {
@@ -43,6 +60,6 @@ void mx_create_win_log(t_glade *g) {
     g_signal_connect(g->e_name, "changed", G_CALLBACK(entry_changed), NULL);
     g_signal_connect(g->e_pass, "changed", G_CALLBACK(entry_changed), NULL);
     g_signal_connect(g->b_log_in, "clicked", G_CALLBACK(clicked_log), NULL);
-    g_signal_connect(g->b_reg, "clicked", G_CALLBACK(mx_hide_win), g->w_reg);
+    g_signal_connect(g->b_reg, "clicked", G_CALLBACK(mx_hide_win), g);
 }
 
