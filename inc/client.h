@@ -23,7 +23,8 @@ void mx_create_win_log(t_glade *g); // entry window
 
 struct s_glade {
     GtkBuilder *bd; // builder
-
+    char *log;
+    char *pass;
     // log in window
     GtkWidget *w_log; // window log
     GtkWidget *e_name; // entry name
