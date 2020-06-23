@@ -23,11 +23,13 @@ void mx_widget_set_visibility(GtkBuilder *bd, gchar *name,
                               gboolean is_visible); // set visible by name
 void mx_b_log(GtkButton *b, t_glade *g); // when click button -> in log window
 void mx_b_reg_log(GtkButton *b, t_glade *g); // when click button -> in register window
-
-
+void mx_create_win_chat(t_glade *g);
+void mx_open_win_chat(GtkWidget *w, t_glade *g);
+void mx_show_win_chat(GtkWidget *v, t_glade *g);
 
 struct s_glade {
     GtkBuilder *bd; // builder
+    // user data
     char *log;
     char *pass;
     // log in window
@@ -43,5 +45,9 @@ struct s_glade {
     GtkWidget *r_repass; // entry pass
     GtkWidget *b_reg_login; // button log in
     GtkWidget *b_reg_back; // button back to log in window
-
+    // chat window
+    GtkWidget *w_chat;
+    GtkWidget *c_label; // window register
+    GtkWidget *c_entry; // window register
+    GtkWidget *c_b_go; // window register
 };

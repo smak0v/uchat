@@ -14,7 +14,7 @@ int mx_init_client(int argc, char **argv) {
     }
     mx_connect_css("ex.css");
     mx_create_win_log(g);
-    // mx_create_win_reg(g);
+    mx_create_win_chat(g);
 
     gtk_main();
     mx_strdel(&ui_path);

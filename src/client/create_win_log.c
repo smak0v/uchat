@@ -40,7 +40,7 @@ void mx_create_win_log(t_glade *g) {
     g->b_log_in = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_login"));
     g->b_reg = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_reg"));
     g_signal_connect(g->w_log, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    g_signal_connect(g->b_log_in, "clicked", G_CALLBACK(mx_b_log), g);
     g_signal_connect(g->b_reg, "clicked", G_CALLBACK(mx_open_regwin), g);
+    g_signal_connect(g->b_log_in, "clicked", G_CALLBACK(mx_b_log), g);
 }
 

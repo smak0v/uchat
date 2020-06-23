@@ -144,7 +144,8 @@ CLIENT_OBJ_DIRS			= $(CLIENT_OBJD)
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c init.c utils.c create_win_log.c auth_utils.c
+CLIENT_SRCS				= main.c init.c utils.c create_win_log.c auth_utils.c \
+						  win_chat.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
