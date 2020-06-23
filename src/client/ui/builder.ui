@@ -408,6 +408,40 @@
           </packing>
         </child>
         <child>
+          <object class="GtkLabel" id="r_pass_err">
+            <property name="sensitive">False</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="label" translatable="yes">Different passwords*</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">3</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="r_pass_err1">
+            <property name="sensitive">False</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="label" translatable="yes">Different passwords*</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">2</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
           <placeholder/>
         </child>
         <child>
@@ -418,6 +452,20 @@
         </child>
         <child>
           <placeholder/>
+        </child>
+        <child>
+          <object class="GtkLabel" id="r_name_err">
+            <property name="sensitive">False</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="label" translatable="yes">Write username*</property>
+          </object>
+          <packing>
+            <property name="left_attach">3</property>
+            <property name="top_attach">1</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
+          </packing>
         </child>
       </object>
     </child>

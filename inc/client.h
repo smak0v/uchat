@@ -16,10 +16,15 @@ int mx_init_client(int argc, char **argv);
 // UI
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path); // connect .css
-// void mx_hide_win(GtkWidget *sender, GtkWidget *window); // hide window on G_CALLBACK click
-void mx_hide_win(GtkWidget *sender, t_glade *g);
+void mx_open_regwin(GtkWidget *sender, t_glade *g);
 void mx_create_win_log(t_glade *g); // entry window
-// void mx_create_win_reg(t_glade *g); // register window
+void mx_widget_visible(GtkWidget *widget, gboolean is_visible); // TRUE - show widget, FALSE - hide
+void mx_widget_set_visibility(GtkBuilder *bd, gchar *name, 
+                              gboolean is_visible); // set visible by name
+void mx_b_log(GtkButton *b, t_glade *g); // when click button -> in log window
+void mx_b_reg_log(GtkButton *b, t_glade *g); // when click button -> in register window
+
+
 
 struct s_glade {
     GtkBuilder *bd; // builder
