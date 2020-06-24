@@ -144,11 +144,12 @@ SERVER_DB_OBJS			= $(addprefix $(OBJD)/server/db/, $(DB_SRCS:%.c=%.o))
 #===================================SRC=======================================#
 DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						new_table.c db_user_del.c db_gr_members_del.c \
-						db_dialog.c db_dialog_del.c db_group.c \
+						db_dialog.c db_dialog_del.c db_group.c sock_table.c \
 						db_messages.c db_get_messages.c db_auth.c
 
-SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
-						sign_out.c groups.c
+SERVER_SRCS				= main.c 
+# threads.c request_processing.c reg_sign_in.c \
+						# sign_out.c groups.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 

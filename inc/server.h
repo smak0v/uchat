@@ -82,6 +82,7 @@ void mx_new_table_group_members(sqlite3 *database);
 void mx_new_table_group(sqlite3 *database);
 void mx_new_table_dialog(sqlite3 *database);
 void mx_new_table_message(sqlite3 *database);
+void mx_new_table_socket(sqlite3 *database);
 
 // USER table
 t_user *mx_get_user_by_login(sqlite3 *db, char *user_login);
@@ -117,6 +118,13 @@ t_msg *mx_get_msg_by_id(sqlite3 *db, int id);
 int mx_delete_msg_by_id(sqlite3 *db, int id);
 int mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id);
 int mx_get_msg(sqlite3 *db, t_msg *m);
+
+//SOCKETS table
+int mx_add_sock_user(sqlite3 *db, int user_id,
+                     int sock_fd, char *online_user);
+int mx_get_sock_by_user_id(sqlite3 *db, int user_id);
+char *mx_get_online_by_user_id(sqlite3 *db, int user_id);
+int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 
 // Utils
 void mx_print_db(sqlite3 *db, char *table);
