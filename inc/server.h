@@ -25,6 +25,7 @@ struct s_communication {
     char *status;
     t_list **clients;
 	sqlite3 *db;
+	SSL *ssl;
 };
 
 struct s_metadata {
@@ -32,6 +33,7 @@ struct s_metadata {
     char *status;
 	sqlite3 *db;
 	t_list **clients;
+	SSL *ssl;
 };
 
 struct s_connected_clients {

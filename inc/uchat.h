@@ -24,6 +24,7 @@
 // Constants
 #define MX_SUCCESS 0
 #define MX_FAILURE 1
+#define MX_SSL_FAILURE -1
 
 #define MX_SA struct sockaddr
 #define MX_MAX 80
