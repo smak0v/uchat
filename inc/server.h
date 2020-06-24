@@ -41,6 +41,7 @@ struct s_gr_members {
 	int gr_members_id;
 	int user_id;
 	int group_id;
+	bool adm;
 };
 
 struct s_dialog {
@@ -95,14 +96,15 @@ int mx_change_user_pass(sqlite3 *db, char *login, char *new_pass);
 
 // GROUP_MEMBERS table
 t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id);
-int mx_add_group_member(sqlite3 *db, int user_id, int group_id);
+int mx_add_group_member(sqlite3 *db, int user_id, int group_id, bool adm);
 int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id);
 int mx_get_group_member_by_user_id(sqlite3 *db, int user_id);
+t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id);
 
 //GROUP table
 int mx_add_grp(sqlite3 *db, char *group_name);
 int mx_delete_grp_by_id(sqlite3 *db, int grp_id);
-int mx_rename_grp_by_name(sqlite3 *db, char *grp_name, char *new_name);
+int mx_rename_grp_by_id(sqlite3 *db, int grp_id, char *new_name);
 int mx_get_grp_id(sqlite3 *db, char *grp_name);
 
 // DIALOG table
@@ -128,3 +130,4 @@ int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 
 // Utils
 void mx_print_db(sqlite3 *db, char *table);
+void mx_print_list_members(t_list *mem);

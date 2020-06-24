@@ -9,9 +9,11 @@ void mx_new_table_user(sqlite3 *database) {
 
 void mx_new_table_group_members(sqlite3 *database) {
     sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS GROUP_MEMBERS(" \
-                 "GROUP_MEMBERS_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL"\
-                 ",USER_ID INTEGER NOT NULL," \
-                 "GROUP_ID INTEGER NOT NULL);", 0, 0, 0);
+                 "GROUP_MEMBERS_ID INTEGER PRIMARY KEY " \
+                 "AUTOINCREMENT NOT NULL," \
+                 "USER_ID INTEGER NOT NULL," \
+                 "GROUP_ID INTEGER NOT NULL," \
+                 "ADMIN INTEGER NOT NULL);", 0, 0, 0);
 }
 
 void mx_new_table_group(sqlite3 *database) {

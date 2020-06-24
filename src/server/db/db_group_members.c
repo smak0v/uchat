@@ -12,33 +12,31 @@ static t_gr_members *for_get_member(sqlite3_stmt *stmt) {
         sqlite3_finalize(stmt);
         return NULL;
     }
-
     mem = malloc(sizeof(t_gr_members));
     mem->gr_members_id = sqlite3_column_int(stmt, 0);
     mem->user_id = sqlite3_column_int(stmt, 1);
     mem->group_id = sqlite3_column_int(stmt, 2);
-
+    mem->adm = sqlite3_column_int(stmt, 3);
     sqlite3_finalize(stmt);
 
     return mem;
 }
 
-int mx_add_group_member(sqlite3 *db, int user_id, int group_id) {
+int mx_add_group_member(sqlite3 *db, int user_id, int group_id, bool adm) {
     sqlite3_stmt *stmt = NULL;
     int rv = 0;
 
     if (mx_get_group_member_by_user_id(db, user_id) > 0)
         return -2;
-
     rv = sqlite3_prepare_v2(db,
-        "INSERT INTO GROUP_MEMBERS(USER_ID, GROUP_ID)VALUES(?1, ?2);",
-        -1, &stmt, NULL);
-
+        "INSERT INTO GROUP_MEMBERS(USER_ID, GROUP_ID, ADMIN)"\
+        "VALUES(?1, ?2, ?3);", -1, &stmt, NULL);
     if (rv == SQLITE_ERROR)
-        return -1;
+        return -2;
 
     sqlite3_bind_int(stmt, 1, user_id);
     sqlite3_bind_int(stmt, 2, group_id);
+    sqlite3_bind_int(stmt, 3, adm);
 
     if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
         return -1;
@@ -88,24 +86,24 @@ int mx_get_group_member_by_user_id(sqlite3 *db, int user_id) {
     return id == 0 ? -1 : id;
 }
 
-// void mx_update_gr_members(sqlite3 *db, int group_member_id,
-//                             int user_id, int group_id) {
-//     sqlite3_stmt *stmt = NULL;
-//     int rv = sqlite3_prepare_v2(db,
-//         "UPDATE GROUP_MEMBERS SET USER_ID = ?1, GROUP_ID = ?2 WHERE " \
-//         "GROUP_MEMBERS_ID = ?3;", -1, &stmt, NULL);
 
-//     sqlite3_bind_int(stmt, 1, user_id);
-//     sqlite3_bind_int(stmt, 2, group_id);
-//     sqlite3_bind_int(stmt, 3, group_member_id);
+t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id) {
+    sqlite3_stmt *stmt;
+    t_list *g = NULL;
 
-//     if (rv == SQLITE_ERROR) {
-//         fprintf(stderr, "Can't update dialog in db: %s\n", sqlite3_errmsg(db));
-//         return;
-//     }
-
-//     if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
-//         fprintf(stderr, "Can't update user in db: %s\n", sqlite3_errmsg(db));
-
-//     sqlite3_finalize(stmt);
-// }
+    sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS " \
+                        "WHERE GROUP_ID = ?1", -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, group_mem_id);
+    while(sqlite3_step(stmt) == SQLITE_ROW) {
+            t_gr_members *d = malloc(sizeof(t_gr_members));
+            d->gr_members_id = sqlite3_column_int(stmt, 0);
+            d->user_id = sqlite3_column_int(stmt, 1);
+            d->group_id = sqlite3_column_int(stmt, 2);
+            d->adm = sqlite3_column_int(stmt, 3);
+            mx_push_back(&g, d);
+    }
+    sqlite3_finalize(stmt);
+    if (g == NULL)
+        return NULL;
+    return g;
+}

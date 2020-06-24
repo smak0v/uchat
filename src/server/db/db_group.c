@@ -23,14 +23,14 @@ int mx_add_grp(sqlite3 *db, char *group_name) {
     return mx_get_grp_id(db, group_name);
 }
 
-int mx_rename_grp_by_name(sqlite3 *db, char *grp_name, char *new_name) {
+int mx_rename_grp_by_id(sqlite3 *db, int grp_id, char *new_name) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db,
-        "UPDATE GRP SET GROUP_NAME = ?1 WHERE GROUP_NAME = ?2;",
+        "UPDATE GRP SET GROUP_NAME = ?1 WHERE GROUP_ID = ?2;",
         -1, &stmt, NULL);
 
     sqlite3_bind_text(stmt, 1, new_name, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 2, grp_name, -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, grp_id);
 
     if (rv == SQLITE_ERROR)
         return -1;
