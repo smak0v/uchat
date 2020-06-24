@@ -10,8 +10,7 @@
 // Structures
 typedef struct s_communication t_comm;
 typedef struct s_metadata t_meta;
-typedef struct s_connected_clients t_cli;
-typedef char *(*api_function)(void *, t_list **, sqlite3 *, int);
+typedef char *(*api_function)(void *, sqlite3 *, int);
 
 // DB
 typedef struct s_user t_user;
@@ -21,9 +20,8 @@ typedef struct s_msg t_msg;
 
 
 struct s_communication {
-    int connection_fd;
+    int fd;
     char *status;
-    t_list **clients;
 	sqlite3 *db;
 };
 
@@ -31,13 +29,6 @@ struct s_metadata {
     pthread_t *threads;
     char *status;
 	sqlite3 *db;
-	t_list **clients;
-};
-
-struct s_connected_clients {
-    int connection_fd;
-    int user_id;
-	char *username;
 };
 
 struct s_user {
@@ -72,19 +63,15 @@ struct s_msg {
 t_meta *mx_init_threads(sqlite3 *db);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
-char *mx_process_request(char *request, t_list **clients, sqlite3 *db, int fd);
+char *mx_process_request(char *request, sqlite3 *db, int fd);
 
 // Server API
-char *mx_bad_request(void *jobj, t_list **clients, sqlite3 *db, int fd);
-char *mx_register_user(void *jobj, t_list **clients, sqlite3 *db, int fd);
-char *mx_sign_in(void *jobj, t_list **clients, sqlite3 *db, int fd);
-char *mx_sign_out(void *jobj, t_list **clients, sqlite3 *db, int fd);
-
-// Clients linked list
-void mx_add_client(t_list **clients, int connection_fd, char *uname, int uid);
-void mx_pop_client(t_list **clients, int connection_fd);
-t_cli *mx_find_client_by_uname(t_list **clients, char *uname);
-t_cli *mx_find_client_by_uid(t_list **clients, int uid);
+char *mx_bad_request(void *jobj, sqlite3 *db, int fd);
+char *mx_register_user(void *jobj, sqlite3 *db, int fd);
+char *mx_sign_in(void *jobj, sqlite3 *db, int fd);
+char *mx_sign_out(void *jobj, sqlite3 *db, int fd);
+char *mx_new_group(void *jobj, sqlite3 *db, int fd);
+char *mx_add_to_group(void *jobj, sqlite3 *db, int fd);
 
 // DB API
 sqlite3 *mx_opendb(char *name);

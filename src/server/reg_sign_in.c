@@ -37,33 +37,33 @@ static int extract_name_passw(json_object *json, const char **name,
         return 0;
 }
 
-char *mx_register_user(void *jobj, t_list **clients, sqlite3 *db, int fd) {
+char *mx_register_user(void *jobj, sqlite3 *db, int fd) {
     const char *name = NULL;
     const char *pass = NULL;
     int code = 0;
 
-    clients = NULL;
     fd = 0;
 
     if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
-        return mx_bad_request(NULL, NULL, NULL, 0);
+        return mx_bad_request(NULL, NULL, 0);
 
     return add_to_db(db, (char *)name, (char *)pass);
 }
 
-char *mx_sign_in(void *jobj, t_list **clients, sqlite3 *db, int fd) {
+char *mx_sign_in(void *jobj, sqlite3 *db, int fd) {
     const char *name = NULL;
     const char *pass = NULL;
     int code = 0;
     int uid = -1;
 
+    fd = 0;
+
     if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
-        return mx_bad_request(NULL, NULL, NULL, 0);
+        return mx_bad_request(NULL, NULL, 0);
 
     if ((uid = validate_sign_in(db, name, pass)) == -1) {
         mx_print_db(db, "USER");
         return "{\"code\": 401}";
     }
-    mx_add_client(clients, fd, (char *)name, uid);
     return "{\"code\": 200}";
 }

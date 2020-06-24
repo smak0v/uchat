@@ -10,14 +10,14 @@ void *mx_communicate(void *data) {
     free(connect);
     while (1) {
         bzero(buff, MX_MAX);
-        bytes_read = read(connect->connection_fd, buff, sizeof(buff));
+        bytes_read = read(connect->fd, buff, sizeof(buff));
         if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
-            close(connect->connection_fd);
+            close(connect->fd);
             *status = 0;
             printf("Connection closed\n");
             pthread_exit(NULL);
         }
-        response = mx_process_request(buff, connect->clients, connect->db, connect->connection_fd);
+        response = mx_process_request(buff, connect->db, connect->fd);
         printf("%s\n", response);
         // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
     }

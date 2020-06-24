@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
             exit(1);
         }
         // status = mx_init_client(argc, argv);
-        // mx_start_client(argv[1], mx_atoi(argv[2]));
+        mx_start_client(argv[1], mx_atoi(argv[2]));
     }
     return status;
 }

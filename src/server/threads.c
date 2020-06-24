@@ -13,9 +13,8 @@ static int get_free_thread(char *status, int *counter) {
 static t_comm *init_data(int connection_fd, char *status, t_meta **metadata) {
     t_comm *data = malloc(sizeof(t_comm));
 
-    data->connection_fd = connection_fd;
+    data->fd = connection_fd;
     data->status = status;
-    data->clients = (*metadata)->clients;
     data->db = (*metadata)->db;
 
     return data;
@@ -25,13 +24,11 @@ t_meta *mx_init_threads(sqlite3 *db) {
     pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
     char *status = malloc(sizeof(char) * MX_MAX_THREADS);
     t_meta *data = malloc(sizeof(t_meta));
-    t_list *clients = NULL;
 
     mx_memset(status, 0, MX_MAX_THREADS);
     data->threads = threads;
     data->status = status;
     data->db = db;
-    data->clients = &clients;
 
     return data;
 }
