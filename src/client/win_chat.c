@@ -1,17 +1,27 @@
 #include "uchat.h"
 
+void mx_create_box(t_glade *g, char *tmp) {
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *label_text = gtk_label_new(NULL);
+
+    mx_printstr_endl("Chat window1");
+    gtk_box_pack_start(GTK_BOX(box), label_text, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(g->c_box), box, TRUE, TRUE, 0);
+    gtk_label_set_text(GTK_LABEL(label_text), tmp);
+    gtk_widget_show_all(box);
+}
+
 void go(GtkButton *b, t_glade *g) {
-    char tmp[128];
-    sprintf(tmp, "entry=%s", gtk_entry_get_text(GTK_ENTRY(g->c_entry)));
-    gtk_label_set_text(GTK_LABEL(g->c_label), (const gchar *)tmp);
+    char *tmp = (char *)gtk_entry_get_text(GTK_ENTRY(g->c_entry));
+    // gtk_label_set_text(GTK_LABEL(g->c_label), tmp);
     (void)b;
     mx_printstr_endl("Chat button clicked");
-    
+    mx_create_box(g, tmp);
 }
 
 void mx_create_win_chat(t_glade *g) {
     g->w_chat = GTK_WIDGET(gtk_builder_get_object(g->bd, "win_chat"));
-    g->c_label = GTK_WIDGET(gtk_builder_get_object(g->bd, "label1"));
+    g->c_box = GTK_WIDGET(gtk_builder_get_object(g->bd, "box3"));
     g->c_entry = GTK_WIDGET(gtk_builder_get_object(g->bd, "entry1"));
     g->c_b_go = GTK_WIDGET(gtk_builder_get_object(g->bd, "go"));
     mx_printstr_endl("Chat window");

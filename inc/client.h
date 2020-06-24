@@ -32,6 +32,7 @@ struct s_glade {
     // user data
     char *log;
     char *pass;
+
     // log in window
     GtkWidget *w_log; // window log
     GtkWidget *e_name; // entry name
@@ -47,7 +48,10 @@ struct s_glade {
     GtkWidget *b_reg_back; // button back to log in window
     // chat window
     GtkWidget *w_chat;
+    GtkWidget *c_box; // window register
     GtkWidget *c_label; // window register
     GtkWidget *c_entry; // window register
     GtkWidget *c_b_go; // window register
+    GtkWidget *c_main;
+
 };
