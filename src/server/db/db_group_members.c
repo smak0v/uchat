@@ -5,10 +5,8 @@ static t_gr_members *for_get_member(sqlite3_stmt *stmt) {
     int rv = 0;
 
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
-        if (rv == SQLITE_ERROR) {
-            fprintf(stderr, "get member\n");
+        if (rv == SQLITE_ERROR)
             return NULL;
-        }
         sqlite3_finalize(stmt);
         return NULL;
     }
@@ -54,18 +52,15 @@ t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id) {
 
     sqlite3_bind_int(stmt, 1, gr_member_id);
 
-    if (rv != SQLITE_OK) {
-        fprintf(stderr, "Can't group member user from db: %s\n",
-                sqlite3_errmsg(db));
+    if (rv != SQLITE_OK)
         return NULL;
-    }
 
     return for_get_member(stmt);
 }
 
 int mx_get_group_member_by_user_id(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt = NULL;
-    int id = -1;
+    int grp_mem = -1;
     int rv = sqlite3_prepare_v2(db,
         "SELECT * FROM GROUP_MEMBERS WHERE USER_ID = ?1",
        -1, &stmt, NULL);
@@ -79,11 +74,11 @@ int mx_get_group_member_by_user_id(sqlite3 *db, int user_id) {
         if (rv == SQLITE_ERROR)
             return -1;
 
-    id = sqlite3_column_int(stmt, 0);
+    grp_mem = sqlite3_column_int(stmt, 0);
 
     sqlite3_finalize(stmt);
 
-    return id == 0 ? -1 : id;
+    return grp_mem == 0 ? -1 : grp_mem;
 }
 
 

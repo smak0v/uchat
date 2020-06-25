@@ -51,7 +51,7 @@ int mx_delete_msg_by_id(sqlite3 *db, int id) {
 
     sqlite3_finalize(stmt);
 
-    return 1;
+    return 0;
 }
 
 int mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id) {
@@ -72,5 +72,5 @@ int mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id) {
 
     sqlite3_finalize(stmt);
 
-    return 1;
+    return 0;
 }

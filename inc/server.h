@@ -100,6 +100,7 @@ int mx_add_group_member(sqlite3 *db, int user_id, int group_id, bool adm);
 int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id);
 int mx_get_group_member_by_user_id(sqlite3 *db, int user_id);
 t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id);
+int mx_change_admin_status(sqlite3 *db, int user_id, int group_id, bool adm);
 
 //GROUP table
 int mx_add_grp(sqlite3 *db, char *group_name);

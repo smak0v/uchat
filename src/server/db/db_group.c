@@ -40,7 +40,7 @@ int mx_rename_grp_by_id(sqlite3 *db, int grp_id, char *new_name) {
 
     sqlite3_finalize(stmt);
 
-    return 1;
+    return 0;
 }
 
 int mx_delete_grp_by_id(sqlite3 *db, int grp_id) {
@@ -58,7 +58,7 @@ int mx_delete_grp_by_id(sqlite3 *db, int grp_id) {
 
     sqlite3_finalize(stmt);
 
-    return 1;
+    return 0;
 }
 
 int mx_get_grp_id(sqlite3 *db, char *grp_name) {
