@@ -13,6 +13,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include <openssl/crypto.h>
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 

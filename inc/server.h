@@ -135,3 +135,8 @@ int mx_get_msg(sqlite3 *db, t_msg *m);
 
 // Utils
 void mx_print_db(sqlite3 *db, char *table);
+
+// TLS/SSL
+void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);
+SSL_CTX *mx_init_server_ctx(void);
+void mx_show_client_certs(SSL *ssl);

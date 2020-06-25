@@ -1,73 +1,23 @@
 #include "uchat.h"
 
-static void show_certs(SSL *ssl) {
-    char *line = NULL;
-    X509 *cert = SSL_get_peer_certificate(ssl);
-
-    if (cert) {
-        mx_printstr_endl("Server certificates:");
-        line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
-        mx_printstr("Subject: ");
-        mx_printstr_endl(line);
-        mx_strdel(&line);
-        line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
-        mx_printstr("Issuer: ");
-        mx_printstr_endl(line);
-        mx_strdel(&line);
-        X509_free(cert);
-    }
-    else
-        mx_print_error_endl("uchat: no client certificates configured");
-}
-
-void func(int socket_fd, SSL *ssl) {
-    char buff[MX_MAX];
+static void communicate(SSL *ssl) {
     int bytes_read = 0;
+    char buff[MX_MAX];
+    int n = 0;
 
     while(1) {
-        show_certs(ssl);
+        mx_show_server_certs(ssl);
         mx_printstr("Enter the string: ");
+        while ((buff[n++] = getchar()) != '\n')
+            ;
+        n = 0;
+        SSL_write(ssl, buff, strlen(buff));
+
         bzero(buff, sizeof(buff));
         bytes_read = SSL_read(ssl, buff, sizeof(buff));
         buff[bytes_read] = '\0';
         mx_printstr_endl(buff);
-
-        socket_fd = 0;
-
-        // bzero(buff, sizeof(buff));
-        // mx_printstr("Enter the string: ");
-        // n = 0;
-
-        // while ((buff[n++] = getchar()) != '\n')
-        //     ;
-
-        // write(socket_fd, buff, sizeof(buff));
-        // bzero(buff, sizeof(buff));
-        // read(socket_fd, buff, sizeof(buff));
-        // mx_printstr(buff);
-        // if ((strncmp(buff, "exit", 4)) == 0) {
-        //     mx_printstr_endl("Client Exit...");
-        //     break;
-        // }
     }
-}
-
-static SSL_CTX *init_ctx(void) {
-    const SSL_METHOD *method = NULL;
-    SSL_CTX *ctx = NULL;
-
-    OpenSSL_add_all_algorithms();
-    SSL_load_error_strings();
-
-    method = TLS_client_method();
-    ctx = SSL_CTX_new(method);
-
-    if (!ctx) {
-        ERR_print_errors_fp(stderr);
-        exit(MX_FAILURE);
-    }
-
-    return ctx;
 }
 
 static int open_connection(char *ip, int port) {
@@ -101,12 +51,12 @@ static int open_connection(char *ip, int port) {
 }
 
 int mx_start_client(char *ip, int port) {
-    int socket_fd = 0;
+    int socket_fd = -1;
     SSL_CTX *ctx = NULL;
     SSL *ssl = NULL;
 
     SSL_library_init();
-    ctx = init_ctx();
+    ctx = mx_init_client_ctx();
     socket_fd = open_connection(ip, port);
     ssl = SSL_new(ctx);
     SSL_set_fd(ssl, socket_fd);
@@ -114,7 +64,7 @@ int mx_start_client(char *ip, int port) {
     if (SSL_connect(ssl) == MX_SSL_FAILURE)
         ERR_print_errors_fp(stderr);
     else {
-        func(socket_fd, ssl);
+        communicate(ssl);
         SSL_free(ssl);
     }
     close(socket_fd);
