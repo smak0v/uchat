@@ -23,12 +23,14 @@ struct s_communication {
     int fd;
     char *status;
 	sqlite3 *db;
+	SSL *ssl;
 };
 
 struct s_metadata {
     pthread_t *threads;
     char *status;
 	sqlite3 *db;
+	SSL *ssl;
 };
 
 struct s_user {
@@ -134,3 +136,8 @@ int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 // Utils
 void mx_print_db(sqlite3 *db, char *table);
 void mx_print_list_members(t_list *mem);
+
+// TLS/SSL
+void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);
+SSL_CTX *mx_init_server_ctx(void);
+void mx_show_client_certs(SSL *ssl);

@@ -1,7 +1,7 @@
 #include "uchat.h"
 
 static int get_free_thread(char *status, int *counter) {
-    for (int j = 0; j < MX_MAX_THREADS; j++)
+    for (int j = 0; j < MX_MAX_THREADS; ++j)
         if (status[j] == 0) {
             *counter = j;
             return 0;
@@ -16,6 +16,7 @@ static t_comm *init_data(int connection_fd, char *status, t_meta **metadata) {
     data->fd = connection_fd;
     data->status = status;
     data->db = (*metadata)->db;
+    data->ssl = (*metadata)->ssl;
 
     return data;
 }
@@ -29,6 +30,7 @@ t_meta *mx_init_threads(sqlite3 *db) {
     data->threads = threads;
     data->status = status;
     data->db = db;
+    data->ssl = NULL;
 
     return data;
 }
@@ -45,8 +47,9 @@ void mx_thread_manager(int connection_fd, t_meta **metadata) {
 
     data = init_data(connection_fd, &status[counter], metadata);
     status[counter] = 1;
+
     if (pthread_create(&thr[counter], NULL, mx_communicate, (void *)data) == 0)
-        printf("Connected to client!\n");
+        mx_printstr_endl("Connected to client!");
     else
-        printf("Connection failed :(\n");
+        mx_printstr_endl("Connection failed :(");
 }

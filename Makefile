@@ -148,7 +148,7 @@ DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						db_messages.c db_get_messages.c db_auth.c
 
 SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
-						sign_out.c groups.c
+						sign_out.c groups.c ssl_tls.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -189,7 +189,7 @@ CLIENT_OBJ_DIRS			= $(CLIENT_OBJD)
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c init.c build_ui_path.c
+CLIENT_SRCS				= main.c init.c build_ui_path.c ssl_tls.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
