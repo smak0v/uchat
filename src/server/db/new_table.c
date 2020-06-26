@@ -33,13 +33,14 @@ void mx_new_table_message(sqlite3 *database) {
     sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS MSG("\
                  "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"\
                  "GROUP_ID INTEGER,"\
-                 "RECEPIENT INTEGER,"\
+                 "DIALOG_ID INTEGER,"\
                  "SENDER INTEGER NOT NULL,"\
                  "MSG_BODY TEXT,"\
                  "TIME TEXT NOT NULL,"\
                  "EDITED INTEGER NOT NULL,"\
                  "READ INTEGER NOT NULL," \
                  "FILE TEXT," \
-                 "FOREIGN KEY (GROUP_ID) REFERENCES GRP (GROUP_ID));",
+                 "FOREIGN KEY (GROUP_ID) REFERENCES GRP (GROUP_ID)," \
+                 "FOREIGN KEY (DIALOG_ID) REFERENCES DIALOG (DIALOG_ID));",
                  0, 0, 0);
 }

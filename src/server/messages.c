@@ -24,6 +24,8 @@
 //     }
 // }
 
+static char *
+
 char *mx_send_message(void *jobj, sqlite3 *db, int fd) {
     t_msg *message = extract_message(jobj);
 
@@ -36,11 +38,4 @@ char *mx_send_message(void *jobj, sqlite3 *db, int fd) {
     //     return send_group_message(message, db);
     // else
         return send_private_message(message, db);
-// find target user in db
-
-// create a chat if it does not yet exist
-
-// if the target user is online send the message
-
-// send the reponse to the client
 }

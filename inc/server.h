@@ -55,11 +55,13 @@ struct s_dialog {
 struct s_msg {
 	int id;
 	int group_id;
+	int dialog_id;
 	int sender;
 	char *msg;
 	int time;
 	bool edited;
 	bool read;
+	char *file;
 };
 
 // Functions
