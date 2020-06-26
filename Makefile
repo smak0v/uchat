@@ -148,7 +148,7 @@ DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						db_messages.c db_get_messages.c db_auth.c
 
 SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
-						sign_out.c groups.c ssl_tls.c
+						sign_out.c groups.c ssl_tls.c messages.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 

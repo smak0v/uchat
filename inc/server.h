@@ -76,7 +76,7 @@ char *mx_sign_out(void *jobj, sqlite3 *db, int fd);
 char *mx_new_group(void *jobj, sqlite3 *db, int fd);
 char *mx_add_to_group(void *jobj, sqlite3 *db, int fd);
 char *mx_rename_group(void *jobj, sqlite3 *db, int fd);
-// char *mx_send_message(void *jobj, sqlite3 *db, int fd);
+char *mx_send_message(void *jobj, sqlite3 *db, int fd);
 
 // DB API
 sqlite3 *mx_opendb(char *name);
