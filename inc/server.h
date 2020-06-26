@@ -73,6 +73,8 @@ char *mx_sign_in(void *jobj, sqlite3 *db, int fd);
 char *mx_sign_out(void *jobj, sqlite3 *db, int fd);
 char *mx_new_group(void *jobj, sqlite3 *db, int fd);
 char *mx_add_to_group(void *jobj, sqlite3 *db, int fd);
+char *mx_rename_group(void *jobj, sqlite3 *db, int fd);
+// char *mx_send_message(void *jobj, sqlite3 *db, int fd);
 
 // DB API
 sqlite3 *mx_opendb(char *name);
@@ -123,9 +125,9 @@ int mx_get_msg(sqlite3 *db, t_msg *m);
 
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,
-                     int sock_fd, char *online_user);
+                     int sock_fd, char *token);
 int mx_get_sock_by_user_id(sqlite3 *db, int user_id);
-char *mx_get_online_by_user_id(sqlite3 *db, int user_id);
+char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 
 // Utils

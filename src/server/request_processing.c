@@ -19,6 +19,10 @@ api_function mx_select_method(const char *type) {
         return mx_new_group;
     else if (!mx_strcmp(type, "INV"))
         return mx_add_to_group;
+    else if (!mx_strcmp(type, "RN_GR"))
+        return mx_rename_group;
+    // else if (!mx_strcmp(type, "S_MES"))
+    //     return mx_send_message;
     else
         return mx_bad_request;
 }

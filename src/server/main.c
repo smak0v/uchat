@@ -18,8 +18,8 @@ void *mx_communicate(void *data) {
             pthread_exit(NULL);
         }
         response = mx_process_request(buff, connect->db, connect->fd);
-        printf("%s\n", response);
-        // write(socket_fd, "got it\n", sizeof(char) * mx_strlen("got it\n"));
+        // printf("%s\n", response);
+        write(connect->fd, response, sizeof(char) * mx_strlen(response));
     }
 }
 

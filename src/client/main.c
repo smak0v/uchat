@@ -13,9 +13,9 @@ void func(int socket_fd) {
             ;
 
         write(socket_fd, buff, sizeof(buff));
-        // bzero(buff, sizeof(buff));
-        // read(socket_fd, buff, sizeof(buff));
-        // mx_printstr(buff);
+        bzero(buff, sizeof(buff));
+        read(socket_fd, buff, sizeof(buff));
+        mx_printstr_endl(buff);
         // if ((strncmp(buff, "exit", 4)) == 0) {
         //     mx_printstr_endl("Client Exit...");
         //     break;

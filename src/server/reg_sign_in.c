@@ -22,13 +22,16 @@ static char *add_to_db(sqlite3 *db, char *name, char *passw) {
 
 static int extract_name_passw(json_object *json, const char **name,
                               const char **passw) {
-    json_object_object_foreach(json, key, val) {
-        if (json_object_get_type(val) != json_type_string)
-            return 1;
-        if (!mx_strcmp(key, "name"))
-            *name = json_object_get_string(val);
-        else if (!mx_strcmp(key, "passw"))
-            *passw = json_object_get_string(val);
+    json_object *j_name = NULL;
+    json_object *j_passw = NULL;
+
+    json_object_object_get_ex(json, "name", &j_name);
+    json_object_object_get_ex(json, "passw", &j_passw);
+
+    if (j_name && j_passw && json_object_get_type(j_name) == json_type_string
+        && json_object_get_type(j_passw) == json_type_string) {
+        *name = json_object_get_string(j_name);
+        *passw = json_object_get_string(j_passw);
     }
 
     if (*name == NULL || *passw == NULL)
@@ -55,15 +58,16 @@ char *mx_sign_in(void *jobj, sqlite3 *db, int fd) {
     const char *pass = NULL;
     int code = 0;
     int uid = -1;
+    char *token = NULL;
 
     fd = 0;
-
     if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
         return mx_bad_request(NULL, NULL, 0);
 
-    if ((uid = validate_sign_in(db, name, pass)) == -1) {
-        mx_print_db(db, "USER");
+    if ((uid = validate_sign_in(db, name, pass)) == -1)
         return "{\"code\": 401}";
-    }
+    // generate token
+    if (mx_add_sock_user(db, uid, fd, token) == -1)
+        return "{\"code\": 500}";
     return "{\"code\": 200}";
 }
