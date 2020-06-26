@@ -54,7 +54,7 @@ int mx_get_msg(sqlite3 *db, t_msg *m) {
 
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW)
         if (rv == SQLITE_ERROR)
-            return -2;
+            return -1;
 
     id = sqlite3_column_int(stmt, 0);
     sqlite3_finalize(stmt);

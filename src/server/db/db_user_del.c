@@ -15,7 +15,7 @@ int mx_delete_user_by_login(sqlite3 *db, char *login) {
 
     sqlite3_finalize(stmt);
 
-    return 1;
+    return 0;
 }
 
 int mx_delete_user_by_id(sqlite3 *db, int user_id) {
@@ -33,5 +33,5 @@ int mx_delete_user_by_id(sqlite3 *db, int user_id) {
 
     sqlite3_finalize(stmt);
 
-    return 1;
+    return 0;
 }
