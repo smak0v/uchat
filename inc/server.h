@@ -107,6 +107,7 @@ int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id);
 int mx_get_group_member_by_user_id(sqlite3 *db, int user_id);
 t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id);
 int mx_change_admin_status(sqlite3 *db, int user_id, int group_id, bool adm);
+int *mx_get_all_id_group_members(sqlite3 *db, int group_id);
 
 //GROUP table
 int mx_add_grp(sqlite3 *db, char *group_name);
@@ -120,6 +121,7 @@ int mx_delete_by_dialog_id(sqlite3 *db, int dialog_id);
 t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2);
 int mx_get_dialog_id(sqlite3 *db, int id1, int id2);
 int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2);
+int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id);
 
 // MSG table
 int mx_add_msg(sqlite3 *db, t_msg *m);
@@ -138,6 +140,7 @@ int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 // Utils
 void mx_print_db(sqlite3 *db, char *table);
 void mx_print_list_members(t_list *mem);
+int mx_get_size_table(sqlite3 *db, char *table);
 
 // TLS/SSL
 void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);

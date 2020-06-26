@@ -25,10 +25,8 @@ static t_dialog *for_get_dialog(sqlite3_stmt *stmt) {
     int rv = 0;
 
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
-        if (rv == SQLITE_ERROR) {
-            fprintf(stderr, "get dialog\n");
+        if (rv == SQLITE_ERROR)
             return NULL;
-        }
         sqlite3_finalize(stmt);
         return NULL;
     }
@@ -81,4 +79,23 @@ int mx_get_dialog_id(sqlite3 *db, int id1, int id2) {
     sqlite3_finalize(stmt);
 
     return id == 0 ? -1 : id;
+}
+
+int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id) {
+    sqlite3_stmt *stmt;
+    int *users = malloc(3 * sizeof(int));
+    int i = 0;
+
+    sqlite3_prepare_v2(db, "SELECT * FROM DIALOG \
+                       WHERE DIALOG_ID = ?1", -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, dialog_id);
+
+    if (sqlite3_step(stmt) == SQLITE_ROW) 
+        for (int j = 1; i < 2; j++)
+            users[i++] = sqlite3_column_int(stmt, j);
+    users[i] = -1;
+
+    sqlite3_finalize(stmt);
+
+    return users;
 }
