@@ -50,6 +50,7 @@ void mx_print_db(sqlite3 *db, char *table) {
     rc = sqlite3_exec(db, sql, callback, (void *)data, &z_err_msg);
 
     mx_printstr("===============================\n");
+    sqlite3_free(sql);
 }
 
 void mx_print_list_members(t_list *mem) {
