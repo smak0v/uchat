@@ -58,14 +58,31 @@ int mx_get_size_table(sqlite3 *db, char *table) {
     return size;
 }
 
+int mx_get_size_group_mem_by_group_id(sqlite3 *db, int group_id) {
+    sqlite3_stmt *stmt;
+    int size = 1;
+    int rv = 0;
+
+    rv = sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS \
+        WHERE GROUP_ID = ?1", -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, group_id);
+    if (sqlite3_step(stmt) != SQLITE_DONE)
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+            size++;
+    else
+        size = -1;
+    sqlite3_finalize(stmt);
+    return size;
+}
+
 int *mx_get_all_id_group_members(sqlite3 *db, int group_id) {
     sqlite3_stmt *stmt;
-    int table = mx_get_size_table(db, "GROUP_MEMBERS");
-    int size = table == -1 ? 0 : table;
-    int *members = malloc(size * sizeof(int));
+    int size = mx_get_size_group_mem_by_group_id(db, group_id);
+    int *members = malloc((size + 1) * sizeof(int));
     int i = 0;
 
     if (size < 1) {
+        members = realloc(members, (sizeof(int) * 1));
         members[i] = -1;
         return members;
     }
