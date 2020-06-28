@@ -6,5 +6,6 @@ button {
 }
 label {
     font-size: 13.px;
-    color: white;
+    /* color: white; */
+    color: black;
 }

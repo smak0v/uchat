@@ -48,10 +48,19 @@ struct s_glade {
     GtkWidget *b_reg_back; // button back to log in window
     // chat window
     GtkWidget *w_chat;
-    GtkWidget *c_box; // window register
-    GtkWidget *c_label; // window register
-    GtkWidget *c_entry; // window register
-    GtkWidget *c_b_go; // window register
-    GtkWidget *c_main;
-
+    // GtkWidget *c_box; // window register
+    // GtkWidget *c_label; // window register
+    // GtkWidget *c_entry; // window register
+    // GtkWidget *c_b_go; // window register
+    // GtkWidget *c_main;
+    GtkWidget *box;
+    GtkWidget *b1;
+    GtkWidget *box_new;
+    GtkWidget *scroll;
+    GtkWidget *listbox;
+    GtkWidget *msg_box;
+    GtkWidget *entry;
+    GtkWidget *send;
+    int n;
+    int message_num;
 };
