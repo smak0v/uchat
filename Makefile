@@ -111,7 +111,7 @@ COMMON_OBJ_DIRS			= $(COMMON_OBJD)
 COMMON_OBJS				= $(addprefix $(OBJD)/, $(COMMON:%.c=%.o))
 
 #===================================SRC=======================================#
-COMMON_SRCS				= check_port.c check_ip.c
+COMMON_SRCS				= check_port.c check_ip.c file_transfer.c
 
 COMMON					= $(addprefix common/, $(COMMON_SRCS))
 
