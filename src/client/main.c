@@ -114,8 +114,16 @@ int main(int argc, char **argv) {
 
 // {"type": "REG", "name": "kali", "passw": "qwerty"}
 // {"type": "REG", "name": "geralt", "passw": "qwerty"}
+// {"type": "REG", "name": "BogdanUeban", "passw": "qwerty"}
+// {"type": "REG", "name": "dendi", "passw": "qwerty"}
 // {"type": "S_IN", "name": "kali", "passw": "qwerty"}
 // {"type": "S_IN", "name": "geralt", "passw": "qwerty"}
+// {"type": "S_IN", "name": "BogdanUeban", "passw": "qwerty"}
+// {"type": "S_IN", "name": "dendi", "passw": "qwerty"}
 // {"type": "S_MES", "gid": -1, "did": -2, "uid": 2, "uid2": 1, "msg": "Hello I'm Geralt", "time": 3819524, "file": ""}
 // {"type": "S_OUT", "id": 1}
 // {"type": "S_OUT", "id": 2}
+
+// {"type": "N_GRP", "name": "TEST", "id": [1]}
+// {"type": "INV", "gid": 1, "uid": [2,3,4]}
+// // {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "Bogdash milash", "time": 3819524, "file": ""}

@@ -81,6 +81,8 @@ char *mx_add_to_group(void *jobj, t_comm *connect);
 char *mx_rename_group(void *jobj, t_comm *connect);
 char *mx_send_message(void *jobj, t_comm *connect);
 
+t_msg *mx_extract_message(void *jobj);
+
 // DB API
 sqlite3 *mx_opendb(char *name);
 void mx_closedb(sqlite3 *db);

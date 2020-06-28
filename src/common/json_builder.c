@@ -1,5 +1,16 @@
 #include "uchat.h"
 
+// converts "str" to "\"str\""
+char *mx_str_builder(char *str) {
+    int len = mx_strlen(str);
+    char *full_str = malloc(sizeof(char) * (len + 3));
+    full_str[0] = '"';
+    mx_strcpy(&full_str[1], str);
+    full_str[len + 1] = '"';
+    full_str[len + 2] = '\0';
+
+    return full_str;
+}
 
 char *mx_array_to_str(int *arr, int len) {
     char *str = mx_strdup("[");

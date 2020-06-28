@@ -30,6 +30,7 @@ char *mx_process_request(char *request, t_comm *connect) {
     json_object *jobj = json_tokener_parse(request);
     json_object *j_type = NULL;
     const char *type = NULL;
+    char *output = NULL;
 
     if (json_object_get_type(jobj) == json_type_object) {
         json_object_object_get_ex(jobj, "type", &j_type);
@@ -41,5 +42,8 @@ char *mx_process_request(char *request, t_comm *connect) {
     else
         return mx_bad_request(NULL, NULL);
 
-    return mx_select_method(type)((void *)jobj, connect);
+    output = mx_select_method(type)((void *)jobj, connect);
+    json_object_put(jobj);
+
+    return output;
 }
