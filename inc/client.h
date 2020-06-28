@@ -53,14 +53,19 @@ struct s_glade {
     // GtkWidget *c_entry; // window register
     // GtkWidget *c_b_go; // window register
     // GtkWidget *c_main;
-    GtkWidget *box;
-    GtkWidget *b1;
-    GtkWidget *box_new;
+    GtkWidget *box1;
+    GtkWidget *button1;
+    GtkWidget *box2;
+    GtkWidget *label1;
+    GtkWidget *label2;
+    GtkWidget *button2;
+    GtkWidget *box3;
+    GtkWidget *entry1;
     GtkWidget *scroll;
     GtkWidget *listbox;
-    GtkWidget *msg_box;
-    GtkWidget *entry;
-    GtkWidget *send;
+    GtkWidget *box5;
+    GtkWidget *box4;
+
     int n;
-    int message_num;
+    // int message_num;
 };
