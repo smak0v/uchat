@@ -36,7 +36,7 @@ void mx_new_table_message(sqlite3 *database) {
                  "DIALOG_ID INTEGER,"\
                  "SENDER INTEGER NOT NULL,"\
                  "MSG_BODY TEXT,"\
-                 "TIME TEXT NOT NULL,"\
+                 "TIME INTEGER NOT NULL,"\
                  "EDITED INTEGER NOT NULL,"\
                  "READ INTEGER NOT NULL," \
                  "FILE TEXT," \

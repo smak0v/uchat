@@ -1,9 +1,8 @@
 #include "server.h"
 
-char *mx_bad_request(void *jobj, sqlite3 *db, int fd) {
+char *mx_bad_request(void *jobj, t_comm *connect) {
     jobj = NULL;
-    db = NULL;
-    fd = 0;
+    connect = NULL;
 
     return "{\"code\": 400}";
 }
@@ -27,7 +26,7 @@ api_function mx_select_method(const char *type) {
         return mx_bad_request;
 }
 
-char *mx_process_request(char *request, sqlite3 *db, int fd) {
+char *mx_process_request(char *request, t_comm *connect) {
     json_object *jobj = json_tokener_parse(request);
     json_object *j_type = NULL;
     const char *type = NULL;
@@ -37,10 +36,10 @@ char *mx_process_request(char *request, sqlite3 *db, int fd) {
         if (j_type && json_object_get_type(j_type) == json_type_string)
             type = json_object_get_string(j_type);
         else
-            return mx_bad_request(NULL, NULL, 0);
+            return mx_bad_request(NULL, NULL);
     }
     else
-        return mx_bad_request(NULL, NULL, 0);
+        return mx_bad_request(NULL, NULL);
 
-    return mx_select_method(type)((void *)jobj, db, fd);
+    return mx_select_method(type)((void *)jobj, connect);
 }

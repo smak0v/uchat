@@ -64,6 +64,7 @@ int *mx_get_all_id_group_members(sqlite3 *db, int group_id) {
     int *members = malloc(size * sizeof(int));
     int i = 0;
 
+    *members = 0;
     sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS \
                        WHERE GROUP_ID = ?1", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, group_id);

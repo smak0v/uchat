@@ -1,6 +1,6 @@
 #include "uchat.h"
 
-static void communicate(SSL *ssl) {
+static void communicate(SSL *ssl, int socket_fd) {
     int bytes_read = 0;
     char buff[MX_MAX];
     int n = 0;
@@ -8,9 +8,20 @@ static void communicate(SSL *ssl) {
     while(1) {
         mx_show_server_certs(ssl);
         mx_printstr("Enter the string: ");
-        while ((buff[n++] = getchar()) != '\n')
-            ;
+        while ((buff[n++] = getchar()) != '\n');
         n = 0;
+
+        if (buff[0] == '1') {
+            while (1) {
+                bytes_read = read(socket_fd, buff, sizeof(buff));
+                buff[bytes_read] = '\0';
+                mx_printstr_endl(buff);
+                char f = getchar();
+                if (f == '2')
+                    break;
+            }
+        }
+
         SSL_write(ssl, buff, strlen(buff));
         bzero(buff, sizeof(buff));
         bytes_read = SSL_read(ssl, buff, sizeof(buff));
@@ -67,7 +78,7 @@ int mx_start_client(char *ip, int port) {
     if (SSL_connect(ssl) == MX_SSL_FAILURE)
         ERR_print_errors_fp(stderr);
     else {
-        communicate(ssl);
+        communicate(ssl, socket_fd);
         SSL_free(ssl);
     }
     close(socket_fd);
@@ -99,3 +110,12 @@ int main(int argc, char **argv) {
     }
     return status;
 }
+
+
+// {"type": "REG", "name": "kali", "passw": "qwerty"}
+// {"type": "REG", "name": "geralt", "passw": "qwerty"}
+// {"type": "S_IN", "name": "kali", "passw": "qwerty"}
+// {"type": "S_IN", "name": "geralt", "passw": "qwerty"}
+// {"type": "S_MES", "gid": -1, "did": -2, "uid": 2, "uid2": 1, "msg": "Hello I'm Geralt", "time": 3819524, "file": ""}
+// {"type": "S_OUT", "id": 1}
+// {"type": "S_OUT", "id": 2}

@@ -40,34 +40,31 @@ static int extract_name_passw(json_object *json, const char **name,
         return 0;
 }
 
-char *mx_register_user(void *jobj, sqlite3 *db, int fd) {
+char *mx_register_user(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;
     int code = 0;
 
-    fd = 0;
-
     if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
-        return mx_bad_request(NULL, NULL, 0);
+        return mx_bad_request(NULL, NULL);
 
-    return add_to_db(db, (char *)name, (char *)pass);
+    return add_to_db(connect->db, (char *)name, (char *)pass);
 }
 
-char *mx_sign_in(void *jobj, sqlite3 *db, int fd) {
+char *mx_sign_in(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;
     int code = 0;
     int uid = -1;
-    char *token = NULL;
+    char *token = "foo";
 
-    fd = 0;
     if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
-        return mx_bad_request(NULL, NULL, 0);
+        return mx_bad_request(NULL, NULL);
 
-    if ((uid = validate_sign_in(db, name, pass)) == -1)
+    if ((uid = validate_sign_in(connect->db, name, pass)) == -1)
         return "{\"code\": 401}";
     // generate token
-    if (mx_add_sock_user(db, uid, fd, token) == -1)
+    if (mx_add_sock_user(connect->db, uid, connect->fd, token) == -1)
         return "{\"code\": 500}";
-    return "{\"code\": 200}";
+    return mx_strjoin(mx_strjoin("{\"code\": 200, \"uid\": ", mx_itoa(uid)), "}");
 }

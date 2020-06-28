@@ -28,7 +28,7 @@
 #define MX_SSL_FAILURE -1
 
 #define MX_SA struct sockaddr
-#define MX_MAX 80
+#define MX_MAX 10500
 
 #define MX_CAESAR_KEY 5
 #define MX_VIGENERE_KEY "UCHAT"

@@ -7,6 +7,8 @@ void *mx_communicate(void *data) {
     int bytes_read = 0;
     char *response = NULL;
 
+    printf("In mx communicate fd = %d\n", connect->fd);
+
     while (1) {
         if (SSL_accept(connect->ssl) == MX_SSL_FAILURE)
             ERR_print_errors_fp(stderr);
@@ -21,7 +23,7 @@ void *mx_communicate(void *data) {
                 printf("Connection closed\n");
                 pthread_exit(NULL);
             }
-            response = mx_process_request(buff, connect->db, connect->fd);
+            response = mx_process_request(buff, connect);
             SSL_write(connect->ssl, response, strlen(response));
         }
     }

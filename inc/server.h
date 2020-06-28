@@ -10,7 +10,7 @@
 // Structures
 typedef struct s_communication t_comm;
 typedef struct s_metadata t_meta;
-typedef char *(*api_function)(void *, sqlite3 *, int);
+typedef char *(*api_function)(void *, t_comm *);
 
 // DB
 typedef struct s_user t_user;
@@ -57,6 +57,7 @@ struct s_msg {
 	int group_id;
 	int dialog_id;
 	int sender;
+	int recepient;
 	char *msg;
 	int time;
 	bool edited;
@@ -68,17 +69,17 @@ struct s_msg {
 t_meta *mx_init_threads(sqlite3 *db);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
-char *mx_process_request(char *request, sqlite3 *db, int fd);
+ char *mx_process_request(char *request, t_comm *connect);
 
 // Server API
-char *mx_bad_request(void *jobj, sqlite3 *db, int fd);
-char *mx_register_user(void *jobj, sqlite3 *db, int fd);
-char *mx_sign_in(void *jobj, sqlite3 *db, int fd);
-char *mx_sign_out(void *jobj, sqlite3 *db, int fd);
-char *mx_new_group(void *jobj, sqlite3 *db, int fd);
-char *mx_add_to_group(void *jobj, sqlite3 *db, int fd);
-char *mx_rename_group(void *jobj, sqlite3 *db, int fd);
-char *mx_send_message(void *jobj, sqlite3 *db, int fd);
+char *mx_bad_request(void *jobj, t_comm *connect);
+char *mx_register_user(void *jobj, t_comm *connect);
+char *mx_sign_in(void *jobj, t_comm *connect);
+char *mx_sign_out(void *jobj, t_comm *connect);
+char *mx_new_group(void *jobj, t_comm *connect);
+char *mx_add_to_group(void *jobj, t_comm *connect);
+char *mx_rename_group(void *jobj, t_comm *connect);
+char *mx_send_message(void *jobj, t_comm *connect);
 
 // DB API
 sqlite3 *mx_opendb(char *name);
@@ -109,7 +110,7 @@ t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id);
 int mx_change_admin_status(sqlite3 *db, int user_id, int group_id, bool adm);
 int *mx_get_all_id_group_members(sqlite3 *db, int group_id);
 
-//GROUP table
+// GROUP table
 int mx_add_grp(sqlite3 *db, char *group_name);
 int mx_delete_grp_by_id(sqlite3 *db, int grp_id);
 int mx_rename_grp_by_id(sqlite3 *db, int grp_id, char *new_name);
