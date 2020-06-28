@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 
 #include <pthread.h>
 #include <netdb.h>
@@ -47,3 +48,8 @@ void mx_recv_file(int connection_fd);
 char *mx_generate_key(char *str, char *key);
 char *mx_encrypt(char *str, char *key);
 char *mx_decrypt(char *str, char *key);
+
+// JSON builder
+char *mx_array_to_str(int *arr, int len);
+char *mx_json_builder(int num, ...);
+
