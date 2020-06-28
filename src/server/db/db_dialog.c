@@ -90,14 +90,9 @@ int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id) {
     sqlite3_prepare_v2(db, "SELECT * FROM DIALOG \
                        WHERE DIALOG_ID = ?1", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, dialog_id);
-<<<<<<< HEAD
 
     if (sqlite3_step(stmt) == SQLITE_ROW)
-        for (int j = 1; i < 2; j++)
-=======
-    if (sqlite3_step(stmt) == SQLITE_ROW) 
         for (int j = 1, i = 0; i < 2; j++)
->>>>>>> 8677cc523fb5ae8f9dd3c8820f719f97cffd9863
             users[i++] = sqlite3_column_int(stmt, j);
     sqlite3_finalize(stmt);
     return users;
