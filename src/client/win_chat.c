@@ -14,7 +14,12 @@ void mx_msg(GtkWidget *top, t_glade *g) {
     mx_printstr_endl(tmp);
     gtk_label_set_text(GTK_LABEL(label), tmp);
 
-    gtk_grid_attach(GTK_GRID(gridmenu), label, 2, 1, 1, 1);
+    GtkWidget *time = gtk_label_new("21:45:34 ");
+    GtkWidget *name = gtk_label_new("name ");
+
+    gtk_grid_attach(GTK_GRID(gridmenu), name, 0, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(gridmenu), time, 0, 1, 1, 1);
+    gtk_grid_attach(GTK_GRID(gridmenu), label, 1, 1, 1, 1);
 
     gtk_widget_show_all(row);
 }
@@ -57,13 +62,14 @@ void mx_create_win_chat(t_glade *g) {
     // g->b1 = gtk_button_new();
     // g->box_new = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     g->scroll = gtk_scrolled_window_new(0,0);
+    gtk_widget_set_name(g->scroll, "scroll");
     g->listbox = gtk_list_box_new();
     // g->msg_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     // g->entry = gtk_entry_new();
     // g->send = gtk_button_new();
     // g->n = 0;
     // g->message_num = 0;
-    gtk_widget_set_size_request(g->scroll,300,30);
+    // gtk_widget_set_size_request(g->scroll,30,30);
 
     // gtk_box_pack_start(GTK_BOX(g->box2), l, FALSE, FALSE, 0);
     // gtk_box_pack_start(GTK_BOX(g->box), g->b1, TRUE, TRUE, 0);
