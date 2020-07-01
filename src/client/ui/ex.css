@@ -1,0 +1,11 @@
+window {
+    background: #6caeb1;
+}
+button {
+    background: #6caeb1;
+}
+label {
+    font-size: 13.px;
+    /* color: white; */
+    color: black;
+}

@@ -153,8 +153,6 @@ SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
-DB						= $(addprefix server/db/, $(DB_SRCS))
-
 #================================DEPENDENCIES=================================#
 $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
@@ -185,12 +183,20 @@ $(SERVER_OBJS): | $(SERVER_OBJ_DIRS) $(COMMON_OBJ_DIRS)
 #==================================OBJ========================================#
 CLIENT_OBJD				= $(OBJD)/client
 
-CLIENT_OBJ_DIRS			= $(CLIENT_OBJD)
+VALIDATORS_OBJD			= $(SERVER_OBJD)/validators
+
+CLIENT_OBJ_DIRS			= $(CLIENT_OBJD) $(VALIDATORS_OBJD)
 
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
+CLIENT_VALIDATORS_OBJS	= $(addprefix $(OBJD)/client/validators/,\
+						  $(VALIDATORS_SRCS:%.c=%.o))
+
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c init.c build_ui_path.c ssl_tls.c
+CLIENT_SRCS				= main.c init.c utils.c create_win_log.c auth_utils.c \
+						  win_chat.c ssl_tls.c
+
+VALIDATORS_SRCS			=
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -206,6 +212,9 @@ $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
+	$(call compile_dependency, $<, $@)
+
+$(VALIDATORS_OBJD)/validators/%.o: $(SRCD)/client/validators/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS) $(COMMON_OBJ_DIRS)
