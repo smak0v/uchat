@@ -26,7 +26,8 @@ static void create_win_reg(t_glade *g) {
     g->r_repass = GTK_WIDGET(gtk_builder_get_object(g->bd, "reg_erepeat"));
     g->b_reg_login = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_reg_login"));
     g->b_reg_back = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_reg_back"));
-
+    
+    g_signal_connect(g->w_reg, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(g->b_reg_back, "clicked", G_CALLBACK(open_logwin), g);
     g_signal_connect(g->b_reg_login, "clicked", G_CALLBACK(mx_b_reg_log), g);
 }
