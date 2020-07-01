@@ -6,7 +6,6 @@
 
 // Constants
 #define MX_UI_PATH "./src/client/ui/"
-#define MX_PAS_REG "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_+-.,!@#$%^&*();\\/|<>\"']).{9,})"
 
 
 // Structures

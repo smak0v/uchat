@@ -85,15 +85,14 @@ void mx_create_win_chat(t_glade *g) {
 
     // gtk_widget_set_name(listbox,"listboxleft");
     gtk_container_add(GTK_CONTAINER(g->scroll), g->listbox);
-    mx_printstr_endl("Chat window");
     // gtk_widget_show_all(g->w_chat);
 }
 
 void mx_show_win_chat(GtkWidget *v, t_glade *g) {
-    int w;
-    int h;
-    int x;
-    int y;
+    int w = 0;
+    int h = 0;
+    int x = 0;
+    int y= 0;
 
     gtk_window_get_position(GTK_WINDOW(v), &x, &y);
     gtk_window_get_size(GTK_WINDOW(v), &w, &h);
@@ -102,11 +101,8 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     gtk_window_resize(GTK_WINDOW(g->w_chat), w, h);
     gtk_window_move(GTK_WINDOW(g->w_chat), x, y + 22.35);
     gtk_widget_show_all(GTK_WIDGET(g->w_chat));
-
-    printf("==========Enter in chat!==========\n");
 }
 
 void mx_open_win_chat(GtkWidget *w, t_glade *g) {
     mx_show_win_chat(w, g);
-
 }
