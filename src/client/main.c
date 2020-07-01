@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
             mx_print_error_endl("uchat: not valid port");
             exit(MX_FAILURE);
         }
-        // status = mx_init_client(argc, argv);
+        status = mx_init_client(argc, argv);
         mx_start_client(argv[1], mx_atoi(argv[2]));
     }
     return status;

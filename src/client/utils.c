@@ -33,8 +33,11 @@ int mx_connect_css(char *path) {
         gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
                                           GTK_STYLE_PROVIDER(cssProvider),
                                           GTK_STYLE_PROVIDER_PRIORITY_USER);
+
         mx_strdel(&path_css);
+
         return MX_SUCCESS;
     }
+
     return MX_FAILURE;
 }
