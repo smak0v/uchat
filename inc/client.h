@@ -68,6 +68,7 @@ struct s_glade {
 // Functions
 void mx_init_client(int argc, char **argv);
 void *mx_start_client(void *data);
+void mx_reconnect(SSL *ssl, void *data);
 
 // SSL/TLS
 SSL_CTX *mx_init_client_ctx(void);

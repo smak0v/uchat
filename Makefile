@@ -199,7 +199,7 @@ CLIENT_UTILS_OBJS		= $(addprefix $(OBJD)/client/utils/, \
 
 #===================================SRC=======================================#
 CLIENT_SRCS				= main.c init.c utils.c create_win_log.c auth_utils.c \
-						  win_chat.c ssl_tls.c threads.c
+						  win_chat.c ssl_tls.c threads.c sockets.c
 
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
