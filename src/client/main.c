@@ -64,14 +64,15 @@ static int open_connection(char *ip, int port) {
     return socket_fd;
 }
 
-int mx_start_client(char *ip, int port) {
+void *mx_start_client(void *data) {
+    t_thread_data *thread_data = (t_thread_data *)data;
     int socket_fd = -1;
     SSL_CTX *ctx = NULL;
     SSL *ssl = NULL;
 
     SSL_library_init();
     ctx = mx_init_client_ctx();
-    socket_fd = open_connection(ip, port);
+    socket_fd = open_connection(thread_data->ip, thread_data->port);
     ssl = SSL_new(ctx);
     SSL_set_fd(ssl, socket_fd);
 
@@ -83,13 +84,10 @@ int mx_start_client(char *ip, int port) {
     }
     close(socket_fd);
     SSL_CTX_free(ctx);
-
-    return 0;
+    return data;
 }
 
 int main(int argc, char **argv) {
-    int status = MX_SUCCESS;
-
     if (argc < 3) {
         mx_print_error("uchat: must take two parameters -");
         mx_print_error_endl("server IP address and port");
@@ -105,10 +103,10 @@ int main(int argc, char **argv) {
             mx_print_error_endl("uchat: not valid port");
             exit(MX_FAILURE);
         }
-        status = mx_init_client(argc, argv);
-        mx_start_client(argv[1], mx_atoi(argv[2]));
+        mx_init_client(argc, argv);
     }
-    return status;
+
+    return MX_SUCCESS;
 }
 
 

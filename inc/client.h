@@ -10,6 +10,13 @@
 
 // Structures
 typedef struct s_glade t_glade;
+typedef struct s_thread_data t_thread_data;
+
+struct s_thread_data {
+    int port;
+    char *ip;
+    t_glade *glade;
+};
 
 struct s_glade {
     GtkBuilder *bd;
@@ -59,7 +66,8 @@ struct s_glade {
 
 
 // Functions
-int mx_init_client(int argc, char **argv);
+void mx_init_client(int argc, char **argv);
+void *mx_start_client(void *data);
 
 // SSL/TLS
 SSL_CTX *mx_init_client_ctx(void);
@@ -68,6 +76,9 @@ void mx_show_server_certs(SSL *ssl);
 // Validators
 int mx_validate_login_data(t_glade *g);
 int mx_validate_signup_data(t_glade *g, char *repeat);
+
+// Threads
+void mx_client_thread_manager(char *ip, int port, t_glade *glade);
 
 // Utils
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);

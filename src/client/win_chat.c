@@ -81,6 +81,7 @@ void mx_create_win_chat(t_glade *g) {
     // gtk_box_pack_start(GTK_BOX(g->msg_box), g->entry, TRUE, TRUE, 0);
 
     gtk_entry_set_placeholder_text(GTK_ENTRY(g->entry1),"Write a message...");
+    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(g->button2, "clicked", G_CALLBACK(mx_msg), g);
 
     // gtk_widget_set_name(listbox,"listboxleft");
