@@ -163,7 +163,7 @@ $(SERVER_OBJ_DIRS):
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS) $(SERVER_DB_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITEA) \
 		$(COMMON_OBJS) $(SERVER_OBJS) $(SERVER_DB_OBJS) -L $(LIBMXD) \
-		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto  -o $@
+		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -ljson-c -lcrypto  -o $@
 
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
@@ -202,7 +202,7 @@ $(CLIENT_OBJ_DIRS):
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
 		$(CLIENT_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
-		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
+		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -ljson-c -o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 

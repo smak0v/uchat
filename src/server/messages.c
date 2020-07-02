@@ -83,13 +83,18 @@ static char *send_private_message(t_msg *msg, sqlite3 *db) {
 
 char *mx_send_message(void *jobj, t_comm *connect) {
     t_msg *message = mx_extract_message(jobj);
+    char *res = NULL;
 
     if (!message)
         return mx_bad_request(NULL, NULL);
 
     if (message->group_id != -1)
-        return send_group_message(message, connect->db, connect->fd);
+        res = send_group_message(message, connect->db, connect->fd);
     else
-        return send_private_message(message, connect->db);
-}
+        res = send_private_message(message, connect->db);
+        
+    if (message->file)
+        mx_recv_file(connect->fd, message->file);
 
+    return res;
+}

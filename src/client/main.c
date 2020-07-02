@@ -23,6 +23,16 @@ static void communicate(SSL *ssl, int socket_fd) {
         }
 
         SSL_write(ssl, buff, strlen(buff));
+        // FILE TRANSFER TEST
+        json_object *jobj = json_tokener_parse(buff);
+        json_object *j_type = NULL;
+        json_object_object_get_ex(jobj, "file", &j_type);
+        if (j_type) {
+            const char *path = json_object_get_string(j_type);
+            if (!strcmp(path, "Makefile"))
+                mx_send_file(socket_fd, "Makefile");
+        }
+        // FILE TRANSFER TEST
         bzero(buff, sizeof(buff));
         bytes_read = SSL_read(ssl, buff, sizeof(buff));
         buff[bytes_read] = '\0';
