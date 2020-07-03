@@ -112,7 +112,6 @@ COMMON_OBJS				= $(addprefix $(OBJD)/, $(COMMON:%.c=%.o))
 
 #===================================SRC=======================================#
 COMMON_SRCS				= check_port.c check_ip.c file_transfer.c \
-						  json_builder.c
 
 COMMON					= $(addprefix common/, $(COMMON_SRCS))
 
@@ -150,7 +149,7 @@ DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 
 SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
 						sign_out.c groups.c ssl_tls.c messages.c \
-						message_extraction.c validate_token.c
+						message_extraction.c validate_token.c json_builder.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 

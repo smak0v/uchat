@@ -1,7 +1,6 @@
 #include "server.h"
 
 static char *add_to_group(sqlite3 *db, json_object *arr, int gr_id, int adm) {
-    char *grp_id_str = mx_itoa(gr_id);
     json_object *id = NULL;
 
     for (size_t i = 0; i < json_object_array_length(arr); i++) {
@@ -12,7 +11,7 @@ static char *add_to_group(sqlite3 *db, json_object *arr, int gr_id, int adm) {
             return "{\"code\": 500}";
     }
 
-    return mx_json_builder(4, "\"code\":", "200", "\"id\":", grp_id_str);;
+    return mx_json_string_add_to_gr(gr_id);
 }
 
 static int extract_data(json_object *jobj, char **name, int *gid, int *uid) {
@@ -24,7 +23,7 @@ static int extract_data(json_object *jobj, char **name, int *gid, int *uid) {
     json_object_object_get_ex(jobj, "gid", &j_gid);
     json_object_object_get_ex(jobj, "uid", &j_uid);
     if (j_name && j_gid && json_object_get_type(j_name) == json_type_string
-        && json_object_get_type(j_gid) == json_type_int && j_uid 
+        && json_object_get_type(j_gid) == json_type_int && j_uid
         && json_object_get_type(j_uid) == json_type_int) {
         *name = (char *)json_object_get_string(j_name);
         *gid = json_object_get_int(j_gid);

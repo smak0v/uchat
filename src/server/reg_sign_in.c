@@ -55,10 +55,8 @@ char *mx_register_user(void *jobj, t_comm *connect) {
 char *mx_sign_in(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;
-    char *str_uid = NULL;
     int uid = -1;
     unsigned char *token = malloc(sizeof(unsigned char *) * 257);
-    char *json_str = NULL;
 
     if (extract_name_passw((json_object *)jobj, &name, &pass) != 0)
         return mx_bad_request(NULL, NULL);
@@ -72,16 +70,12 @@ char *mx_sign_in(void *jobj, t_comm *connect) {
 
     // TEMPORARY KOSTYL
     for (int i = 0; i < 256; i++) {
-        if (token[i] < 33 || token[i] == 34 || token[i] > 126)
+        if (token[i] < 33 || token[i] == 34 || token[i] > 126 || token[i] == '{' || token[i] == '}')
             token[i] = 75;
     }
 
     if (mx_add_sock_user(connect->db, uid, connect->fd, (char *)token) == -1)
         return "{\"code\": 500}";
 
-    str_uid = mx_itoa(uid);
-    json_str = mx_json_builder(6, "\"code\":", "200", "\"uid\":", str_uid, "\"token\":", mx_str_builder((char *)token));
-    mx_strdel(&str_uid);
-
-    return json_str;
+    return mx_json_string_s_in(uid, (char *)token);
 }

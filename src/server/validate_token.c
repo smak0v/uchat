@@ -2,7 +2,7 @@
 
 static char *get_token(json_object *jobj) {
     json_object *j_tok = NULL;
-    
+
     json_object_object_get_ex(jobj, "tok", &j_tok);
 
     if (!j_tok || json_object_get_type(j_tok) != json_type_string)
@@ -24,9 +24,10 @@ int mx_validate_token(sqlite3 *db, int id, void *v_jobj) {
 
     if (!mx_strcmp(incoming_tok, true_tok))
         code = 0;
-    else
+    else {
         printf("%d\n%s\n%s\n", id, true_tok, incoming_tok);
-
+        mx_print_db(db, "SOCKETS");
+    }
     mx_strdel(&true_tok);
     return code;
 }

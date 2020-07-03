@@ -1,47 +1,7 @@
 #include "server.h"
 
-// struct s_msg {
-// 	int id;
-// 	int group_id;
-// 	int dialog_id;
-// 	int sender;
-// 	int recepient;
-// 	char *msg;
-// 	int time;
-// 	bool edited;
-// 	bool read;
-// 	char *file;
-// };
-
-// {"type": "S_MES", "gid": -1, "did": -2, "uid": 2, "uid2": 1, "msg": "Hello I'm Geralt", "time": 3819524, "file": ""}
-
-static char *create_json_string(t_msg *message) {
-    char *gid = mx_itoa(message->group_id);
-    char *did = mx_itoa(message->dialog_id);
-    char *uid = mx_itoa(message->sender);
-    char *uid2 = mx_itoa(message->recepient);
-    char *msg = mx_str_builder(message->msg);
-    char *time = mx_itoa(message->time);
-    char *file = mx_str_builder(message->file);
-    char *str = mx_json_builder(16, "\"type\":", "\"S_MES\"", "\"gid\":", gid,
-                                "\"did\":", did, "\"uid\":", uid, "\"uid2\":",
-                                uid2, "\"msg\":", msg, "\"time\":", time,
-                                "\"file\":", file);
-
-    mx_strdel(&gid);
-    mx_strdel(&did);
-    mx_strdel(&uid);
-    mx_strdel(&uid2);
-    mx_strdel(&msg);
-    mx_strdel(&time);
-    mx_strdel(&file);
-    return str;
-}
-
 static char *send_group_message(t_msg *message, sqlite3 *db, int fd) {
-    printf("1\n");
-    char *js_str = create_json_string(message);
-    printf("2\n");
+    char *js_str = mx_json_string_msg(message);
     int *group_members = mx_get_all_id_group_members(db, message->group_id);
     int socket_fd = -1;
 
@@ -54,7 +14,7 @@ static char *send_group_message(t_msg *message, sqlite3 *db, int fd) {
             write(socket_fd, js_str, (sizeof(char) * strlen(js_str)));
         }
     }
-
+    mx_strdel(&js_str);
     return "{\"code\": 200}";
 }
 
@@ -72,12 +32,11 @@ static char *send_private_message(t_msg *msg, sqlite3 *db) {
     }
 
     mx_add_msg(db, msg);
-    json_string = create_json_string(msg);
-    if ((socket_fd = mx_get_sock_by_user_id(db, msg->recepient)) != -1)
+    if ((socket_fd = mx_get_sock_by_user_id(db, msg->recepient)) != -1) {
+        json_string = mx_json_string_msg(msg);
         write(socket_fd, json_string, (sizeof(char) * strlen(json_string)));
-    else
-        mx_print_db(db, "SOCKETS");
-
+        mx_strdel(&json_string);
+    }
     return "{\"code\": 200}";
 }
 

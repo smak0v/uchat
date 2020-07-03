@@ -37,5 +37,5 @@ void mx_recv_file(int connection_fd, char *path) {
     if (fclose(file) < 0)
         mx_terminate("close");
 
-    mx_strdel(&full_path)
+    mx_strdel(&full_path);
 }

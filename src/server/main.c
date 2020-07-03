@@ -87,7 +87,7 @@ int mx_start_server(int port) {
 
     socket_fd = open_listener(port);
     db = mx_opendb("test.db");
-
+    mx_print_db(db, "SOCKETS");
     accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);
