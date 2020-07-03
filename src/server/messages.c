@@ -75,21 +75,29 @@ static char *send_private_message(t_msg *msg, sqlite3 *db) {
     json_string = create_json_string(msg);
     if ((socket_fd = mx_get_sock_by_user_id(db, msg->recepient)) != -1)
         write(socket_fd, json_string, (sizeof(char) * strlen(json_string)));
-    else {
+    else
         mx_print_db(db, "SOCKETS");
-    }
+
     return "{\"code\": 200}";
 }
 
 char *mx_send_message(void *jobj, t_comm *connect) {
     t_msg *message = mx_extract_message(jobj);
+    char *res = NULL;
 
     if (!message)
         return mx_bad_request(NULL, NULL);
 
-    if (message->group_id != -1)
-        return send_group_message(message, connect->db, connect->fd);
-    else
-        return send_private_message(message, connect->db);
-}
+    if (mx_validate_token(connect->db, message->sender, (json_object *)jobj))
+        return "{\"code\": 401}";
 
+    if (message->group_id != -1)
+        res = send_group_message(message, connect->db, connect->fd);
+    else
+        res = send_private_message(message, connect->db);
+
+    if (message->file)
+        mx_recv_file(connect->fd, message->file);
+
+    return res;
+}

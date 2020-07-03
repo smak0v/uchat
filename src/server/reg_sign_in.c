@@ -51,20 +51,37 @@ char *mx_register_user(void *jobj, t_comm *connect) {
     return add_to_db(connect->db, (char *)name, (char *)pass);
 }
 
+// TODO: AUDITOR && REFACGTOR && LEAKS
 char *mx_sign_in(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;
-    int code = 0;
+    char *str_uid = NULL;
     int uid = -1;
-    char *token = "foo";
+    unsigned char *token = malloc(sizeof(unsigned char *) * 257);
+    char *json_str = NULL;
 
-    if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
+    if (extract_name_passw((json_object *)jobj, &name, &pass) != 0)
         return mx_bad_request(NULL, NULL);
 
     if ((uid = validate_sign_in(connect->db, name, pass)) == -1)
         return "{\"code\": 401}";
-    // generate token
-    if (mx_add_sock_user(connect->db, uid, connect->fd, token) == -1)
+
+    if (RAND_bytes(token, 256) != 1)
         return "{\"code\": 500}";
-    return mx_strjoin(mx_strjoin("{\"code\": 200, \"uid\": ", mx_itoa(uid)), "}");
+    token[256] = '\0';
+
+    // TEMPORARY KOSTYL
+    for (int i = 0; i < 256; i++) {
+        if (token[i] < 33 || token[i] == 34 || token[i] > 126)
+            token[i] = 75;
+    }
+
+    if (mx_add_sock_user(connect->db, uid, connect->fd, (char *)token) == -1)
+        return "{\"code\": 500}";
+
+    str_uid = mx_itoa(uid);
+    json_str = mx_json_builder(6, "\"code\":", "200", "\"uid\":", str_uid, "\"token\":", mx_str_builder((char *)token));
+    mx_strdel(&str_uid);
+
+    return json_str;
 }

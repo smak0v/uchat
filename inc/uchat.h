@@ -17,6 +17,7 @@
 #include <openssl/crypto.h>
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+#include <openssl/rand.h>
 
 #include "libmx.h"
 #include "client.h"
@@ -42,7 +43,7 @@
 bool mx_check_port(char *port);
 bool mx_check_ip(char *ip);
 void mx_send_file(int socket_fd, char *path);
-void mx_recv_file(int connection_fd);
+void mx_recv_file(int connection_fd, char *path);
 
 // Encryption (Vigenere + Caesar ciphers combination)
 char *mx_generate_key(char *str, char *key);

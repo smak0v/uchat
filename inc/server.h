@@ -81,7 +81,9 @@ char *mx_add_to_group(void *jobj, t_comm *connect);
 char *mx_rename_group(void *jobj, t_comm *connect);
 char *mx_send_message(void *jobj, t_comm *connect);
 
+// Server Utils
 t_msg *mx_extract_message(void *jobj);
+int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 
 // DB API
 sqlite3 *mx_opendb(char *name);
