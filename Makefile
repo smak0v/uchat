@@ -227,7 +227,7 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
-						  create_error_modal_window.c auth.c
+						  create_error_modal_window.c auth.c win_destroy.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

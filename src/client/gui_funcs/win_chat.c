@@ -87,7 +87,7 @@ void mx_create_win_chat(t_glade *g) {
 
     gtk_entry_set_placeholder_text(GTK_ENTRY(g->entry1),"Write a message...");
 
-    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
     g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);
     g_signal_connect(g->b_logout, "clicked", G_CALLBACK(mx_b_logout), g);
 }

@@ -106,6 +106,7 @@ void mx_clear_signup_inputs(t_glade *g);
 
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path);
+void mx_gtk_quit(void);
 
 void mx_create_win_log(t_glade *g);
 void mx_create_win_reg(t_glade *g);
