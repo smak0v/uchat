@@ -22,8 +22,10 @@ api_function mx_select_method(enum e_types type) {
         return mx_rename_group;
     else if (type == S_MES)
         return mx_send_message;
-    else if (type == DEL_USER_PROFILE)
-        return mx_send_message;
+    else if (type == EDIT_MESSAGE)
+        return mx_edit_message;
+    // else if (type == DEL_USER_PROFILE)
+    //     return mx_del_user;
     else
         return mx_bad_request;
 }

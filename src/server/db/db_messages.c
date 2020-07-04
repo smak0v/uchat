@@ -49,14 +49,14 @@ int mx_delete_msg_by_id(sqlite3 *db, int id) {
     return 0;
 }
 
-int mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id) {
+int mx_update_msg_by_id(sqlite3 *db, char *msg, int id) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db,
         "UPDATE MSG SET MSG_BODY = ?1, EDITED = ?2 WHERE ID = ?3;",
         -1, &stmt, NULL);
 
-    sqlite3_bind_text(stmt, 1, m->msg, -1, SQLITE_STATIC);
-    sqlite3_bind_int(stmt, 2, m->edited);
+    sqlite3_bind_text(stmt, 1, msg, -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, 1);
     sqlite3_bind_int(stmt, 3, id);
 
     if (rv == SQLITE_ERROR)

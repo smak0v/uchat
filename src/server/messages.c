@@ -60,3 +60,20 @@ char *mx_send_message(void *jobj, t_comm *connect) {
 
     return res;
 }
+
+char *mx_edit_message(void *jobj, t_comm *connect) {
+    int uid = -1;
+    int msg_id = -1;
+    char *msg = NULL;
+
+    if (mx_extract_edit_msg(jobj, &uid, &msg_id, &msg) == -1)
+        return mx_bad_request(NULL, NULL);
+
+    if (mx_validate_token(connect->db, uid, (json_object *)jobj))
+        return "{\"code\": 401}";
+
+    if (mx_update_msg_by_id(connect->db, msg, msg_id) == -1)
+        return "{\"code\": 500}";
+
+    return "{\"code\": 200}";
+}

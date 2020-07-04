@@ -61,3 +61,26 @@ t_msg *mx_extract_message(void *jobj) {
     else
         return message;
 }
+
+int mx_extract_edit_msg(json_object *jobj, int *uid, int *mid, char **msg) {
+    json_object *j_uid = NULL;
+    json_object *j_mid = NULL;
+    json_object *j_msg = NULL;
+
+    if (json_object_get_type(jobj) == json_type_object) {
+        json_object_object_get_ex(jobj, "uid", &j_uid);
+        json_object_object_get_ex(jobj, "msg", &j_msg);
+        json_object_object_get_ex(jobj, "mid", &j_mid);
+
+        if (j_uid && j_mid && json_object_get_type(j_uid) == json_type_int
+            && json_object_get_type(j_mid) == json_type_int && j_msg
+            && json_object_get_type(j_msg) == json_type_string) {
+                *uid = json_object_get_int(j_uid);
+                *mid = json_object_get_int(j_mid);
+                *msg = (char *)json_object_get_string(j_msg);
+                return 0;
+            }
+    }
+
+    return -1;
+}

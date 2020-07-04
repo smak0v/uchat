@@ -58,3 +58,25 @@ void mx_show_client_certs(SSL *ssl) {
     else
         mx_print_error_endl("uchat_server: no client certificates configured");
 }
+
+unsigned char *mx_generate_token(void) {
+    unsigned char *token = malloc(sizeof(unsigned char *) * 257);
+
+    if (RAND_bytes(token, 256) != 1)
+        return NULL;
+
+    token[256] = '\0';
+
+    for (int i = 0; i < 256; i++) {
+        if (token[i] < 33)
+            token[i] = 75;
+        else if (token[i] == 34)
+            token[i] = 64;
+        else if (token[i] > 126)
+            token[i] = 106;
+        else if (token[i] == '{' || token[i] == '}')
+            token[i] = 70;
+    }
+
+    return token;
+}

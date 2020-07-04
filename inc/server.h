@@ -80,6 +80,8 @@ char *mx_new_group(void *jobj, t_comm *connect);
 char *mx_add_to_group(void *jobj, t_comm *connect);
 char *mx_rename_group(void *jobj, t_comm *connect);
 char *mx_send_message(void *jobj, t_comm *connect);
+char *mx_edit_message(void *jobj, t_comm *connect);
+char *mx_del_user(void *jobj, t_comm *connect);
 
 // JSON builders
 char *mx_json_string_msg(t_msg *msg);
@@ -88,6 +90,8 @@ char *mx_json_string_add_to_gr(int gid);
 
 // Server Utils
 t_msg *mx_extract_message(void *jobj);
+int mx_extract_edit_msg(json_object *jobj, int *uid, int *mid, char **msg);
+unsigned char *mx_generate_token(void);
 int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 
 // DB API
@@ -138,7 +142,7 @@ int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id);
 int mx_add_msg(sqlite3 *db, t_msg *m);
 t_msg *mx_get_msg_by_id(sqlite3 *db, int id);
 int mx_delete_msg_by_id(sqlite3 *db, int id);
-int mx_update_msg_by_id(sqlite3 *db, t_msg *m, int id);
+int mx_update_msg_by_id(sqlite3 *db, char *msg, int id);
 int mx_get_msg(sqlite3 *db, t_msg *m);
 
 //SOCKETS table

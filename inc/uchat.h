@@ -42,6 +42,7 @@ enum e_types {
     INV,
     RN_GR,
     S_MES,
+    EDIT_MESSAGE,
     DEL_USER_PROFILE,
 };
 
