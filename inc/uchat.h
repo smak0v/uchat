@@ -20,8 +20,6 @@
 #include <openssl/rand.h>
 
 #include "libmx.h"
-#include "client.h"
-#include "server.h"
 #include "json.h"
 
 // Constants
@@ -37,9 +35,9 @@
 
 // Structures
 enum e_types {
-	REG,
+    REG,
     S_IN,
-	S_OUT,
+    S_OUT,
     N_GRP,
     INV,
     RN_GR,

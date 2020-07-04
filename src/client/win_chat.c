@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 void mx_msg(GtkWidget *top, t_glade *g) {
     GtkWidget *row = gtk_list_box_row_new();
@@ -81,19 +81,19 @@ void mx_create_win_chat(t_glade *g) {
     // gtk_box_pack_start(GTK_BOX(g->msg_box), g->entry, TRUE, TRUE, 0);
 
     gtk_entry_set_placeholder_text(GTK_ENTRY(g->entry1),"Write a message...");
+    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(g->button2, "clicked", G_CALLBACK(mx_msg), g);
 
     // gtk_widget_set_name(listbox,"listboxleft");
     gtk_container_add(GTK_CONTAINER(g->scroll), g->listbox);
-    mx_printstr_endl("Chat window");
     // gtk_widget_show_all(g->w_chat);
 }
 
 void mx_show_win_chat(GtkWidget *v, t_glade *g) {
-    int w;
-    int h;
-    int x;
-    int y;
+    int w = 0;
+    int h = 0;
+    int x = 0;
+    int y= 0;
 
     gtk_window_get_position(GTK_WINDOW(v), &x, &y);
     gtk_window_get_size(GTK_WINDOW(v), &w, &h);
@@ -102,11 +102,8 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     gtk_window_resize(GTK_WINDOW(g->w_chat), w, h);
     gtk_window_move(GTK_WINDOW(g->w_chat), x, y + 22.35);
     gtk_widget_show_all(GTK_WIDGET(g->w_chat));
-
-    printf("==========Enter in chat!==========\n");
 }
 
 void mx_open_win_chat(GtkWidget *w, t_glade *g) {
     mx_show_win_chat(w, g);
-
 }

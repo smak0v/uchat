@@ -1,10 +1,30 @@
-#include "uchat.h"
+#include "client.h"
+
+// {"type": "REG", "name": "kali", "passw": "qwerty"}
+// {"type": "REG", "name": "geralt", "passw": "qwerty"}
+// {"type": "REG", "name": "BogdanUeban", "passw": "qwerty"}
+// {"type": "REG", "name": "MrSkout", "passw": "qwerty"}
+// {"type": "S_IN", "name": "kali", "passw": "qwerty"}
+// {"type": "S_IN", "name": "geralt", "passw": "qwerty"}
+// {"type": "S_IN", "name": "BogdanUeban", "passw": "qwerty"}
+// {"type": "S_IN", "name": "MrSkout", "passw": "qwerty"}
+// {"type": "S_MES", "gid": -1, "did": -2, "uid": 2, "uid2": 1, "msg": "Hello I'm Geralt", "time": 3819524, "file": ""}
+// {"type": "S_OUT", "id": 1}
+// {"type": "S_OUT", "id": 2}
+
+// {"type": "N_GRP", "name": "TEST2", "id": [1], "tok":"MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+// {"type": "INV", "gid": 1, "add": [2], "uid": 1, "tok": "MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+// // {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "привет", "time": 3819524, "file": "", "tok":"MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+// {"type": "S_MES", "gid": -1, "did": -2, "uid": 1, "uid2": 2, "msg": "привет", "time": 3819524, "file": "", "tok":"MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+
+// "MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"
+// "KKKKKC5FKKMKKK(KKKKKKghKKK7KKKJKPKKKiKv^IKK&K,KSKKKKKK?KK;KKKKKhtKlsKKKKKKKKKKKKKKK2Kc]KKJKGhK4K@K]KiwKK]\/XKKKKKKK\\*KBKYKKKqKKKK?BlKKKKKKKeKH:KK-:KUMKoKKK`KKKKKKKIKKKcKP\\zKKKKKKK4KKKuKKKKKKKd;K~KqK@KKiNKKKKK|K'9KKB*K@KyKKKK7toKKQQKKKvGKKKKKKKKKKKKKKKKKKKKM"
 
 void mx_open_regwin(GtkWidget *sender, t_glade *g) {
-    int w;
-    int h;
-    int x;
-    int y;
+    int w = 0;
+    int h = 0;
+    int x = 0;
+    int y = 0;
 
     (void)sender;
     gtk_window_get_position(GTK_WINDOW(g->w_log), &x, &y);
@@ -18,47 +38,36 @@ void mx_open_regwin(GtkWidget *sender, t_glade *g) {
     mx_widget_set_visibility(g->bd, "r_pass_err", FALSE);
     mx_widget_set_visibility(g->bd, "r_pass_err1", FALSE);
     mx_widget_set_visibility(g->bd, "r_name_err", FALSE);
-    printf("==========Hide on click!==========\n");
 }
 
 void mx_b_reg_log(GtkButton *b, t_glade *g) {
     char *repeat = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_repass));
+    char *request = NULL;
+    int bytes_read = 0;
+    char buff[MX_MAX];
 
+    (void)b;
     g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_ename));
     g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_epass));
-    if (strlen(g->log) < 3)
-        mx_widget_set_visibility(g->bd, "r_name_err", TRUE);
-    if (repeat) { // create fun to valid log and pass and repeat
-        if (mx_strcmp(repeat, g->pass) != 0) {
-            mx_printstr_endl("Incorrect pass");
-            mx_widget_set_visibility(g->bd, "r_pass_err", TRUE);
-            mx_widget_set_visibility(g->bd, "r_pass_err1", TRUE);
-        }
-    }
-    // after valid user data - register into db and log into chat
-    mx_open_win_chat(g->w_reg, g);
 
-    mx_printstr_endl(g->log);
-    mx_printstr_endl(g->pass);
-    (void)b;
-    printf("Reg button clicked\n"); // del
+    if (!mx_validate_signup_data(g, repeat)) {
+        request = mx_json_string_login_signup(REG, g->log, g->pass);
+        SSL_write(g->ssl, request, strlen(request));
+        bzero(buff, sizeof(buff));
+        bytes_read = SSL_read(g->ssl, buff, sizeof(buff));
+        buff[bytes_read] = '\0';
+        printf("%s\n", buff);
+        mx_strdel(&request);
+        // mx_open_win_chat(g->w_reg, g);
+    }
 }
 
  void mx_b_log(GtkButton *b, t_glade *g) {
     g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_name));
     g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_pass));
 
-    // create valid func! and then send data to db and goto to open_win_chat
-    if (strlen(g->log) < 3)
-        mx_printstr_endl("Write username");
-    if (strlen(g->pass) < 3)
-        mx_printstr_endl("Write password");
-
-    mx_printstr_endl(g->log);
-    mx_printstr_endl(g->pass);
     (void)b;
-    printf("Log in button clicked\n");
-
-    // log into chat!
-    mx_open_win_chat(g->w_log, g);
+    if (!mx_validate_login_data(g)) {
+        mx_open_win_chat(g->w_log, g);
+    }
 }
