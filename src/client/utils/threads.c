@@ -7,5 +7,5 @@ void mx_client_thread_manager(t_glade *glade, SSL *ssl) {
     data->ssl = ssl;
     data->glade = glade;
 
-    pthread_create(&thread_id, NULL, mx_client_communicate, (void *)data);
+    pthread_create(&thread_id, NULL, mx_listen_server, (void *)data);
 }
