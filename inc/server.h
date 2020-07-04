@@ -81,6 +81,7 @@ char *mx_add_to_group(void *jobj, t_comm *connect);
 char *mx_rename_group(void *jobj, t_comm *connect);
 char *mx_send_message(void *jobj, t_comm *connect);
 char *mx_edit_message(void *jobj, t_comm *connect);
+char *mx_delete_message(void *jobj, t_comm *connect);
 char *mx_del_user(void *jobj, t_comm *connect);
 
 // JSON builders
@@ -91,6 +92,7 @@ char *mx_json_string_add_to_gr(int gid);
 // Server Utils
 t_msg *mx_extract_message(void *jobj);
 int mx_extract_edit_msg(json_object *jobj, int *uid, int *mid, char **msg);
+int mx_extract_delete_message(json_object *jobj, int *uid, int *mid);
 unsigned char *mx_generate_token(void);
 int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 

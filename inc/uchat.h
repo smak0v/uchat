@@ -44,6 +44,7 @@ enum e_types {
     S_MES,
     EDIT_MESSAGE,
     DEL_USER_PROFILE,
+    DELETE_MESSAGE
 };
 
 // Functions

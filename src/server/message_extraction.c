@@ -84,3 +84,22 @@ int mx_extract_edit_msg(json_object *jobj, int *uid, int *mid, char **msg) {
 
     return -1;
 }
+
+int mx_extract_delete_message(json_object *jobj, int *uid, int *mid) {
+    json_object *j_uid = NULL;
+    json_object *j_mid = NULL;
+
+    if (json_object_get_type(jobj) == json_type_object) {
+        json_object_object_get_ex(jobj, "uid", &j_uid);
+        json_object_object_get_ex(jobj, "mid", &j_mid);
+
+        if (j_uid && j_mid && json_object_get_type(j_uid) == json_type_int
+            && json_object_get_type(j_mid) == json_type_int) {
+                *uid = json_object_get_int(j_uid);
+                *mid = json_object_get_int(j_mid);
+                return 0;
+            }
+    }
+
+    return -1;
+}
