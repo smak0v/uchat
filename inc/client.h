@@ -2,6 +2,7 @@
 
 // Includes
 #include <gtk/gtk.h>
+
 #include "uchat.h"
 
 
@@ -44,7 +45,11 @@ struct s_glade {
     GtkWidget *b_reg_back; // button back to login window
 
     // chat window
-    GtkWidget *w_chat;
+    GtkWidget *w_chat; // window chat
+    GtkWidget *b_logout; // button logout
+    GtkWidget *b_send_msg; // button send message
+
+
     // GtkWidget *c_box; // window register
     // GtkWidget *c_label; // window register
     // GtkWidget *c_entry; // window register
@@ -55,7 +60,6 @@ struct s_glade {
     GtkWidget *box2;
     GtkWidget *label1;
     GtkWidget *label2;
-    GtkWidget *button2;
     GtkWidget *box3;
     GtkWidget *entry1;
     GtkWidget *scroll;
@@ -69,11 +73,6 @@ struct s_glade {
 
 
 // Functions
-void mx_init_client(int argc, char **argv);
-void mx_start_client(char *ip, int port, t_glade *g);
-void *mx_listen_server(void *data);
-char *mx_read_server_response(t_glade *g);
-
 // SSL/TLS
 SSL_CTX *mx_init_client_ctx(void);
 void mx_show_server_certs(SSL *ssl);
@@ -86,26 +85,41 @@ int mx_validate_signup_data(t_glade *g, char *repeat);
 void mx_client_thread_manager(t_glade *glade, SSL *ssl);
 
 // Utils
-void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
+void mx_start_client(char *ip, int port, t_glade *g);
+void *mx_listen_server(void *data);
+char *mx_read_server_response(t_glade *g);
 int mx_clear_jobj(json_object **jobj, int status);
 
 // JOSN builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
+char *mx_json_string_logout(char *token, int uid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
 int mx_parse_signup_response(char *response, t_glade *g);
+void mx_parse_logout_response(char *response, t_glade *g);
 
-// UI
+// GUI
+void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
+void mx_clear_login_inputs(t_glade *g);
+void mx_clear_signup_inputs(t_glade *g);
+
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path);
-void mx_open_regwin(GtkWidget *sender, t_glade *g);
+
 void mx_create_win_log(t_glade *g);
+void mx_create_win_reg(t_glade *g);
+void mx_create_win_chat(t_glade *g);
+
 void mx_widget_visible(GtkWidget *widget, gboolean is_visible);
 void mx_widget_set_visibility(GtkBuilder *bd, gchar *name,
                               gboolean is_visible);
+
 void mx_b_log(GtkButton *b, t_glade *g);
 void mx_b_reg_log(GtkButton *b, t_glade *g);
-void mx_create_win_chat(t_glade *g);
+void mx_b_logout(GtkButton *b, t_glade *g);
+
+void mx_open_logwin(GtkWidget *sender, t_glade *g);
+void mx_open_regwin(GtkWidget *sender, t_glade *g);
 void mx_open_win_chat(GtkWidget *w, t_glade *g);
 void mx_show_win_chat(GtkWidget *v, t_glade *g);

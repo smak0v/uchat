@@ -191,8 +191,10 @@ PARSERS_OBJD			= $(CLIENT_OBJD)/parsers
 
 BUILDERS_OBJD			= $(CLIENT_OBJD)/builders
 
+GUI_FUNCS_OBJD			= $(CLIENT_OBJD)/gui_funcs
+
 CLIENT_OBJ_DIRS			= $(CLIENT_OBJD) $(VALIDATORS_OBJD) $(UTILS_OBJD) \
-						  $(PARSERS_OBJD) $(BUILDERS_OBJD)
+						  $(PARSERS_OBJD) $(BUILDERS_OBJD) $(GUI_FUNCS_OBJD)
 
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
@@ -208,19 +210,24 @@ CLIENT_PARSERS_OBJS		= $(addprefix $(OBJD)/client/parsers/, \
 CLIENT_BUILDERSS_OBJS	= $(addprefix $(OBJD)/client/builders/, \
 						  $(BUILDERS_SRCS:%.c=%.o))
 
+CLIENT_GUI_FUNCS_OBJS	= $(addprefix $(OBJD)/client/gui_funcs/, \
+						  $(GUI_FUNCS_SRCS:%.c=%.o))
+
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c init.c create_win_log.c auth_utils.c \
-						  win_chat.c sockets.c
+CLIENT_SRCS				= main.c
 
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
-UTILS_SRCS				= create_error_modal_window.c clear_jobj.c \
-						  read_server_response.c ssl_tls.c gui_utils.c \
-						  threads.c
+UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
+						  threads.c sockets.c
 
-PARSERS_SRCS			= login_response.c signup_response.c
+PARSERS_SRCS			= login_response.c signup_response.c logout_response.c
 
-BUILDERS_SRCS			= login_signup_builder.c
+BUILDERS_SRCS			= login_signup_builder.c logout_builder.c
+
+GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
+						  win_login_signup.c win_chat.c gui_utils.c \
+						  create_error_modal_window.c auth.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -230,12 +237,12 @@ $(CLIENT_OBJ_DIRS):
 
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS) $(CLIENT_VALIDATORS_OBJS) \
 					$(CLIENT_UTILS_OBJS) $(CLIENT_PARSERS_OBJS) \
-					$(CLIENT_BUILDERSS_OBJS)
+					$(CLIENT_BUILDERSS_OBJS) $(CLIENT_GUI_FUNCS_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
 		$(CLIENT_OBJS) $(CLIENT_VALIDATORS_OBJS) $(CLIENT_UTILS_OBJS) \
-		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERSS_OBJS) -L $(LIBMXD) \
-		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o \
-		$@ $(GTK_LIBS)
+		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERSS_OBJS) \
+		$(CLIENT_GUI_FUNCS_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
+		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 

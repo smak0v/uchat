@@ -59,7 +59,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="button2">
+                          <object class="GtkButton" id="b_send_msg">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -128,11 +128,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button3">
-                <property name="label" translatable="yes">log out -&gt;</property>
+              <object class="GtkButton" id="b_logout">
+                <property name="label" translatable="yes">Logout -&gt;</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can_focus">False</property>
                 <property name="receives_default">True</property>
+                <signal name="clicked" handler="b_logout" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>

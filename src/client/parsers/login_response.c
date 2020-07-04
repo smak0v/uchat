@@ -21,8 +21,8 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
         return MX_FAILURE;
     }
     else if (code == 500) {
-        mx_create_error_modal_window("Something were wrong!",
-            "Something were wrong!. Try again later!", g->w_log);
+        mx_create_error_modal_window("Error!",
+            "Something were wrong! Try again later!", g->w_log);
         return MX_FAILURE;
     }
     else {

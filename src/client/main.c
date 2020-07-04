@@ -1,5 +1,26 @@
 #include "client.h"
 
+static void init_client(int argc, char **argv) {
+    t_glade *g = malloc(sizeof(t_glade));
+    GError *error = NULL;
+    char *ui_path = mx_build_ui_path("builder.ui");
+
+    gtk_init(&argc, &argv);
+    g->bd = gtk_builder_new();
+    if (gtk_builder_add_from_file(g->bd, ui_path, &error) == 0) {
+        g_printerr("Error loading file: %s\n", error->message);
+        g_clear_error(&error);
+    }
+
+    mx_connect_css("ex.css");
+    mx_create_win_log(g);
+    mx_create_win_chat(g);
+
+    mx_start_client(argv[1], mx_atoi(argv[2]), g);
+
+    mx_strdel(&ui_path);
+}
+
 int main(int argc, char **argv) {
     if (argc < 3) {
         mx_print_error("uchat: must take two parameters -");
@@ -16,7 +37,7 @@ int main(int argc, char **argv) {
             mx_print_error_endl("uchat: not valid port");
             exit(MX_FAILURE);
         }
-        mx_init_client(argc, argv);
+        init_client(argc, argv);
     }
 
     return MX_SUCCESS;

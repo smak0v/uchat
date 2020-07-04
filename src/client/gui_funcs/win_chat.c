@@ -1,6 +1,6 @@
 #include "client.h"
 
-void mx_msg(GtkWidget *top, t_glade *g) {
+void mx_send_msg(GtkWidget *top, t_glade *g) {
     GtkWidget *row = gtk_list_box_row_new();
     gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW(row), TRUE);
     gtk_list_box_insert (GTK_LIST_BOX(g->listbox), row, g->n);
@@ -45,6 +45,9 @@ void mx_msg(GtkWidget *top, t_glade *g) {
 
 void mx_create_win_chat(t_glade *g) {
     g->w_chat = GTK_WIDGET(gtk_builder_get_object(g->bd, "win_chat"));
+    g->b_logout = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_logout"));
+    g->b_send_msg = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_send_msg"));
+
     g->box1 = GTK_WIDGET(gtk_builder_get_object(g->bd, "box1"));
     g->button1 = GTK_WIDGET(gtk_builder_get_object(g->bd, "button1"));
     g->box2 = GTK_WIDGET(gtk_builder_get_object(g->bd, "box2"));
@@ -53,10 +56,8 @@ void mx_create_win_chat(t_glade *g) {
     // g->box5 = GTK_WIDGET(gtk_builder_get_object(g->bd, "box5"));
     g->label1 = GTK_WIDGET(gtk_builder_get_object(g->bd, "label1"));
     g->label2 = GTK_WIDGET(gtk_builder_get_object(g->bd, "label2"));
-    g->button2 = GTK_WIDGET(gtk_builder_get_object(g->bd, "button2"));
     g->box3 = GTK_WIDGET(gtk_builder_get_object(g->bd, "box3"));
     g->entry1 = GTK_WIDGET(gtk_builder_get_object(g->bd, "entry1"));
-
     // GtkWidget *l = gtk_label_new("Group name");
     // GtkWidget *l1 = gtk_label_new("->> name");
     // g->b1 = gtk_button_new();
@@ -70,7 +71,6 @@ void mx_create_win_chat(t_glade *g) {
     // g->n = 0;
     // g->message_num = 0;
     // gtk_widget_set_size_request(g->scroll,30,30);
-
     // gtk_box_pack_start(GTK_BOX(g->box2), l, FALSE, FALSE, 0);
     // gtk_box_pack_start(GTK_BOX(g->box), g->b1, TRUE, TRUE, 0);
     // gtk_box_pack_start(GTK_BOX(g->box_new), b, TRUE, TRUE, 0);
@@ -79,14 +79,17 @@ void mx_create_win_chat(t_glade *g) {
     // gtk_box_pack_end(GTK_BOX(g->box_new), g->msg_box, TRUE, TRUE, 0);
     // gtk_box_pack_end(GTK_BOX(g->msg_box), g->send, TRUE, TRUE, 0);
     // gtk_box_pack_start(GTK_BOX(g->msg_box), g->entry, TRUE, TRUE, 0);
-
-    gtk_entry_set_placeholder_text(GTK_ENTRY(g->entry1),"Write a message...");
-    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    g_signal_connect(g->button2, "clicked", G_CALLBACK(mx_msg), g);
-
     // gtk_widget_set_name(listbox,"listboxleft");
     gtk_container_add(GTK_CONTAINER(g->scroll), g->listbox);
     // gtk_widget_show_all(g->w_chat);
+
+
+
+    gtk_entry_set_placeholder_text(GTK_ENTRY(g->entry1),"Write a message...");
+
+    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);
+    g_signal_connect(g->b_logout, "clicked", G_CALLBACK(mx_b_logout), g);
 }
 
 void mx_show_win_chat(GtkWidget *v, t_glade *g) {
