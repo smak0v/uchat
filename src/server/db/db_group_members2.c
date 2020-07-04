@@ -24,7 +24,7 @@ int mx_change_admin_status(sqlite3 *db, int user_id, int group_id, bool adm) {
     sqlite3_stmt *stmt = NULL;
     int rv = 0;
 
-    if (mx_get_group_member_by_user_id(db, user_id) < 0)
+    if (mx_check_group_member(db, user_id, group_id) < 0)
         return -2;
     rv = sqlite3_prepare_v2(db, "UPDATE GROUP_MEMBERS SET ADMIN = ?1 "\
         "WHERE USER_ID = ?2 AND GROUP_ID = ?3;", -1, &stmt, NULL);
