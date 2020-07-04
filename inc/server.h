@@ -141,6 +141,8 @@ t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2);
 int mx_get_dialog_id(sqlite3 *db, int id1, int id2);
 int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2);
 int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id);
+t_list *mx_get_all_user_dialogs(sqlite3 *db, int user_id);
+
 
 // MSG table
 int mx_add_msg(sqlite3 *db, t_msg *m);
