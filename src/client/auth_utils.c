@@ -1,10 +1,10 @@
-#include "uchat.h"
+#include "client.h"
 
 void mx_open_regwin(GtkWidget *sender, t_glade *g) {
-    int w;
-    int h;
-    int x;
-    int y;
+    int w = 0;
+    int h = 0;
+    int x = 0;
+    int y = 0;
 
     (void)sender;
     gtk_window_get_position(GTK_WINDOW(g->w_log), &x, &y);
@@ -18,47 +18,36 @@ void mx_open_regwin(GtkWidget *sender, t_glade *g) {
     mx_widget_set_visibility(g->bd, "r_pass_err", FALSE);
     mx_widget_set_visibility(g->bd, "r_pass_err1", FALSE);
     mx_widget_set_visibility(g->bd, "r_name_err", FALSE);
-    printf("==========Hide on click!==========\n");
 }
 
 void mx_b_reg_log(GtkButton *b, t_glade *g) {
     char *repeat = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_repass));
+    char *request = NULL;
+    int bytes_read = 0;
+    char buff[MX_MAX];
 
+    (void)b;
     g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_ename));
     g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_epass));
-    if (strlen(g->log) < 3)
-        mx_widget_set_visibility(g->bd, "r_name_err", TRUE);
-    if (repeat) { // create fun to valid log and pass and repeat
-        if (mx_strcmp(repeat, g->pass) != 0) {
-            mx_printstr_endl("Incorrect pass");
-            mx_widget_set_visibility(g->bd, "r_pass_err", TRUE);
-            mx_widget_set_visibility(g->bd, "r_pass_err1", TRUE);
-        }
-    }
-    // after valid user data - register into db and log into chat
-    mx_open_win_chat(g->w_reg, g);
 
-    mx_printstr_endl(g->log);
-    mx_printstr_endl(g->pass);
-    (void)b;
-    printf("Reg button clicked\n"); // del
+    if (!mx_validate_signup_data(g, repeat)) {
+        request = mx_json_string_login_signup(REG, g->log, g->pass);
+        SSL_write(g->ssl, request, strlen(request));
+        bzero(buff, sizeof(buff));
+        bytes_read = SSL_read(g->ssl, buff, sizeof(buff));
+        buff[bytes_read] = '\0';
+        printf("%s\n", buff);
+        mx_strdel(&request);
+        // mx_open_win_chat(g->w_reg, g);
+    }
 }
 
  void mx_b_log(GtkButton *b, t_glade *g) {
     g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_name));
     g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_pass));
 
-    // create valid func! and then send data to db and goto to open_win_chat
-    if (strlen(g->log) < 3)
-        mx_printstr_endl("Write username");
-    if (strlen(g->pass) < 3)
-        mx_printstr_endl("Write password");
-
-    mx_printstr_endl(g->log);
-    mx_printstr_endl(g->pass);
     (void)b;
-    printf("Log in button clicked\n");
-
-    // log into chat!
-    mx_open_win_chat(g->w_log, g);
+    if (!mx_validate_login_data(g)) {
+        mx_open_win_chat(g->w_log, g);
+    }
 }

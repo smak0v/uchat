@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id) {
     sqlite3_stmt *stmt = NULL;

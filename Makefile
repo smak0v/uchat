@@ -183,20 +183,28 @@ $(SERVER_OBJS): | $(SERVER_OBJ_DIRS) $(COMMON_OBJ_DIRS)
 #==================================OBJ========================================#
 CLIENT_OBJD				= $(OBJD)/client
 
-VALIDATORS_OBJD			= $(SERVER_OBJD)/validators
+VALIDATORS_OBJD			= $(CLIENT_OBJD)/validators
 
-CLIENT_OBJ_DIRS			= $(CLIENT_OBJD) $(VALIDATORS_OBJD)
+UTILS_OBJD				= $(CLIENT_OBJD)/utils
+
+CLIENT_OBJ_DIRS			= $(CLIENT_OBJD) $(VALIDATORS_OBJD) $(UTILS_OBJD)
 
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
-CLIENT_VALIDATORS_OBJS	= $(addprefix $(OBJD)/client/validators/,\
+CLIENT_VALIDATORS_OBJS	= $(addprefix $(OBJD)/client/validators/, \
 						  $(VALIDATORS_SRCS:%.c=%.o))
+
+CLIENT_UTILS_OBJS		= $(addprefix $(OBJD)/client/utils/, \
+						  $(UTILS_SRCS:%.c=%.o))
 
 #===================================SRC=======================================#
 CLIENT_SRCS				= main.c init.c utils.c create_win_log.c auth_utils.c \
-						  win_chat.c ssl_tls.c
+						  win_chat.c ssl_tls.c threads.c sockets.c \
+						  json_builder.c
 
-VALIDATORS_SRCS			=
+VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
+
+UTILS_SRCS				= create_error_modal_window.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -204,10 +212,12 @@ CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 $(CLIENT_OBJ_DIRS):
 	@mkdir -p $@
 
-$(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
-		$(CLIENT_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
-		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
+$(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS) $(CLIENT_VALIDATORS_OBJS) \
+					$(CLIENT_UTILS_OBJS)
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
+		$(CLIENT_OBJS) $(CLIENT_VALIDATORS_OBJS) $(CLIENT_UTILS_OBJS) \
+		-L $(LIBMXD) -L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl \
+		-lcrypto -o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 
@@ -215,6 +225,9 @@ $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(VALIDATORS_OBJD)/validators/%.o: $(SRCD)/client/validators/%.c $(INCS)
+	$(call compile_dependency, $<, $@)
+
+$(UTILS_OBJD)/utils/%.o: $(SRCD)/client/utils/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS) $(COMMON_OBJ_DIRS)

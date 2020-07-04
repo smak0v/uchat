@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 void mx_new_table_user(sqlite3 *database) {
     sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS USER(" \

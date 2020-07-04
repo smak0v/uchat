@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 static t_msg *get_msg(sqlite3_stmt *stmt) {
     t_msg *m = malloc(sizeof(t_msg));;

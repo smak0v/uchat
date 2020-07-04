@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 int mx_add_dialog(sqlite3 *db, int user_id1, int user_id2) {
     sqlite3_stmt *stmt = NULL;

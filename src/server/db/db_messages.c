@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 static int insert_to_table(sqlite3 *db, t_msg *m, sqlite3_stmt *stmt) {
     int rv = 0;

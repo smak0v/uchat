@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 int mx_delete_by_dialog_id(sqlite3 *db, int dialog_id) {
     sqlite3_stmt *stmt = NULL;

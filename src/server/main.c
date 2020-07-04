@@ -20,7 +20,7 @@ void *mx_communicate(void *data) {
                 close(SSL_get_fd(connect->ssl));
                 *status = 0;
                 ERR_print_errors_fp(stderr);
-                printf("Connection closed\n");
+                mx_printstr_endl("Connection closed");
                 pthread_exit(NULL);
             }
             response = mx_process_request(buff, connect);
