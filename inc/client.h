@@ -24,6 +24,8 @@ struct s_glade {
     // user data
     char *log;
     char *pass;
+    char *token;
+    int uid;
     SSL *ssl;
 
     // log in window
@@ -69,7 +71,8 @@ struct s_glade {
 // Functions
 void mx_init_client(int argc, char **argv);
 void mx_start_client(char *ip, int port, t_glade *g);
-void *mx_client_communicate(void *data);
+void *mx_listen_server(void *data);
+char *mx_read_server_response(t_glade *g);
 
 // SSL/TLS
 SSL_CTX *mx_init_client_ctx(void);
@@ -84,9 +87,13 @@ void mx_client_thread_manager(t_glade *glade, SSL *ssl);
 
 // Utils
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
+int mx_clear_jobj(json_object **jobj, int status);
 
-// JOSN
+// JOSN builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
+
+// JSON parsers
+int mx_parse_login_response(char *response, t_glade *g);
 
 // UI
 char *mx_build_ui_path(char *filename);

@@ -1,13 +1,5 @@
 #include "client.h"
 
-// {"type": "REG", "name": "kali", "passw": "qwerty"}
-// {"type": "REG", "name": "geralt", "passw": "qwerty"}
-// {"type": "S_IN", "name": "kali", "passw": "qwerty"}
-// {"type": "S_IN", "name": "geralt", "passw": "qwerty"}
-// {"type": "S_MES", "gid": -1, "did": -2, "uid": 2, "uid2": 1, "msg": "Hello I'm Geralt", "time": 3819524, "file": ""}
-// {"type": "S_OUT", "id": 1}
-// {"type": "S_OUT", "id": 2}
-
 static int create_socket(void) {
     int socket_fd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -41,9 +33,11 @@ static int open_connection(char *ip, int port) {
     return socket_fd;
 }
 
-void *mx_client_communicate(void *data) {
+void *mx_listen_server(void *data) {
     t_thread_data *thread_data = (t_thread_data *)data;
     thread_data++;
+    // TODO Forever llo that listen to the server and display all input responses
+
     // int bytes_read = 0;
     // char buff[MX_MAX];
     // int n = 0;

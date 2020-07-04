@@ -43,8 +43,7 @@ void mx_open_regwin(GtkWidget *sender, t_glade *g) {
 void mx_b_reg_log(GtkButton *b, t_glade *g) {
     char *repeat = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_repass));
     char *request = NULL;
-    int bytes_read = 0;
-    char buff[MX_MAX];
+    char *response = NULL;
 
     (void)b;
     g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_ename));
@@ -53,21 +52,29 @@ void mx_b_reg_log(GtkButton *b, t_glade *g) {
     if (!mx_validate_signup_data(g, repeat)) {
         request = mx_json_string_login_signup(REG, g->log, g->pass);
         SSL_write(g->ssl, request, strlen(request));
-        bzero(buff, sizeof(buff));
-        bytes_read = SSL_read(g->ssl, buff, sizeof(buff));
-        buff[bytes_read] = '\0';
-        printf("%s\n", buff);
+        response = mx_read_server_response(g);
+        mx_printstr_endl(response);
         mx_strdel(&request);
+        mx_strdel(&response);
         // mx_open_win_chat(g->w_reg, g);
     }
 }
 
  void mx_b_log(GtkButton *b, t_glade *g) {
+    char *request = NULL;
+    char *response = NULL;
+
     g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_name));
     g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_pass));
 
     (void)b;
     if (!mx_validate_login_data(g)) {
-        mx_open_win_chat(g->w_log, g);
+        request = mx_json_string_login_signup(S_IN, g->log, g->pass);
+        SSL_write(g->ssl, request, strlen(request));
+        response = mx_read_server_response(g);
+        if (!mx_parse_login_response(response, g))
+            mx_open_win_chat(g->w_log, g);
+        mx_strdel(&request);
+        mx_strdel(&response);
     }
 }
