@@ -218,7 +218,7 @@ UTILS_SRCS				= create_error_modal_window.c clear_jobj.c \
 						  read_server_response.c ssl_tls.c gui_utils.c \
 						  threads.c
 
-PARSERS_SRCS			= login_response.c
+PARSERS_SRCS			= login_response.c signup_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c
 
