@@ -77,3 +77,25 @@ char *mx_edit_message(void *jobj, t_comm *connect) {
 
     return "{\"code\": 200}";
 }
+
+char *mx_delete_message(void *jobj, t_comm *connect) {
+    t_msg *msg = NULL;
+    int uid = -1;
+    int mid = -1;
+
+    if (mx_extract_delete_message(jobj, &uid, &mid) != 0)
+        return mx_bad_request(NULL, NULL);
+
+    if (mx_validate_token(connect->db, uid, (json_object *)jobj))
+        return "{\"code\": 401}";
+
+    msg = mx_get_msg_by_id(connect->db, mid);
+
+    if (msg->sender != uid)
+        return "{\"code\": 403}";
+
+    if (mx_delete_msg_by_id(connect->db, mid) != 0)
+        return "{\"code\": 500}";
+
+    return "{\"code\": 201}";
+}

@@ -24,6 +24,8 @@ api_function mx_select_method(enum e_types type) {
         return mx_send_message;
     else if (type == EDIT_MESSAGE)
         return mx_edit_message;
+    else if (type == DELETE_MESSAGE)
+        return mx_delete_message;
     // else if (type == DEL_USER_PROFILE)
     //     return mx_del_user;
     else
