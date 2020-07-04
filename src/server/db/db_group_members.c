@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 static t_gr_members *for_get_member(sqlite3_stmt *stmt) {
     t_gr_members *mem = NULL;

@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 int mx_change_user_pass(sqlite3 *db, char *login, char *new_pass) {
     sqlite3_stmt *stmt = NULL;

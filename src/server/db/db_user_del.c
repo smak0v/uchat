@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 int mx_delete_user_by_login(sqlite3 *db, char *login) {
     sqlite3_stmt *stmt = NULL;

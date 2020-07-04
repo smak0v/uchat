@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 int mx_add_grp(sqlite3 *db, char *group_name) {
     sqlite3_stmt *stmt = NULL;
