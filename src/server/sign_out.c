@@ -11,6 +11,9 @@ char *mx_sign_out(void *jobj, t_comm *connect) {
     else
         return mx_bad_request(NULL, NULL);
 
+    if (mx_validate_token(connect->db, id, (json_object *)jobj))
+        return "{\"code\": 401}";
+
     if (mx_delete_sock_by_user_id(connect->db, id) == -1)
         printf("I'm not sure how to handle this mistake in mx_sign_out\n");
 
