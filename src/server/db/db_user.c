@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 static t_user *for_get_user(sqlite3_stmt *stmt) {
     t_user *user = NULL;

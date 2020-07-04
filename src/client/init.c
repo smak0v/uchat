@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 void mx_init_client(int argc, char **argv) {
     t_glade *g = malloc(sizeof(t_glade));
@@ -16,8 +16,7 @@ void mx_init_client(int argc, char **argv) {
     mx_create_win_log(g);
     mx_create_win_chat(g);
 
-    mx_client_thread_manager(argv[1], mx_atoi(argv[2]), g);
-    gtk_main();
+    mx_start_client(argv[1], mx_atoi(argv[2]), g);
 
     mx_strdel(&ui_path);
 }

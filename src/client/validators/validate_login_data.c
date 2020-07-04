@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 int mx_validate_login_data(t_glade *g) {
     char *username = g->log;

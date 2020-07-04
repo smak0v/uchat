@@ -199,7 +199,8 @@ CLIENT_UTILS_OBJS		= $(addprefix $(OBJD)/client/utils/, \
 
 #===================================SRC=======================================#
 CLIENT_SRCS				= main.c init.c utils.c create_win_log.c auth_utils.c \
-						  win_chat.c ssl_tls.c threads.c sockets.c
+						  win_chat.c ssl_tls.c threads.c sockets.c \
+						  json_builder.c
 
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
@@ -213,10 +214,10 @@ $(CLIENT_OBJ_DIRS):
 
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS) $(CLIENT_VALIDATORS_OBJS) \
 					$(CLIENT_UTILS_OBJS)
-	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(COMMON_OBJS) \
+	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
 		$(CLIENT_OBJS) $(CLIENT_VALIDATORS_OBJS) $(CLIENT_UTILS_OBJS) \
-		-L $(LIBMXD) -L $(LIBJSOND) \
-		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
+		-L $(LIBMXD) -L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl \
+		-lcrypto -o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 

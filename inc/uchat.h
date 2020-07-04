@@ -19,8 +19,6 @@
 #include <openssl/err.h>
 
 #include "libmx.h"
-#include "client.h"
-#include "server.h"
 #include "json.h"
 
 // Constants
@@ -35,7 +33,16 @@
 #define MX_VIGENERE_KEY "UCHAT"
 
 // Structures
-
+enum e_types {
+    REG,
+    S_IN,
+    S_OUT,
+    N_GRP,
+    INV,
+    RN_GR,
+    S_MES,
+    DEL_USER_PROFILE,
+};
 
 // Functions
 //Utils

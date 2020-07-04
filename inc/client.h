@@ -2,6 +2,7 @@
 
 // Includes
 #include <gtk/gtk.h>
+#include "uchat.h"
 
 
 // Constants
@@ -13,8 +14,7 @@ typedef struct s_glade t_glade;
 typedef struct s_thread_data t_thread_data;
 
 struct s_thread_data {
-    int port;
-    char *ip;
+    SSL *ssl;
     t_glade *glade;
 };
 
@@ -24,6 +24,7 @@ struct s_glade {
     // user data
     char *log;
     char *pass;
+    SSL *ssl;
 
     // log in window
     GtkWidget *w_log; // window log
@@ -67,8 +68,8 @@ struct s_glade {
 
 // Functions
 void mx_init_client(int argc, char **argv);
-void *mx_start_client(void *data);
-void mx_reconnect(SSL *ssl, void *data);
+void mx_start_client(char *ip, int port, t_glade *g);
+void *mx_client_communicate(void *data);
 
 // SSL/TLS
 SSL_CTX *mx_init_client_ctx(void);
@@ -79,10 +80,13 @@ int mx_validate_login_data(t_glade *g);
 int mx_validate_signup_data(t_glade *g, char *repeat);
 
 // Threads
-void mx_client_thread_manager(char *ip, int port, t_glade *glade);
+void mx_client_thread_manager(t_glade *glade, SSL *ssl);
 
 // Utils
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
+
+// JOSN
+char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
 
 // UI
 char *mx_build_ui_path(char *filename);

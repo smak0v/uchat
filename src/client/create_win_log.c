@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 static void open_logwin(GtkWidget *sender, t_glade *g) {
     int x = 0;

@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 static bool check_password_strength(const char *password) {
     int n_upper = 0;

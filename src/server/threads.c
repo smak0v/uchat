@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 static int get_free_thread(char *status, int *counter) {
     for (int j = 0; j < MX_MAX_THREADS; ++j)

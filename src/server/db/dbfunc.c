@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 sqlite3 *mx_opendb(char *name) {
     sqlite3 *db = NULL;

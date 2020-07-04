@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win) {
     GtkWidget *error = gtk_message_dialog_new(

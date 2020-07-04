@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "server.h"
 
 void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file) {
     if (SSL_CTX_use_certificate_file(ctx, cert_file, SSL_FILETYPE_PEM) <= 0) {

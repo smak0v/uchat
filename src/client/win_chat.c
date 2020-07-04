@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 void mx_msg(GtkWidget *top, t_glade *g) {
     GtkWidget *row = gtk_list_box_row_new();

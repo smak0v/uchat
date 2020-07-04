@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 void mx_open_regwin(GtkWidget *sender, t_glade *g) {
     int w = 0;
@@ -22,13 +22,23 @@ void mx_open_regwin(GtkWidget *sender, t_glade *g) {
 
 void mx_b_reg_log(GtkButton *b, t_glade *g) {
     char *repeat = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_repass));
+    char *request = NULL;
+    int bytes_read = 0;
+    char buff[MX_MAX];
 
     (void)b;
     g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_ename));
     g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_epass));
 
     if (!mx_validate_signup_data(g, repeat)) {
-        mx_open_win_chat(g->w_reg, g);
+        request = mx_json_string_login_signup(REG, g->log, g->pass);
+        SSL_write(g->ssl, request, strlen(request));
+        bzero(buff, sizeof(buff));
+        bytes_read = SSL_read(g->ssl, buff, sizeof(buff));
+        buff[bytes_read] = '\0';
+        printf("%s\n", buff);
+        mx_strdel(&request);
+        // mx_open_win_chat(g->w_reg, g);
     }
 }
 

@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "client.h"
 
 void mx_widget_visible(GtkWidget *widget, gboolean is_visible) {
     if (is_visible)
