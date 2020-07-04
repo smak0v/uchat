@@ -7,8 +7,6 @@ void *mx_communicate(void *data) {
     int bytes_read = 0;
     char *response = NULL;
 
-    printf("In mx communicate fd = %d\n", connect->fd);
-
     while (1) {
         if (SSL_accept(connect->ssl) == MX_SSL_FAILURE)
             ERR_print_errors_fp(stderr);
@@ -87,7 +85,7 @@ int mx_start_server(int port) {
 
     socket_fd = open_listener(port);
     db = mx_opendb("test.db");
-
+    mx_print_db(db, "SOCKETS");
     accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);

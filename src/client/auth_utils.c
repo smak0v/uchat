@@ -1,5 +1,25 @@
 #include "client.h"
 
+// {"type": "REG", "name": "kali", "passw": "qwerty"}
+// {"type": "REG", "name": "geralt", "passw": "qwerty"}
+// {"type": "REG", "name": "BogdanUeban", "passw": "qwerty"}
+// {"type": "REG", "name": "MrSkout", "passw": "qwerty"}
+// {"type": "S_IN", "name": "kali", "passw": "qwerty"}
+// {"type": "S_IN", "name": "geralt", "passw": "qwerty"}
+// {"type": "S_IN", "name": "BogdanUeban", "passw": "qwerty"}
+// {"type": "S_IN", "name": "MrSkout", "passw": "qwerty"}
+// {"type": "S_MES", "gid": -1, "did": -2, "uid": 2, "uid2": 1, "msg": "Hello I'm Geralt", "time": 3819524, "file": ""}
+// {"type": "S_OUT", "id": 1}
+// {"type": "S_OUT", "id": 2}
+
+// {"type": "N_GRP", "name": "TEST2", "id": [1], "tok":"MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+// {"type": "INV", "gid": 1, "add": [2], "uid": 1, "tok": "MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+// // {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "привет", "time": 3819524, "file": "", "tok":"MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+// {"type": "S_MES", "gid": -1, "did": -2, "uid": 1, "uid2": 2, "msg": "привет", "time": 3819524, "file": "", "tok":"MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"}
+
+// "MKK;KPK]KaKKKKK'B-KKK:XFKpDuK+KKOKKKKKKIS:O\/`KKKKXKKKKKX?KgKMzKKKK_<L(KKKCKKKKkKKKK,KPe?KK6KqKK(<K2KKHKKdKKKKaKKZKKKKlKQKNKJKK7KKKK$yKKrKKJ,K2KKKK!KKKKKKKKKK-KKKKK!KKJK:KKFKyK|(KyKHK1KKKWKKKKSKv<0KKgUKtKKKKKKVKDH&K`KKKKK7JKK)gKKKK\/KKeKoK]KK>KKKKKKqKrsK?fLK"
+// "KKKKKC5FKKMKKK(KKKKKKghKKK7KKKJKPKKKiKv^IKK&K,KSKKKKKK?KK;KKKKKhtKlsKKKKKKKKKKKKKKK2Kc]KKJKGhK4K@K]KiwKK]\/XKKKKKKK\\*KBKYKKKqKKKK?BlKKKKKKKeKH:KK-:KUMKoKKK`KKKKKKKIKKKcKP\\zKKKKKKK4KKKuKKKKKKKd;K~KqK@KKiNKKKKK|K'9KKB*K@KyKKKK7toKKQQKKKvGKKKKKKKKKKKKKKKKKKKKM"
+
 void mx_open_regwin(GtkWidget *sender, t_glade *g) {
     int w = 0;
     int h = 0;
