@@ -69,7 +69,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage" id="image6">
+              <object class="GtkImage" id="i_search">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
@@ -179,7 +179,7 @@
                     <property name="has_tooltip">True</property>
                     <property name="tooltip_text" translatable="yes">Chats</property>
                     <child>
-                      <object class="GtkLabel" id="label3">
+                      <object class="GtkLabel" id="l_chats">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Chats</property>
@@ -251,7 +251,7 @@
                     <property name="has_tooltip">True</property>
                     <property name="tooltip_text" translatable="yes">Groups</property>
                     <child>
-                      <object class="GtkLabel" id="label1">
+                      <object class="GtkLabel" id="l_groups">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Groups</property>
@@ -311,7 +311,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="box3">
+              <object class="GtkBox" id="messages_area">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
