@@ -63,7 +63,6 @@
                 <property name="invisible_char">●</property>
                 <property name="shadow_type">out</property>
                 <property name="invisible_char_set">True</property>
-                <property name="primary_icon_stock">gtk-find</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="secondary_icon_sensitive">False</property>
                 <property name="primary_icon_tooltip_text" translatable="yes">Search ...</property>
