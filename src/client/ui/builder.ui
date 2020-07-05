@@ -409,7 +409,7 @@
                           <object class="GtkGrid" id="high_right_profile">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_left">10</property>
+                            <property name="margin_left">50</property>
                             <property name="margin_right">10</property>
                             <property name="margin_top">100</property>
                             <property name="margin_bottom">10</property>
