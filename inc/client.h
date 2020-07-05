@@ -48,27 +48,16 @@ struct s_glade {
     GtkWidget *w_chat; // window chat
     GtkWidget *b_logout; // button logout
     GtkWidget *b_send_msg; // button send message
+    GtkWidget *b_username; // button username
+    GtkWidget *b_close_profile; // button close profile
+    GtkWidget *e_search; // entry search
+    GtkWidget *i_search; // image search
 
-
-    // GtkWidget *c_box; // window register
-    // GtkWidget *c_label; // window register
-    // GtkWidget *c_entry; // window register
-    // GtkWidget *c_b_go; // window register
-    // GtkWidget *c_main;
-    GtkWidget *box1;
-    GtkWidget *button1;
-    GtkWidget *box2;
-    GtkWidget *label1;
-    GtkWidget *label2;
-    GtkWidget *box3;
-    GtkWidget *entry1;
-    GtkWidget *scroll;
-    GtkWidget *listbox;
-    GtkWidget *box5;
-    GtkWidget *box4;
-
-    int n;
-    // int message_num;
+    // GUI blocks (chat)
+    GtkWidget *common_area;
+    GtkWidget *messages_area;
+    GtkWidget *box_message;
+    GtkWidget *profile_area;
 };
 
 
@@ -89,6 +78,7 @@ void mx_start_client(char *ip, int port, t_glade *g);
 void *mx_listen_server(void *data);
 char *mx_read_server_response(t_glade *g);
 int mx_clear_jobj(json_object **jobj, int status);
+GtkWidget *mx_get_gtk_obj(t_glade *g, char *name);
 
 // JOSN builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
@@ -124,3 +114,6 @@ void mx_open_logwin(GtkWidget *sender, t_glade *g);
 void mx_open_regwin(GtkWidget *sender, t_glade *g);
 void mx_open_win_chat(GtkWidget *w, t_glade *g);
 void mx_show_win_chat(GtkWidget *v, t_glade *g);
+
+void mx_open_profile(GtkWidget *w, t_glade *g);
+void mx_close_profile(GtkWidget *w, t_glade *g);
