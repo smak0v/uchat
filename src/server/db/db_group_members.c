@@ -97,8 +97,5 @@ t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id) {
         mx_push_back(&g, d);
     }
     sqlite3_finalize(stmt);
-    if (g == NULL)
-        return NULL;
-
     return g;
 }

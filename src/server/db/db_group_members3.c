@@ -11,10 +11,8 @@ int *mx_get_all_user_groups_member(sqlite3 *db, int user_id) {
                         "WHERE USER_ID = ?1", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, user_id);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
-        mx_printint(n);
         groups = realloc(groups, (sizeof(int) * (n + 1)));
         groups[n++] = sqlite3_column_int(stmt, 2);
-        mx_printint(n);
     }
     sqlite3_finalize(stmt);
     if (n < 1)
