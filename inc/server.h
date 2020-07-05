@@ -11,6 +11,7 @@
 typedef struct s_communication t_comm;
 typedef struct s_metadata t_meta;
 typedef char *(*api_function)(void *, t_comm *);
+typedef struct s_load_dialogues t_ld_d;
 
 // DB
 typedef struct s_user t_user;
@@ -59,6 +60,12 @@ struct s_dialog_users {
 	int user_id;
 };
 
+struct s_load_dialogues {
+	int *dialog_id;
+	char **username;
+	int *user_id;
+};
+
 struct s_msg {
 	int id;
 	int group_id;
@@ -90,12 +97,17 @@ char *mx_rename_group(void *jobj, t_comm *connect);
 char *mx_send_message(void *jobj, t_comm *connect);
 char *mx_edit_message(void *jobj, t_comm *connect);
 char *mx_delete_message(void *jobj, t_comm *connect);
-char *mx_del_user(void *jobj, t_comm *connect);
+char *mx_load_dialogues(void *jobj, t_comm *connect);
+// char *mx_del_user(void *jobj, t_comm *connect);
 
 // JSON builders
 char *mx_json_string_msg(t_msg *msg);
 char *mx_json_string_s_in(int uid, char *tok);
 char *mx_json_string_add_to_gr(int gid);
+char *mx_json_string_dlg(t_ld_d *arrays, int len);
+
+void mx_fill_array_int(json_object *jobj, int *arr, int len);
+void mx_fill_array_str(json_object *jobj, char **arr, int len);
 
 // Server Utils
 t_msg *mx_extract_message(void *jobj);
@@ -103,6 +115,9 @@ int mx_extract_edit_msg(json_object *jobj, int *uid, int *mid, char **msg);
 int mx_extract_delete_message(json_object *jobj, int *uid, int *mid);
 unsigned char *mx_generate_token(void);
 int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
+
+// Wrappers
+int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
 
 // DB API
 sqlite3 *mx_opendb(char *name);
@@ -151,7 +166,7 @@ int mx_get_dialog_id(sqlite3 *db, int id1, int id2);
 int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2);
 int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id);
 t_list *mx_get_all_user_dialogs(sqlite3 *db, int user_id);
-t_list *mx_get_dialog_users(sqlite3 *db, int user_id);
+t_list *mx_get_dialog_users(sqlite3 *db, int usr_id, int *len);
 
 // MSG table
 int mx_add_msg(sqlite3 *db, t_msg *m);

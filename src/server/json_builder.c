@@ -36,3 +36,26 @@ char *mx_json_string_add_to_gr(int gid) {
 
     return (char *)json_object_to_json_string(jobj);
 }
+
+char *mx_json_string_dlg(t_ld_d *arrs, int len) {
+    json_object *jobj = json_object_new_object();
+    json_object *arr = NULL;
+
+    json_object_object_add(jobj, "code", json_object_new_int(200));
+    json_object_object_add(jobj, "len", json_object_new_int(len));
+    if (len) {
+        arr = json_object_new_array();
+        mx_fill_array_int(arr, arrs->dialog_id, len);
+        mx_j_o_o_a(jobj, "did", arr);
+
+        arr = json_object_new_array();
+        mx_fill_array_int(arr, arrs->user_id, len);
+        mx_j_o_o_a(jobj, "uid", arr);
+
+        arr = json_object_new_array();
+        mx_fill_array_str(arr, arrs->username, len);
+        mx_j_o_o_a(jobj, "names", arr);
+    }
+
+    return (char *)json_object_to_json_string(jobj);
+}
