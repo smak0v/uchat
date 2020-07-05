@@ -387,12 +387,18 @@
                       <object class="GtkGrid" id="high_profile">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
                         <property name="row_spacing">10</property>
                         <property name="column_spacing">5</property>
                         <child>
                           <object class="GtkImage" id="i_profile_image">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
                             <property name="pixbuf">no_photo.png</property>
                           </object>
                           <packing>
@@ -498,6 +504,8 @@
                       <object class="GtkGrid" id="low_profile">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
                         <property name="orientation">vertical</property>
                         <property name="row_spacing">10</property>
                         <property name="column_spacing">5</property>
