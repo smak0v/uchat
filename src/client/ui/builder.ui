@@ -85,13 +85,14 @@
                   <object class="GtkImage" id="image4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">110</property>
                     <property name="pixbuf">logout.png</property>
                   </object>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">False</property>
+                <property name="fill">True</property>
                 <property name="position">5</property>
               </packing>
             </child>
