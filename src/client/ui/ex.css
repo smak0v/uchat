@@ -28,6 +28,14 @@ label {
     margin-bottom: 10px;
 }
 
+.search_entry {
+
+}
+
+.entry {
+    border-radius: 15px;
+}
+
 .b_close_profile {
     background: #323b4f;
     margin-right: 10px;
