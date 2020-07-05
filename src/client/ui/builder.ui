@@ -2,8 +2,8 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkWindow" id="win_chat">
-    <property name="width_request">800</property>
-    <property name="height_request">600</property>
+    <property name="width_request">1000</property>
+    <property name="height_request">800</property>
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="box1">
@@ -822,8 +822,8 @@
     </child>
   </object>
   <object class="GtkWindow" id="win_log">
-    <property name="width_request">800</property>
-    <property name="height_request">600</property>
+    <property name="width_request">1000</property>
+    <property name="height_request">800</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="border_width">10</property>
@@ -978,8 +978,8 @@
     </child>
   </object>
   <object class="GtkWindow" id="win_reg">
-    <property name="width_request">800</property>
-    <property name="height_request">600</property>
+    <property name="width_request">1000</property>
+    <property name="height_request">800</property>
     <property name="can_focus">False</property>
     <property name="window_position">center</property>
     <child>
