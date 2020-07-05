@@ -393,6 +393,7 @@
                             <property name="can_focus">False</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
+                            <property name="margin_left">10</property>
                             <property name="margin_right">10</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
@@ -410,7 +411,8 @@
                             <property name="can_focus">False</property>
                             <property name="margin_left">10</property>
                             <property name="margin_right">10</property>
-                            <property name="margin_top">10</property>
+                            <property name="margin_top">50</property>
+                            <property name="margin_bottom">10</property>
                             <property name="hexpand">True</property>
                             <property name="vexpand">True</property>
                             <property name="row_spacing">10</property>
