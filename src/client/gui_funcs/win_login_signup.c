@@ -43,13 +43,13 @@ void mx_open_regwin(GtkWidget *sender, t_glade *g) {
 }
 
 void mx_create_win_reg(t_glade *g) {
-    g->w_reg = GTK_WIDGET(gtk_builder_get_object(g->bd, "win_reg"));
-    g->b_reg_login = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_reg_login"));
-    g->r_ename = GTK_WIDGET(gtk_builder_get_object(g->bd, "reg_elogin"));
-    g->r_epass = GTK_WIDGET(gtk_builder_get_object(g->bd, "reg_epass"));
-    g->r_repass = GTK_WIDGET(gtk_builder_get_object(g->bd, "reg_erepeat"));
-    g->b_reg_login = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_reg_login"));
-    g->b_reg_back = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_reg_back"));
+    g->w_reg = mx_get_gtk_obj(g, "win_reg");
+    g->b_reg_login = mx_get_gtk_obj(g, "b_reg_login");
+    g->r_ename = mx_get_gtk_obj(g, "reg_elogin");
+    g->r_epass = mx_get_gtk_obj(g, "reg_epass");
+    g->r_repass = mx_get_gtk_obj(g, "reg_erepeat");
+    g->b_reg_login = mx_get_gtk_obj(g, "b_reg_login");
+    g->b_reg_back = mx_get_gtk_obj(g, "b_reg_back");
 
     g_signal_connect(g->w_reg, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
     g_signal_connect(g->b_reg_back, "clicked", G_CALLBACK(mx_open_logwin), g);
@@ -59,11 +59,11 @@ void mx_create_win_reg(t_glade *g) {
 void mx_create_win_log(t_glade *g) {
     mx_create_win_reg(g);
 
-    g->w_log = GTK_WIDGET(gtk_builder_get_object(g->bd, "win_log"));
-    g->e_name = GTK_WIDGET(gtk_builder_get_object(g->bd, "name_entry"));
-    g->e_pass = GTK_WIDGET(gtk_builder_get_object(g->bd, "pass_entry"));
-    g->b_log_in = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_login"));
-    g->b_reg = GTK_WIDGET(gtk_builder_get_object(g->bd, "b_reg"));
+    g->w_log = mx_get_gtk_obj(g, "win_log");
+    g->e_name = mx_get_gtk_obj(g, "name_entry");
+    g->e_pass = mx_get_gtk_obj(g, "pass_entry");
+    g->b_log_in = mx_get_gtk_obj(g, "b_login");
+    g->b_reg = mx_get_gtk_obj(g, "b_reg");
 
     g_signal_connect(g->w_log, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
     g_signal_connect(g->b_reg, "clicked", G_CALLBACK(mx_open_regwin), g);

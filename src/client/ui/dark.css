@@ -1,0 +1,59 @@
+window {
+    background: #1f2933;
+}
+
+button {
+    background: #1f2933;
+}
+
+label {
+    font-size: 13px;
+    color: #f5f7fa;
+}
+
+.header {
+    padding: 15px;
+}
+
+.btn_add_chat_group {
+    background: #d7d3cf;
+}
+
+.panned {
+    background: #323b4f;
+}
+
+.notebook {
+
+}
+
+.tooltip * {
+    background-color: transparent;
+}
+
+.search_entry {
+    font-size: 15px;
+}
+
+.entry {
+    border-radius: 15px;
+    font-size: 17px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.b_close_profile {
+    background: #323b4f;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.l_select_chat {
+    font-size: 20px;
+}
+
+.username_button {
+
+}
