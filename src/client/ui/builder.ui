@@ -463,7 +463,7 @@
                               <object class="GtkEntry" id="e_profile_username">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">50</property>
+                                <property name="max_length">40</property>
                                 <property name="invisible_char">●</property>
                                 <property name="width_chars">50</property>
                                 <property name="invisible_char_set">True</property>
@@ -479,7 +479,7 @@
                               <object class="GtkEntry" id="e_status">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">255</property>
+                                <property name="max_length">40</property>
                                 <property name="invisible_char">●</property>
                                 <property name="width_chars">50</property>
                                 <property name="invisible_char_set">True</property>
@@ -623,8 +623,9 @@
                           <object class="GtkEntry" id="e_profile_name">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="max_length">50</property>
+                            <property name="max_length">100</property>
                             <property name="invisible_char">●</property>
+                            <property name="width_chars">40</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -639,6 +640,7 @@
                             <property name="can_focus">True</property>
                             <property name="max_length">100</property>
                             <property name="invisible_char">●</property>
+                            <property name="width_chars">40</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -653,6 +655,7 @@
                             <property name="can_focus">True</property>
                             <property name="max_length">20</property>
                             <property name="invisible_char">●</property>
+                            <property name="width_chars">40</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -667,6 +670,7 @@
                             <property name="can_focus">True</property>
                             <property name="max_length">100</property>
                             <property name="invisible_char">●</property>
+                            <property name="width_chars">40</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -825,6 +829,7 @@
             <property name="margin_bottom">7</property>
             <property name="max_length">30</property>
             <property name="invisible_char">●</property>
+            <property name="width_chars">30</property>
             <signal name="changed" handler="name_entry_changed" swapped="no"/>
           </object>
           <packing>
@@ -843,6 +848,7 @@
             <property name="max_length">50</property>
             <property name="visibility">False</property>
             <property name="invisible_char">●</property>
+            <property name="width_chars">30</property>
             <property name="caps_lock_warning">False</property>
             <property name="progress_pulse_step">0.10999999940395355</property>
             <property name="input_purpose">password</property>
@@ -907,6 +913,7 @@
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
+                <property name="secondary">True</property>
               </packing>
             </child>
           </object>
@@ -1033,6 +1040,7 @@
             <property name="tooltip_text" translatable="yes">Max length 30</property>
             <property name="margin_bottom">7</property>
             <property name="invisible_char">●</property>
+            <property name="width_chars">30</property>
           </object>
           <packing>
             <property name="left_attach">2</property>
@@ -1050,6 +1058,7 @@
             <property name="margin_bottom">7</property>
             <property name="visibility">False</property>
             <property name="invisible_char">●</property>
+            <property name="width_chars">30</property>
           </object>
           <packing>
             <property name="left_attach">2</property>
@@ -1067,6 +1076,7 @@
             <property name="margin_bottom">7</property>
             <property name="visibility">False</property>
             <property name="invisible_char">●</property>
+            <property name="width_chars">30</property>
           </object>
           <packing>
             <property name="left_attach">2</property>
