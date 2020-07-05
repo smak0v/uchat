@@ -11,6 +11,10 @@ label {
     color: #f5f7fa;
 }
 
+.header {
+    padding: 15px;
+}
+
 .btn_add_chat_group {
     background: #d7d3cf;
 }
@@ -23,17 +27,21 @@ label {
 
 }
 
-.search {
-    margin-top: 10px;
-    margin-bottom: 10px;
+.tooltip * {
+    background-color: transparent;
 }
 
 .search_entry {
-
+    font-size: 15px;
 }
 
 .entry {
     border-radius: 15px;
+    font-size: 17px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .b_close_profile {
@@ -44,4 +52,8 @@ label {
 
 .l_select_chat {
     font-size: 20px;
+}
+
+.username_button {
+
 }
