@@ -17,7 +17,9 @@
             <child>
               <object class="GtkBox" id="box9">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can_focus">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Profile</property>
                 <child>
                   <object class="GtkImage" id="i_profile">
                     <property name="visible">True</property>
