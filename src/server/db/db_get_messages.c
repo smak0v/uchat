@@ -1,15 +1,8 @@
 #include "server.h"
 
-static t_msg *get_msg(sqlite3_stmt *stmt) {
-    t_msg *m = malloc(sizeof(t_msg));;
-    int rv = 0;
+t_msg *fill_msg(sqlite3_stmt *stmt) {
+    t_msg *m = malloc(sizeof(t_msg));
 
-    if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
-        if (rv == SQLITE_ERROR)
-            return NULL;
-        sqlite3_finalize(stmt);
-        return NULL;
-    }
     m->id = sqlite3_column_int(stmt, 0);
     m->group_id = sqlite3_column_int(stmt, 1);
     m->dialog_id = sqlite3_column_int(stmt, 2);
@@ -18,8 +11,32 @@ static t_msg *get_msg(sqlite3_stmt *stmt) {
     m->time = sqlite3_column_int(stmt, 5);
     m->edited = sqlite3_column_int(stmt, 6);
     m->read = sqlite3_column_int(stmt, 7);
-    m->file = strdup((const char*)sqlite3_column_text(stmt, 8));
+    if (sqlite3_column_text(stmt, 8) != NULL)
+        m->file = strdup((const char*)sqlite3_column_text(stmt, 8));
+    else 
+        m->file = NULL;
+    if (sqlite3_column_text(stmt, 9) != NULL)
+        m->forwarded = strdup((const char*)sqlite3_column_text(stmt, 9));
+    else
+        m->forwarded = NULL;
+    return m;
+}
+
+static t_msg *get_msg(sqlite3_stmt *stmt) {
+    t_msg *m = NULL;
+    int rv = 0;
+
+    if ((rv = sqlite3_step(stmt)) != SQLITE_ROW) {
+        if (rv == SQLITE_ERROR)
+            return NULL;
+        sqlite3_finalize(stmt);
+        return NULL;
+    }
+
+    m = fill_msg(stmt);
+
     sqlite3_finalize(stmt);
+
     return m;
 }
 

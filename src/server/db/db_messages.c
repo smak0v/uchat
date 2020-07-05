@@ -11,6 +11,7 @@ static int insert_to_table(sqlite3 *db, t_msg *m, sqlite3_stmt *stmt) {
     sqlite3_bind_int(stmt, 6, m->edited);
     sqlite3_bind_int(stmt, 7, m->read);
     sqlite3_bind_text(stmt, 8, m->file, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 9, m->forwarded, -1, SQLITE_STATIC);
 
     if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
         return -1;
@@ -22,8 +23,9 @@ static int insert_to_table(sqlite3 *db, t_msg *m, sqlite3_stmt *stmt) {
 int mx_add_msg(sqlite3 *db, t_msg *m) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db, "INSERT INTO MSG\
-            (GROUP_ID, DIALOG_ID, SENDER, MSG_BODY, TIME, EDITED, READ, FILE)\
-            VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8);", -1, &stmt, NULL);
+            (GROUP_ID, DIALOG_ID, SENDER, MSG_BODY, TIME, EDITED, READ, "\
+            "FILE, FORWARDED)VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9);", 
+            -1, &stmt, NULL);
 
     if (rv == SQLITE_ERROR)
         return -1;

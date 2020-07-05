@@ -40,6 +40,7 @@ void mx_new_table_message(sqlite3 *database) {
                  "EDITED INTEGER NOT NULL,"\
                  "READ INTEGER NOT NULL," \
                  "FILE TEXT," \
+                 "FORWARDED TEXT," \
                  "FOREIGN KEY (GROUP_ID) REFERENCES GRP (GROUP_ID)," \
                  "FOREIGN KEY (DIALOG_ID) REFERENCES DIALOG (DIALOG_ID));",
                  0, 0, 0);
