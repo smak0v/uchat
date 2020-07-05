@@ -810,6 +810,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Please select a chat to start messaging</property>
+                    <style>
+                      <class name="l_select_chat"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
