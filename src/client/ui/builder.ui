@@ -809,7 +809,12 @@
                   <object class="GtkLabel" id="l_select_chat">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Please select a chat to start messaging</property>
+                    <property name="label" translatable="yes">
+                      <style>
+                        <class name="l_select_chat"/>
+                      </style>
+                      Please select a chat to start messaging
+                    </property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
