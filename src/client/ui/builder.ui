@@ -16,6 +16,9 @@
             <property name="can_focus">False</property>
             <property name="valign">start</property>
             <property name="homogeneous">True</property>
+            <style>
+              <class name="header"/>
+            </style>
             <child>
               <object class="GtkBox" id="box_profile">
                 <property name="visible">True</property>
