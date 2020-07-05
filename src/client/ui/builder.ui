@@ -129,11 +129,22 @@
             </child>
             <child>
               <object class="GtkButton" id="b_logout">
-                <property name="label" translatable="yes">Logout -&gt;</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">True</property>
+                <property name="use_underline">True</property>
+                <signal name="enter" handler="b_logout" swapped="no"/>
+                <signal name="activate" handler="b_logout" swapped="no"/>
                 <signal name="clicked" handler="b_logout" swapped="no"/>
+                <child>
+                  <object class="GtkImage" id="image4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xpad">1</property>
+                    <property name="ypad">1</property>
+                    <property name="pixbuf">logout.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="left_attach">1</property>
