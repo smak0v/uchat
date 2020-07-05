@@ -116,6 +116,9 @@
           <object class="GtkPaned" id="paned1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <style>
+              <class name="panned"/>
+            </style>
             <child>
               <object class="GtkNotebook" id="notebook1">
                 <property name="visible">True</property>
