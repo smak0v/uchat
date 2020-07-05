@@ -16,6 +16,7 @@ typedef char *(*api_function)(void *, t_comm *);
 typedef struct s_user t_user;
 typedef struct s_gr_members t_gr_members;
 typedef struct s_dialog t_dialog;
+typedef struct s_dialog_users t_dialog_users;
 typedef struct s_msg t_msg;
 
 
@@ -50,6 +51,12 @@ struct s_dialog {
 	int dialog_id;
 	int user_id1;
 	int user_id2;
+};
+
+struct s_dialog_users {
+	int dialog_id;
+	char *username;
+	int user_id;
 };
 
 struct s_msg {
@@ -115,6 +122,7 @@ int mx_delete_user_by_login(sqlite3 *db, char *login);
 int mx_delete_user_by_id(sqlite3 *db, int user_id);
 int mx_get_user_id_by_login(sqlite3 *db, char *login);
 int mx_change_user_pass(sqlite3 *db, char *login, char *new_pass);
+char *mx_get_user_login_by_id(sqlite3 *db, int user_id);
 
 // GROUP_MEMBERS table
 t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id);
@@ -142,6 +150,7 @@ int mx_get_dialog_id(sqlite3 *db, int id1, int id2);
 int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2);
 int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id);
 t_list *mx_get_all_user_dialogs(sqlite3 *db, int user_id);
+t_list *mx_get_dialog_users(sqlite3 *db, int user_id);
 
 
 // MSG table
@@ -162,6 +171,7 @@ int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 void mx_print_db(sqlite3 *db, char *table);
 void mx_print_list_members(t_list *mem);
 int mx_get_size_table(sqlite3 *db, char *table);
+void mx_delete_list(t_list *head);
 
 // TLS/SSL
 void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);
