@@ -108,27 +108,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="b_close_profile">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="has_tooltip">True</property>
-                <property name="tooltip_text" translatable="yes">Close profile</property>
-                <property name="halign">end</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkImage" id="image2">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="pixbuf">cancel.png</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">4</property>
-              </packing>
+              <placeholder/>
             </child>
             <child>
               <object class="GtkButton" id="b_logout">
@@ -384,6 +364,30 @@
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
+                      <object class="GtkButton" id="b_close_profile">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="tooltip_markup" translatable="yes">Close profile</property>
+                        <property name="tooltip_text" translatable="yes">Close profile</property>
+                        <property name="halign">end</property>
+                        <property name="relief">none</property>
+                        <child>
+                          <object class="GtkImage" id="image2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="pixbuf">cancel.png</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkBox" id="hight_profile">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -523,7 +527,7 @@
                       <packing>
                         <property name="expand">True</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -539,30 +543,6 @@
                         <property name="orientation">vertical</property>
                         <property name="row_spacing">10</property>
                         <property name="column_spacing">5</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
                         <child>
                           <object class="GtkLabel" id="label1">
                             <property name="visible">True</property>
@@ -626,6 +606,7 @@
                             <property name="max_length">100</property>
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
+                            <property name="invisible_char_set">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -641,6 +622,7 @@
                             <property name="max_length">100</property>
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
+                            <property name="invisible_char_set">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -656,6 +638,7 @@
                             <property name="max_length">20</property>
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
+                            <property name="invisible_char_set">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -671,6 +654,7 @@
                             <property name="max_length">100</property>
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
+                            <property name="invisible_char_set">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -679,11 +663,35 @@
                             <property name="height">1</property>
                           </packing>
                         </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">True</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
