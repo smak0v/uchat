@@ -1,5 +1,42 @@
 #include "uchat.h"
 
+char *mx_json_string_s_file(int id, int num, char *buff, int buf_size) {
+    json_object *jobj = json_object_new_object();
+
+    json_object_object_add(jobj, "id", json_object_new_int(id));
+    json_object_object_add(jobj, "num", json_object_new_int(num));
+    json_object_object_add(jobj, "data", json_object_new_string_len(buff, buf_size));
+    json_object_object_add(jobj, "is_last", json_object_new_boolean(buf_size < 1024 ? true : false));
+
+    return (char *)json_object_to_json_string(jobj);
+}
+
+// from cient
+void mx_send_file_test(int socket_fd, char *path) {
+    FILE *file;
+    char buffer[1024];
+    int b = 1;
+    char *json_str;
+    int pack_num = 1;
+
+    if (!(file = fopen(path, "r")))
+        mx_terminate("open");
+
+    FILE *file2 = fopen(mx_strjoin("test/", path), "w");
+    while ((b = fread(buffer, 1, sizeof(buffer), file)) > 0) {
+        json_str = mx_json_string_s_file(1, pack_num++, buffer, b);
+        write(socket_fd, json_str, strlen(json_str));
+        fwrite(buffer, 1, b, file2);
+        mx_printstr(json_str);
+        mx_printstr("\n");
+        mx_strdel(&json_str);
+    }
+
+    if (fclose(file) < 0)
+        mx_terminate("close");
+    fclose(file2);
+}
+
 static void communicate(SSL *ssl, int socket_fd) {
     int bytes_read = 0;
     char buff[MX_MAX];
@@ -29,20 +66,29 @@ static void communicate(SSL *ssl, int socket_fd) {
         json_object_object_get_ex(jobj, "file", &j_type);
         if (j_type) {
             const char *path = json_object_get_string(j_type);
-            if (!strcmp(path, "Makefile"))
-                mx_send_file(socket_fd, "Makefile");
+            if (!strcmp(path, "photo-1573935146153-f6322e84d1e4.jpeg"))
+                mx_send_file_test(socket_fd, "photo-1573935146153-f6322e84d1e4.jpeg");
         }
         // FILE TRANSFER TEST
         bzero(buff, sizeof(buff));
-        bytes_read = SSL_read(ssl, buff, sizeof(buff));
-        buff[bytes_read] = '\0';
-        mx_printstr_endl(buff);
+        // bytes_read = SSL_read(ssl, buff, sizeof(buff));
+        // buff[bytes_read] = '\0';
+        // mx_printstr_endl(buff);
         // if ((strncmp(buff, "exit", 4)) == 0) {
         //     mx_printstr_endl("Client Exit...");
         //     break;
         // }
     }
 }
+// {"type": "REG", "name": "BogdanUeban", "passw": "qwerty"}
+
+// {"type": "S_IN", "name": "BogdanUeban", "passw": "qwerty"}
+
+
+// {"type": "N_GRP", "name": "TEST", "id": [1]}
+
+// {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "Makefile"}
+// {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "photo-1573935146153-f6322e84d1e4.jpeg"}
 
 static int open_connection(char *ip, int port) {
     struct sockaddr_in server_address;

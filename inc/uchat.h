@@ -49,7 +49,3 @@ char *mx_generate_key(char *str, char *key);
 char *mx_encrypt(char *str, char *key);
 char *mx_decrypt(char *str, char *key);
 
-// JSON builder
-char *mx_array_to_str(int *arr, int len);
-char *mx_json_builder(int num, ...);
-char *mx_str_builder(char *str);

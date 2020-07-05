@@ -1,7 +1,7 @@
 #include "server.h"
 
 static char *add_to_group(sqlite3 *db, json_object *arr, int gr_id, int adm) {
-    char *grp_id_str = mx_itoa(gr_id);
+    // char *grp_id_str = mx_itoa(gr_id);
     json_object *id = NULL;
 
     for (size_t i = 0; i < json_object_array_length(arr); i++) {
@@ -12,7 +12,8 @@ static char *add_to_group(sqlite3 *db, json_object *arr, int gr_id, int adm) {
             return "{\"code\": 500}";
     }
 
-    return mx_json_builder(4, "\"code\":", "200", "\"id\":", grp_id_str);;
+    return "foo";
+    // return mx_json_builder(4, "\"code\":", "200", "\"id\":", grp_id_str);;
 }
 
 char *mx_rename_group(void *jobj, t_comm *connect) {

@@ -83,6 +83,7 @@ char *mx_send_message(void *jobj, t_comm *connect);
 
 t_msg *mx_extract_message(void *jobj);
 
+char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
 // DB API
 sqlite3 *mx_opendb(char *name);
 void mx_closedb(sqlite3 *db);
