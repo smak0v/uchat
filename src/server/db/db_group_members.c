@@ -90,6 +90,7 @@ t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id) {
     sqlite3_bind_int(stmt, 1, group_mem_id);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         t_gr_members *d = malloc(sizeof(t_gr_members));
+
         d->gr_members_id = sqlite3_column_int(stmt, 0);
         d->user_id = sqlite3_column_int(stmt, 1);
         d->group_id = sqlite3_column_int(stmt, 2);
