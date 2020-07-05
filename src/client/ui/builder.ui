@@ -426,6 +426,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
+                        <property name="row_spacing">10</property>
+                        <property name="column_spacing">5</property>
                         <child>
                           <placeholder/>
                         </child>
@@ -552,6 +554,7 @@
                           <object class="GtkEntry" id="e_country">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
+                            <property name="max_length">100</property>
                             <property name="invisible_char">●</property>
                           </object>
                           <packing>
