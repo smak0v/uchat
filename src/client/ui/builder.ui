@@ -81,6 +81,9 @@
                 <property name="xpad">10</property>
                 <property name="ypad">3</property>
                 <property name="pixbuf">search.png</property>
+                <style>
+                  <class name="search"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -93,6 +96,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_tooltip">True</property>
+                <property name="width_chars">50</property>
                 <property name="tooltip_text" translatable="yes">Search ...</property>
                 <property name="hexpand">True</property>
                 <property name="invisible_char">●</property>
@@ -102,6 +106,9 @@
                 <property name="secondary_icon_sensitive">False</property>
                 <property name="primary_icon_tooltip_text" translatable="yes">Search ...</property>
                 <property name="placeholder_text">Search...</property>
+                <style>
+                  <class name="search"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -161,6 +168,9 @@
                 <property name="double_buffered">False</property>
                 <property name="vexpand">True</property>
                 <property name="enable_popup">True</property>
+                <style>
+                  <class name="notebook"/>
+                </style>
                 <child>
                   <object class="GtkBox" id="box5">
                     <property name="visible">True</property>
@@ -809,12 +819,10 @@
                   <object class="GtkLabel" id="l_select_chat">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">
-                      <style>
-                        <class name="l_select_chat"/>
-                      </style>
-                      Please select a chat to start messaging
-                    </property>
+                    <property name="label" translatable="yes">Please select a chat to start messaging</property>
+                    <style>
+                      <class name="l_select_chat"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
