@@ -168,6 +168,10 @@
                           <object class="GtkImage" id="image8">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">2</property>
+                            <property name="margin_right">2</property>
+                            <property name="margin_top">2</property>
+                            <property name="margin_bottom">2</property>
                             <property name="pixbuf">add_chat_group.png</property>
                           </object>
                         </child>
@@ -236,6 +240,9 @@
                           <object class="GtkImage" id="image9">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_right">2</property>
+                            <property name="margin_top">2</property>
+                            <property name="margin_bottom">2</property>
                             <property name="pixbuf">add_chat_group.png</property>
                           </object>
                         </child>
