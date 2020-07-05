@@ -57,6 +57,8 @@
               <object class="GtkEntry" id="e_search">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Search ...</property>
                 <property name="invisible_char">●</property>
                 <property name="shadow_type">out</property>
                 <property name="invisible_char_set">True</property>
@@ -76,7 +78,10 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="margin_right">3</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Logout</property>
+                <property name="halign">end</property>
+                <property name="relief">none</property>
                 <property name="use_underline">True</property>
                 <signal name="enter" handler="b_logout" swapped="no"/>
                 <signal name="activate" handler="b_logout" swapped="no"/>
@@ -85,7 +90,6 @@
                   <object class="GtkImage" id="image4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">110</property>
                     <property name="pixbuf">logout.png</property>
                   </object>
                 </child>
@@ -93,6 +97,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
+                <property name="pack_type">end</property>
                 <property name="position">5</property>
               </packing>
             </child>
@@ -132,6 +137,8 @@
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="has_tooltip">True</property>
+                    <property name="tooltip_text" translatable="yes">Chats</property>
                     <property name="yalign">0.49000000953674316</property>
                     <property name="label" translatable="yes">Chats</property>
                   </object>
@@ -162,6 +169,8 @@
                   <object class="GtkLabel" id="label2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="has_tooltip">True</property>
+                    <property name="tooltip_text" translatable="yes">Groups</property>
                     <property name="label" translatable="yes">Groups</property>
                   </object>
                   <packing>
@@ -236,6 +245,8 @@
                       <object class="GtkEntry" id="e_message">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="tooltip_text" translatable="yes">Write a message ...</property>
                         <property name="invisible_char">●</property>
                         <property name="invisible_char_set">True</property>
                         <property name="progress_pulse_step">0.090000003576278687</property>
@@ -252,10 +263,13 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="relief">none</property>
                         <child>
                           <object class="GtkImage" id="image5">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="tooltip_text" translatable="yes">Attach file</property>
                             <property name="pixbuf">attach.png</property>
                           </object>
                         </child>
@@ -272,7 +286,10 @@
                         <property name="can_focus">True</property>
                         <property name="can_default">True</property>
                         <property name="receives_default">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="tooltip_text" translatable="yes">Send message</property>
                         <property name="halign">end</property>
+                        <property name="relief">none</property>
                         <child>
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
