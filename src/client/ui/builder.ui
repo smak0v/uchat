@@ -373,6 +373,9 @@
                         <property name="tooltip_text" translatable="yes">Close profile</property>
                         <property name="halign">end</property>
                         <property name="relief">none</property>
+                        <style>
+                          <class name="b_close_profile"/>
+                        </style>
                         <child>
                           <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
