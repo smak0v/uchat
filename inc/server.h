@@ -134,7 +134,7 @@ t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id);
 int mx_change_admin_status(sqlite3 *db, int user_id, int group_id, bool adm);
 int *mx_get_all_id_group_members(sqlite3 *db, int group_id);
 int mx_get_size_group_mem_by_group_id(sqlite3 *db, int group_id);
-int *mx_get_all_user_groups_member(sqlite3 *db, int user_id); 
+int *mx_get_all_user_groups_member(sqlite3 *db, int user_id);
 int mx_check_group_member(sqlite3 *db, int user_id, int group_id);
 
 // GROUP table
