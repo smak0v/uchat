@@ -32,7 +32,7 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     int w = 0;
     int h = 0;
     int x = 0;
-    int y= 0;
+    int y = 0;
 
     gtk_window_get_position(GTK_WINDOW(v), &x, &y);
     gtk_window_get_size(GTK_WINDOW(v), &w, &h);

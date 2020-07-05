@@ -35,6 +35,7 @@ struct s_glade {
     GtkWidget *e_pass; // entry pass
     GtkWidget *b_log_in; // button login
     GtkWidget *b_reg; // button register
+    GtkWidget *b_eye; // eye button
 
     // register window
     GtkWidget *w_reg; // window register
@@ -43,6 +44,7 @@ struct s_glade {
     GtkWidget *r_repass; // entry pass
     GtkWidget *b_reg_login; // button register and login
     GtkWidget *b_reg_back; // button back to login window
+    GtkWidget *b_reye; // reg eye button
 
     // chat window
     GtkWidget *w_chat; // window chat
@@ -106,6 +108,7 @@ void mx_create_win_chat(t_glade *g);
 void mx_widget_visible(GtkWidget *widget, gboolean is_visible);
 void mx_widget_set_visibility(GtkBuilder *bd, gchar *name,
                               gboolean is_visible);
+void mx_entry_visibility(GtkButton *b, GtkWidget *entry);
 
 void mx_b_log(GtkButton *b, t_glade *g);
 void mx_b_reg_log(GtkButton *b, t_glade *g);
