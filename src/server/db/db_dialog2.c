@@ -1,5 +1,15 @@
 #include "server.h"
 
+void mx_delete_list(t_list *head) {
+    t_list *temp = head;
+
+    while (head) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
 t_list *mx_get_all_user_dialogs(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt;
     t_list *g = NULL;
