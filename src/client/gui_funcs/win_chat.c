@@ -18,6 +18,7 @@ void mx_create_win_chat(t_glade *g) {
     g->b_close_profile = mx_get_gtk_obj(g, "b_close_profile");
     g->e_search = mx_get_gtk_obj(g, "e_search");
     g->i_search = mx_get_gtk_obj(g, "i_search");
+    g->b_attach_file = mx_get_gtk_obj(g, "b_attach_file");
 
     g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
     g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);
@@ -41,6 +42,7 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     gtk_window_move(GTK_WINDOW(g->w_chat), x, y + 22.35);
     gtk_widget_show_all(GTK_WIDGET(g->w_chat));
 
+    gtk_widget_hide(GTK_WIDGET(g->profile_area));
     gtk_widget_hide(g->messages_area);
     gtk_widget_hide(g->box_message);
     gtk_widget_hide(g->b_close_profile);
