@@ -59,6 +59,9 @@ struct s_glade {
     GtkWidget *b_add_chat; // button add chat
     GtkWidget *b_add_group; // button add group
 
+    // profile window
+    GtkWidget *b_save_profile; // button save profile
+
     // GUI blocks (chat)
     GtkWidget *common_area;
     GtkWidget *messages_area;
@@ -123,6 +126,7 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g);
 
 void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);
+void mx_save_profile(GtkWidget *w, t_glade *g);
 
 void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);

@@ -16,6 +16,7 @@ static void find_gtk_objects(t_glade *g) {
     g->l_select_chat = mx_get_gtk_obj(g, "l_select_chat");
     g->b_add_chat = mx_get_gtk_obj(g, "b_add_chat");
     g->b_add_group = mx_get_gtk_obj(g, "b_add_group");
+    g->b_save_profile = mx_get_gtk_obj(g, "b_save_profile");
 }
 
 static void connect_signals(t_glade *g) {
@@ -27,6 +28,8 @@ static void connect_signals(t_glade *g) {
         G_CALLBACK(mx_close_profile), g);
     g_signal_connect(g->b_add_chat, "clicked", G_CALLBACK(mx_add_chat), g);
     g_signal_connect(g->b_add_group, "clicked", G_CALLBACK(mx_add_group), g);
+    g_signal_connect(g->b_save_profile, "clicked",
+        G_CALLBACK(mx_save_profile), g);
 }
 
 void mx_create_win_chat(t_glade *g) {

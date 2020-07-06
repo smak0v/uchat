@@ -91,3 +91,20 @@ label {
 .username_button {
     background: shade(@base_color, 0.75);
 }
+
+.save_profile_btn {
+    margin-left: 500px;
+    margin-bottom: 100px;
+    background-color: shade(@second_color, 0.75);
+    border-color: shade(@second_color, 0.75);
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.save_profile_btn:hover {
+    background-color: shade(@second_color, 0.9);
+}

@@ -409,7 +409,7 @@
                             <property name="valign">center</property>
                             <property name="margin_left">50</property>
                             <property name="margin_right">10</property>
-                            <property name="margin_top">10</property>
+                            <property name="margin_top">50</property>
                             <property name="margin_bottom">10</property>
                             <property name="pixbuf">no_photo.png</property>
                           </object>
@@ -705,6 +705,9 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="halign">start</property>
+                        <style>
+                          <class name="save_profile_btn"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
