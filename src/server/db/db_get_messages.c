@@ -45,7 +45,7 @@ t_msg *mx_get_msg_by_id(sqlite3 *db, int id) {
     int rv = 0;
 
     sqlite3_prepare_v2(db, "SELECT * FROM MSG WHERE ID = ?1",
-        -1, &stmt, NULL);
+                       -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, id);
 

@@ -86,7 +86,7 @@ t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id) {
     t_list *g = NULL;
 
     sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS " \
-                        "WHERE GROUP_ID = ?1", -1, &stmt, NULL);
+                       "WHERE GROUP_ID = ?1", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, group_mem_id);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         t_gr_members *d = malloc(sizeof(t_gr_members));

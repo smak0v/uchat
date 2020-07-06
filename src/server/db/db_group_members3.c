@@ -8,7 +8,7 @@ int *mx_get_all_user_groups_member(sqlite3 *db, int user_id) {
     for (int i = 0; i < 2; i++)
         groups[i] = -1;
     sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS " \
-                        "WHERE USER_ID = ?1", -1, &stmt, NULL);
+                       "WHERE USER_ID = ?1", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, user_id);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         groups = realloc(groups, (sizeof(int) * (n + 1)));
@@ -26,7 +26,7 @@ t_list *mx_get_groups(sqlite3 *db, int user_id) {
     t_list *groups = NULL;
 
     sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS " \
-                        "WHERE USER_ID = ?1", -1, &stmt, NULL);
+                       "WHERE USER_ID = ?1", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, user_id);
 
     while(sqlite3_step(stmt) == SQLITE_ROW) {
