@@ -147,7 +147,7 @@ DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						db_dialog.c db_dialog_del.c db_group.c sock_table.c \
 						db_messages.c db_get_messages.c db_auth.c \
 						db_group_members3.c db_dialog2.c db_get_messages2.c \
-						db_get_messages3.c
+						db_get_messages3.c db_profile.c db_profile2.c 
 
 SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
 						sign_out.c groups.c ssl_tls.c messages.c \
