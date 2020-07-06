@@ -1,6 +1,6 @@
 #include "server.h"
 
-t_msg *fill_msg(sqlite3_stmt *stmt) {
+t_msg *mx_fill_msg(sqlite3_stmt *stmt) {
     t_msg *m = malloc(sizeof(t_msg));
 
     m->id = sqlite3_column_int(stmt, 0);
@@ -22,7 +22,7 @@ t_msg *fill_msg(sqlite3_stmt *stmt) {
     return m;
 }
 
-static t_msg *get_msg(sqlite3_stmt *stmt) {
+static t_msg *take_msg(sqlite3_stmt *stmt) {
     t_msg *m = NULL;
     int rv = 0;
 
@@ -33,7 +33,7 @@ static t_msg *get_msg(sqlite3_stmt *stmt) {
         return NULL;
     }
 
-    m = fill_msg(stmt);
+    m = mx_fill_msg(stmt);
 
     sqlite3_finalize(stmt);
 
@@ -52,7 +52,7 @@ t_msg *mx_get_msg_by_id(sqlite3 *db, int id) {
     if (rv != SQLITE_OK)
         return NULL;
 
-    return get_msg(stmt);
+    return take_msg(stmt);
 }
 
 int mx_get_msg(sqlite3 *db, t_msg *m) {
