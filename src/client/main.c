@@ -12,7 +12,7 @@ static void init_client(int argc, char **argv) {
         g_clear_error(&error);
     }
 
-    mx_connect_css("ex.css");
+    mx_connect_css("dark.css");
     mx_create_win_log(g);
     mx_create_win_chat(g);
 

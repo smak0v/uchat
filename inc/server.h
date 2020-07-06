@@ -16,6 +16,7 @@ typedef struct s_load_dialogues t_ld_d;
 // DB
 typedef struct s_user t_user;
 typedef struct s_gr_members t_gr_members;
+typedef struct s_all_gr_member t_all_gr_member;
 typedef struct s_dialog t_dialog;
 typedef struct s_dialog_users t_dialog_users;
 typedef struct s_msg t_msg;
@@ -46,6 +47,11 @@ struct s_gr_members {
 	int user_id;
 	int group_id;
 	bool adm;
+};
+
+struct s_all_gr_member {
+	int group_id;
+	char *group_name;
 };
 
 struct s_dialog {
@@ -151,12 +157,14 @@ int *mx_get_all_id_group_members(sqlite3 *db, int group_id);
 int mx_get_size_group_mem_by_group_id(sqlite3 *db, int group_id);
 int *mx_get_all_user_groups_member(sqlite3 *db, int user_id);
 int mx_check_group_member(sqlite3 *db, int user_id, int group_id);
+t_list *mx_get_groups(sqlite3 *db, int user_id);
 
 // GROUP table
 int mx_add_grp(sqlite3 *db, char *group_name);
 int mx_delete_grp_by_id(sqlite3 *db, int grp_id);
 int mx_rename_grp_by_id(sqlite3 *db, int grp_id, char *new_name);
 int mx_get_grp_id(sqlite3 *db, char *grp_name);
+char *mx_get_group_name_by_id(sqlite3 *db, int group_id);
 
 // DIALOG table
 int mx_add_dialog(sqlite3 *db, int user_id1, int user_id2);

@@ -30,8 +30,6 @@
 #define MX_SA struct sockaddr
 #define MX_MAX 10500
 
-#define MX_CAESAR_KEY 5
-#define MX_VIGENERE_KEY "UCHAT"
 
 // Structures
 enum e_types {
@@ -54,13 +52,3 @@ bool mx_check_port(char *port);
 bool mx_check_ip(char *ip);
 void mx_send_file(int socket_fd, char *path);
 void mx_recv_file(int connection_fd, char *path);
-
-// Encryption (Vigenere + Caesar ciphers combination)
-char *mx_generate_key(char *str, char *key);
-char *mx_encrypt(char *str, char *key);
-char *mx_decrypt(char *str, char *key);
-
-// JSON builder
-char *mx_array_to_str(int *arr, int len);
-char *mx_json_builder(int num, ...);
-char *mx_str_builder(char *str);
