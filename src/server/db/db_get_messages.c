@@ -13,7 +13,7 @@ t_msg *fill_msg(sqlite3_stmt *stmt) {
     m->read = sqlite3_column_int(stmt, 7);
     if (sqlite3_column_text(stmt, 8) != NULL)
         m->file = strdup((const char*)sqlite3_column_text(stmt, 8));
-    else 
+    else
         m->file = NULL;
     if (sqlite3_column_text(stmt, 9) != NULL)
         m->forwarded = strdup((const char*)sqlite3_column_text(stmt, 9));
@@ -58,7 +58,7 @@ t_msg *mx_get_msg_by_id(sqlite3 *db, int id) {
 int mx_get_msg(sqlite3 *db, t_msg *m) {
     sqlite3_stmt *stmt = NULL;
     int id = -1;
-    int rv = sqlite3_prepare_v2(db, 
+    int rv = sqlite3_prepare_v2(db,
             "SELECT * FROM MSG WHERE GROUP_ID = ?1 AND MSG_BODY = ?2 AND\
             SENDER = ?3 AND TIME = ?4 AND DIALOG_ID = ?5", -1, &stmt, NULL);
 

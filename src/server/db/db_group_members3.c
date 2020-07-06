@@ -1,6 +1,6 @@
 #include "server.h"
 
-int *mx_get_all_user_groups_member(sqlite3 *db, int user_id) { 
+int *mx_get_all_user_groups_member(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt;
     int *groups = malloc(2 * sizeof(int));
     int n = 0;

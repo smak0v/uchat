@@ -55,6 +55,7 @@ struct s_glade {
     GtkWidget *e_search; // entry search
     GtkWidget *i_search; // image search
     GtkWidget *b_attach_file; // button attach file
+    GtkWidget *l_select_chat; // label select chat
 
     // GUI blocks (chat)
     GtkWidget *common_area;

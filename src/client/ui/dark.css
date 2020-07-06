@@ -9,6 +9,7 @@ button {
 label {
     font-size: 13px;
     color: #f5f7fa;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .header {
@@ -51,7 +52,7 @@ label {
 }
 
 .l_select_chat {
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .username_button {

@@ -24,7 +24,7 @@ int mx_add_msg(sqlite3 *db, t_msg *m) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db, "INSERT INTO MSG\
             (GROUP_ID, DIALOG_ID, SENDER, MSG_BODY, TIME, EDITED, READ, "\
-            "FILE, FORWARDED)VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9);", 
+            "FILE, FORWARDED)VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9);",
             -1, &stmt, NULL);
 
     if (rv == SQLITE_ERROR)

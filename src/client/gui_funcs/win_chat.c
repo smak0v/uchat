@@ -19,6 +19,7 @@ void mx_create_win_chat(t_glade *g) {
     g->e_search = mx_get_gtk_obj(g, "e_search");
     g->i_search = mx_get_gtk_obj(g, "i_search");
     g->b_attach_file = mx_get_gtk_obj(g, "b_attach_file");
+    g->l_select_chat = mx_get_gtk_obj(g, "l_select_chat");
 
     g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
     g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);

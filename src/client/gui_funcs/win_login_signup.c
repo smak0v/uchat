@@ -41,7 +41,7 @@ void mx_open_regwin(GtkWidget *sender, t_glade *g) {
 static void entry_visibility(GtkButton *b, t_glade *g) {
     (void)b;
 
-    if (gtk_entry_get_visibility(GTK_ENTRY(g->r_epass)) && 
+    if (gtk_entry_get_visibility(GTK_ENTRY(g->r_epass)) &&
         gtk_entry_get_visibility(GTK_ENTRY(g->r_repass))) {
         gtk_entry_set_visibility(GTK_ENTRY(g->r_epass), false);
         gtk_entry_set_visibility(GTK_ENTRY(g->r_repass), false);
@@ -81,6 +81,6 @@ void mx_create_win_log(t_glade *g) {
     g_signal_connect(g->w_log, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
     g_signal_connect(g->b_reg, "clicked", G_CALLBACK(mx_open_regwin), g);
     g_signal_connect(g->b_log_in, "clicked", G_CALLBACK(mx_b_log), g);
-    g_signal_connect(g->b_eye, "clicked", 
+    g_signal_connect(g->b_eye, "clicked",
                      G_CALLBACK(mx_entry_visibility), g->e_pass);
 }

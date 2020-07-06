@@ -47,6 +47,6 @@ void mx_entry_visibility(GtkButton *b, GtkWidget *entry) {
 
     if (gtk_entry_get_visibility(GTK_ENTRY(entry)))
         gtk_entry_set_visibility(GTK_ENTRY(entry), false);
-    else 
+    else
         gtk_entry_set_visibility(GTK_ENTRY(entry), true);
 }
