@@ -169,6 +169,8 @@ int mx_update_msg_by_id(sqlite3 *db, char *msg, int id);
 int mx_get_msg(sqlite3 *db, t_msg *m);
 t_list *mx_db_load_messages(sqlite3 *db, int group_id, int dialog_id, int n);
 t_msg *mx_fill_msg(sqlite3_stmt *stmt); 
+t_list *mx_db_load_next_messages(sqlite3 *db, int group_id, 
+                                 int dialog_id, int n, int time);
 
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,
