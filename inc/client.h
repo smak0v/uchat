@@ -56,6 +56,8 @@ struct s_glade {
     GtkWidget *i_search; // image search
     GtkWidget *b_attach_file; // button attach file
     GtkWidget *l_select_chat; // label select chat
+    GtkWidget *b_add_chat; // button add chat
+    GtkWidget *b_add_group; // button add group
 
     // GUI blocks (chat)
     GtkWidget *common_area;
@@ -117,8 +119,12 @@ void mx_b_logout(GtkButton *b, t_glade *g);
 
 void mx_open_logwin(GtkWidget *sender, t_glade *g);
 void mx_open_regwin(GtkWidget *sender, t_glade *g);
-void mx_open_win_chat(GtkWidget *w, t_glade *g);
 void mx_show_win_chat(GtkWidget *v, t_glade *g);
 
 void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);
+
+void mx_add_chat(GtkWidget *w, t_glade *g);
+void mx_add_group(GtkWidget *w, t_glade *g);
+
+void mx_send_msg(GtkWidget *w, t_glade *g);

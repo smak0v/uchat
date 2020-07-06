@@ -8,7 +8,7 @@ static void login(t_glade *g, GtkWidget *w) {
     response = mx_read_server_response(g);
 
     if (!mx_parse_login_response(response, g))
-        mx_open_win_chat(w, g);
+        mx_show_win_chat(w, g);
 
     mx_clear_login_inputs(g);
 

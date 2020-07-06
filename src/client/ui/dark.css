@@ -1,14 +1,50 @@
+@define-color base_color #4B0082;
+@define-color second_color #800080;
+@define_color label_color #f5f7fa;
+
 window {
-    background: #1f2933;
+    background: shade(@base_color, 0.75);
+}
+
+.error_modal {
+    background: shade(@base_color, 0.75);
+}
+
+.error_modal button {
+    background: shade(@second_color, 1);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding-bottom: 15px;
+}
+
+.error_modal label {
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.notebook {
+    border: none;
+}
+
+.notebook > header.top {
+    background: shade(@base_color, 0.75);
+    border: none;
+}
+
+.btn_add_chat_group {
+    background: shade(@second_color, 0.9);
+    border-radius: 50px;
 }
 
 button {
-    background: #1f2933;
+    background: shade(@base_color, 0.75);
 }
 
 label {
-    font-size: 13px;
-    color: #f5f7fa;
+    font-size: 15px;
+    color: @label_color;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -16,16 +52,12 @@ label {
     padding: 15px;
 }
 
-.btn_add_chat_group {
-    background: #d7d3cf;
-}
-
 .panned {
-    background: #323b4f;
+    background: shade(@base_color, 0.6);;
 }
 
-.notebook {
-
+.notebook_tab {
+    background-color: shade(@base_color, 0.75);
 }
 
 .tooltip * {
@@ -46,7 +78,7 @@ label {
 }
 
 .b_close_profile {
-    background: #323b4f;
+    background: shade(@base_color, 0.6);
     margin-right: 10px;
     margin-top: 10px;
 }
@@ -56,5 +88,5 @@ label {
 }
 
 .username_button {
-
+    background: shade(@base_color, 0.75);
 }

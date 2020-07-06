@@ -165,6 +165,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
+                    <style>
+                      <class name="notebook_tab"/>
+                    </style>
                     <child>
                       <placeholder/>
                     </child>
@@ -201,7 +204,7 @@
                         <property name="receives_default">True</property>
                         <property name="has_tooltip">True</property>
                         <property name="tooltip_text" translatable="yes">Add chat</property>
-                        <property name="margin_left">5</property>
+                        <property name="margin_left">10</property>
                         <property name="relief">none</property>
                         <style>
                           <class name="btn_add_chat_group"/>
@@ -234,6 +237,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
+                    <style>
+                      <class name="notebook_tab"/>
+                    </style>
                     <child>
                       <placeholder/>
                     </child>
@@ -273,7 +279,7 @@
                         <property name="receives_default">True</property>
                         <property name="has_tooltip">True</property>
                         <property name="tooltip_text" translatable="yes">Add group</property>
-                        <property name="margin_left">5</property>
+                        <property name="margin_left">10</property>
                         <property name="relief">none</property>
                         <style>
                           <class name="btn_add_chat_group"/>
