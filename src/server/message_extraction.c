@@ -17,33 +17,31 @@ static int validate_message(t_msg *message) {
         code = -1;
     else if (message->file == NULL)
         code = -1;
-
     message->msg = !mx_strcmp(message->msg, "") ? NULL : message->msg;
     message->file = !mx_strcmp(message->file, "") ? NULL : message->file;
+    code = (!message->file && !message->msg) ? -1 : code;
     return code;
 }
 
 static void extract_entry(t_msg *message, char *key, json_object *val) {
-    if (!mx_strcmp(key, "gid") && json_object_get_type(val) == json_type_int)
+    if (!mx_strcmp(key, "gid") && mx_j_o_g_t(val) == json_type_int)
         message->group_id = json_object_get_int(val);
-    else if (!mx_strcmp(key, "did")
-                && json_object_get_type(val) == json_type_int)
+    else if (!mx_strcmp(key, "did") && mx_j_o_g_t(val) == json_type_int)
         message->dialog_id = json_object_get_int(val);
-    else if (!mx_strcmp(key, "uid")
-                && json_object_get_type(val) == json_type_int)
+    else if (!mx_strcmp(key, "uid") && mx_j_o_g_t(val) == json_type_int)
         message->sender = json_object_get_int(val);
-    else if (!mx_strcmp(key, "uid2")
-            && json_object_get_type(val) == json_type_int)
+    else if (!mx_strcmp(key, "uid2") && mx_j_o_g_t(val) == json_type_int)
         message->recepient = json_object_get_int(val);
-    else if (!mx_strcmp(key, "msg")
-        && json_object_get_type(val) == json_type_string)
+    else if (!mx_strcmp(key, "msg") && mx_j_o_g_t(val) == json_type_string)
         message->msg = (char *)json_object_get_string(val);
-    else if (!mx_strcmp(key, "time")
-             && json_object_get_type(val) == json_type_int)
+    else if (!mx_strcmp(key, "time") && mx_j_o_g_t(val) == json_type_int)
         message->time = json_object_get_int(val);
-    else if (!mx_strcmp(key, "file")
-            && json_object_get_type(val) == json_type_string)
+    else if (!mx_strcmp(key, "file") && mx_j_o_g_t(val) == json_type_string)
         message->file = (char *)json_object_get_string(val);
+    else if (!mx_strcmp(key, "frwd") && mx_j_o_g_t(val) == json_type_string)
+        message->forwarded = (char *)json_object_get_string(val);
+    else if (!mx_strcmp(key, "frwd") && mx_j_o_g_t(val) == json_type_null)
+        message->forwarded = NULL;
 }
 
 t_msg *mx_extract_message(void *jobj) {

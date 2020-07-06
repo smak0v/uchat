@@ -28,6 +28,8 @@ api_function mx_select_method(enum e_types type) {
         return mx_delete_message;
     else if (type == LOAD_DIALOGUES)
         return mx_load_dialogues;
+    else if (type == LOAD_GROUPS)
+        return mx_load_groups;
     // else if (type == DEL_USER_PROFILE)
     //     return mx_del_user;
     else

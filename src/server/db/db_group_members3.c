@@ -21,20 +21,22 @@ int *mx_get_all_user_groups_member(sqlite3 *db, int user_id) {
     return groups;
 }
 
-t_list *mx_get_groups(sqlite3 *db, int user_id) {
+t_list *mx_get_groups(sqlite3 *db, int user_id, int *len) {
     sqlite3_stmt *stmt;
     t_list *groups = NULL;
+    t_all_gr_member *tmp = NULL;
 
     sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS " \
                        "WHERE USER_ID = ?1", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, user_id);
 
     while(sqlite3_step(stmt) == SQLITE_ROW) {
-        t_all_gr_member *tmp = malloc(sizeof(t_all_gr_member));
+        tmp = malloc(sizeof(t_all_gr_member));
 
         tmp->group_id = sqlite3_column_int(stmt, 2);
         tmp->group_name = mx_get_group_name_by_id(db, tmp->group_id);
         mx_push_back(&groups, tmp);
+        *len += 1;
     }
 
     sqlite3_finalize(stmt);

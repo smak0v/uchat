@@ -104,13 +104,15 @@ char *mx_send_message(void *jobj, t_comm *connect);
 char *mx_edit_message(void *jobj, t_comm *connect);
 char *mx_delete_message(void *jobj, t_comm *connect);
 char *mx_load_dialogues(void *jobj, t_comm *connect);
+char *mx_load_groups(void *jobj, t_comm *connect);
 // char *mx_del_user(void *jobj, t_comm *connect);
 
 // JSON builders
 char *mx_json_string_msg(t_msg *msg);
 char *mx_json_string_s_in(int uid, char *tok);
 char *mx_json_string_add_to_gr(int gid);
-char *mx_json_string_dlg(t_ld_d *arrays, int len);
+char *mx_json_string_load_dlg(t_ld_d *arrays, int len);
+char *mx_json_string_load_grp(t_ld_d *arrs, int len);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
@@ -124,6 +126,7 @@ int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
+enum json_type mx_j_o_g_t(json_object *jso);
 
 // DB API
 sqlite3 *mx_opendb(char *name);
@@ -157,7 +160,7 @@ int *mx_get_all_id_group_members(sqlite3 *db, int group_id);
 int mx_get_size_group_mem_by_group_id(sqlite3 *db, int group_id);
 int *mx_get_all_user_groups_member(sqlite3 *db, int user_id);
 int mx_check_group_member(sqlite3 *db, int user_id, int group_id);
-t_list *mx_get_groups(sqlite3 *db, int user_id);
+t_list *mx_get_groups(sqlite3 *db, int user_id, int *len);
 
 // GROUP table
 int mx_add_grp(sqlite3 *db, char *group_name);

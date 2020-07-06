@@ -44,6 +44,7 @@ enum e_types {
     DEL_USER_PROFILE,
     DELETE_MESSAGE,
     LOAD_DIALOGUES,
+    LOAD_GROUPS
 };
 
 // Functions
