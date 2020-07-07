@@ -194,6 +194,7 @@ int mx_add_profile(sqlite3 *db, t_profile *usr);
 int mx_profile_exist(sqlite3 *db, int user_id);
 int mx_delete_profile(sqlite3 *db, int user_id);
 t_profile *mx_get_profile_by_id(sqlite3 *db, int user_id);
+int mx_change_profile_by_id(sqlite3 *db, t_profile *profile, int user_id);
 
 // Utils
 void mx_print_db(sqlite3 *db, char *table);

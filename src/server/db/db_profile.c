@@ -18,18 +18,17 @@ int mx_add_profile(sqlite3 *db, t_profile *usr) {
 
     if (rv == SQLITE_ERROR)
         return -1;
-
     sqlite3_bind_int(stmt, 1, usr->user_id);
     sqlite3_bind_text(stmt, 2, usr->name, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 3, usr->birth, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 4, usr->email, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 5, usr->status, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 6, usr->country, -1, SQLITE_STATIC);
-
-    if ((rv = sqlite3_step(stmt)) != SQLITE_DONE)
+    if ((rv = sqlite3_step(stmt)) != SQLITE_DONE) {
+        sqlite3_finalize(stmt);
         return -1;
+    }
     sqlite3_finalize(stmt);
-
     return 0;
 }
 

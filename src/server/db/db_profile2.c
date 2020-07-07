@@ -48,3 +48,15 @@ t_profile *mx_get_profile_by_id(sqlite3 *db, int user_id) {
 
     return take_profile(stmt);
 }
+
+int mx_change_profile_by_id(sqlite3 *db, t_profile *profile, int user_id) {
+    int ret = 0;
+
+    if ((ret = mx_delete_profile(db, user_id)) < 0)
+        return -1;
+
+    if ((ret = mx_add_profile(db, profile)) < 0)
+        return -1;
+
+    return ret;
+}
