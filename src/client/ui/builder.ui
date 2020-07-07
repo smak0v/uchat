@@ -1,9 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkDialog" id="d_add_chat">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Add chat</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="default_width">500</property>
+    <property name="default_height">400</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox1">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="b_add_chat_cancel">
+                <property name="label" translatable="yes">Cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="b_add_caht_ok">
+                <property name="label" translatable="yes">Add</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkEntry" id="e_chat_search">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="margin_left">20</property>
+                <property name="margin_right">20</property>
+                <property name="margin_top">20</property>
+                <property name="margin_bottom">20</property>
+                <property name="invisible_char">●</property>
+                <property name="width_chars">20</property>
+                <property name="primary_icon_stock">gtk-zoom-fit</property>
+                <property name="placeholder_text">Search ...</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">b_add_chat_cancel</action-widget>
+      <action-widget response="0">b_add_caht_ok</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkDialog" id="d_add_group">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Add group</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="default_width">500</property>
+    <property name="default_height">400</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox2">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area2">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="b_add_group_cancel">
+                <property name="label" translatable="yes">Cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="b_add_group_ok">
+                <property name="label" translatable="yes">Add</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box7">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkEntry" id="e_search_group">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="margin_left">20</property>
+                <property name="margin_right">20</property>
+                <property name="margin_top">20</property>
+                <property name="margin_bottom">20</property>
+                <property name="invisible_char">●</property>
+                <property name="width_chars">20</property>
+                <property name="primary_icon_stock">gtk-zoom-fit</property>
+                <property name="placeholder_text">Search ...</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">b_add_group_cancel</action-widget>
+      <action-widget response="0">b_add_group_ok</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkWindow" id="win_chat">
-    <property name="width_request">1000</property>
-    <property name="height_request">800</property>
+    <property name="width_request">800</property>
+    <property name="height_request">600</property>
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="box1">
@@ -50,9 +238,6 @@
                     <property name="tooltip_text" translatable="yes">Username</property>
                     <property name="relief">none</property>
                     <property name="focus_on_click">False</property>
-                    <style>
-                      <class name="username_button"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -68,6 +253,18 @@
               </packing>
             </child>
             <child>
+              <object class="GtkLabel" id="l_chat_name">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="yalign">0.49000000953674316</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkImage" id="i_search">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -75,8 +272,6 @@
                 <property name="xpad">10</property>
                 <property name="ypad">3</property>
                 <property name="pixbuf">search.png</property>
-                <style>
-                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -89,7 +284,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_tooltip">True</property>
-                <property name="width_chars">35</property>
                 <property name="tooltip_text" translatable="yes">Search ...</property>
                 <property name="hexpand">True</property>
                 <property name="invisible_char">●</property>
@@ -99,10 +293,6 @@
                 <property name="secondary_icon_sensitive">False</property>
                 <property name="primary_icon_tooltip_text" translatable="yes">Search ...</property>
                 <property name="placeholder_text">Search...</property>
-                <style>
-                  <class name="entry"/>
-                  <class name="search_entry"/>
-                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -159,9 +349,6 @@
                 <property name="double_buffered">False</property>
                 <property name="vexpand">True</property>
                 <property name="enable_popup">True</property>
-                <style>
-                  <class name="notebook"/>
-                </style>
                 <child>
                   <object class="GtkBox" id="box5">
                     <property name="visible">True</property>
@@ -477,9 +664,6 @@
                                 <property name="invisible_char">●</property>
                                 <property name="width_chars">50</property>
                                 <property name="invisible_char_set">True</property>
-                                <style>
-                                  <class name="entry"/>
-                                </style>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -496,9 +680,6 @@
                                 <property name="invisible_char">●</property>
                                 <property name="width_chars">50</property>
                                 <property name="invisible_char_set">True</property>
-                                <style>
-                                  <class name="entry"/>
-                                </style>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -619,9 +800,6 @@
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
                             <property name="invisible_char_set">True</property>
-                            <style>
-                              <class name="entry"/>
-                            </style>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -638,9 +816,6 @@
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
                             <property name="invisible_char_set">True</property>
-                            <style>
-                              <class name="entry"/>
-                            </style>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -657,9 +832,6 @@
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
                             <property name="invisible_char_set">True</property>
-                            <style>
-                              <class name="entry"/>
-                            </style>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -676,9 +848,6 @@
                             <property name="invisible_char">●</property>
                             <property name="width_chars">40</property>
                             <property name="invisible_char_set">True</property>
-                            <style>
-                              <class name="entry"/>
-                            </style>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -730,9 +899,6 @@
                         <property name="invisible_char_set">True</property>
                         <property name="progress_pulse_step">0.090000003576278687</property>
                         <property name="placeholder_text">Write a message...</property>
-                        <style>
-                          <class name="entry"/>
-                        </style>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -849,8 +1015,8 @@
     </child>
   </object>
   <object class="GtkWindow" id="win_log">
-    <property name="width_request">1000</property>
-    <property name="height_request">800</property>
+    <property name="width_request">800</property>
+    <property name="height_request">600</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="border_width">10</property>
@@ -871,9 +1037,6 @@
             <property name="invisible_char">●</property>
             <property name="width_chars">30</property>
             <signal name="changed" handler="name_entry_changed" swapped="no"/>
-            <style>
-              <class name="entry"/>
-            </style>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -896,9 +1059,6 @@
             <property name="progress_pulse_step">0.10999999940395355</property>
             <property name="input_purpose">password</property>
             <signal name="changed" handler="pass_entry_changed" swapped="no"/>
-            <style>
-              <class name="entry"/>
-            </style>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -979,9 +1139,6 @@
             <property name="margin_right">10</property>
             <property name="margin_bottom">10</property>
             <property name="pixbuf">user.png</property>
-            <style>
-              <class name="entry"/>
-            </style>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -1014,8 +1171,8 @@
     </child>
   </object>
   <object class="GtkWindow" id="win_reg">
-    <property name="width_request">1000</property>
-    <property name="height_request">800</property>
+    <property name="width_request">800</property>
+    <property name="height_request">600</property>
     <property name="can_focus">False</property>
     <property name="window_position">center</property>
     <child>
@@ -1090,9 +1247,6 @@
             <property name="margin_bottom">7</property>
             <property name="invisible_char">●</property>
             <property name="width_chars">30</property>
-            <style>
-              <class name="entry"/>
-            </style>
           </object>
           <packing>
             <property name="left_attach">2</property>
@@ -1111,9 +1265,6 @@
             <property name="visibility">False</property>
             <property name="invisible_char">●</property>
             <property name="width_chars">30</property>
-            <style>
-              <class name="entry"/>
-            </style>
           </object>
           <packing>
             <property name="left_attach">2</property>
@@ -1132,9 +1283,6 @@
             <property name="visibility">False</property>
             <property name="invisible_char">●</property>
             <property name="width_chars">30</property>
-            <style>
-              <class name="entry"/>
-            </style>
           </object>
           <packing>
             <property name="left_attach">2</property>
