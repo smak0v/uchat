@@ -151,7 +151,8 @@ DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
 						sign_out.c groups.c ssl_tls.c messages.c \
 						message_extraction.c validate_token.c json_builder.c \
-						wrappers.c json_array_builders.c loaders.c
+						wrappers.c json_array_builders.c loaders.c \
+						load_messages.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 

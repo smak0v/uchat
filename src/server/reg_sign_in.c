@@ -51,7 +51,6 @@ char *mx_register_user(void *jobj, t_comm *connect) {
     return add_to_db(connect->db, (char *)name, (char *)pass);
 }
 
-// TODO: AUDITOR && REFACGTOR && LEAKS
 char *mx_sign_in(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;

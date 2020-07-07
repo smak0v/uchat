@@ -105,6 +105,7 @@ char *mx_edit_message(void *jobj, t_comm *connect);
 char *mx_delete_message(void *jobj, t_comm *connect);
 char *mx_load_dialogues(void *jobj, t_comm *connect);
 char *mx_load_groups(void *jobj, t_comm *connect);
+char *mx_load_messages(void *jobj, t_comm *connect);
 // char *mx_del_user(void *jobj, t_comm *connect);
 
 // JSON builders
@@ -116,6 +117,7 @@ char *mx_json_string_load_grp(t_ld_d *arrs, int len);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
+void mx_fill_array_msg(json_object *jobj, t_list *msg_list);
 
 // Server Utils
 t_msg *mx_extract_message(void *jobj);
@@ -186,7 +188,7 @@ int mx_delete_msg_by_id(sqlite3 *db, int id);
 int mx_update_msg_by_id(sqlite3 *db, char *msg, int id);
 int mx_get_msg(sqlite3 *db, t_msg *m);
 t_list *mx_db_load_messages(sqlite3 *db, int group_id, int dialog_id, int n);
-t_msg *mx_fill_msg(sqlite3_stmt *stmt); 
+t_msg *mx_fill_msg(sqlite3_stmt *stmt);
 
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,

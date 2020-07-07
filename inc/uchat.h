@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <time.h>
 
 #include <pthread.h>
 #include <netdb.h>
@@ -44,7 +45,8 @@ enum e_types {
     DEL_USER_PROFILE,
     DELETE_MESSAGE,
     LOAD_DIALOGUES,
-    LOAD_GROUPS
+    LOAD_GROUPS,
+    LOAD_MESSAGES
 };
 
 // Functions
