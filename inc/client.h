@@ -67,6 +67,20 @@ struct s_glade {
     GtkWidget *messages_area;
     GtkWidget *box_message;
     GtkWidget *profile_area;
+
+    // dialogs
+    GtkWidget *d_add_chat; // dialog for adding new chat
+    GtkWidget *d_add_group; // dialog for adding new group
+
+    // add chat dialog
+    GtkWidget *b_add_chat_ok; // button add chat
+    GtkWidget *b_add_chat_cancel; // button cancel add chat
+    GtkWidget *e_chat_search; // entry chat search
+
+    // add group dialog
+    GtkWidget *b_add_group_ok; // button add group
+    GtkWidget *b_add_group_cancel; // button cancel add group
+    GtkWidget *e_group_search; // entry group search
 };
 
 

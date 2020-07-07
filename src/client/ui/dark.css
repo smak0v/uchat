@@ -1,8 +1,9 @@
-@define-color base_color #4B0082;
-@define-color second_color #800080;
+@define-color base_color #243b53;
+@define-color second_color #334e68;
 @define_color label_color #f5f7fa;
 
-window {
+window,
+dialog {
     background: shade(@base_color, 0.75);
 }
 
@@ -93,7 +94,7 @@ label {
 }
 
 .save_profile_btn {
-    margin-left: 500px;
+    margin-left: 350px;
     margin-bottom: 100px;
     background-color: shade(@second_color, 0.75);
     border-color: shade(@second_color, 0.75);

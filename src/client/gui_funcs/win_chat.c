@@ -17,6 +17,8 @@ static void find_gtk_objects(t_glade *g) {
     g->b_add_chat = mx_get_gtk_obj(g, "b_add_chat");
     g->b_add_group = mx_get_gtk_obj(g, "b_add_group");
     g->b_save_profile = mx_get_gtk_obj(g, "b_save_profile");
+    g->d_add_chat = mx_get_gtk_obj(g, "d_add_chat");
+    g->d_add_group = mx_get_gtk_obj(g, "d_add_group");
 }
 
 static void connect_signals(t_glade *g) {
