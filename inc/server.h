@@ -117,6 +117,7 @@ char *mx_load_groups(void *jobj, t_comm *connect);
 char *mx_load_messages(void *jobj, t_comm *connect);
 char *mx_del_user(void *jobj, t_comm *connect);
 char *mx_leave_group(void *jobj, t_comm *connect);
+char *mx_get_user(void *jobj, t_comm *connect);
 
 // JSON builders
 char *mx_json_string_msg(t_msg *msg);
