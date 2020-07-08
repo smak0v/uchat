@@ -53,7 +53,6 @@ struct s_glade {
     GtkWidget *b_username; // button username
     GtkWidget *b_close_profile; // button close profile
     GtkWidget *e_search; // entry search
-    GtkWidget *i_search; // image search
     GtkWidget *b_attach_file; // button attach file
     GtkWidget *l_select_chat; // label select chat
     GtkWidget *b_add_chat; // button add chat

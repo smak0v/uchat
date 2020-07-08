@@ -94,7 +94,6 @@ label {
 }
 
 .save_profile_btn {
-    margin-left: 350px;
     margin-bottom: 100px;
     background-color: shade(@second_color, 0.75);
     border-color: shade(@second_color, 0.75);
@@ -108,4 +107,14 @@ label {
 
 .save_profile_btn:hover {
     background-color: shade(@second_color, 0.9);
+}
+
+.add_btn {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.cancel_btn {
+    margin-bottom: 20px;
+    margin-left: 20px;
 }
