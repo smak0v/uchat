@@ -50,7 +50,7 @@ char *mx_load_messages(void *jobj, t_comm *connect) {
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return "{\"code\": 401}";
 
-    m_list = mx_db_load_messages(connect->db, gid, did, time);
+    m_list = mx_db_load_next_messages(connect->db, gid, did, 20, time);
 
     return process_t_list(m_list);
 }

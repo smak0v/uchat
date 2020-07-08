@@ -20,6 +20,10 @@ api_function mx_select_method(enum e_types type) {
         return mx_add_to_group;
     else if (type == RN_GR)
         return mx_rename_group;
+    // else if (type == DEL_GROUP)
+    //     return mx_del_group;
+    // else if (type == LEAVE_GROUP)
+    //     return mx_leave_group;
     else if (type == S_MES)
         return mx_send_message;
     else if (type == EDIT_MESSAGE)
@@ -32,7 +36,11 @@ api_function mx_select_method(enum e_types type) {
         return mx_load_groups;
     else if (type == LOAD_MESSAGES)
         return mx_load_messages;
-    // else if (type == DEL_USER_PROFILE)
+    // else if (type == DELETE_USER)
+    //     return mx_del_user;
+    // else if (type == GET_USER)
+    //     return mx_get_user;
+    // else if (type == EDIT_PROFILE)
     //     return mx_del_user;
     else
         return mx_bad_request;

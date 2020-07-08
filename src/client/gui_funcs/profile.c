@@ -24,3 +24,9 @@ void mx_close_profile(GtkWidget *w, t_glade *g) {
     mx_widget_visible(g->l_select_chat, true);
 }
 
+void mx_save_profile(GtkWidget *w, t_glade *g) {
+    (void)w;
+
+    g++;
+}
+

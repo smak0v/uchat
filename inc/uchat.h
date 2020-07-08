@@ -42,13 +42,16 @@ enum e_types {
     N_GRP,
     INV,
     RN_GR,
+    LEAVE_GROUP,
     S_MES,
     EDIT_MESSAGE,
     DEL_USER_PROFILE,
     DELETE_MESSAGE,
     LOAD_DIALOGUES,
     LOAD_GROUPS,
-    LOAD_MESSAGES
+    LOAD_MESSAGES,
+    DELETE_USER,
+    GET_USER
 };
 
 // Functions

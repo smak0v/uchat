@@ -56,12 +56,31 @@ struct s_glade {
     GtkWidget *i_search; // image search
     GtkWidget *b_attach_file; // button attach file
     GtkWidget *l_select_chat; // label select chat
+    GtkWidget *b_add_chat; // button add chat
+    GtkWidget *b_add_group; // button add group
+
+    // profile window
+    GtkWidget *b_save_profile; // button save profile
 
     // GUI blocks (chat)
     GtkWidget *common_area;
     GtkWidget *messages_area;
     GtkWidget *box_message;
     GtkWidget *profile_area;
+
+    // dialogs
+    GtkWidget *d_add_chat; // dialog for adding new chat
+    GtkWidget *d_add_group; // dialog for adding new group
+
+    // add chat dialog
+    GtkWidget *b_add_chat_ok; // button add chat
+    GtkWidget *b_add_chat_cancel; // button cancel add chat
+    GtkWidget *e_chat_search; // entry chat search
+
+    // add group dialog
+    GtkWidget *b_add_group_ok; // button add group
+    GtkWidget *b_add_group_cancel; // button cancel add group
+    GtkWidget *e_group_search; // entry group search
 };
 
 
@@ -117,8 +136,13 @@ void mx_b_logout(GtkButton *b, t_glade *g);
 
 void mx_open_logwin(GtkWidget *sender, t_glade *g);
 void mx_open_regwin(GtkWidget *sender, t_glade *g);
-void mx_open_win_chat(GtkWidget *w, t_glade *g);
 void mx_show_win_chat(GtkWidget *v, t_glade *g);
 
 void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);
+void mx_save_profile(GtkWidget *w, t_glade *g);
+
+void mx_add_chat(GtkWidget *w, t_glade *g);
+void mx_add_group(GtkWidget *w, t_glade *g);
+
+void mx_send_msg(GtkWidget *w, t_glade *g);

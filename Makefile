@@ -146,7 +146,8 @@ DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						new_table.c db_user_del.c db_group_members2.c \
 						db_dialog.c db_dialog_del.c db_group.c sock_table.c \
 						db_messages.c db_get_messages.c db_auth.c \
-						db_group_members3.c db_dialog2.c db_get_messages2.c
+						db_group_members3.c db_dialog2.c db_get_messages2.c \
+						db_get_messages3.c db_profile.c db_profile2.c
 
 SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c \
 						sign_out.c groups.c ssl_tls.c messages.c \
@@ -231,7 +232,8 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
 						  create_error_modal_window.c auth.c win_destroy.c \
-						  profile.c get_gtk_obj.c
+						  profile.c get_gtk_obj.c add_chat.c add_group.c \
+						  messages.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

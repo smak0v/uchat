@@ -92,7 +92,7 @@ char *mx_load_groups(void *jobj, t_comm *connect) {
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return "{\"code\": 401}";
 
-    g_lst = mx_get_dialog_users(connect->db, uid, &len);
+    g_lst = mx_get_groups(connect->db, uid, &len);
     arrays = create_arrays_grp(g_lst, len);
     // if (d_lst)
     //     mx_delete_list(d_lst);

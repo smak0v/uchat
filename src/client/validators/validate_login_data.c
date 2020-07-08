@@ -1,6 +1,9 @@
 #include "client.h"
 
 int mx_validate_login_data(t_glade *g) {
+    // TODO remove
+    return 0;
+
     char *username = g->log;
     char *password = g->pass;
 
