@@ -893,7 +893,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="halign">start</property>
+                        <property name="halign">center</property>
                         <style>
                           <class name="save_profile_btn"/>
                         </style>
