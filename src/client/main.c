@@ -22,20 +22,29 @@ void mx_send_file_test(int socket_fd, char *path) {
     if (!(file = fopen(path, "r")))
         mx_terminate("open");
 
-    FILE *file2 = fopen(mx_strjoin("test/", path), "w");
-    while ((b = fread(buffer, 1, sizeof(buffer), file)) > 0) {
+    while ((b = fread(buffer, sizeof(char), sizeof(buffer), file)) > 0) {
+        // for (unsigned long i = 0; i < sizeof(buffer); i++) {
+        //     printf("bytes[%lu] = %d\n", i, (int)buffer[i]);
+        // }
         json_str = mx_json_string_s_file(1, pack_num++, buffer, b);
-        write(socket_fd, json_str, strlen(json_str));
-        fwrite(buffer, 1, b, file2);
-        mx_printstr(json_str);
-        mx_printstr("\n");
+        send(socket_fd, json_str, strlen(json_str), 0);
         mx_strdel(&json_str);
+        usleep(1000);
+        bzero(buffer, sizeof(buffer));
     }
 
     if (fclose(file) < 0)
         mx_terminate("close");
-    fclose(file2);
 }
+// {"type": "REG", "name": "BogdanUeban", "passw": "qwerty"}
+
+// {"type": "S_IN", "name": "BogdanUeban", "passw": "qwerty"}
+
+
+// {"type": "N_GRP", "name": "TEST", "id": [1]}
+
+// {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "Makefile"}
+// {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "photo-1573935146153-f6322e84d1e4.jpeg"}
 
 static void communicate(SSL *ssl, int socket_fd) {
     int bytes_read = 0;
@@ -80,15 +89,6 @@ static void communicate(SSL *ssl, int socket_fd) {
         // }
     }
 }
-// {"type": "REG", "name": "BogdanUeban", "passw": "qwerty"}
-
-// {"type": "S_IN", "name": "BogdanUeban", "passw": "qwerty"}
-
-
-// {"type": "N_GRP", "name": "TEST", "id": [1]}
-
-// {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "Makefile"}
-// {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "photo-1573935146153-f6322e84d1e4.jpeg"}
 
 static int open_connection(char *ip, int port) {
     struct sockaddr_in server_address;
