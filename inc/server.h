@@ -19,7 +19,7 @@ typedef struct s_all_gr_member t_all_gr_member;
 typedef struct s_dialog t_dialog;
 typedef struct s_dialog_users t_dialog_users;
 typedef struct s_msg t_msg;
-
+typedef struct s_profile t_profile;
 
 struct s_communication {
     int fd;
@@ -79,6 +79,15 @@ struct s_msg {
 	char *forwarded;
 };
 
+struct s_profile {
+	int user_id;
+	char *name;
+	char *birth;
+	char *email;
+	char *status;
+	char *country;
+};
+
 // Functions
 t_meta *mx_init_threads(sqlite3 *db);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
@@ -120,6 +129,7 @@ void mx_new_table_group(sqlite3 *database);
 void mx_new_table_dialog(sqlite3 *database);
 void mx_new_table_message(sqlite3 *database);
 void mx_new_table_socket(sqlite3 *database);
+void mx_new_table_profiles(sqlite3 *database);
 
 // USER table
 t_user *mx_get_user_by_login(sqlite3 *db, char *user_login);
@@ -167,6 +177,10 @@ t_msg *mx_get_msg_by_id(sqlite3 *db, int id);
 int mx_delete_msg_by_id(sqlite3 *db, int id);
 int mx_update_msg_by_id(sqlite3 *db, char *msg, int id);
 int mx_get_msg(sqlite3 *db, t_msg *m);
+t_list *mx_db_load_messages(sqlite3 *db, int group_id, int dialog_id, int n);
+t_msg *mx_fill_msg(sqlite3_stmt *stmt);
+t_list *mx_db_load_next_messages(sqlite3 *db, int group_id,
+                                 int dialog_id, int n, int time);
 
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,
@@ -174,6 +188,13 @@ int mx_add_sock_user(sqlite3 *db, int user_id,
 int mx_get_sock_by_user_id(sqlite3 *db, int user_id);
 char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
+
+//PROFILES table
+int mx_add_profile(sqlite3 *db, t_profile *usr);
+int mx_profile_exist(sqlite3 *db, int user_id);
+int mx_delete_profile(sqlite3 *db, int user_id);
+t_profile *mx_get_profile_by_id(sqlite3 *db, int user_id);
+int mx_change_profile_by_id(sqlite3 *db, t_profile *profile, int user_id);
 
 // Utils
 void mx_print_db(sqlite3 *db, char *table);
