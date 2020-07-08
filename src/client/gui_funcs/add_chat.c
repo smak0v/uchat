@@ -1,17 +1,24 @@
 #include "client.h"
 
-void add_chat(GtkWidget *w, t_glade *g) {
+static void add_chat(GtkWidget *w, t_glade *g) {
     gtk_entry_set_text(GTK_ENTRY(g->e_chat_search), "");
-    gtk_widget_destroy(GTK_WIDGET(g->d_add_chat));
+    gtk_widget_hide(GTK_WIDGET(g->d_add_chat));
 
     (void)w;
 }
 
-void cancel_add_chat(GtkWidget *w, t_glade *g) {
+static void cancel_add_chat(GtkWidget *w, t_glade *g) {
     gtk_entry_set_text(GTK_ENTRY(g->e_chat_search), "");
-    gtk_widget_destroy(GTK_WIDGET(g->d_add_chat));
+    gtk_widget_hide(GTK_WIDGET(g->d_add_chat));
 
     (void)w;
+}
+
+static void destroy_dialog(GtkWidget *w, t_glade *g) {
+    (void)w;
+    (void)g;
+
+    return;
 }
 
 void mx_add_chat(GtkWidget *w, t_glade *g) {
@@ -27,6 +34,8 @@ void mx_add_chat(GtkWidget *w, t_glade *g) {
     g_signal_connect(g->b_add_chat_ok, "clicked", G_CALLBACK(add_chat), g);
     g_signal_connect(g->b_add_chat_cancel, "clicked",
         G_CALLBACK(cancel_add_chat), g);
+    g_signal_connect(g->d_add_chat, "delete-event",
+        G_CALLBACK(destroy_dialog), g);
 
     gtk_widget_show_all(g->d_add_chat);
     gtk_dialog_run(GTK_DIALOG(g->d_add_chat));
