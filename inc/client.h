@@ -150,3 +150,5 @@ void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
+
+void mx_load_groups(t_glade *g);

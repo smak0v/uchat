@@ -33,6 +33,12 @@ static void connect_signals(t_glade *g) {
         G_CALLBACK(mx_save_profile), g);
 }
 
+static void win_chat_utils(t_glade *g) {
+    gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
+
+    mx_load_groups(g);
+}
+
 void mx_create_win_chat(t_glade *g) {
     find_gtk_objects(g);
     connect_signals(g);
@@ -43,8 +49,6 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     int h = 0;
     int x = 0;
     int y = 0;
-
-    gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
 
     gtk_window_get_position(GTK_WINDOW(v), &x, &y);
     gtk_window_get_size(GTK_WINDOW(v), &w, &h);
@@ -58,4 +62,6 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     gtk_widget_hide(g->messages_area);
     gtk_widget_hide(g->box_message);
     gtk_widget_hide(g->b_close_profile);
+
+    win_chat_utils(g);
 }
