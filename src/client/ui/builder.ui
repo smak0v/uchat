@@ -112,8 +112,8 @@
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
-    <property name="default_width">500</property>
-    <property name="default_height">400</property>
+    <property name="default_width">350</property>
+    <property name="default_height">250</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
@@ -175,6 +175,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Group name</property>
+                <style>
+                  <class name="l_new_group_name"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>

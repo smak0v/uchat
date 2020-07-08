@@ -79,7 +79,7 @@ struct s_glade {
     // add group dialog
     GtkWidget *b_add_group_ok; // button add group
     GtkWidget *b_add_group_cancel; // button cancel add group
-    GtkWidget *e_group_search; // entry group search
+    GtkWidget *e_new_group_name; // entry group search
 };
 
 

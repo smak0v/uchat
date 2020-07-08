@@ -1,14 +1,25 @@
 #include "client.h"
 
 static void add_group(GtkWidget *w, t_glade *g) {
-    gtk_entry_set_text(GTK_ENTRY(g->e_group_search), "");
+    char *name = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_new_group_name));
+
+    if (name && strlen(name) > 5) {
+
+    }
+    else {
+        mx_create_error_modal_window("Error!",
+            "Groum name must be at least 5 characters. Try another name!",
+            g->d_add_chat);
+    }
+
+    gtk_entry_set_text(GTK_ENTRY(g->e_new_group_name), "");
     gtk_widget_hide(GTK_WIDGET(g->d_add_group));
 
     (void)w;
 }
 
 static void cancel_add_group(GtkWidget *w, t_glade *g) {
-    gtk_entry_set_text(GTK_ENTRY(g->e_group_search), "");
+    gtk_entry_set_text(GTK_ENTRY(g->e_new_group_name), "");
     gtk_widget_hide(GTK_WIDGET(g->d_add_group));
 
     (void)w;
@@ -29,7 +40,7 @@ void mx_add_group(GtkWidget *w, t_glade *g) {
 
     g->b_add_group_ok = mx_get_gtk_obj(g, "b_add_group_ok");
     g->b_add_group_cancel = mx_get_gtk_obj(g, "b_add_group_cancel");
-    g->e_group_search = mx_get_gtk_obj(g, "e_group_search");
+    g->e_new_group_name = mx_get_gtk_obj(g, "e_new_group_name");
 
     g_signal_connect(g->b_add_group_ok, "clicked", G_CALLBACK(add_group), g);
     g_signal_connect(g->b_add_group_cancel, "clicked",
