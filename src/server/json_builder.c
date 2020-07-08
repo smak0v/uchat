@@ -14,6 +14,7 @@ char *mx_json_string_msg(t_msg *msg) {
     json_object_object_add(jobj, "msg", json_object_new_string(s_msg));
     json_object_object_add(jobj, "time", json_object_new_int(msg->time));
     json_object_object_add(jobj, "file", json_object_new_string(file));
+    mx_j_o_o_a(jobj, "frwd", json_object_new_string(msg->forwarded));
 
     return (char *)json_object_to_json_string(jobj);
 }
@@ -33,6 +34,48 @@ char *mx_json_string_add_to_gr(int gid) {
 
     json_object_object_add(jobj, "code", json_object_new_int(200));
     json_object_object_add(jobj, "id", json_object_new_int(gid));
+
+    return (char *)json_object_to_json_string(jobj);
+}
+
+char *mx_json_string_load_dlg(t_ld_d *arrs, int len) {
+    json_object *jobj = json_object_new_object();
+    json_object *arr = NULL;
+
+    json_object_object_add(jobj, "code", json_object_new_int(200));
+    json_object_object_add(jobj, "len", json_object_new_int(len));
+    if (len) {
+        arr = json_object_new_array();
+        mx_fill_array_int(arr, arrs->dialog_id, len);
+        mx_j_o_o_a(jobj, "did", arr);
+
+        arr = json_object_new_array();
+        mx_fill_array_int(arr, arrs->user_id, len);
+        mx_j_o_o_a(jobj, "uid", arr);
+
+        arr = json_object_new_array();
+        mx_fill_array_str(arr, arrs->username, len);
+        mx_j_o_o_a(jobj, "names", arr);
+    }
+
+    return (char *)json_object_to_json_string(jobj);
+}
+
+char *mx_json_string_load_grp(t_ld_d *arrs, int len) {
+    json_object *jobj = json_object_new_object();
+    json_object *arr = NULL;
+
+    json_object_object_add(jobj, "code", json_object_new_int(200));
+    json_object_object_add(jobj, "len", json_object_new_int(len));
+    if (len) {
+        arr = json_object_new_array();
+        mx_fill_array_int(arr, arrs->dialog_id, len);
+        mx_j_o_o_a(jobj, "gid", arr);
+
+        arr = json_object_new_array();
+        mx_fill_array_str(arr, arrs->username, len);
+        mx_j_o_o_a(jobj, "names", arr);
+    }
 
     return (char *)json_object_to_json_string(jobj);
 }

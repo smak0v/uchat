@@ -44,7 +44,7 @@ static t_list *next_dialog_msg(sqlite3 *db, int dialog_id, int n, int time) {
     return dialog_msg;
 }
 
-t_list *mx_db_load_next_messages(sqlite3 *db, int group_id, 
+t_list *mx_db_load_next_messages(sqlite3 *db, int group_id,
                                  int dialog_id, int n, int time) {
     t_list *messages = NULL;
 

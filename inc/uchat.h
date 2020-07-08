@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <time.h>
 
 #include <pthread.h>
 #include <netdb.h>
@@ -18,6 +19,8 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 #include <openssl/rand.h>
+#include <openssl/evp.h>
+#include <openssl/hmac.h>
 
 #include "libmx.h"
 #include "json.h"
@@ -39,10 +42,16 @@ enum e_types {
     N_GRP,
     INV,
     RN_GR,
+    LEAVE_GROUP,
     S_MES,
     EDIT_MESSAGE,
     DEL_USER_PROFILE,
-    DELETE_MESSAGE
+    DELETE_MESSAGE,
+    LOAD_DIALOGUES,
+    LOAD_GROUPS,
+    LOAD_MESSAGES,
+    DELETE_USER,
+    GET_USER
 };
 
 // Functions
