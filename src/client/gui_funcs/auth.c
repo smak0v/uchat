@@ -49,11 +49,9 @@ void mx_b_log(GtkButton *b, t_glade *g) {
        login(g, g->w_log);
 }
 
-void mx_b_logout(GtkButton *b, t_glade *g) {
+void mx_logout(t_glade *g) {
     char *request = mx_json_string_logout(g->token, g->uid);
     char *response = NULL;
-
-    (void)b;
 
     SSL_write(g->ssl, request, strlen(request));
     response = mx_read_server_response(g);
@@ -62,4 +60,10 @@ void mx_b_logout(GtkButton *b, t_glade *g) {
 
     mx_strdel(&request);
     mx_strdel(&response);
+}
+
+void mx_b_logout(GtkButton *b, t_glade *g) {
+    (void)b;
+
+    mx_logout(g);
 }

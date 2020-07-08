@@ -21,7 +21,7 @@ static void find_gtk_objects(t_glade *g) {
 }
 
 static void connect_signals(t_glade *g) {
-    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
+    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), g);
     g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);
     g_signal_connect(g->b_logout, "clicked", G_CALLBACK(mx_b_logout), g);
     g_signal_connect(g->b_username, "clicked", G_CALLBACK(mx_open_profile), g);

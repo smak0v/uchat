@@ -223,9 +223,11 @@ VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
 						  threads.c sockets.c
 
-PARSERS_SRCS			= login_response.c signup_response.c logout_response.c
+PARSERS_SRCS			= login_response.c signup_response.c \
+						  logout_response.c new_group_parser.c
 
-BUILDERS_SRCS			= login_signup_builder.c logout_builder.c
+BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
+						  new_group_builder.c load_groups_builder.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
