@@ -2,8 +2,9 @@
 
 static int validate_sign_in(sqlite3 *db, const char *name, const char *passw) {
     t_user *user = mx_get_user_by_login(db, (char *)name);
+    char *encrypted_passw = mx_hmac_sha_256((char *)name, (char *)passw);
 
-    if (!user || mx_strcmp((char *)passw, user->user_pass))
+    if (!user || mx_strcmp(encrypted_passw, user->user_pass))
         return -1;
     else
         return user->user_id;
@@ -43,12 +44,16 @@ static int extract_name_passw(json_object *json, const char **name,
 char *mx_register_user(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;
+    char *encrypted_pass = NULL;
     int code = 0;
 
     if ((code = extract_name_passw((json_object *)jobj, &name, &pass)) != 0)
         return mx_bad_request(NULL, NULL);
 
-    return add_to_db(connect->db, (char *)name, (char *)pass);
+    if (!mx_hmac_sha_256((char *)name, (char *)pass))
+        return "{\"code\": 500}";
+
+    return add_to_db(connect->db, (char *)name, encrypted_pass);
 }
 
 char *mx_sign_in(void *jobj, t_comm *connect) {

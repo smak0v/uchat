@@ -19,6 +19,8 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 #include <openssl/rand.h>
+#include <openssl/evp.h>
+#include <openssl/hmac.h>
 
 #include "libmx.h"
 #include "json.h"
