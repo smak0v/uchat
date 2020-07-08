@@ -11,7 +11,6 @@ static void find_gtk_objects(t_glade *g) {
     g->box_message = mx_get_gtk_obj(g, "box_message");
     g->b_close_profile = mx_get_gtk_obj(g, "b_close_profile");
     g->e_search = mx_get_gtk_obj(g, "e_search");
-    g->i_search = mx_get_gtk_obj(g, "i_search");
     g->b_attach_file = mx_get_gtk_obj(g, "b_attach_file");
     g->l_select_chat = mx_get_gtk_obj(g, "l_select_chat");
     g->b_add_chat = mx_get_gtk_obj(g, "b_add_chat");

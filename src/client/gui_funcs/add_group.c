@@ -22,7 +22,7 @@ void mx_add_group(GtkWidget *w, t_glade *g) {
 
     g->b_add_group_ok = mx_get_gtk_obj(g, "b_add_group_ok");
     g->b_add_group_cancel = mx_get_gtk_obj(g, "b_add_group_cancel");
-    g->e_group_search = mx_get_gtk_obj(g, "e_search_group");
+    g->e_group_search = mx_get_gtk_obj(g, "e_group_search");
 
     g_signal_connect(g->b_add_group_ok, "clicked", G_CALLBACK(add_group), g);
     g_signal_connect(g->b_add_group_cancel, "clicked",
