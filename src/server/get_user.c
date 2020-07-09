@@ -26,17 +26,27 @@ static char *json_str_builder(t_profile *prof) {
     return (char *)json_object_to_json_string(jobj);
 }
 
+// TODO: REFACTOR
 char *mx_get_user(void *jobj, t_comm *connect) {
     json_object *j_name = NULL;
+    json_object *j_uid = NULL;
     char *name = NULL;
+    int uid = -1;
     t_profile *prof = NULL;
     t_user *user = NULL;
 
     json_object_object_get_ex(jobj, "name", &j_name);
-    if (j_name && json_object_get_type(j_name) == json_type_string)
+    json_object_object_get_ex(jobj, "name", &j_uid);
+    if (j_name && j_uid && json_object_get_type(j_name) == json_type_string
+        && json_object_get_type(j_uid) == json_type_int) {
         name = (char *)json_object_get_string(j_name);
+        uid = json_object_get_int(j_uid);
+    }
     else
         return mx_bad_request(NULL, NULL);
+
+    if (mx_validate_token(connect->db, uid, (json_object *)jobj))
+        return "{\"code\": 401}";
 
     if ((user = mx_get_user_by_login(connect->db, name)) == NULL)
         return "{\"code\": 500}";
