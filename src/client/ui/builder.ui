@@ -26,6 +26,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <style>
+                  <class name="cancel_btn"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -40,6 +43,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <style>
+                  <class name="add_btn"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -95,8 +101,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">b_add_chat_cancel</action-widget>
-      <action-widget response="0">b_add_chat_ok</action-widget>
+      <action-widget response="-1">b_add_chat_cancel</action-widget>
+      <action-widget response="1">b_add_chat_ok</action-widget>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="d_add_group">
@@ -106,8 +112,8 @@
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
-    <property name="default_width">500</property>
-    <property name="default_height">400</property>
+    <property name="default_width">350</property>
+    <property name="default_height">250</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
@@ -124,6 +130,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <style>
+                  <class name="cancel_btn"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -138,6 +147,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <style>
+                  <class name="add_btn"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -159,19 +171,12 @@
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkEntry" id="e_search_group">
+              <object class="GtkLabel" id="label8">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="margin_left">20</property>
-                <property name="margin_right">20</property>
-                <property name="margin_top">20</property>
-                <property name="margin_bottom">20</property>
-                <property name="invisible_char">●</property>
-                <property name="width_chars">20</property>
-                <property name="primary_icon_pixbuf">search.png</property>
-                <property name="placeholder_text">Search ...</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Group name</property>
                 <style>
-                  <class name="entry"/>
+                  <class name="l_new_group_name"/>
                 </style>
               </object>
               <packing>
@@ -181,7 +186,43 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkEntry" id="e_new_group_name">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="margin_left">20</property>
+                <property name="margin_right">20</property>
+                <property name="margin_top">20</property>
+                <property name="margin_bottom">20</property>
+                <property name="max_length">50</property>
+                <property name="invisible_char">●</property>
+                <property name="width_chars">20</property>
+                <property name="truncate_multiline">True</property>
+                <property name="invisible_char_set">True</property>
+                <property name="placeholder_text">Group name</property>
+                <style>
+                  <class name="entry"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="err_group_name_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <style>
+                  <class name="error"/>
+                  <class name="new_group_error"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -193,8 +234,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">b_add_group_cancel</action-widget>
-      <action-widget response="0">b_add_group_ok</action-widget>
+      <action-widget response="-1">b_add_group_cancel</action-widget>
+      <action-widget response="1">b_add_group_ok</action-widget>
     </action-widgets>
   </object>
   <object class="GtkWindow" id="win_chat">
@@ -893,7 +934,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="halign">start</property>
+                        <property name="halign">center</property>
                         <style>
                           <class name="save_profile_btn"/>
                         </style>
@@ -1204,15 +1245,6 @@
           </packing>
         </child>
         <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
           <object class="GtkButton" id="b_eye">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -1231,6 +1263,15 @@
             <property name="width">1</property>
             <property name="height">1</property>
           </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
         </child>
       </object>
     </child>
@@ -1503,30 +1544,6 @@
           </packing>
         </child>
         <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
           <object class="GtkButton" id="b_reye">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -1545,6 +1562,30 @@
             <property name="width">1</property>
             <property name="height">1</property>
           </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
         </child>
       </object>
     </child>

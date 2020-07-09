@@ -53,7 +53,6 @@ struct s_glade {
     GtkWidget *b_username; // button username
     GtkWidget *b_close_profile; // button close profile
     GtkWidget *e_search; // entry search
-    GtkWidget *i_search; // image search
     GtkWidget *b_attach_file; // button attach file
     GtkWidget *l_select_chat; // label select chat
     GtkWidget *b_add_chat; // button add chat
@@ -80,7 +79,8 @@ struct s_glade {
     // add group dialog
     GtkWidget *b_add_group_ok; // button add group
     GtkWidget *b_add_group_cancel; // button cancel add group
-    GtkWidget *e_group_search; // entry group search
+    GtkWidget *e_new_group_name; // entry group search
+    GtkWidget *err_group_name_label; // label error group name
 };
 
 
@@ -102,15 +102,19 @@ void *mx_listen_server(void *data);
 char *mx_read_server_response(t_glade *g);
 int mx_clear_jobj(json_object **jobj, int status);
 GtkWidget *mx_get_gtk_obj(t_glade *g, char *name);
+void mx_logout(t_glade *g);
 
 // JOSN builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
 char *mx_json_string_logout(char *token, int uid);
+char *mx_json_string_new_group(char *token, int uid, char *group_name);
+char *mx_json_string_load_groups(char *token, int uid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
 int mx_parse_signup_response(char *response, t_glade *g);
 void mx_parse_logout_response(char *response, t_glade *g);
+int mx_parse_new_group_response(char *response, t_glade *g, char *name);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
@@ -119,7 +123,7 @@ void mx_clear_signup_inputs(t_glade *g);
 
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path);
-void mx_gtk_quit(void);
+void mx_gtk_quit(GtkWidget *w, t_glade *g);
 
 void mx_create_win_log(t_glade *g);
 void mx_create_win_reg(t_glade *g);
@@ -146,3 +150,5 @@ void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
+
+void mx_load_groups(t_glade *g);

@@ -1,7 +1,7 @@
 #include "client.h"
 
 static void init_client(int argc, char **argv) {
-    t_glade *g = malloc(sizeof(t_glade));
+    t_glade *g = mx_memalloc(sizeof(t_glade));
     GError *error = NULL;
     char *ui_path = mx_build_ui_path("builder.ui");
 

@@ -11,7 +11,6 @@ static void find_gtk_objects(t_glade *g) {
     g->box_message = mx_get_gtk_obj(g, "box_message");
     g->b_close_profile = mx_get_gtk_obj(g, "b_close_profile");
     g->e_search = mx_get_gtk_obj(g, "e_search");
-    g->i_search = mx_get_gtk_obj(g, "i_search");
     g->b_attach_file = mx_get_gtk_obj(g, "b_attach_file");
     g->l_select_chat = mx_get_gtk_obj(g, "l_select_chat");
     g->b_add_chat = mx_get_gtk_obj(g, "b_add_chat");
@@ -22,7 +21,7 @@ static void find_gtk_objects(t_glade *g) {
 }
 
 static void connect_signals(t_glade *g) {
-    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
+    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), g);
     g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);
     g_signal_connect(g->b_logout, "clicked", G_CALLBACK(mx_b_logout), g);
     g_signal_connect(g->b_username, "clicked", G_CALLBACK(mx_open_profile), g);
@@ -32,6 +31,12 @@ static void connect_signals(t_glade *g) {
     g_signal_connect(g->b_add_group, "clicked", G_CALLBACK(mx_add_group), g);
     g_signal_connect(g->b_save_profile, "clicked",
         G_CALLBACK(mx_save_profile), g);
+}
+
+static void win_chat_utils(t_glade *g) {
+    gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
+
+    mx_load_groups(g);
 }
 
 void mx_create_win_chat(t_glade *g) {
@@ -45,8 +50,6 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     int x = 0;
     int y = 0;
 
-    gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
-
     gtk_window_get_position(GTK_WINDOW(v), &x, &y);
     gtk_window_get_size(GTK_WINDOW(v), &w, &h);
     gtk_widget_hide(GTK_WIDGET(v));
@@ -59,4 +62,6 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     gtk_widget_hide(g->messages_area);
     gtk_widget_hide(g->box_message);
     gtk_widget_hide(g->b_close_profile);
+
+    win_chat_utils(g);
 }

@@ -94,7 +94,6 @@ label {
 }
 
 .save_profile_btn {
-    margin-left: 350px;
     margin-bottom: 100px;
     background-color: shade(@second_color, 0.75);
     border-color: shade(@second_color, 0.75);
@@ -108,4 +107,30 @@ label {
 
 .save_profile_btn:hover {
     background-color: shade(@second_color, 0.9);
+}
+
+.add_btn {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.cancel_btn {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.l_new_group_name {
+    margin-top: 30px;
+    margin-right: 190px;
+    font-size: 18px;
+}
+
+.error {
+    font-size: 15px;
+    color: red;
+}
+
+.new_group_error {
+    margin-right: 40px;
+    margin-bottom: 30px;
 }
