@@ -42,6 +42,7 @@ enum e_types {
     N_GRP,
     INV,
     RN_GR,
+    DEL_GROUP,
     LEAVE_GROUP,
     S_MES,
     EDIT_MESSAGE,

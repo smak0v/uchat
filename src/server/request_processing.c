@@ -20,10 +20,10 @@ api_function mx_select_method(enum e_types type) {
         return mx_add_to_group;
     else if (type == RN_GR)
         return mx_rename_group;
-    // else if (type == DEL_GROUP)
-    //     return mx_del_group;
-    // else if (type == LEAVE_GROUP)
-    //     return mx_leave_group;
+    else if (type == DEL_GROUP)
+        return mx_del_group;
+    else if (type == LEAVE_GROUP)
+        return mx_leave_group;
     else if (type == S_MES)
         return mx_send_message;
     else if (type == EDIT_MESSAGE)
