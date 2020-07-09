@@ -226,7 +226,8 @@ UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
 						  threads.c sockets.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
-						  logout_response.c new_group_parser.c
+						  logout_response.c new_group_response.c \
+						  load_groups_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_groups_builder.c
@@ -235,7 +236,7 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
 						  create_error_modal_window.c auth.c win_destroy.c \
 						  profile.c get_gtk_obj.c add_chat.c add_group.c \
-						  messages.c load_groups.c
+						  messages.c load_groups.c delete_childs.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

@@ -381,7 +381,7 @@
               <class name="panned"/>
             </style>
             <child>
-              <object class="GtkNotebook" id="notebook1">
+              <object class="GtkNotebook" id="gc_notebook">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="double_buffered">False</property>
@@ -391,7 +391,7 @@
                   <class name="notebook"/>
                 </style>
                 <child>
-                  <object class="GtkBox" id="box5">
+                  <object class="GtkBox" id="dialogs_box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
@@ -463,22 +463,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="box8">
+                  <object class="GtkBox" id="groups_box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <style>
                       <class name="notebook_tab"/>
                     </style>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
                   </object>
                   <packing>
                     <property name="position">1</property>

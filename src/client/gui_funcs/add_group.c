@@ -7,7 +7,7 @@ static void add_new_group(t_glade *g, char *name) {
     SSL_write(g->ssl, request, strlen(request));
     response = mx_read_server_response(g);
 
-    if (!mx_parse_new_group_response(response, g, name)) {
+    if (!mx_parse_new_group_response(response, g)) {
         gtk_entry_set_text(GTK_ENTRY(g->e_new_group_name), "");
         gtk_label_set_text(GTK_LABEL(g->err_group_name_label), "");
         gtk_widget_hide(GTK_WIDGET(g->d_add_group));
@@ -20,11 +20,11 @@ static void add_new_group(t_glade *g, char *name) {
 static void prepare_add_group(GtkWidget *w, t_glade *g) {
     char *name = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_new_group_name));
 
-    if (name && strlen(name) >= 5)
+    if (name && strlen(name) >= 1)
         add_new_group(g, name);
     else {
         gtk_label_set_text(GTK_LABEL(g->err_group_name_label),
-            "The name of the group must be at least\n5 characters long." \
+            "The name of the group must be at least\n1 character long." \
             "Try another name!");
         mx_widget_visible(g->err_group_name_label, true);
     }
@@ -48,6 +48,7 @@ static void destroy_dialog(GtkWidget *w, t_glade *g) {
 }
 
 void mx_add_group(GtkWidget *w, t_glade *g) {
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(g->gc_notebook), 1);
     gtk_window_set_transient_for(GTK_WINDOW(g->d_add_group),
         GTK_WINDOW(g->w_chat));
     gtk_window_set_position(GTK_WINDOW(g->d_add_group),
@@ -63,7 +64,6 @@ void mx_add_group(GtkWidget *w, t_glade *g) {
         G_CALLBACK(cancel_add_group), g);
     g_signal_connect(g->d_add_group, "delete-event",
         G_CALLBACK(destroy_dialog), g);
-
     gtk_widget_show_all(g->d_add_group);
     gtk_dialog_run(GTK_DIALOG(g->d_add_group));
 

@@ -22,6 +22,7 @@ static void destroy_dialog(GtkWidget *w, t_glade *g) {
 }
 
 void mx_add_chat(GtkWidget *w, t_glade *g) {
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(g->gc_notebook), 0);
     gtk_window_set_transient_for(GTK_WINDOW(g->d_add_chat),
         GTK_WINDOW(g->w_chat));
     gtk_window_set_position(GTK_WINDOW(g->d_add_chat),

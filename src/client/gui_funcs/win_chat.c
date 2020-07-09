@@ -18,6 +18,7 @@ static void find_gtk_objects(t_glade *g) {
     g->b_save_profile = mx_get_gtk_obj(g, "b_save_profile");
     g->d_add_chat = mx_get_gtk_obj(g, "d_add_chat");
     g->d_add_group = mx_get_gtk_obj(g, "d_add_group");
+    g->gc_notebook = mx_get_gtk_obj(g, "gc_notebook");
 }
 
 static void connect_signals(t_glade *g) {
@@ -36,6 +37,7 @@ static void connect_signals(t_glade *g) {
 static void win_chat_utils(t_glade *g) {
     gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
 
+    mx_delete_childs(g->groups_box);
     mx_load_groups(g);
 }
 
@@ -59,9 +61,9 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     gtk_widget_show_all(GTK_WIDGET(g->w_chat));
 
     gtk_widget_hide(GTK_WIDGET(g->profile_area));
-    gtk_widget_hide(g->messages_area);
-    gtk_widget_hide(g->box_message);
-    gtk_widget_hide(g->b_close_profile);
+    gtk_widget_hide(GTK_WIDGET(g->messages_area));
+    gtk_widget_hide(GTK_WIDGET(g->box_message));
+    gtk_widget_hide(GTK_WIDGET(g->b_close_profile));
 
     win_chat_utils(g);
 }

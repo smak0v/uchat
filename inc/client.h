@@ -57,6 +57,9 @@ struct s_glade {
     GtkWidget *l_select_chat; // label select chat
     GtkWidget *b_add_chat; // button add chat
     GtkWidget *b_add_group; // button add group
+    GtkWidget *groups_box; // box with groups
+    GtkWidget *dialogs_box; // box with dialogs
+    GtkWidget *gc_notebook; // left groups and chats notebook
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
@@ -114,7 +117,8 @@ char *mx_json_string_load_groups(char *token, int uid);
 int mx_parse_login_response(char *response, t_glade *g);
 int mx_parse_signup_response(char *response, t_glade *g);
 void mx_parse_logout_response(char *response, t_glade *g);
-int mx_parse_new_group_response(char *response, t_glade *g, char *name);
+int mx_parse_new_group_response(char *response, t_glade *g);
+void mx_parse_load_groups_response(char *response, t_glade *g);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
@@ -124,6 +128,7 @@ void mx_clear_signup_inputs(t_glade *g);
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path);
 void mx_gtk_quit(GtkWidget *w, t_glade *g);
+void mx_delete_childs(GtkWidget *w);
 
 void mx_create_win_log(t_glade *g);
 void mx_create_win_reg(t_glade *g);
