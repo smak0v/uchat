@@ -9,6 +9,7 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
 
     gtk_widget_show(GTK_WIDGET(g->messages_area));
     gtk_widget_show(GTK_WIDGET(g->box_message));
+    gtk_widget_show(GTK_WIDGET(g->e_search));
     gtk_widget_hide(GTK_WIDGET(g->l_select_chat));
     gtk_widget_hide(GTK_WIDGET(g->profile_area));
 
