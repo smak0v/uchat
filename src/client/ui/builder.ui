@@ -1262,6 +1262,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
             <child>
               <object class="GtkImage" id="image6">
                 <property name="visible">True</property>
@@ -1561,6 +1562,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
             <child>
               <object class="GtkImage" id="image3">
                 <property name="visible">True</property>
