@@ -166,6 +166,8 @@ int mx_change_user_username(sqlite3 *db, int user_id, char *username);
 
 // GROUP_MEMBERS table
 t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id);
+t_gr_members *mx_get_by_user_id(sqlite3 *db, int user_id);
+t_gr_members *mx_get_by_group_id(sqlite3 *db, int group_id);
 int mx_add_group_member(sqlite3 *db, int user_id, int group_id, bool adm);
 int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id);
 int mx_check_group_member(sqlite3 *db, int user_id, int group_id);
