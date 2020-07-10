@@ -6,9 +6,18 @@ static void open_group(GtkWidget *event_box, t_glade *g) {
     GtkWidget *l_gid = GTK_WIDGET(g_list_nth_data(childs, 0));
     char *str_gid = (char *)gtk_label_get_text(GTK_LABEL(l_gid));
 
-    mx_printstr_endl(str_gid);
 
-    (void)g;
+    g->profile_area = mx_get_gtk_obj(g, "profile_area");
+    if (!g->profile_area)
+        mx_printstr_endl("suka");
+    // g->messages_area = mx_get_gtk_obj(g, "messages_area");
+    // g->box_message = mx_get_gtk_obj(g, "box_message");
+    // g->l_select_chat = mx_get_gtk_obj(g, "l_select_chat");
+    // gtk_widget_show(GTK_WIDGET(g->messages_area));
+    // gtk_widget_show(GTK_WIDGET(g->box_message));
+    // gtk_widget_hide(GTK_WIDGET(g->l_select_chat));
+
+    mx_printstr_endl(str_gid);
 }
 
 static void add_group_to_gui(t_glade *g, int gid, char *name) {
@@ -20,15 +29,16 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
 
     mx_strdel(&str_gid);
 
-    gtk_box_pack_end(GTK_BOX(g->groups_box), event_box, TRUE, TRUE, 0);
+    gtk_box_pack_end(GTK_BOX(g->groups_box), event_box, FALSE, FALSE, 0);
     gtk_container_add(GTK_CONTAINER(event_box), group_box);
     gtk_box_pack_end(GTK_BOX(group_box), l_name, TRUE, TRUE, 0);
+    // gtk_label_set_xalign(GTK_LABEL(l_name), 0.0);
     gtk_box_pack_end(GTK_BOX(group_box), l_uid, TRUE, TRUE, 0);
-
-    gtk_widget_set_events(event_box, GDK_BUTTON_PRESS_MASK);
+    gtk_style_context_add_class(gtk_widget_get_style_context(group_box),
+        "chat_group_box");
     g_signal_connect(event_box, "button_press_event",
         G_CALLBACK(open_group), g);
-
+    gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
     gtk_widget_show_all(event_box);
     gtk_widget_hide(GTK_WIDGET(l_uid));
 }
