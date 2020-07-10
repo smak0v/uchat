@@ -147,3 +147,14 @@ label {
     padding-left: 50px;
     padding-right: 50px;
 }
+
+.box_message {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    background-color: shade(@base_color, 0.75);
+}
+
+.box_message_button {
+    margin-right: 5px;
+}

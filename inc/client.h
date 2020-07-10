@@ -53,6 +53,7 @@ struct s_glade {
     GtkWidget *b_username; // button username
     GtkWidget *b_close_profile; // button close profile
     GtkWidget *e_search; // entry search
+    GtkWidget *e_message; // entry message
     GtkWidget *b_attach_file; // button attach file
     GtkWidget *l_select_chat; // label select chat
     GtkWidget *b_add_chat; // button add chat
@@ -112,6 +113,8 @@ char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
 char *mx_json_string_logout(char *token, int uid);
 char *mx_json_string_new_group(char *token, int uid, char *group_name);
 char *mx_json_string_load_groups(char *token, int uid);
+char *mx_json_string_send_message();
+char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
@@ -119,6 +122,7 @@ int mx_parse_signup_response(char *response, t_glade *g);
 void mx_parse_logout_response(char *response, t_glade *g);
 int mx_parse_new_group_response(char *response, t_glade *g);
 void mx_parse_load_groups_response(char *response, t_glade *g);
+void mx_parse_load_messages_response(char *response, t_glade *g);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
@@ -157,3 +161,7 @@ void mx_add_group(GtkWidget *w, t_glade *g);
 void mx_send_msg(GtkWidget *w, t_glade *g);
 
 void mx_load_groups(t_glade *g);
+
+void mx_load_messages(t_glade *g, int duid, bool group, time_t timestamp);
+
+gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g);

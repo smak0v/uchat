@@ -1,23 +1,21 @@
 #include "client.h"
 
-static void open_group(GtkWidget *event_box, t_glade *g) {
-    // GList *group_box = gtk_container_get_children(GTK_CONTAINER(event_box));
-    // GList *childs = gtk_container_get_children(GTK_CONTAINER(group_box->data));
-    // GtkWidget *l_gid = GTK_WIDGET(g_list_nth_data(childs, 0));
-    // char *str_gid = (char *)gtk_label_get_text(GTK_LABEL(l_gid));
+static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
+    GList *group_box = gtk_container_get_children(GTK_CONTAINER(event_box));
+    GList *childs = gtk_container_get_children(GTK_CONTAINER(group_box->data));
+    GtkWidget *l_gid = GTK_WIDGET(g_list_nth_data(childs, 0));
 
-    if (!g->profile_area)
-        mx_printstr_endl("suka");
-    // g->messages_area = mx_get_gtk_obj(g, "messages_area");
-    // g->box_message = mx_get_gtk_obj(g, "box_message");
-    // g->l_select_chat = mx_get_gtk_obj(g, "l_select_chat");
-    // gtk_widget_show(GTK_WIDGET(g->messages_area));
-    // gtk_widget_show(GTK_WIDGET(g->box_message));
-    // gtk_widget_hide(GTK_WIDGET(g->l_select_chat));
+    gtk_entry_set_text(GTK_ENTRY(g->e_message), "");
 
-    event_box++;
+    gtk_widget_show(GTK_WIDGET(g->messages_area));
+    gtk_widget_show(GTK_WIDGET(g->box_message));
+    gtk_widget_hide(GTK_WIDGET(g->l_select_chat));
+    gtk_widget_hide(GTK_WIDGET(g->profile_area));
 
-    // mx_printstr_endl(str_gid);
+    mx_load_messages(g, mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_gid))),
+        true, time(NULL));
+
+    (void)e;
 }
 
 static void add_group_to_gui(t_glade *g, int gid, char *name) {
@@ -33,11 +31,11 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
     gtk_container_add(GTK_CONTAINER(event_box), group_box);
     gtk_box_pack_end(GTK_BOX(group_box), l_name, TRUE, TRUE, 0);
     gtk_box_pack_end(GTK_BOX(group_box), l_uid, TRUE, TRUE, 0);
-
     gtk_style_context_add_class(gtk_widget_get_style_context(group_box),
         "chat_group_box");
     g_signal_connect(event_box, "button_press_event",
         G_CALLBACK(open_group), g);
+    gtk_widget_realize (event_box);
     gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
     gtk_widget_show_all(event_box);
     gtk_widget_hide(GTK_WIDGET(l_uid));

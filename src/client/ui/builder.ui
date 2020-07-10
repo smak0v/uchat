@@ -969,27 +969,9 @@
                   <object class="GtkBox" id="box_message">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkEntry" id="e_message">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="has_tooltip">True</property>
-                        <property name="tooltip_text" translatable="yes">Write a message ...</property>
-                        <property name="margin_left">5</property>
-                        <property name="invisible_char">●</property>
-                        <property name="invisible_char_set">True</property>
-                        <property name="progress_pulse_step">0.090000003576278687</property>
-                        <property name="placeholder_text">Write a message...</property>
-                        <style>
-                          <class name="entry"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
+                    <style>
+                      <class name="box_message"/>
+                    </style>
                     <child>
                       <object class="GtkButton" id="b_attach_file">
                         <property name="visible">True</property>
@@ -997,6 +979,9 @@
                         <property name="receives_default">True</property>
                         <property name="has_tooltip">True</property>
                         <property name="relief">none</property>
+                        <style>
+                          <class name="box_message_button"/>
+                        </style>
                         <child>
                           <object class="GtkImage" id="image5">
                             <property name="visible">True</property>
@@ -1009,6 +994,26 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="e_message">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="tooltip_text" translatable="yes">Write a message ...</property>
+                        <property name="invisible_char">●</property>
+                        <property name="invisible_char_set">True</property>
+                        <property name="progress_pulse_step">0.090000003576278687</property>
+                        <property name="placeholder_text">Write a message...</property>
+                        <style>
+                          <class name="entry"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -1020,6 +1025,9 @@
                         <property name="has_tooltip">True</property>
                         <property name="tooltip_text" translatable="yes">Attach sticker</property>
                         <property name="relief">none</property>
+                        <style>
+                          <class name="box_message_button"/>
+                        </style>
                         <child>
                           <object class="GtkImage" id="image7">
                             <property name="visible">True</property>
@@ -1045,6 +1053,9 @@
                         <property name="tooltip_text" translatable="yes">Send message</property>
                         <property name="halign">end</property>
                         <property name="relief">none</property>
+                        <style>
+                          <class name="box_message_button"/>
+                        </style>
                         <child>
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
