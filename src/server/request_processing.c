@@ -40,8 +40,8 @@ api_function mx_select_method(enum e_types type) {
     //     return mx_del_user;
     else if (type == GET_USER)
         return mx_get_user;
-    // else if (type == EDIT_PROFILE)
-    //     return mx_del_user;
+    else if (type == EDIT_PROFILE)
+        return mx_edit_profile;
     else
         return mx_bad_request;
 }

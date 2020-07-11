@@ -1,6 +1,6 @@
 #include "server.h"
 
-static int parse_json(json_object *jobj, t_profile *prof, int uid) {
+static int parse_json(json_object *jobj, t_profile *prof) {
     int code = -1;
 
     json_object_object_foreach(jobj, key, val) {
@@ -31,8 +31,8 @@ char *mx_edit_profile(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if ((new_prof = mx_get_profile_by_id(connect->db, uid)) == NULL)
-        return "{\"code\": 500}";
-    if (parse_json(connect->db, new_prof, uid) == -1)
+        return "{\"code\": 404}";
+    if (parse_json(jobj, new_prof) == -1)
         return mx_bad_request(NULL, NULL);
     if (mx_change_profile_by_id(connect->db, new_prof, uid) == -1)
         return "{\"code\": 500}";
@@ -43,5 +43,5 @@ char *mx_edit_profile(void *jobj, t_comm *connect) {
 char *mx_del_user(void *jobj, t_comm *connect) {
     jobj = NULL;
     connect = NULL;
-    return NULL:
+    return NULL;
 }

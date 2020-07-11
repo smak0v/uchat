@@ -1,23 +1,31 @@
 #include "server.h"
 
+static void check_null(char *name, char *var, json_object *jobj) {
+    if (var)
+        mx_j_o_o_a(jobj, name, json_object_new_string(var));
+    else
+        mx_j_o_o_a(jobj, name, json_object_new_null());
+}
+
+
 static json_object *create_profile_object(t_profile *prof) {
     json_object *j_prof = json_object_new_object();
 
     mx_j_o_o_a(j_prof, "uid", json_object_new_int(prof->user_id));
     mx_j_o_o_a(j_prof, "name", json_object_new_string(prof->name));
-    mx_j_o_o_a(j_prof, "dob", json_object_new_string(prof->birth));
-    mx_j_o_o_a(j_prof, "mail", json_object_new_string(prof->email));
-    mx_j_o_o_a(j_prof, "status", json_object_new_string(prof->status));
-    mx_j_o_o_a(j_prof, "country", json_object_new_string(prof->country));
+
+    check_null("dob", prof->birth, j_prof);
+    check_null("mail", prof->email, j_prof);
+    check_null("status", prof->status, j_prof);
+    check_null("country", prof->country, j_prof);
 
     return j_prof;
 }
 
 static char *json_str_builder(t_profile *prof) {
     json_object *jobj = json_object_new_object();
-    json_object *j_prof = NULL;
 
-    mx_j_o_o_a(j_prof, "code", json_object_new_int(200));
+    mx_j_o_o_a(jobj, "code", json_object_new_int(200));
     if (!prof)
         mx_j_o_o_a(jobj, "prof", json_object_new_null());
     else
@@ -49,7 +57,8 @@ char *mx_get_user(void *jobj, t_comm *connect) {
         return "{\"code\": 401}";
 
     if ((user = mx_get_user_by_login(connect->db, name)) == NULL)
-        return "{\"code\": 500}";
+        return "{\"code\": 404}";
+
     prof = mx_get_profile_by_id(connect->db, user->user_id);
 
     return json_str_builder(prof);

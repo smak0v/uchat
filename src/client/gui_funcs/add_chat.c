@@ -6,7 +6,7 @@ static void search_user(GtkWidget *w, t_glade *g) {
     char *response = NULL;
 
     if (input && strlen(input) > 0) {
-        request = mx_json_string_search_user(g->token, g->uid2, input);
+        request = mx_json_string_search_user(g->token, g->uid, input);
 
         SSL_write(g->ssl, request, strlen(request));
         response = mx_read_server_response(g);
