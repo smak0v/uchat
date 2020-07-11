@@ -37,22 +37,6 @@
                 <property name="secondary">True</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkButton" id="b_add_chat_ok">
-                <property name="label" translatable="yes">Add</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <style>
-                  <class name="add_btn"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -102,7 +86,6 @@
     </child>
     <action-widgets>
       <action-widget response="-1">b_add_chat_cancel</action-widget>
-      <action-widget response="1">b_add_chat_ok</action-widget>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="d_add_group">

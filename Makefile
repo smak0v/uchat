@@ -232,7 +232,8 @@ PARSERS_SRCS			= login_response.c signup_response.c \
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \
-						  send_message_builder.c load_messages_builder.c
+						  send_message_builder.c load_messages_builder.c \
+						  search_user_builder.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \

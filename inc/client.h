@@ -94,7 +94,6 @@ struct s_glade {
     GtkWidget *d_file_choose; // dialog for file choosig
 
     // add chat dialog
-    GtkWidget *b_add_chat_ok; // button add chat
     GtkWidget *b_add_chat_cancel; // button cancel add chat
     GtkWidget *e_chat_search; // entry chat search
 
@@ -134,6 +133,7 @@ char *mx_json_string_load_dialogs_groups(enum e_types type, char *token,
     int uid);
 char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
+char *mx_json_string_search_user(char *token, int uid, char *name);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
