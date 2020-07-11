@@ -159,6 +159,7 @@ int mx_parse_new_group_response(char *response, t_glade *g);
 void mx_parse_load_groups_response(char *response, t_glade *g);
 void mx_parse_load_messages_response(char *response, t_glade *g);
 int mx_parse_send_message_response(char *response);
+void mx_parse_get_profile_response(char *response, t_glade *g, bool current);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
@@ -190,7 +191,7 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g);
 void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);
 void mx_save_profile(GtkWidget *w, t_glade *g);
-void mx_get_profile(t_glade *g);
+void mx_get_profile(t_glade *g, bool current);
 
 void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);

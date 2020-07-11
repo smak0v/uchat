@@ -21,6 +21,11 @@ static void find_gtk_objects(t_glade *g) {
     g->d_add_group = mx_get_gtk_obj(g, "d_add_group");
     g->d_file_choose = mx_get_gtk_obj(g, "d_file_choose");
     g->gc_notebook = mx_get_gtk_obj(g, "gc_notebook");
+    g->e_country = mx_get_gtk_obj(g, "e_country");
+    g->e_birthday = mx_get_gtk_obj(g, "e_birthday");
+    g->e_email = mx_get_gtk_obj(g, "e_email");
+    g->e_profile_name = mx_get_gtk_obj(g, "e_profile_name");
+    g->e_status = mx_get_gtk_obj(g, "e_status");
 }
 
 static void connect_signals(t_glade *g) {
@@ -47,7 +52,7 @@ static void win_chat_utils(t_glade *g) {
     mx_delete_childs(g->groups_box);
     mx_load_dialogs(g);
     mx_load_groups(g);
-    mx_get_profile(g);
+    mx_get_profile(g, true);
 }
 
 void mx_create_win_chat(t_glade *g) {
