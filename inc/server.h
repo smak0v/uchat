@@ -163,6 +163,7 @@ int mx_get_user_id_by_login(sqlite3 *db, char *login);
 int mx_change_user_pass(sqlite3 *db, int user_id, char *new_pass);
 char *mx_get_user_login_by_id(sqlite3 *db, int user_id);
 int mx_change_user_username(sqlite3 *db, int user_id, char *username);
+t_list *mx_find_user_by_char(sqlite3 *db, char *str);
 
 // GROUP_MEMBERS table
 t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id);
