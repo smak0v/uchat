@@ -16,7 +16,7 @@ static char *send_group_message(t_msg *message, sqlite3 *db, int fd) {
     }
 
     mx_strdel(&js_str);
-    return "{\"code\": 200}";
+    return mx_msg_json_builder(message);;
 }
 
 // Dialog_id == -1: message is a group message; Dialog_id == -2: message is a
@@ -38,7 +38,7 @@ static char *send_private_message(t_msg *msg, sqlite3 *db) {
         write(socket_fd, json_string, (sizeof(char) * strlen(json_string)));
         mx_strdel(&json_string);
     }
-    return "{\"code\": 200}";
+    return mx_msg_json_builder(msg);;
 }
 
 char *mx_send_message(void *jobj, t_comm *connect) {
