@@ -5,7 +5,7 @@ static json_object *json_builder_msg(t_msg *msg) {
     char *s_msg = msg->msg == NULL ? "" : msg->msg;
     char *file = msg->file == NULL ? "" : msg->file;
 
-    json_object_object_add(jobj, "type", json_object_new_string("S_MES"));
+    json_object_object_add(jobj, "type", json_object_new_int(S_MES));
     json_object_object_add(jobj, "gid", json_object_new_int(msg->group_id));
     json_object_object_add(jobj, "did", json_object_new_int(msg->dialog_id));
     json_object_object_add(jobj, "uid", json_object_new_int(msg->sender));
@@ -13,7 +13,10 @@ static json_object *json_builder_msg(t_msg *msg) {
     json_object_object_add(jobj, "msg", json_object_new_string(s_msg));
     json_object_object_add(jobj, "time", json_object_new_int(msg->time));
     json_object_object_add(jobj, "file", json_object_new_string(file));
-    mx_j_o_o_a(jobj, "frwd", json_object_new_string(msg->forwarded));
+    if (msg->forwarded)
+        mx_j_o_o_a(jobj, "frwd", json_object_new_string(msg->forwarded));
+    else
+        mx_j_o_o_a(jobj, "frwd", json_object_new_null());
 
     return jobj;
 }

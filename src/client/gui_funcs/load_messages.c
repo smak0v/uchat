@@ -5,8 +5,8 @@ void mx_load_messages(t_glade *g, time_t timestamp) {
         g->group);
     char *response = NULL;
 
-    // SSL_write(g->ssl, request, strlen(request));
-    // response = mx_read_server_response(g);
+    SSL_write(g->ssl, request, strlen(request));
+    response = mx_read_server_response(g);
 
     mx_printstr_endl(request);
     mx_printstr_endl(response);

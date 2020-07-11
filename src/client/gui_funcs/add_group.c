@@ -7,6 +7,8 @@ static void add_new_group(t_glade *g, char *name) {
     SSL_write(g->ssl, request, strlen(request));
     response = mx_read_server_response(g);
 
+    mx_printstr_endl(response);
+
     if (!mx_parse_new_group_response(response, g)) {
         gtk_entry_set_text(GTK_ENTRY(g->e_new_group_name), "");
         gtk_label_set_text(GTK_LABEL(g->err_group_name_label), "");

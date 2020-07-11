@@ -14,6 +14,7 @@ static char *send_group_message(t_msg *message, sqlite3 *db, int fd) {
             write(socket_fd, js_str, (sizeof(char) * strlen(js_str)));
         }
     }
+
     mx_strdel(&js_str);
     return "{\"code\": 200}";
 }
@@ -49,7 +50,6 @@ char *mx_send_message(void *jobj, t_comm *connect) {
 
     if (mx_validate_token(connect->db, message->sender, (json_object *)jobj))
         return "{\"code\": 401}";
-
     if (message->group_id != -1)
         res = send_group_message(message, connect->db, connect->fd);
     else
