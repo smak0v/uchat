@@ -126,10 +126,13 @@ char *mx_json_string_s_in(int uid, char *tok);
 char *mx_json_string_add_to_gr(int gid);
 char *mx_json_string_load_dlg(t_ld_d *arrays, int len);
 char *mx_json_string_load_grp(t_ld_d *arrs, int len);
+char *mx_msg_json_builder(t_msg *msg);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
 void mx_fill_array_msg(json_object *jobj, t_list *msg_list);
+
+json_object *mx_json_builder_msg(t_msg *msg);
 
 // Server Utils
 t_msg *mx_extract_message(void *jobj);
