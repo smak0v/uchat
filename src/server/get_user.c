@@ -36,7 +36,7 @@ char *mx_get_user(void *jobj, t_comm *connect) {
     t_user *user = NULL;
 
     json_object_object_get_ex(jobj, "name", &j_name);
-    json_object_object_get_ex(jobj, "name", &j_uid);
+    json_object_object_get_ex(jobj, "uid", &j_uid);
     if (j_name && j_uid && json_object_get_type(j_name) == json_type_string
         && json_object_get_type(j_uid) == json_type_int) {
         name = (char *)json_object_get_string(j_name);
