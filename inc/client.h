@@ -15,6 +15,7 @@
 typedef struct s_glade t_glade;
 typedef struct s_thread_data t_thread_data;
 typedef struct s_msg t_msg;
+typedef struct s_profile t_profile;
 
 struct s_thread_data {
     SSL *ssl;
@@ -29,6 +30,14 @@ struct s_msg {
     char *file;
     char *fwrd;
     int time;
+};
+
+struct s_profile {
+    char *name;
+    char *dob;
+    char *email;
+    char *status;
+    char *country;
 };
 
 struct s_glade {
@@ -81,6 +90,11 @@ struct s_glade {
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
+    GtkWidget *e_country; // entry country
+    GtkWidget *e_birthday; // entry birthday
+    GtkWidget *e_email; // entry email
+    GtkWidget *e_profile_name; // entry profile name
+    GtkWidget *e_status; // entry status
 
     // GUI blocks (chat)
     GtkWidget *common_area;
@@ -125,7 +139,7 @@ int mx_clear_jobj(json_object **jobj, int status);
 GtkWidget *mx_get_gtk_obj(t_glade *g, char *name);
 void mx_logout(t_glade *g);
 
-// JOSN builders
+// JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
 char *mx_json_string_logout(char *token, int uid);
 char *mx_json_string_new_group(char *token, int uid, char *group_name);
@@ -134,6 +148,7 @@ char *mx_json_string_load_dialogs_groups(enum e_types type, char *token,
 char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 char *mx_json_string_search_user(char *token, int uid, char *name);
+char *mx_json_string_edit_profile(t_glade *g, t_profile *profile);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
@@ -175,6 +190,7 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g);
 void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);
 void mx_save_profile(GtkWidget *w, t_glade *g);
+void mx_get_profile(t_glade *g);
 
 void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);

@@ -11,6 +11,7 @@ static void search_user(GtkWidget *w, t_glade *g) {
         SSL_write(g->ssl, request, strlen(request));
         response = mx_read_server_response(g);
 
+        mx_printstr_endl(request);
         mx_printstr_endl(response);
 
         mx_strdel(&request);
