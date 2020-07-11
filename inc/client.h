@@ -91,6 +91,7 @@ struct s_glade {
     // dialogs
     GtkWidget *d_add_chat; // dialog for adding new chat
     GtkWidget *d_add_group; // dialog for adding new group
+    GtkWidget *d_file_choose; // dialog for file choosig
 
     // add chat dialog
     GtkWidget *b_add_chat_ok; // button add chat
@@ -129,7 +130,8 @@ void mx_logout(t_glade *g);
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
 char *mx_json_string_logout(char *token, int uid);
 char *mx_json_string_new_group(char *token, int uid, char *group_name);
-char *mx_json_string_load_groups(char *token, int uid);
+char *mx_json_string_load_dialogs_groups(enum e_types type, char *token,
+    int uid);
 char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 
@@ -137,6 +139,7 @@ char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 int mx_parse_login_response(char *response, t_glade *g);
 int mx_parse_signup_response(char *response, t_glade *g);
 void mx_parse_logout_response(char *response, t_glade *g);
+void mx_parse_load_dialogs_response(char *response, t_glade *g);
 int mx_parse_new_group_response(char *response, t_glade *g);
 void mx_parse_load_groups_response(char *response, t_glade *g);
 void mx_parse_load_messages_response(char *response, t_glade *g);
@@ -177,7 +180,9 @@ void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
+void mx_attach_file(GtkWidget *w, t_glade *g);
 
+void mx_load_dialogs(t_glade *g);
 void mx_load_groups(t_glade *g);
 
 void mx_load_messages(t_glade *g, time_t timestamp);
