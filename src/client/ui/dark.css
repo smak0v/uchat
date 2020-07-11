@@ -160,6 +160,21 @@ label {
 }
 
 .chat_name {
-    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 18px;
+    background-color: shade(@base_color, 0.9);
+}
+
+.msg {
+    background: shade(@second_color, 0.95);
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
 }

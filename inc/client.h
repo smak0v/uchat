@@ -88,6 +88,7 @@ struct s_glade {
     GtkWidget *dialogs_box; // box with dialogs
     GtkWidget *gc_notebook; // left groups and chats notebook
     GtkWidget *l_chat_name; // label chat name
+    GtkWidget *scrolledwindow1; // scrolled window with messages
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
