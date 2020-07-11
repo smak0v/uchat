@@ -8,15 +8,27 @@
 
 // Constants
 #define MX_UI_PATH "./src/client/ui/"
+#define MX_MISTERY -666
 
 
 // Structures
 typedef struct s_glade t_glade;
 typedef struct s_thread_data t_thread_data;
+typedef struct s_msg t_msg;
 
 struct s_thread_data {
     SSL *ssl;
     t_glade *glade;
+};
+
+struct s_msg {
+    int dgid;
+    bool group;
+    int uid2;
+    char *msg;
+    char *file;
+    char *fwrd;
+    int time;
 };
 
 struct s_glade {
@@ -28,6 +40,11 @@ struct s_glade {
     char *token;
     int uid;
     SSL *ssl;
+
+    // message data
+    int dgid;
+    bool group;
+    int uid2;
 
     // log in window
     GtkWidget *w_log; // window login
@@ -113,7 +130,7 @@ char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
 char *mx_json_string_logout(char *token, int uid);
 char *mx_json_string_new_group(char *token, int uid, char *group_name);
 char *mx_json_string_load_groups(char *token, int uid);
-char *mx_json_string_send_message();
+char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 
 // JSON parsers
@@ -123,6 +140,7 @@ void mx_parse_logout_response(char *response, t_glade *g);
 int mx_parse_new_group_response(char *response, t_glade *g);
 void mx_parse_load_groups_response(char *response, t_glade *g);
 void mx_parse_load_messages_response(char *response, t_glade *g);
+int mx_parse_send_message_response(char *response);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
@@ -162,6 +180,6 @@ void mx_send_msg(GtkWidget *w, t_glade *g);
 
 void mx_load_groups(t_glade *g);
 
-void mx_load_messages(t_glade *g, int duid, bool group, time_t timestamp);
+void mx_load_messages(t_glade *g, time_t timestamp);
 
 gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g);

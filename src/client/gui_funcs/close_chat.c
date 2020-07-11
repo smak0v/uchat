@@ -5,6 +5,9 @@ gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g) {
         gtk_widget_hide(g->messages_area);
         gtk_widget_hide(g->box_message);
         gtk_widget_show(g->l_select_chat);
+
+        g->group = false;
+        g->dgid = MX_MISTERY;
     }
 
     (void)w;

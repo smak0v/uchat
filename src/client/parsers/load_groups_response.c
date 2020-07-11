@@ -1,9 +1,10 @@
 #include "client.h"
 
 static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
-    GList *group_box = gtk_container_get_children(GTK_CONTAINER(event_box));
-    GList *childs = gtk_container_get_children(GTK_CONTAINER(group_box->data));
+    GtkWidget *group_box = gtk_bin_get_child(GTK_BIN(event_box));
+    GList *childs = gtk_container_get_children(GTK_CONTAINER(group_box));
     GtkWidget *l_gid = GTK_WIDGET(g_list_nth_data(childs, 0));
+    int dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_gid)));
 
     gtk_entry_set_text(GTK_ENTRY(g->e_message), "");
 
@@ -13,9 +14,12 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     gtk_widget_hide(GTK_WIDGET(g->l_select_chat));
     gtk_widget_hide(GTK_WIDGET(g->profile_area));
 
-    mx_load_messages(g, mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_gid))),
-        true, time(NULL));
+    g->group = true;
+    g->dgid = dgid;
+    mx_load_messages(g, time(NULL));
 
+    g_list_free(childs);
+    childs = NULL;
     (void)e;
 }
 
@@ -36,7 +40,7 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
         "chat_group_box");
     g_signal_connect(event_box, "button_press_event",
         G_CALLBACK(open_group), g);
-    gtk_widget_realize (event_box);
+    gtk_widget_realize(event_box);
     gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
     gtk_widget_show_all(event_box);
     gtk_widget_hide(GTK_WIDGET(l_uid));

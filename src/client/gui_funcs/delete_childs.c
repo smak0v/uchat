@@ -12,9 +12,11 @@ void mx_delete_childs(GtkWidget *w) {
     if (w) {
         childs = gtk_container_get_children(GTK_CONTAINER(w));
 
-        g_list_foreach(childs, (GFunc)delete_child, NULL);
+        if (childs) {
+            g_list_foreach(childs, (GFunc)delete_child, NULL);
 
-        g_list_free(childs);
-        childs = NULL;
+            g_list_free(childs);
+            childs = NULL;
+        }
     }
 }
