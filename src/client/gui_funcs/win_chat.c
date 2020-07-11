@@ -26,6 +26,7 @@ static void find_gtk_objects(t_glade *g) {
     g->e_email = mx_get_gtk_obj(g, "e_email");
     g->e_profile_name = mx_get_gtk_obj(g, "e_profile_name");
     g->e_status = mx_get_gtk_obj(g, "e_status");
+    g->l_chat_name = mx_get_gtk_obj(g, "l_chat_name");
 }
 
 static void connect_signals(t_glade *g) {

@@ -158,3 +158,8 @@ label {
 .box_message_button {
     margin-right: 5px;
 }
+
+.chat_name {
+    margin-top: 10px;
+    font-size: 18px;
+}
