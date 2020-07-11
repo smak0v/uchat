@@ -13,7 +13,7 @@ static t_list *get_group_msg(sqlite3 *db, int group_id, int n) {
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         t_msg *tmp = mx_fill_msg(stmt);
 
-        mx_push_front(&group_msg, tmp);
+        mx_push_back(&group_msg, tmp);
     }
 
     sqlite3_finalize(stmt);
@@ -34,7 +34,7 @@ static t_list *get_dialog_msg(sqlite3 *db, int dialog_id, int n) {
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         t_msg *tmp = mx_fill_msg(stmt);
 
-        mx_push_front(&dialog_msg, tmp);
+        mx_push_back(&dialog_msg, tmp);
     }
 
     sqlite3_finalize(stmt);
