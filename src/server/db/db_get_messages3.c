@@ -60,3 +60,4 @@ t_list *mx_db_load_next_messages(sqlite3 *db, int group_id,
 
     return messages;
 }
+
