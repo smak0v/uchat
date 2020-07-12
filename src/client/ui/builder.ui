@@ -615,6 +615,24 @@
                             <child>
                               <placeholder/>
                             </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -988,18 +1006,21 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="e_message">
+                      <object class="GtkTextView" id="s_message">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="has_focus">True</property>
+                        <property name="is_focus">True</property>
+                        <property name="can_default">True</property>
+                        <property name="has_default">True</property>
+                        <property name="receives_default">True</property>
                         <property name="has_tooltip">True</property>
-                        <property name="tooltip_text" translatable="yes">Write a message ...</property>
-                        <property name="invisible_char">●</property>
-                        <property name="invisible_char_set">True</property>
-                        <property name="progress_pulse_step">0.090000003576278687</property>
-                        <property name="placeholder_text">Write a message...</property>
-                        <style>
-                          <class name="entry"/>
-                        </style>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="pixels_above_lines">1</property>
+                        <property name="pixels_below_lines">1</property>
+                        <property name="wrap_mode">word-char</property>
+                        <property name="accepts_tab">False</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
