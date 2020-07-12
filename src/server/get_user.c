@@ -1,6 +1,6 @@
 #include "server.h"
 
-static json_object *create_profile_object(t_profile *prof) {
+json_object *mx_create_profile_object(t_profile *prof) {
     json_object *j_prof = json_object_new_object();
 
     mx_j_o_o_a(j_prof, "uid", json_object_new_int(prof->user_id));
@@ -26,23 +26,29 @@ static char *json_str_builder(t_profile *prof) {
     return (char *)json_object_to_json_string(jobj);
 }
 
-// TODO: REFACTOR
-char *mx_get_user(void *jobj, t_comm *connect) {
+static int parse_get_user(json_object *jobj, char **name, int *uid) {
     json_object *j_name = NULL;
     json_object *j_uid = NULL;
+
+    json_object_object_get_ex(jobj, "name", &j_name);
+    json_object_object_get_ex(jobj, "uid", &j_uid);
+    if (j_name && j_uid && json_object_get_type(j_name) == json_type_string
+        && json_object_get_type(j_uid) == json_type_int) {
+        *name = (char *)json_object_get_string(j_name);
+        *uid = json_object_get_int(j_uid);
+        return 0;
+    }
+    else
+        return -1;
+}
+
+char *mx_get_user(void *jobj, t_comm *connect) {
     char *name = NULL;
     int uid = -1;
     t_profile *prof = NULL;
     t_user *user = NULL;
 
-    json_object_object_get_ex(jobj, "name", &j_name);
-    json_object_object_get_ex(jobj, "name", &j_uid);
-    if (j_name && j_uid && json_object_get_type(j_name) == json_type_string
-        && json_object_get_type(j_uid) == json_type_int) {
-        name = (char *)json_object_get_string(j_name);
-        uid = json_object_get_int(j_uid);
-    }
-    else
+    if (parse_get_user((json_object *)jobj, &name, &uid))
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))

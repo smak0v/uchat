@@ -131,6 +131,8 @@ void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
 void mx_fill_array_msg(json_object *jobj, t_list *msg_list);
 
+json_object *mx_create_profile_object(t_profile *prof);
+
 // Server Utils
 t_msg *mx_extract_message(void *jobj);
 int mx_extract_edit_msg(json_object *jobj, int *uid, int *mid, char **msg);
