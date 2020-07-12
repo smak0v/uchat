@@ -3,7 +3,7 @@
 void mx_new_table_socket(sqlite3 *database) {
     sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS SOCKETS(" \
                  "USER_ID INTEGER PRIMARY KEY NOT NULL," \
-                 "SOCKET_FD INTEGER NOT NULL," \
+                 "SOCKET_FD TEXT NOT NULL," \
                  "TOKEN TEXT NOT NULL," \
                  "FOREIGN KEY (USER_ID) REFERENCES USERS (USER_ID));",
                  0, 0, 0);
