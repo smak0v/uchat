@@ -134,3 +134,47 @@ label {
     margin-right: 40px;
     margin-bottom: 30px;
 }
+
+.chat_group_box {
+    background: shade(@second_color, 0.85);
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.box_message {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    background-color: shade(@base_color, 0.75);
+}
+
+.box_message_button {
+    margin-right: 5px;
+}
+
+.chat_name {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    background-color: shade(@base_color, 0.9);
+}
+
+.msg {
+    background: shade(@second_color, 0.95);
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}

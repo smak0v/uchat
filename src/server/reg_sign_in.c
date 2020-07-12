@@ -68,20 +68,21 @@ char *mx_sign_in(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;
     int uid = -1;
-    unsigned char *token = NULL;
+    char *token = NULL;
     char *res = NULL;
 
     if (extract_name_passw((json_object *)jobj, &name, &pass) != 0)
         return mx_bad_request(NULL, NULL);
     if ((uid = validate_sign_in(connect->db, name, pass)) == -1)
         return "{\"code\": 404}";
-    token = mx_generate_token();
+    if ((token = mx_get_token_by_user_id(connect->db, uid)) == NULL)
+        token = (char *)mx_generate_token();
     if (!token)
         return "{\"code\": 500}";
-    if (mx_add_sock_user(connect->db, uid, connect->fd, (char *)token) == -1)
+    if (mx_add_sock_user(connect->db, uid, connect->fd, token) == -1)
         res = "{\"code\": 500}";
     else
-        res = mx_json_string_s_in(uid, (char *)token);
-    mx_strdel((char **)&token);
+        res = mx_json_string_s_in(uid, token);
+    mx_strdel(&token);
     return res;
 }

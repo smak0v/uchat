@@ -1,5 +1,6 @@
 #include "server.h"
 
+// TODO REFACTOR
 void *mx_communicate(void *data) {
     t_comm *connect = (t_comm *)data;
     char buff[MX_MAX];

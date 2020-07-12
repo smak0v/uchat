@@ -154,7 +154,8 @@ SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c\
 						sign_out.c groups.c ssl_tls.c messages.c \
 						message_extraction.c validate_token.c json_builder.c \
 						wrappers.c json_array_builders.c loaders.c \
-						load_messages.c get_user.c groups2.c
+						load_messages.c get_user.c groups2.c json_builders2.c \
+						user_profile.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -227,16 +228,23 @@ UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
 						  threads.c sockets.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
-						  logout_response.c new_group_parser.c
+						  logout_response.c new_group_response.c \
+						  load_groups_response.c load_messages_response.c \
+						  send_message_response.c load_dialogs_response.c \
+						  get_profile_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
-						  new_group_builder.c load_groups_builder.c
+						  new_group_builder.c load_dialogs_groups_builder.c \
+						  send_message_builder.c load_messages_builder.c \
+						  search_user_builder.c edit_profile_builder.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
 						  create_error_modal_window.c auth.c win_destroy.c \
-						  profile.c get_gtk_obj.c add_chat.c add_group.c \
-						  messages.c load_groups.c
+						  edit_profile.c get_gtk_obj.c add_chat.c add_group.c \
+						  send_message.c load_groups.c delete_childs.c \
+						  load_messages.c close_chat.c attach_file.c \
+						  load_dialogs.c get_profile.c profile.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

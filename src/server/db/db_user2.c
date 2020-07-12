@@ -34,7 +34,6 @@ t_list *mx_find_user_by_char(sqlite3 *db, char *str) {
 
         d->user_id = sqlite3_column_int(stmt, 0);
         d->user_login = strdup((char*)sqlite3_column_text(stmt, 1));
-        d->user_pass = strdup((char*)sqlite3_column_text(stmt, 2));
         mx_push_back(&g, d);
     }
     sqlite3_finalize(stmt);

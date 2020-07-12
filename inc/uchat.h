@@ -52,7 +52,9 @@ enum e_types {
     LOAD_GROUPS,
     LOAD_MESSAGES,
     DELETE_USER,
-    GET_USER
+    GET_USER,
+    FIND_USER,
+    EDIT_PROFILE
 };
 
 // Functions

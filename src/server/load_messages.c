@@ -32,7 +32,6 @@ static char *process_t_list(t_list *m_list) {
     mx_fill_array_msg(arr, m_list);
     mx_j_o_o_a(jobj, "msg", arr);
     res = (char *)json_object_to_json_string(jobj);
-    json_object_put(jobj);
 
     return res;
 }

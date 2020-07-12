@@ -1,28 +1,29 @@
 #include "server.h"
 
-json_object *mx_create_profile_object(t_profile *prof) {
-    json_object *j_prof = json_object_new_object();
-
-    mx_j_o_o_a(j_prof, "uid", json_object_new_int(prof->user_id));
-    mx_j_o_o_a(j_prof, "name", json_object_new_string(prof->name));
-    mx_j_o_o_a(j_prof, "dob", json_object_new_string(prof->birth));
-    mx_j_o_o_a(j_prof, "mail", json_object_new_string(prof->email));
-    mx_j_o_o_a(j_prof, "status", json_object_new_string(prof->status));
-    mx_j_o_o_a(j_prof, "country", json_object_new_string(prof->country));
-
-    return j_prof;
-}
-
-static char *json_str_builder(t_profile *prof) {
+static char *json_str_builder_get(t_profile *prof) {
     json_object *jobj = json_object_new_object();
-    json_object *j_prof = NULL;
 
-    mx_j_o_o_a(j_prof, "code", json_object_new_int(200));
+    mx_j_o_o_a(jobj, "code", json_object_new_int(200));
     if (!prof)
         mx_j_o_o_a(jobj, "prof", json_object_new_null());
     else
-        mx_j_o_o_a(jobj, "prof", create_profile_object(prof));
+        mx_j_o_o_a(jobj, "prof", mx_create_profile_object(prof));
 
+    return (char *)json_object_to_json_string(jobj);
+}
+
+static char *json_str_builder_find(t_list *users) {
+    json_object *jobj = json_object_new_object();
+    json_object *arr = NULL;
+
+    mx_j_o_o_a(jobj, "code", json_object_new_int(200));
+    if (!users)
+        mx_j_o_o_a(jobj, "users", json_object_new_null());
+    else {
+        arr = json_object_new_array();
+        mx_fill_array_user(arr, users);
+        mx_j_o_o_a(jobj, "users", arr);
+    }
     return (char *)json_object_to_json_string(jobj);
 }
 
@@ -55,8 +56,25 @@ char *mx_get_user(void *jobj, t_comm *connect) {
         return "{\"code\": 401}";
 
     if ((user = mx_get_user_by_login(connect->db, name)) == NULL)
-        return "{\"code\": 500}";
+        return "{\"code\": 404}";
+
     prof = mx_get_profile_by_id(connect->db, user->user_id);
 
-    return json_str_builder(prof);
+    return json_str_builder_get(prof);
+}
+
+char *mx_find_user(void *jobj, t_comm *connect) {
+    char *name = NULL;
+    int uid = -1;
+    t_list *prof = NULL;
+
+    if (parse_get_user((json_object *)jobj, &name, &uid))
+        return mx_bad_request(NULL, NULL);
+
+    if (mx_validate_token(connect->db, uid, (json_object *)jobj))
+        return "{\"code\": 401}";
+
+    prof = mx_find_user_by_char(connect->db, name);
+
+    return json_str_builder_prof(prof);
 }
