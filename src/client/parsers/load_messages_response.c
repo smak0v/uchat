@@ -33,7 +33,7 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
     else {
         j_msgs = json_object_object_get(jobj, "msg");
         len = json_object_array_length(j_msgs);
-        for (int i = 0; i < len; ++i, ++(g->rows_count))
+        for (int i = 0; i < len; ++i)
             add_message_to_gui(json_object_array_get_idx(j_msgs, i), g);
         gtk_widget_set_vexpand(g->messages_area, TRUE);
         return MX_SUCCESS;
