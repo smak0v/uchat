@@ -6,8 +6,10 @@ static void add_message_to_gui(json_object *msg, t_glade *g, int i) {
     GtkWidget *msg_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *l_msg = gtk_label_new(json_object_get_string(j_msg_text));
 
-    gtk_grid_attach(GTK_GRID(g->messages_area), event_box, 2, i, 2, 1);
+    gtk_grid_attach(GTK_GRID(g->messages_area), event_box, 1, i, 1, 1);
     gtk_container_add(GTK_CONTAINER(event_box), msg_box);
+    gtk_label_set_width_chars(GTK_LABEL(l_msg), 30);
+    gtk_label_set_line_wrap(GTK_LABEL(l_msg), TRUE);
     gtk_box_pack_end(GTK_BOX(msg_box), l_msg, FALSE, FALSE, 0);
 
     gtk_style_context_add_class(gtk_widget_get_style_context(msg_box), "msg");
