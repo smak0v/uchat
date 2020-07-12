@@ -162,11 +162,15 @@ int mx_add_user(sqlite3 *db, char *login, char *pass);
 int mx_delete_user_by_login(sqlite3 *db, char *login);
 int mx_delete_user_by_id(sqlite3 *db, int user_id);
 int mx_get_user_id_by_login(sqlite3 *db, char *login);
-int mx_change_user_pass(sqlite3 *db, char *login, char *new_pass);
+int mx_change_user_pass(sqlite3 *db, int user_id, char *new_pass);
 char *mx_get_user_login_by_id(sqlite3 *db, int user_id);
+int mx_change_user_username(sqlite3 *db, int user_id, char *username);
+t_list *mx_find_user_by_char(sqlite3 *db, char *str);
 
 // GROUP_MEMBERS table
 t_gr_members *mx_get_by_group_mem_id(sqlite3 *db, int gr_member_id);
+t_gr_members *mx_get_by_user_id(sqlite3 *db, int user_id);
+t_gr_members *mx_get_by_group_id(sqlite3 *db, int group_id);
 int mx_add_group_member(sqlite3 *db, int user_id, int group_id, bool adm);
 int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id);
 int mx_check_group_member(sqlite3 *db, int user_id, int group_id);
@@ -208,7 +212,7 @@ t_list *mx_db_load_next_messages(sqlite3 *db, int group_id,
 
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,
-                     int sock_fd, char *token);
+                     char *sock_fd, char *token);
 int mx_get_sock_by_user_id(sqlite3 *db, int user_id);
 char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);

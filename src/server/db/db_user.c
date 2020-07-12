@@ -94,24 +94,3 @@ int mx_get_user_id_by_login(sqlite3 *db, char *login) {
     return id == 0 ? -1 : id;
 }
 
-char *mx_get_user_login_by_id(sqlite3 *db, int user_id) {
-    sqlite3_stmt *stmt = NULL;
-    char *login = NULL;
-    int rv = sqlite3_prepare_v2(db, "SELECT * FROM USER WHERE USER_ID = ?1",
-                                -1, &stmt, NULL);
-
-    sqlite3_bind_int(stmt, 1, user_id);
-
-    if (rv != SQLITE_OK)
-        return NULL;
-
-    if ((rv = sqlite3_step(stmt)) != SQLITE_ROW)
-        if (rv == SQLITE_ERROR)
-            return NULL;
-
-    login = strdup((char*)sqlite3_column_text(stmt, 1));
-
-    sqlite3_finalize(stmt);
-
-    return login;
-}
