@@ -19,7 +19,6 @@ static void find_gtk_objects(t_glade *g) {
     g->b_save_profile = mx_get_gtk_obj(g, "b_save_profile");
     g->d_add_chat = mx_get_gtk_obj(g, "d_add_chat");
     g->d_add_group = mx_get_gtk_obj(g, "d_add_group");
-    g->d_file_choose = mx_get_gtk_obj(g, "d_file_choose");
     g->gc_notebook = mx_get_gtk_obj(g, "gc_notebook");
     g->e_country = mx_get_gtk_obj(g, "e_country");
     g->e_birthday = mx_get_gtk_obj(g, "e_birthday");
@@ -45,6 +44,8 @@ static void connect_signals(t_glade *g) {
         G_CALLBACK(mx_close_chat), g);
     g_signal_connect(g->b_attach_file, "clicked",
         G_CALLBACK(mx_attach_file), g);
+    g_signal_connect(g->messages_area, "size-allocate",
+        G_CALLBACK(mx_scroll_to_bottom), g);
 }
 
 static void win_chat_utils(t_glade *g) {

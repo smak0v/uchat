@@ -1,22 +1,27 @@
 #include "client.h"
 
-static void add_message_to_gui(json_object *msg, t_glade *g, int i) {
+static void add_message_to_gui(json_object *msg, t_glade *g) {
     json_object *j_msg_text = json_object_object_get(msg, "msg");
-    GtkWidget *event_box = gtk_event_box_new();
-    GtkWidget *msg_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    json_object *j_time = json_object_object_get(msg, "time");
     GtkWidget *l_msg = gtk_label_new(json_object_get_string(j_msg_text));
+    GtkWidget *l_username = gtk_label_new("username");
+    GtkWidget *l_time = gtk_label_new(json_object_get_string(j_time));
+    GtkWidget *msg_v_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *u_t_h_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *msg_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-    gtk_grid_attach(GTK_GRID(g->messages_area), event_box, 1, i, 1, 1);
-    gtk_container_add(GTK_CONTAINER(event_box), msg_box);
-    gtk_label_set_width_chars(GTK_LABEL(l_msg), 30);
-    gtk_label_set_line_wrap(GTK_LABEL(l_msg), TRUE);
-    gtk_box_pack_end(GTK_BOX(msg_box), l_msg, FALSE, FALSE, 0);
-
-    gtk_style_context_add_class(gtk_widget_get_style_context(msg_box), "msg");
-
-    gtk_widget_realize(event_box);
-    gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
-    gtk_widget_show_all(event_box);
+    gtk_label_set_xalign(GTK_LABEL(l_username), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(l_time), 1);
+    gtk_label_set_xalign(GTK_LABEL(l_msg), 0.0);
+    gtk_box_pack_end(GTK_BOX(g->messages_area), msg_v_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(msg_v_box), u_t_h_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(msg_v_box), msg_vbox, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(u_t_h_box), l_username, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(u_t_h_box), l_time, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(msg_vbox), l_msg, FALSE, FALSE, 0);
+    gtk_style_context_add_class(gtk_widget_get_style_context(msg_vbox), "msg");
+    // gtk_style_context_add_class(gtk_widget_get_style_context(l_msg), "msgtxt");
+    gtk_widget_show_all(msg_vbox);
 }
 
 static int check_response_code(int code, json_object *jobj, t_glade *g) {
@@ -28,8 +33,8 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
     else {
         j_msgs = json_object_object_get(jobj, "msg");
         len = json_object_array_length(j_msgs);
-        for (int i = 0; i < len; ++i)
-            add_message_to_gui(json_object_array_get_idx(j_msgs, i), g, i);
+        for (int i = 0; i < len; ++i, ++(g->rows_count))
+            add_message_to_gui(json_object_array_get_idx(j_msgs, i), g);
         gtk_widget_set_vexpand(g->messages_area, TRUE);
         return MX_SUCCESS;
     }

@@ -1,18 +1,18 @@
 #include "client.h"
 
-static void destroy_dialog(GtkWidget *w, t_glade *g) {
-    (void)w;
-    (void)g;
-
-    return;
-}
-
 void mx_attach_file(GtkWidget *w, t_glade *g) {
-    g_signal_connect(g->d_file_choose, "delete-event",
-        G_CALLBACK(destroy_dialog), g);
+    char *filename = NULL;
+    GtkWidget *dialog = gtk_file_chooser_dialog_new ("Choose file",
+        GTK_WINDOW(g->w_chat), GTK_FILE_CHOOSER_ACTION_OPEN, "_Cancel",
+        GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 
-    gtk_widget_show_all(g->d_file_choose);
-    gtk_dialog_run(GTK_DIALOG(g->d_file_choose));
+    if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+        mx_printstr_endl(filename);
+        g_free(filename);
+    }
+
+    gtk_widget_destroy(dialog);
 
     (void)w;
 }
