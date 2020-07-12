@@ -211,7 +211,7 @@ t_list *mx_db_load_next_messages(sqlite3 *db, int group_id,
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,
                      char *sock_fd, char *token);
-int mx_get_sock_by_user_id(sqlite3 *db, int user_id);
+char *mx_get_sock_by_user_id(sqlite3 *db, int user_id);
 char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 
