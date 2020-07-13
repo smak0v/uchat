@@ -150,8 +150,8 @@ DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
 						db_get_messages3.c db_profile.c db_profile2.c \
 						db_user2.c sock_table2.c
 
-SERVER_SRCS				= main.c threads.c request_processing.c reg_sign_in.c\
-						sign_out.c groups.c ssl_tls.c messages.c \
+SERVER_SRCS				= main.c threads.c request_processing.c register.c\
+						sign_in.c sign_out.c groups.c ssl_tls.c messages.c \
 						message_extraction.c validate_token.c json_builder.c \
 						wrappers.c json_array_builders.c loaders.c \
 						load_messages.c get_user.c groups2.c json_builders2.c \
