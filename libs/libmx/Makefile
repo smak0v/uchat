@@ -49,7 +49,7 @@ SLL_SRCS				= mx_create_node.c mx_list_size.c mx_reverse_list.c \
 						  mx_push_back.c mx_push_front.c mx_pop_back.c \
 						  mx_pop_front.c mx_push_second.c mx_sort_list.c \
 						  mx_list_merge_sort.c mx_list_insertion_sort.c \
-						  mx_is_equal_lists.c
+						  mx_is_equal_lists.c mx_delete_list.c
 
 TREE_SRCS				= mx_create_tree_node.c
 
