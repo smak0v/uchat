@@ -45,6 +45,7 @@ void mx_send_file_test(int socket_fd, char *path) {
 
 // {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "Makefile"}
 // {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "photo-1573935146153-f6322e84d1e4.jpeg"}
+// {"type": "S_MES", "gid": 1, "did": -1, "uid": 1, "uid2": -1, "msg": "", "time": 3819524, "file": "IMG_4317.MP4"}
 
 static void communicate(SSL *ssl, int socket_fd) {
     int bytes_read = 0;
@@ -69,16 +70,30 @@ static void communicate(SSL *ssl, int socket_fd) {
         }
 
         SSL_write(ssl, buff, strlen(buff));
+
+
         // FILE TRANSFER TEST
+        // json_object *jobj = json_tokener_parse(buff);
+        // json_object *j_type = NULL;
+        // json_object_object_get_ex(jobj, "file", &j_type);
+        // if (j_type) {
+        //     const char *path = json_object_get_string(j_type);
+        //     if (!strcmp(path, "IMG_4317.MP4"))
+        //         mx_send_file_test(socket_fd, "IMG_4317.MP4");
+        // }
+        // FILE TRANSFER TEST
+
+        // AUDIO TEST
         json_object *jobj = json_tokener_parse(buff);
         json_object *j_type = NULL;
-        json_object_object_get_ex(jobj, "file", &j_type);
+        json_object_object_get_ex(jobj, "audio", &j_type);
         if (j_type) {
-            const char *path = json_object_get_string(j_type);
-            if (!strcmp(path, "photo-1573935146153-f6322e84d1e4.jpeg"))
-                mx_send_file_test(socket_fd, "photo-1573935146153-f6322e84d1e4.jpeg");
+            mx_printstr_endl("start recording");
+            mx_record_audio();
+            mx_printstr_endl("stop recording");
         }
-        // FILE TRANSFER TEST
+        // AUDIO TEST
+
         bzero(buff, sizeof(buff));
         // bytes_read = SSL_read(ssl, buff, sizeof(buff));
         // buff[bytes_read] = '\0';

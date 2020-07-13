@@ -59,7 +59,7 @@ static int get_data_len(char *buffer) {
 // from server
 void mx_recv_file(int connection_fd, char *filename) {
     FILE *file;
-    char buffer[4096];
+    char buffer[10000];
     int b = 1;
     const char *data;
     int pack_num = 0;

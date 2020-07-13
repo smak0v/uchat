@@ -58,7 +58,7 @@ SRCD					= src
 #================================FUNCTIONS====================================#
 define compile_dependency
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(GTK_CFLAGS) -c $(1) -o $(2) \
-		-I $(INCD) -I $(LIBMXI) -I $(LIBJSONI) -I $(SQLITEI) \
+		-I $(INCD) -I $(LIBMXI) -I $(LIBJSONI) -I $(SQLITEI) -I libs/portaudio/include \
 		-I /usr/local/opt/openssl/include
 
 	@printf "\r\33[2K$(DIR)\t\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
@@ -191,7 +191,7 @@ CLIENT_OBJ_DIRS			= $(CLIENT_OBJD)
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c init.c build_ui_path.c ssl_tls.c
+CLIENT_SRCS				= main.c init.c build_ui_path.c ssl_tls.c audio_recording.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -202,7 +202,7 @@ $(CLIENT_OBJ_DIRS):
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
 		$(CLIENT_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
-		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
+		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto libs/portaudio/lib/.libs/libportaudio.a -framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework Carbon -framework Carbon -framework AudioUnit -framework AudioToolbox -framework CoreAudio -o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 
