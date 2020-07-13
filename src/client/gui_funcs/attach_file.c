@@ -8,7 +8,7 @@ void mx_attach_file(GtkWidget *w, t_glade *g) {
 
     if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-        mx_printstr_endl(filename);
+        g->filename = mx_strdup(filename);
         g_free(filename);
     }
 

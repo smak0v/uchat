@@ -49,7 +49,7 @@ char *mx_send_message(void *jobj, t_comm *connect) {
         res = send_private_message(message, connect->db);
 
     if (message->file)
-        mx_recv_file(connect->fd, message->file);
+        mx_recv_file(connect->ssl, message->file);
 
     return res;
 }

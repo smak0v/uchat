@@ -111,7 +111,7 @@ COMMON_OBJ_DIRS			= $(COMMON_OBJD)
 COMMON_OBJS				= $(addprefix $(OBJD)/, $(COMMON:%.c=%.o))
 
 #===================================SRC=======================================#
-COMMON_SRCS				= check_port.c check_ip.c file_transfer.c \
+COMMON_SRCS				= check_port.c check_ip.c
 
 COMMON					= $(addprefix common/, $(COMMON_SRCS))
 
@@ -156,7 +156,8 @@ SERVER_SRCS				= main.c threads.c request_processing.c register.c\
 						wrappers.c json_array_builders.c loaders.c \
 						load_messages.c get_user.c groups2.c json_builders2.c \
 						user_profile.c send_to_all_clients.c sockets.c \
-						remove_socket.c
+						remove_socket.c recv_file.c
+
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -226,7 +227,7 @@ CLIENT_SRCS				= main.c
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
-						  threads.c sockets.c
+						  threads.c sockets.c send_file.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \
@@ -237,7 +238,8 @@ PARSERS_SRCS			= login_response.c signup_response.c \
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \
 						  send_message_builder.c load_messages_builder.c \
-						  search_user_builder.c edit_profile_builder.c
+						  search_user_builder.c edit_profile_builder.c \
+						  send_file_builder.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
