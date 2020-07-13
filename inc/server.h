@@ -143,6 +143,8 @@ unsigned char *mx_generate_token(void);
 int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 char *mx_hmac_sha_256(char *key, char *data);
 int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
+int mx_extract_name_passw(json_object *json, const char **name,
+                              const char **passw);
 
 //Sockets
 char *mx_add_socket(char *sock, int fd);

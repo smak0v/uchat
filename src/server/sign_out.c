@@ -14,8 +14,7 @@ char *mx_sign_out(void *jobj, t_comm *connect) {
     if (mx_validate_token(connect->db, id, (json_object *)jobj))
         return "{\"code\": 401}";
 
-    if (mx_remove_socket(connect->db, connect->fd, id) == NULL)
-        printf("I'm not sure how to handle this mistake in mx_sign_out\n");
+    mx_remove_socket(connect->db, connect->fd, id);
 
     return "{\"code\": 200}";
 }
