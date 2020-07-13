@@ -7,7 +7,8 @@ static char *send_group_message(t_msg *message, sqlite3 *db) {
     mx_add_msg(db, message);
 
     for (int i = 0; group_members[i] != -1; i++)
-        mx_send_to_all_clients(db, js_str, group_members[i]);
+        if (group_members[i] != message->sender)
+            mx_send_to_all_clients(db, js_str, group_members[i]);
 
     mx_strdel(&js_str);
     return mx_msg_json_builder(message);
