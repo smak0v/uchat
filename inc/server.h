@@ -136,6 +136,7 @@ int mx_extract_delete_message(json_object *jobj, int *uid, int *mid);
 unsigned char *mx_generate_token(void);
 int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 char *mx_hmac_sha_256(char *key, char *data);
+int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
 
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);

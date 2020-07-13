@@ -95,17 +95,83 @@ int mx_start_server(int port) {
     return 0;
 }
 
-int main(int argc, char **argv) {
-    if (argc < 2) {
-        mx_print_error_endl("uchat_server: must take parameter - port to run");
-        mx_print_error_endl("usage: ./uchat_server PORT");
-        exit(MX_FAILURE);
-    } else {
-        if (!mx_check_port(argv[1]))
-            mx_terminate("uchat_server: not valid port");
-        mx_start_server(mx_atoi(argv[1]));
-    }
 
-    pthread_exit(NULL);
+static int count_commas(char *sock) {
+    int counter = 0;
+
+    for (int i = 0; sock[i]; i++) {
+        if (sock[i] == ',')
+            counter++;
+    }
+    counter += 1;
+    return counter;
 }
 
+static int *parse_sock_str(char *sock, int *sock_array, int len) {
+    int atoi = 0;
+    int arr_counter = 0;
+    int j = 0;
+
+    for (int i = 0; arr_counter < len;) {
+        while (sock[j] && sock[j] != ',')
+            j++;
+        if (j != i) {
+            char str[j - i + 1];
+
+            mx_strncpy(str, &sock[i], j - i);
+            str[j - i] = '\0';
+            atoi = mx_atoi(str);
+            sock_array[arr_counter] = atoi;
+            arr_counter++;
+            i += (j - i + 1);
+            j += 1;
+        }
+    }
+    return sock_array;
+}
+
+int *test_parse_sock_str(char *sock, int *len) {
+    // char *sock = mx_get_sock_by_user_id(db, uid);
+    int *sock_array = NULL;
+
+    if (!sock || sock[0] == '\0')
+        return NULL;
+
+    *len = count_commas(sock);
+    sock_array = malloc(sizeof(int) * (*len));
+
+    if (*len == 1) {
+        sock_array[0] = mx_atoi(sock);
+        return sock_array;
+    }
+    else
+        return parse_sock_str(sock, sock_array, *len);
+
+    return sock_array;
+}
+
+// int main(int argc, char **argv) {
+//     if (argc < 2) {
+//         mx_print_error_endl("uchat_server: must take parameter - port to run");
+//         mx_print_error_endl("usage: ./uchat_server PORT");
+//         exit(MX_FAILURE);
+//     } else {
+//         if (!mx_check_port(argv[1]))
+//             mx_terminate("uchat_server: not valid port");
+//         mx_start_server(mx_atoi(argv[1]));
+//     }
+
+//     pthread_exit(NULL);
+// }
+
+int main(int argc, char **argv) {
+    int len = 0;
+
+    argc++;
+    int *arr = test_parse_sock_str(argv[1], &len);
+
+    for (int i = 0; i < len; i++)
+        mx_printint_endl(arr[i]);
+    system("leaks uchat_server");
+    return 0;
+}
