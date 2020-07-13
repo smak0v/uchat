@@ -18,6 +18,7 @@ typedef struct s_user t_user;
 typedef struct s_gr_members t_gr_members;
 typedef struct s_all_gr_member t_all_gr_member;
 typedef struct s_dialog t_dialog;
+typedef struct s_dialog_sorted t_dialog_sorted;
 typedef struct s_dialog_users t_dialog_users;
 typedef struct s_msg t_msg;
 typedef struct s_profile t_profile;
@@ -58,6 +59,13 @@ struct s_dialog {
 	int dialog_id;
 	int user_id1;
 	int user_id2;
+};
+
+struct s_dialog_sorted {
+	int dialog_id;
+	int user_id1;
+	int user_id2;
+	int time;
 };
 
 struct s_dialog_users {
@@ -200,6 +208,7 @@ t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2);
 int mx_get_dialog_id(sqlite3 *db, int id1, int id2);
 int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2);
 int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id);
+int mx_get_time_dialog(sqlite3 *db, int dialog_id, int user_id);
 t_list *mx_get_all_user_dialogs(sqlite3 *db, int user_id);
 t_list *mx_get_dialog_users(sqlite3 *db, int usr_id, int *len);
 
