@@ -252,6 +252,7 @@ void mx_print_db(sqlite3 *db, char *table);
 void mx_print_list_members(t_list *mem);
 int mx_get_size_table(sqlite3 *db, char *table);
 void mx_delete_list(t_list *head);
+void mx_recv_file(SSL *ssl, char *filename);
 
 // TLS/SSL
 void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);

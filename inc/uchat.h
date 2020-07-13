@@ -60,5 +60,3 @@ enum e_types {
 //Utils
 bool mx_check_port(char *port);
 bool mx_check_ip(char *ip);
-void mx_send_file(int socket_fd, char *path);
-void mx_recv_file(int connection_fd, char *path);
