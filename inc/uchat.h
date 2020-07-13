@@ -42,6 +42,7 @@ enum e_types {
     N_GRP,
     INV,
     RN_GR,
+    DEL_GROUP,
     LEAVE_GROUP,
     S_MES,
     EDIT_MESSAGE,
@@ -51,7 +52,8 @@ enum e_types {
     LOAD_GROUPS,
     LOAD_MESSAGES,
     DELETE_USER,
-    GET_USER
+    GET_USER,
+    EDIT_PROFILE
 };
 
 // Functions

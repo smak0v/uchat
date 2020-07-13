@@ -69,23 +69,38 @@ char *mx_sign_in(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;
     int uid = -1;
-    unsigned char *token = NULL;
+    char *tk = NULL;
     char *res = NULL;
-    char *socket = NULL;
+
+    char *sock = NULL;
+    char *tmp = NULL;
 
     if (extract_name_passw((json_object *)jobj, &name, &pass) != 0)
         return mx_bad_request(NULL, NULL);
     if ((uid = validate_sign_in(connect->db, name, pass)) == -1)
         return "{\"code\": 404}";
-    if ((token = mx_generate_token()) == NULL)
-        return "{\"code\": 500}";
+    if ((token = mx_get_token_by_user_id(connect->db, uid)) == NULL)
+        if ((token = (char *)mx_generate_token()) == NULL)
+            return "{\"code\": 500}";
 
-    // socket = mx_add_socket(connect->db, connect->fd, uid);
-    // if (mx_add_sock_user(connect->db, uid, socket, (char *)token) == -1)
-    //     res = "{\"code\": 500}";
-    // else
-    //     res = mx_json_string_s_in(uid, (char *)token);
-    mx_strdel(&socket);
-    mx_strdel((char **)&token);
+    sock = mx_get_sock_by_user_id(connect->db, uid);
+    if (!sock)
+        if (mx_add_sock_user(connect->db, uid, mx_itoa(connect->fd), tk) == -1)
+            res = "{\"code\": 500}";
+    else if (sock[0] == '\0') {
+        res = "{\"code\": 500}";
+        mx_strdel(&sock);
+    }
+    else {
+        tmp = sock;
+        sock = mx_add_socket(sock, connect->fd);
+        mx_strdel(&tmp);
+    }
+
+    if (mx_add_sock_user(connect->db, uid, sock, tk) == -1)
+        res = "{\"code\": 500}";
+    else
+        res = mx_json_string_s_in(uid, tk);
+    mx_strdel(&tk);
     return res;
 }

@@ -1,6 +1,7 @@
 @define-color base_color #243b53;
 @define-color second_color #334e68;
 @define_color label_color #f5f7fa;
+@define_color msg_color #92a1b0;
 
 window,
 dialog {
@@ -94,7 +95,6 @@ label {
 }
 
 .save_profile_btn {
-    margin-left: 350px;
     margin-bottom: 100px;
     background-color: shade(@second_color, 0.75);
     border-color: shade(@second_color, 0.75);
@@ -108,4 +108,84 @@ label {
 
 .save_profile_btn:hover {
     background-color: shade(@second_color, 0.9);
+}
+
+.add_btn {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.cancel_btn {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.l_new_group_name {
+    margin-top: 30px;
+    margin-right: 190px;
+    font-size: 18px;
+}
+
+.error {
+    font-size: 15px;
+    color: red;
+}
+
+.new_group_error {
+    margin-right: 40px;
+    margin-bottom: 30px;
+}
+
+.chat_group_box {
+    background: shade(@second_color, 0.85);
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.box_message {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    background-color: shade(@base_color, 0.75);
+}
+
+.box_message_button {
+    margin-right: 5px;
+}
+
+.chat_name {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    background-color: shade(@base_color, 0.9);
+}
+
+.msg {
+    background: #5e7185;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.message_input {
+    background-color: shade(@base_color, 0.75);
+    padding: 10px;
+    padding-left: 10px;
+}
+
+.msgtxt {
+    padding-top: 5px;
 }

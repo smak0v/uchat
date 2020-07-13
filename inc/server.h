@@ -109,6 +109,8 @@ char *mx_sign_out(void *jobj, t_comm *connect);
 char *mx_new_group(void *jobj, t_comm *connect);
 char *mx_add_to_group(void *jobj, t_comm *connect);
 char *mx_rename_group(void *jobj, t_comm *connect);
+char *mx_leave_group(void *jobj, t_comm *connect);
+char *mx_del_group(void *jobj, t_comm *connect);
 char *mx_send_message(void *jobj, t_comm *connect);
 char *mx_edit_message(void *jobj, t_comm *connect);
 char *mx_delete_message(void *jobj, t_comm *connect);
@@ -116,7 +118,8 @@ char *mx_load_dialogues(void *jobj, t_comm *connect);
 char *mx_load_groups(void *jobj, t_comm *connect);
 char *mx_load_messages(void *jobj, t_comm *connect);
 char *mx_del_user(void *jobj, t_comm *connect);
-char *mx_leave_group(void *jobj, t_comm *connect);
+char *mx_get_user(void *jobj, t_comm *connect);
+char *mx_edit_profile(void *jobj, t_comm *connect);
 
 // JSON builders
 char *mx_json_string_msg(t_msg *msg);
@@ -124,10 +127,13 @@ char *mx_json_string_s_in(int uid, char *tok);
 char *mx_json_string_add_to_gr(int gid);
 char *mx_json_string_load_dlg(t_ld_d *arrays, int len);
 char *mx_json_string_load_grp(t_ld_d *arrs, int len);
+char *mx_msg_json_builder(t_msg *msg);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
 void mx_fill_array_msg(json_object *jobj, t_list *msg_list);
+
+json_object *mx_json_builder_msg(t_msg *msg);
 
 // Server Utils
 t_msg *mx_extract_message(void *jobj);
@@ -137,6 +143,12 @@ unsigned char *mx_generate_token(void);
 int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 char *mx_hmac_sha_256(char *key, char *data);
 int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
+
+//Sockets
+char *mx_add_socket(char *sock, int fd);
+char *mx_remove_socket(sqlite3 *db, int fd, int uid);
+int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
+void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
 
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
@@ -212,9 +224,10 @@ t_list *mx_db_load_next_messages(sqlite3 *db, int group_id,
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,
                      char *sock_fd, char *token);
-int mx_get_sock_by_user_id(sqlite3 *db, int user_id);
+char *mx_get_sock_by_user_id(sqlite3 *db, int user_id);
 char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
+int mx_update_socket_by_user_id(sqlite3 *db, char *socket, int user_id);
 
 //PROFILES table
 int mx_add_profile(sqlite3 *db, t_profile *usr);

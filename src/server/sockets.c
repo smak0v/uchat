@@ -54,17 +54,7 @@ int *mx_parse_sock_str(sqlite3 *db, int uid, int *len) {
     return sock_array;
 }
 
-char *mx_remove_socket(sqlite3 *db, int fd, int uid) {
-    char *sock = mx_get_sock_by_user_id(db, uid);
-
-    if (!sock)
-
-    char **split = mx_strsplit(sock, ',');
-
-}
-
-char *mx_add_socket(sqlite3 *db, int fd, int uid) {
-    char *sock = mx_get_sock_by_user_id(db, uid);
+char *mx_add_socket(char *sock, int fd) {
     char *tmp = NULL;
     char *itoa_str = NULL;
 
@@ -85,12 +75,3 @@ char *mx_add_socket(sqlite3 *db, int fd, int uid) {
         return tmp;
     }
 }
-
-
-
-// "2,34,5,6"
-// i = 0,
-// j = 1,
-
-// i = 2,
-// j = 4

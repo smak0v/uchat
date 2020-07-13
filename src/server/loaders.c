@@ -15,11 +15,11 @@ static t_ld_d *create_arrays_dlg(t_list *lst, int len) {
     char **names = malloc(sizeof(char *) * len);
 
     for (int i = 0; i < len; i++) {
+        dialogue = lst->data;
         dids[i] = dialogue->dialog_id;
         uids[i] = dialogue->user_id;
         names[i] = dialogue->username;
         lst = lst->next;
-        dialogue = lst->data;
     }
 
     arrays->dialog_id = dids;
@@ -36,16 +36,14 @@ static t_ld_d *create_arrays_grp(t_list *lst, int len) {
     char **names = malloc(sizeof(char *) * len);
 
     for (int i = 0; i < len; i++) {
+        group = lst->data;
         gids[i] = group->group_id;
         names[i] = group->group_name;
-
         lst = lst->next;
-        group = lst->data;
     }
 
     arrays->dialog_id = gids;
     arrays->username = names;
-
     return arrays;
 }
 
@@ -67,7 +65,9 @@ char *mx_load_dialogues(void *jobj, t_comm *connect) {
         return "{\"code\": 401}";
 
     d_lst = mx_get_dialog_users(connect->db, uid, &len);
-    arrays = create_arrays_dlg(d_lst, len);
+    if (d_lst)
+        arrays = create_arrays_dlg(d_lst, len);
+
     // if (d_lst)
     //     mx_delete_list(d_lst);
     res = mx_json_string_load_dlg(arrays, len);
@@ -93,7 +93,9 @@ char *mx_load_groups(void *jobj, t_comm *connect) {
         return "{\"code\": 401}";
 
     g_lst = mx_get_groups(connect->db, uid, &len);
-    arrays = create_arrays_grp(g_lst, len);
+
+    if (g_lst)
+        arrays = create_arrays_grp(g_lst, len);
     // if (d_lst)
     //     mx_delete_list(d_lst);
     res = mx_json_string_load_grp(arrays, len);

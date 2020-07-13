@@ -10,12 +10,11 @@ char *mx_get_user_login_by_id(sqlite3 *db, int user_id) {
 
     if (rv != SQLITE_OK)
         return NULL;
-
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW)
         if (rv == SQLITE_ERROR)
             return NULL;
-
-    login = strdup((char*)sqlite3_column_text(stmt, 1));
+    if (sqlite3_column_text(stmt, 1) != NULL)
+        login = strdup((char*)sqlite3_column_text(stmt, 1));
 
     sqlite3_finalize(stmt);
 

@@ -4,9 +4,6 @@ int mx_add_grp(sqlite3 *db, char *group_name) {
     sqlite3_stmt *stmt = NULL;
     int rv = 0;
 
-    if (mx_get_grp_id(db, group_name) > 0)
-        return -2;
-
     rv = sqlite3_prepare_v2(db, "INSERT INTO GRP(GROUP_NAME) VALUES(?1);",
                             -1, &stmt, NULL);
 
@@ -20,7 +17,7 @@ int mx_add_grp(sqlite3 *db, char *group_name) {
 
     sqlite3_finalize(stmt);
 
-    return mx_get_grp_id(db, group_name);
+    return sqlite3_last_insert_rowid(db);
 }
 
 int mx_rename_grp_by_id(sqlite3 *db, int grp_id, char *new_name) {
@@ -98,7 +95,8 @@ char *mx_get_group_name_by_id(sqlite3 *db, int group_id) {
         if (rv == SQLITE_ERROR)
             return NULL;
 
-    grp_name = strdup((char*)sqlite3_column_text(stmt, 1));
+    if (sqlite3_column_text(stmt, 1) != NULL)
+        grp_name = strdup((char*)sqlite3_column_text(stmt, 1));
 
     sqlite3_finalize(stmt);
 
