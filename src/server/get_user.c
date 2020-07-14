@@ -76,5 +76,5 @@ char *mx_find_user(void *jobj, t_comm *connect) {
 
     prof = mx_find_user_by_char(connect->db, name);
 
-    return json_str_builder_prof(prof);
+    return json_str_builder_find(prof);
 }

@@ -107,7 +107,7 @@ struct s_profile {
 t_meta *mx_init_threads(sqlite3 *db);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
- char *mx_process_request(char *request, t_comm *connect);
+char *mx_process_request(char *request, t_comm *connect);
 
 // Server API
 char *mx_bad_request(void *jobj, t_comm *connect);
@@ -137,6 +137,7 @@ char *mx_json_string_add_to_gr(int gid);
 char *mx_json_string_load_dlg(t_ld_d *arrays, int len);
 char *mx_json_string_load_grp(t_ld_d *arrs, int len);
 char *mx_msg_json_builder(t_msg *msg);
+char *mx_json_string_notify_gr(int gid, char *gr_name, int type);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
@@ -156,12 +157,17 @@ char *mx_hmac_sha_256(char *key, char *data);
 int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
 int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
+json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
+void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
+
+// Notifications
+void mx_notify_add_to_group(sqlite3 *db, json_object *cli_arr, int gid);
+void mx_notify_group_renamed(sqlite3 *db, int gid, char *name);
 
 //Sockets
 char *mx_add_socket(char *sock, int fd);
 char *mx_remove_socket(sqlite3 *db, int fd, int uid);
 int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
-void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
 
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
@@ -198,7 +204,7 @@ t_gr_members *mx_get_by_group_id(sqlite3 *db, int group_id);
 int mx_add_group_member(sqlite3 *db, int user_id, int group_id, bool adm);
 int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id);
 int mx_check_group_member(sqlite3 *db, int user_id, int group_id);
-t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id);
+t_list *mx_get_all_group_members(sqlite3 *db, int gid);
 int mx_change_admin_status(sqlite3 *db, int user_id, int group_id, bool adm);
 int *mx_get_all_id_group_members(sqlite3 *db, int group_id);
 int mx_get_size_group_mem_by_group_id(sqlite3 *db, int group_id);

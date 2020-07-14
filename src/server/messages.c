@@ -59,12 +59,17 @@ char *mx_edit_message(void *jobj, t_comm *connect) {
     int uid = -1;
     int msg_id = -1;
     char *msg = NULL;
+    t_msg *struct_msg = NULL;
 
     if (mx_extract_edit_msg(jobj, &uid, &msg_id, &msg) == -1)
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return "{\"code\": 401}";
+
+    struct_msg = mx_get_msg_by_id(connect->db, msg_id);
+    if (struct_msg->sender != uid)
+        return "{\"code\": 403}";
 
     if (mx_update_msg_by_id(connect->db, msg, msg_id) == -1)
         return "{\"code\": 500}";
@@ -84,7 +89,6 @@ char *mx_delete_message(void *jobj, t_comm *connect) {
         return "{\"code\": 401}";
 
     msg = mx_get_msg_by_id(connect->db, mid);
-
     if (msg->sender != uid)
         return "{\"code\": 403}";
 

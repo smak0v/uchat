@@ -31,5 +31,5 @@ char *mx_register_user(void *jobj, t_comm *connect) {
             return "{\"code\": 500}";
     }
     free(prof);
-    return (char *)pass;
+    return (char *)pass; // I'M NOT RETURNING PASSW!! ITS KOSTYL, I HAVE 5 VARS
 }

@@ -40,23 +40,23 @@ void *mx_listen_server(void *data) {
 
     // int bytes_read = 0;
     // char buff[MX_MAX];
-    // int n = 0;
+    // // int n = 0;
 
-    // while(1) {
-        // mx_show_server_certs(thread_data->ssl);
-        // mx_printstr("Enter the string: ");
-        // while ((buff[n++] = getchar()) != '\n')
-        //     ;
-        // n = 0;
-        // SSL_write(thread_data->ssl, buff, strlen(buff));
-        // bzero(buff, sizeof(buff));
-        // bytes_read = SSL_read(thread_data->ssl, buff, sizeof(buff));
-        // buff[bytes_read] = '\0';
-        // if (bytes_read <= 0) {
-        //     mx_printstr_endl("Server not responding...");
-        //     close(SSL_get_fd(thread_data->ssl));
-        // }
-        // mx_printstr_endl(buff);
+    // while (1) {
+    //     // mx_show_server_certs(thread_data->ssl);
+    //     // mx_printstr("Enter the string: ");
+    //     // while ((buff[n++] = getchar()) != '\n')
+    //     //     ;
+    //     // n = 0;
+    //     // SSL_write(thread_data->ssl, buff, strlen(buff));
+    //     bzero(buff, sizeof(buff));
+    //     bytes_read = SSL_read(thread_data->ssl, buff, sizeof(buff));
+    //     buff[bytes_read] = '\0';
+    //     if (bytes_read <= 0) {
+    //         mx_printstr_endl("Server not responding...");
+    //         close(SSL_get_fd(thread_data->ssl));
+    //     }
+    //     mx_printstr_endl(buff);
     // }
     return data;
 }

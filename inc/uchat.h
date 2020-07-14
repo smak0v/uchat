@@ -54,7 +54,9 @@ enum e_types {
     DELETE_USER,
     GET_USER,
     FIND_USER,
-    EDIT_PROFILE
+    EDIT_PROFILE,
+    NOTIF_ADD_TO_GR,
+    NOTIF_GR_RENAMED
 };
 
 // Functions
