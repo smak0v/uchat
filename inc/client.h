@@ -55,6 +55,9 @@ struct s_glade {
     bool group;
     int uid2;
 
+    // additional data
+    char *filename;
+
     // log in window
     GtkWidget *w_log; // window login
     GtkWidget *e_name; // entry name
@@ -107,7 +110,6 @@ struct s_glade {
     // dialogs
     GtkWidget *d_add_chat; // dialog for adding new chat
     GtkWidget *d_add_group; // dialog for adding new group
-    GtkWidget *d_file_choose; // dialog for file choosig
 
     // add chat dialog
     GtkWidget *b_add_chat_cancel; // button cancel add chat
@@ -140,6 +142,10 @@ char *mx_read_server_response(t_glade *g);
 int mx_clear_jobj(json_object **jobj, int status);
 GtkWidget *mx_get_gtk_obj(t_glade *g, char *name);
 void mx_logout(t_glade *g);
+void mx_clear_input_text(t_glade *g);
+char *mx_get_input_text(t_glade *g);
+void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g);
+void mx_send_file(SSL *ssl, char *path);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
@@ -151,6 +157,7 @@ char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 char *mx_json_string_search_user(char *token, int uid, char *name);
 char *mx_json_string_edit_profile(t_glade *g, t_profile *profile);
+char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);

@@ -18,6 +18,7 @@ typedef struct s_user t_user;
 typedef struct s_gr_members t_gr_members;
 typedef struct s_all_gr_member t_all_gr_member;
 typedef struct s_dialog t_dialog;
+typedef struct s_dialog_sorted t_dialog_sorted;
 typedef struct s_dialog_users t_dialog_users;
 typedef struct s_msg t_msg;
 typedef struct s_profile t_profile;
@@ -58,6 +59,13 @@ struct s_dialog {
 	int dialog_id;
 	int user_id1;
 	int user_id2;
+};
+
+struct s_dialog_sorted {
+	int dialog_id;
+	int user_id1;
+	int user_id2;
+	int time;
 };
 
 struct s_dialog_users {
@@ -145,6 +153,15 @@ int mx_extract_delete_message(json_object *jobj, int *uid, int *mid);
 unsigned char *mx_generate_token(void);
 int mx_validate_token(sqlite3 *db, int id, void *v_jobj);
 char *mx_hmac_sha_256(char *key, char *data);
+int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
+int mx_extract_name_passw(json_object *json, const char **name,
+                              const char **passw);
+
+//Sockets
+char *mx_add_socket(char *sock, int fd);
+char *mx_remove_socket(sqlite3 *db, int fd, int uid);
+int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
+void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
 
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
@@ -203,6 +220,7 @@ t_dialog *mx_get_dialog_by_id1_id2(sqlite3 *db, int id1, int id2);
 int mx_get_dialog_id(sqlite3 *db, int id1, int id2);
 int mx_delete_dialog_by_id1_id2(sqlite3 *db, int user_id1, int user_id2);
 int *mx_get_users_id_by_dialog_id(sqlite3 *db, int dialog_id);
+int mx_get_time_dialog(sqlite3 *db, int dialog_id, int user_id);
 t_list *mx_get_all_user_dialogs(sqlite3 *db, int user_id);
 t_list *mx_get_dialog_users(sqlite3 *db, int usr_id, int *len);
 
@@ -220,9 +238,10 @@ t_list *mx_db_load_next_messages(sqlite3 *db, int group_id,
 //SOCKETS table
 int mx_add_sock_user(sqlite3 *db, int user_id,
                      char *sock_fd, char *token);
-int mx_get_sock_by_user_id(sqlite3 *db, int user_id);
+char *mx_get_sock_by_user_id(sqlite3 *db, int user_id);
 char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
+int mx_update_socket_by_user_id(sqlite3 *db, char *socket, int user_id);
 
 //PROFILES table
 int mx_add_profile(sqlite3 *db, t_profile *usr);
@@ -236,6 +255,7 @@ void mx_print_db(sqlite3 *db, char *table);
 void mx_print_list_members(t_list *mem);
 int mx_get_size_table(sqlite3 *db, char *table);
 void mx_delete_list(t_list *head);
+void mx_recv_file(SSL *ssl, char *filename);
 
 // TLS/SSL
 void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);

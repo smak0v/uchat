@@ -7,6 +7,8 @@ gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g) {
         gtk_widget_show(g->l_select_chat);
         gtk_label_set_text(GTK_LABEL(g->l_chat_name), "");
 
+        mx_delete_childs(g->messages_area);
+
         g->group = false;
         g->dgid = MX_MISTERY;
     }

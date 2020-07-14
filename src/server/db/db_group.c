@@ -95,7 +95,8 @@ char *mx_get_group_name_by_id(sqlite3 *db, int group_id) {
         if (rv == SQLITE_ERROR)
             return NULL;
 
-    grp_name = strdup((char*)sqlite3_column_text(stmt, 1));
+    if (sqlite3_column_text(stmt, 1) != NULL)
+        grp_name = strdup((char*)sqlite3_column_text(stmt, 1));
 
     sqlite3_finalize(stmt);
 

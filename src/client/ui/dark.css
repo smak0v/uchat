@@ -1,6 +1,7 @@
 @define-color base_color #243b53;
 @define-color second_color #334e68;
 @define_color label_color #f5f7fa;
+@define_color msg_color #92a1b0;
 
 window,
 dialog {
@@ -167,14 +168,24 @@ label {
 }
 
 .msg {
-    background: shade(@second_color, 0.95);
+    background: #5e7185;
     border-radius: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.message_input {
+    background-color: shade(@base_color, 0.75);
+    padding: 10px;
+    padding-left: 10px;
+}
+
+.msgtxt {
+    padding-top: 5px;
 }
