@@ -1,0 +1,12 @@
+prefix=/Users/opiskun/.brew/Cellar/libsndfile/1.0.29pre2
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: sndfile
+Description: A library for reading and writing audio files
+Requires: 
+Version: 1.0.29pre2
+Libs: -L${libdir} -lsndfile
+Libs.private: 
+Cflags: -I${includedir} 

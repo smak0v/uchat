@@ -3,6 +3,7 @@
 // Includes
 #include <gtk/gtk.h>
 #include "portaudio.h"
+#include "sndfile.h"
 
 // Constants
 #define MX_UI_PATH "./src/client/ui/"
