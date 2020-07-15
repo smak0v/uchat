@@ -164,11 +164,11 @@ label {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 18px;
-    background-color: shade(@base_color, 0.9);
+    background-color: shade(@base_color, 0.75);
 }
 
 .msg {
-    background: #5e7185;
+    background-color: rgba(94, 113, 133, 0.5);
     border-radius: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -188,4 +188,19 @@ label {
 
 .msgtxt {
     padding-top: 5px;
+}
+
+.username {
+    margin-right: 50px;
+    color: gray;
+    font-size: 13px;
+}
+
+.time {
+    color: gray;
+    font-size: 13px;
+}
+
+.box5 {
+    background-color: shade(@base_color, 0.75);
 }

@@ -6,7 +6,7 @@ static t_list *next_group_msg(sqlite3 *db, int group_id, int n, int time) {
 
     sqlite3_prepare_v2(db, "SELECT * FROM MSG INNER JOIN USER ON " \
                        "MSG.SENDER = USER.USER_ID WHERE GROUP_ID = ?1 " \
-                       "AND TIME < ?2 ORDER BY TIME DESC LIMIT ?3;",
+                       "AND TIME < ?2 ORDER BY TIME ASC LIMIT ?3;",
                        -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, group_id);
     sqlite3_bind_int(stmt, 2, time);
@@ -27,7 +27,7 @@ static t_list *next_dialog_msg(sqlite3 *db, int dialog_id, int n, int time) {
 
     sqlite3_prepare_v2(db, "SELECT * FROM MSG INNER JOIN USER ON " \
                        "MSG.SENDER = USER.USER_ID WHERE DIALOG_ID = ?1 " \
-                       "AND TIME < ?2 ORDER BY TIME DESC LIMIT ?3;",
+                       "AND TIME < ?2 ORDER BY TIME ASC LIMIT ?3;",
                        -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, dialog_id);
     sqlite3_bind_int(stmt, 2, time);

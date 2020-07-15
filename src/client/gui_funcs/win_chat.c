@@ -27,6 +27,7 @@ static void find_gtk_objects(t_glade *g) {
     g->e_status = mx_get_gtk_obj(g, "e_status");
     g->l_chat_name = mx_get_gtk_obj(g, "l_chat_name");
     g->scrolledwindow1 = mx_get_gtk_obj(g, "scrolledwindow1");
+    g->box5 = mx_get_gtk_obj(g, "box5");
 }
 
 static void connect_signals(t_glade *g) {
@@ -81,6 +82,7 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
     gtk_widget_hide(GTK_WIDGET(g->messages_area));
     gtk_widget_hide(GTK_WIDGET(g->box_message));
     gtk_widget_hide(GTK_WIDGET(g->b_close_profile));
+    gtk_widget_hide(GTK_WIDGET(g->box5));
 
     win_chat_utils(g);
 }

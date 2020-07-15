@@ -92,6 +92,7 @@ struct s_glade {
     GtkWidget *gc_notebook; // left groups and chats notebook
     GtkWidget *l_chat_name; // label chat name
     GtkWidget *scrolledwindow1; // scrolled window with messages
+    GtkWidget *box5; // box with chat name and settings button
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
@@ -146,6 +147,7 @@ void mx_clear_input_text(t_glade *g);
 char *mx_get_input_text(t_glade *g);
 void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g);
 void mx_send_file(SSL *ssl, char *path);
+char *mx_get_time(time_t time);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
@@ -212,5 +214,7 @@ void mx_load_dialogs(t_glade *g);
 void mx_load_groups(t_glade *g);
 
 void mx_load_messages(t_glade *g, time_t timestamp);
+void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
+    GtkWidget *l_time, GtkWidget *l_msg);
 
 gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g);
