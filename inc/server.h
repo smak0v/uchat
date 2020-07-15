@@ -26,6 +26,7 @@ typedef struct s_profile t_profile;
 struct s_communication {
     int fd;
     char *status;
+    char *ft_status;
 	sqlite3 *db;
 	SSL *ssl;
 	SSL_CTX *ctx;
@@ -34,6 +35,7 @@ struct s_communication {
 struct s_metadata {
     pthread_t *threads;
     char *status;
+    char *ft_status;
 	sqlite3 *db;
 	SSL *ssl;
 	SSL_CTX *ctx;
@@ -162,7 +164,8 @@ int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
 json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
 void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
-char *mx_file_transfer(SSL_CTX *ctx, char *file, char *res);
+char *mx_file_transfer(t_comm *connect, char *file, char *res);
+int mx_get_free_thread(char *status, int *counter);
 
 // Notifications
 void mx_notify_add_to_group(sqlite3 *db, json_object *cli_arr, int gid);

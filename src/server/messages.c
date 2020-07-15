@@ -48,7 +48,7 @@ char *mx_send_message(void *jobj, t_comm *connect) {
     else
         res = send_private_message(message, connect->db);
     if (message->file)
-        return mx_file_transfer(connect->ctx, message->file, res);
+        return mx_file_transfer(connect, message->file, res);
     return res;
 }
 
