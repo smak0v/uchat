@@ -32,9 +32,18 @@
 
 #define MX_SA struct sockaddr
 #define MX_MAX 10500
+#define MX_FT_PORT 7777
 
 
 // Structures
+typedef struct s_ft_data t_ft_data;
+
+struct s_ft_data {
+	char *name;
+	int sock;
+	SSL_CTX *ctx;
+};
+
 enum e_types {
     REG,
     S_IN,

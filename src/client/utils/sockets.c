@@ -13,7 +13,7 @@ static int create_socket(void) {
     return socket_fd;
 }
 
-static int open_connection(char *ip, int port) {
+int mx_open_connection(char *ip, int port) {
     int socket_fd = create_socket();
     struct sockaddr_in server_address;
 
@@ -25,7 +25,7 @@ static int open_connection(char *ip, int port) {
     if (connect(socket_fd, (MX_SA*)&server_address, sizeof(server_address))) {
         close(socket_fd);
         mx_print_error_endl("Connection with the server failed!");
-        exit(MX_FAILURE);
+        return -1;
     }
     else
         mx_printstr_endl("Connected to the server!");
@@ -68,10 +68,11 @@ void mx_start_client(char *ip, int port, t_glade *g) {
 
     SSL_library_init();
     ctx = mx_init_client_ctx();
-    socket_fd = open_connection(ip, port);
+    g->ctx = ctx;
+    if ((socket_fd = mx_open_connection(ip, port)) < 0)
+        mx_terminate("Connection error"); // change this to try to reconnect
     ssl = SSL_new(ctx);
     SSL_set_fd(ssl, socket_fd);
-
     if (SSL_connect(ssl) == MX_SSL_FAILURE)
         ERR_print_errors_fp(stderr);
     else {

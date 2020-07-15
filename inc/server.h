@@ -28,7 +28,7 @@ struct s_communication {
     char *status;
 	sqlite3 *db;
 	SSL *ssl;
-	int port;
+	SSL_CTX *ctx;
 };
 
 struct s_metadata {
@@ -36,7 +36,7 @@ struct s_metadata {
     char *status;
 	sqlite3 *db;
 	SSL *ssl;
-	int port;
+	SSL_CTX *ctx;
 };
 
 struct s_user {
@@ -106,10 +106,11 @@ struct s_profile {
 };
 
 // Functions
-t_meta *mx_init_threads(sqlite3 *db);
+t_meta *mx_init_threads(sqlite3 *db, SSL_CTX *ctx);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
 char *mx_process_request(char *request, t_comm *connect);
+int mx_open_listener(int port);
 
 // Server API
 char *mx_bad_request(void *jobj, t_comm *connect);
@@ -161,6 +162,7 @@ int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
 json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
 void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
+char *mx_file_transfer(SSL_CTX *ctx, char *file, char *res);
 
 // Notifications
 void mx_notify_add_to_group(sqlite3 *db, json_object *cli_arr, int gid);

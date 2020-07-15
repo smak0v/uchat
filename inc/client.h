@@ -43,6 +43,10 @@ struct s_profile {
 struct s_glade {
     GtkBuilder *bd;
 
+    // connection data
+    char *ip;
+    SSL_CTX *ctx;
+
     // user data
     char *log;
     char *pass;
@@ -124,6 +128,8 @@ struct s_glade {
 
 
 // Functions
+int mx_open_connection(char *ip, int port);
+
 // SSL/TLS
 SSL_CTX *mx_init_client_ctx(void);
 void mx_show_server_certs(SSL *ssl);
@@ -146,6 +152,7 @@ void mx_clear_input_text(t_glade *g);
 char *mx_get_input_text(t_glade *g);
 void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g);
 void mx_send_file(SSL *ssl, char *path);
+void mx_process_send_file(t_glade *g, char *path);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);

@@ -7,6 +7,7 @@ static void init_client(int argc, char **argv) {
 
     gtk_init(&argc, &argv);
     g->bd = gtk_builder_new();
+    g->ip = argv[1];
     if (gtk_builder_add_from_file(g->bd, ui_path, &error) == 0) {
         g_printerr("Error loading file: %s\n", error->message);
         g_clear_error(&error);

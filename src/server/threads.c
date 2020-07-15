@@ -21,7 +21,7 @@ static t_comm *init_data(int connection_fd, char *status, t_meta **metadata) {
     return data;
 }
 
-t_meta *mx_init_threads(sqlite3 *db) {
+t_meta *mx_init_threads(sqlite3 *db, SSL_CTX *ctx) {
     pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
     char *status = malloc(sizeof(char) * MX_MAX_THREADS);
     t_meta *data = malloc(sizeof(t_meta));
@@ -31,6 +31,7 @@ t_meta *mx_init_threads(sqlite3 *db) {
     data->status = status;
     data->db = db;
     data->ssl = NULL;
+    data->ctx = ctx;
 
     return data;
 }

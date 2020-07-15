@@ -41,9 +41,9 @@ void mx_send_msg(GtkWidget *w, t_glade *g) {
     //     return;
     request = mx_json_string_send_message(g, msg);
     SSL_write(g->ssl, request, strlen(request));
-    if (g->filename)
-        mx_send_file(g->ssl, g->filename);
     response = mx_read_server_response(g);
+    if (g->filename)
+        mx_process_send_file(g, g->filename);
     mx_printstr_endl(request);
     mx_printstr_endl(response);
     if (!mx_parse_send_message_response(response))
