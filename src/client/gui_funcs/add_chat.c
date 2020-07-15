@@ -26,6 +26,8 @@ static void cancel_add_chat(GtkWidget *w, t_glade *g) {
     gtk_entry_set_text(GTK_ENTRY(g->e_chat_search), "");
     gtk_widget_hide(GTK_WIDGET(g->d_add_chat));
 
+    mx_delete_childs(g->box8);
+
     (void)w;
 }
 
