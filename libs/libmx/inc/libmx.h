@@ -136,6 +136,7 @@ t_list *mx_list_insertion_sort(t_list *list, bool (*cmp)(void *a, void *b));
 void mx_list_merge_sort(t_list **head_ptr, bool (*cmp)(void *a, void *b));
 void mx_revers_list(t_list **list);
 bool mx_is_equal_lists(t_list *a, t_list *b);
+void mx_delete_list(t_list *head);
 
 // Doubly Linked List
 t_dll *mx_dll_create_node(void *data);

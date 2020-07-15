@@ -95,6 +95,7 @@ int mx_start_server(int port) {
     return 0;
 }
 
+
 int main(int argc, char **argv) {
     if (argc < 2) {
         mx_print_error_endl("uchat_server: must take parameter - port to run");
