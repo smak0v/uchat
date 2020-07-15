@@ -13,7 +13,7 @@ static int create_socket(void) {
     return socket_fd;
 }
 
-static int open_connection(char *ip, int port) {
+int mx_open_connection(char *ip, int port) {
     int socket_fd = create_socket();
     struct sockaddr_in server_address;
 
@@ -25,7 +25,7 @@ static int open_connection(char *ip, int port) {
     if (connect(socket_fd, (MX_SA*)&server_address, sizeof(server_address))) {
         close(socket_fd);
         mx_print_error_endl("Connection with the server failed!");
-        exit(MX_FAILURE);
+        return -1;
     }
     else
         mx_printstr_endl("Connected to the server!");
@@ -40,23 +40,23 @@ void *mx_listen_server(void *data) {
 
     // int bytes_read = 0;
     // char buff[MX_MAX];
-    // int n = 0;
+    // // int n = 0;
 
-    // while(1) {
-        // mx_show_server_certs(thread_data->ssl);
-        // mx_printstr("Enter the string: ");
-        // while ((buff[n++] = getchar()) != '\n')
-        //     ;
-        // n = 0;
-        // SSL_write(thread_data->ssl, buff, strlen(buff));
-        // bzero(buff, sizeof(buff));
-        // bytes_read = SSL_read(thread_data->ssl, buff, sizeof(buff));
-        // buff[bytes_read] = '\0';
-        // if (bytes_read <= 0) {
-        //     mx_printstr_endl("Server not responding...");
-        //     close(SSL_get_fd(thread_data->ssl));
-        // }
-        // mx_printstr_endl(buff);
+    // while (1) {
+    //     // mx_show_server_certs(thread_data->ssl);
+    //     // mx_printstr("Enter the string: ");
+    //     // while ((buff[n++] = getchar()) != '\n')
+    //     //     ;
+    //     // n = 0;
+    //     // SSL_write(thread_data->ssl, buff, strlen(buff));
+    //     bzero(buff, sizeof(buff));
+    //     bytes_read = SSL_read(thread_data->ssl, buff, sizeof(buff));
+    //     buff[bytes_read] = '\0';
+    //     if (bytes_read <= 0) {
+    //         mx_printstr_endl("Server not responding...");
+    //         close(SSL_get_fd(thread_data->ssl));
+    //     }
+    //     mx_printstr_endl(buff);
     // }
     return data;
 }
@@ -68,10 +68,11 @@ void mx_start_client(char *ip, int port, t_glade *g) {
 
     SSL_library_init();
     ctx = mx_init_client_ctx();
-    socket_fd = open_connection(ip, port);
+    g->ctx = ctx;
+    if ((socket_fd = mx_open_connection(ip, port)) < 0)
+        mx_terminate("Connection error"); // change this to try to reconnect
     ssl = SSL_new(ctx);
     SSL_set_fd(ssl, socket_fd);
-
     if (SSL_connect(ssl) == MX_SSL_FAILURE)
         ERR_print_errors_fp(stderr);
     else {

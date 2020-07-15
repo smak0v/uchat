@@ -89,13 +89,13 @@ int mx_check_group_member(sqlite3 *db, int user_id, int group_id) {
     return grp_mem == 0 ? -1 : grp_mem;
 }
 
-t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id) {
+t_list *mx_get_all_group_members(sqlite3 *db, int gid) {
     sqlite3_stmt *stmt;
     t_list *g = NULL;
 
     sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS " \
                        "WHERE GROUP_ID = ?1", -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, group_mem_id);
+    sqlite3_bind_int(stmt, 1, gid);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         t_gr_members *d = malloc(sizeof(t_gr_members));
 

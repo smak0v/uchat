@@ -1,5 +1,6 @@
 #include "server.h"
 
+// TODO REFACTOR
 void *mx_communicate(void *data) {
     t_comm *connect = (t_comm *)data;
     char buff[MX_MAX];
@@ -27,12 +28,12 @@ void *mx_communicate(void *data) {
     }
 }
 
-void accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
+void mx_accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
     SSL *ssl = NULL;
     int connect_fd = 0;
     unsigned int len = 0;
     struct sockaddr_in client_addr;
-    t_meta *trd_data = mx_init_threads(db);
+    t_meta *trd_data = mx_init_threads(db, ctx);
 
     while (1) {
         mx_printstr_endl("Ready for new client");
@@ -50,12 +51,12 @@ void accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
     }
 }
 
-static int open_listener(int port) {
+int mx_open_listener(int port) {
     struct sockaddr_in server_addr;
     int socket_fd = -1;
 
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-        mx_terminate("Socket creation failed!");
+        return -1;
     mx_printstr_endl("Socket successfully created!");
 
     bzero(&server_addr, sizeof(server_addr));
@@ -64,10 +65,10 @@ static int open_listener(int port) {
     server_addr.sin_port = htons(port);
 
     if ((bind(socket_fd, (MX_SA *)&server_addr, sizeof(server_addr))))
-        mx_terminate("Socket bind failed!");
+        return -2;
     mx_printstr_endl("Socket successfully binded!");
     if ((listen(socket_fd, 5)))
-        mx_terminate("Listen failed!");
+        return -3;
     mx_printstr_endl("Server listening!");
 
     return socket_fd;
@@ -83,10 +84,12 @@ int mx_start_server(int port) {
     ctx = mx_init_server_ctx();
     mx_load_certificates(ctx, "./certs/cert.pem", "./certs/cert.pem");
 
-    socket_fd = open_listener(port);
+    socket_fd = mx_open_listener(port);
+    if (socket_fd < 0)
+        mx_terminate("Socket creation error\n");
     db = mx_opendb("test.db");
-    mx_print_db(db, "SOCKETS");
-    accept_clients(socket_fd, db, ctx);
+    mx_print_db(db, "MSG");
+    mx_accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);
     close(socket_fd);

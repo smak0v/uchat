@@ -26,15 +26,19 @@ typedef struct s_profile t_profile;
 struct s_communication {
     int fd;
     char *status;
+    char *ft_status;
 	sqlite3 *db;
 	SSL *ssl;
+	SSL_CTX *ctx;
 };
 
 struct s_metadata {
     pthread_t *threads;
     char *status;
+    char *ft_status;
 	sqlite3 *db;
 	SSL *ssl;
+	SSL_CTX *ctx;
 };
 
 struct s_user {
@@ -105,10 +109,11 @@ struct s_profile {
 };
 
 // Functions
-t_meta *mx_init_threads(sqlite3 *db);
+t_meta *mx_init_threads(sqlite3 *db, SSL_CTX *ctx);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
- char *mx_process_request(char *request, t_comm *connect);
+char *mx_process_request(char *request, t_comm *connect);
+int mx_open_listener(int port);
 
 // Server API
 char *mx_bad_request(void *jobj, t_comm *connect);
@@ -128,6 +133,7 @@ char *mx_load_groups(void *jobj, t_comm *connect);
 char *mx_load_messages(void *jobj, t_comm *connect);
 char *mx_del_user(void *jobj, t_comm *connect);
 char *mx_get_user(void *jobj, t_comm *connect);
+char *mx_find_user(void *jobj, t_comm *connect);
 char *mx_edit_profile(void *jobj, t_comm *connect);
 
 // JSON builders
@@ -137,11 +143,14 @@ char *mx_json_string_add_to_gr(int gid);
 char *mx_json_string_load_dlg(t_ld_d *arrays, int len);
 char *mx_json_string_load_grp(t_ld_d *arrs, int len);
 char *mx_msg_json_builder(t_msg *msg);
+char *mx_json_string_notify_gr(int gid, char *gr_name, int type);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
 void mx_fill_array_msg(json_object *jobj, t_list *msg_list);
+void mx_fill_array_user(json_object *jobj, t_list *user_list);
 
+json_object *mx_create_profile_object(t_profile *prof);
 json_object *mx_json_builder_msg(t_msg *msg);
 
 // Server Utils
@@ -154,12 +163,19 @@ char *mx_hmac_sha_256(char *key, char *data);
 int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
 int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
+json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
+void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
+char *mx_file_transfer(t_comm *connect, char *file, char *res);
+int mx_get_free_thread(char *status, int *counter);
+
+// Notifications
+void mx_notify_add_to_group(sqlite3 *db, json_object *cli_arr, int gid);
+void mx_notify_group_renamed(sqlite3 *db, int gid, char *name);
 
 //Sockets
 char *mx_add_socket(char *sock, int fd);
 char *mx_remove_socket(sqlite3 *db, int fd, int uid);
 int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
-void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
 
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
@@ -196,7 +212,7 @@ t_gr_members *mx_get_by_group_id(sqlite3 *db, int group_id);
 int mx_add_group_member(sqlite3 *db, int user_id, int group_id, bool adm);
 int mx_delete_user_from_group(sqlite3 *db, int user_id, int group_id);
 int mx_check_group_member(sqlite3 *db, int user_id, int group_id);
-t_list *mx_get_all_group_members(sqlite3 *db, int group_mem_id);
+t_list *mx_get_all_group_members(sqlite3 *db, int gid);
 int mx_change_admin_status(sqlite3 *db, int user_id, int group_id, bool adm);
 int *mx_get_all_id_group_members(sqlite3 *db, int group_id);
 int mx_get_size_group_mem_by_group_id(sqlite3 *db, int group_id);
@@ -240,6 +256,7 @@ char *mx_get_sock_by_user_id(sqlite3 *db, int user_id);
 char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 int mx_update_socket_by_user_id(sqlite3 *db, char *socket, int user_id);
+int mx_get_user_id_by_socket(sqlite3 *db, int sock);
 
 //PROFILES table
 int mx_add_profile(sqlite3 *db, t_profile *usr);

@@ -6,9 +6,9 @@ static char *add_to_group(sqlite3 *db, json_object *arr, int gr_id, int adm) {
     for (size_t i = 0; i < json_object_array_length(arr); i++) {
         id = json_object_array_get_idx(arr, i);
         if (json_object_get_type(id) != json_type_int)
-            return mx_bad_request(NULL, NULL);
+            return NULL;
         if (mx_add_group_member(db, json_object_get_int(id), gr_id, adm) == -1)
-            return "{\"code\": 500}";
+            return NULL;
     }
 
     return mx_json_string_add_to_gr(gr_id);
@@ -46,31 +46,26 @@ char *mx_rename_group(void *jobj, t_comm *connect) {
 
     if (mx_rename_grp_by_id(connect->db, grp_id, (char *)name) == -1)
         return "{\"code\": 500}";
-    //send the update to all online members of the group
+
+    mx_notify_group_renamed(connect->db, grp_id, (char *)name);
+
     return "{\"code\": 200}";
 }
 
 char *mx_add_to_group(void *jobj, t_comm *connect) {
-    json_object *j_gid = NULL;
-    json_object *j_uid = NULL;
-    json_object *j_add = NULL;
     int gid = -1;
     int uid = -1;
+    json_object *j_add = mx_unpack_addtogroup((json_object *)jobj, &gid, &uid);
+    char *res = NULL;
 
-    json_object_object_get_ex(jobj, "gid", &j_gid);
-    json_object_object_get_ex(jobj, "uid", &j_uid);
-    json_object_object_get_ex(jobj, "add", &j_add);
-    if (j_gid && j_uid && json_object_get_type(j_gid) == json_type_int
-        && json_object_get_type(j_add) == json_type_array && j_add
-        && json_object_get_type(j_uid) == json_type_int) {
-        gid = json_object_get_int(j_gid);
-        uid = json_object_get_int(j_uid);
-    }
-    else
-        return mx_bad_request(NULL, NULL);
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return "{\"code\": 401}";
-    return add_to_group(connect->db, j_add, gid, 0);
+    res = add_to_group(connect->db, j_add, gid, 0);
+
+    if (res)
+        mx_notify_add_to_group(connect->db, j_add, gid);
+
+    return res;
 }
 
 char *mx_new_group(void *jobj, t_comm *connect) {
