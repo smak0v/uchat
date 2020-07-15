@@ -28,6 +28,7 @@ struct s_communication {
     char *status;
 	sqlite3 *db;
 	SSL *ssl;
+	int port;
 };
 
 struct s_metadata {
@@ -35,6 +36,7 @@ struct s_metadata {
     char *status;
 	sqlite3 *db;
 	SSL *ssl;
+	int port;
 };
 
 struct s_user {

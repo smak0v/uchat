@@ -28,7 +28,7 @@ void *mx_communicate(void *data) {
     }
 }
 
-void accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
+void mx_accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
     SSL *ssl = NULL;
     int connect_fd = 0;
     unsigned int len = 0;
@@ -51,7 +51,7 @@ void accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
     }
 }
 
-static int open_listener(int port) {
+int mx_open_listener(int port) {
     struct sockaddr_in server_addr;
     int socket_fd = -1;
 
@@ -86,7 +86,6 @@ int mx_start_server(int port) {
 
     socket_fd = open_listener(port);
     db = mx_opendb("test.db");
-    mx_print_db(db, "SOCKETS");
     accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);

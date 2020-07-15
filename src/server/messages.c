@@ -38,6 +38,7 @@ static char *send_private_message(t_msg *msg, sqlite3 *db) {
 char *mx_send_message(void *jobj, t_comm *connect) {
     t_msg *message = mx_extract_message(jobj);
     char *res = NULL;
+    int socket = -1;
 
     if (!message)
         return mx_bad_request(NULL, NULL);
@@ -49,9 +50,9 @@ char *mx_send_message(void *jobj, t_comm *connect) {
     else
         res = send_private_message(message, connect->db);
 
-    if (message->file)
+    if (message->file) {
         mx_recv_file(connect->ssl, message->file);
-
+    }
     return res;
 }
 
