@@ -227,7 +227,7 @@ CLIENT_SRCS				= main.c
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
-						  threads.c sockets.c send_file.c
+						  threads.c sockets.c send_file.c get_time.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \
@@ -248,7 +248,7 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogs.c get_profile.c profile.c \
-						  message_input_utils.c
+						  message_input_utils.c messages.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

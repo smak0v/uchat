@@ -164,7 +164,7 @@ label {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 18px;
-    background-color: shade(@base_color, 0.9);
+    background-color: shade(@base_color, 0.75);
 }
 
 .msg {
@@ -199,4 +199,8 @@ label {
 .time {
     color: gray;
     font-size: 13px;
+}
+
+.box5 {
+    background-color: shade(@base_color, 0.75);
 }

@@ -4,7 +4,6 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     GtkWidget *group_box = gtk_bin_get_child(GTK_BIN(event_box));
     GList *childs = gtk_container_get_children(GTK_CONTAINER(group_box));
     GtkWidget *l_gid = GTK_WIDGET(g_list_nth_data(childs, 0));
-    int dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_gid)));
 
     mx_delete_childs(g->messages_area);
     mx_clear_input_text(g);
@@ -13,10 +12,11 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     gtk_widget_show(GTK_WIDGET(g->messages_area));
     gtk_widget_show(GTK_WIDGET(g->box_message));
     gtk_widget_show(GTK_WIDGET(g->e_search));
+    gtk_widget_show(GTK_WIDGET(g->box5));
     gtk_widget_hide(GTK_WIDGET(g->l_select_chat));
     gtk_widget_hide(GTK_WIDGET(g->profile_area));
     g->group = true;
-    g->dgid = dgid;
+    g->dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_gid)));
     mx_load_messages(g, time(NULL));
     g_list_free(childs);
     childs = NULL;

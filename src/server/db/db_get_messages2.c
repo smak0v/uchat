@@ -6,12 +6,12 @@ static t_list *get_group_msg(sqlite3 *db, int group_id, int n) {
 
     if (n) {
         sqlite3_prepare_v2(db, "SELECT * FROM MSG WHERE GROUP_ID = ?1 " \
-                           "ORDER BY TIME DESC LIMIT ?2;", -1, &stmt, NULL);
+                           "ORDER BY TIME ASC LIMIT ?2;", -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 2, n);
     }
     else {
         sqlite3_prepare_v2(db, "SELECT * FROM MSG WHERE GROUP_ID = ?1 " \
-                           "ORDER BY TIME DESC;", -1, &stmt, NULL);
+                           "ORDER BY TIME ASC;", -1, &stmt, NULL);
     }
     sqlite3_bind_int(stmt, 1, group_id);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
@@ -29,12 +29,12 @@ static t_list *get_dialog_msg(sqlite3 *db, int dialog_id, int n) {
 
     if (n) {
         sqlite3_prepare_v2(db, "SELECT * FROM MSG WHERE DIALOG_ID = ?1 " \
-                           "ORDER BY TIME DESC;", -1, &stmt, NULL);
+                           "ORDER BY TIME ASC;", -1, &stmt, NULL);
         sqlite3_bind_int(stmt, 2, n);
     }
     else {
         sqlite3_prepare_v2(db, "SELECT * FROM MSG WHERE DIALOG_ID = ?1 " \
-                           "ORDER BY TIME DESC;", -1, &stmt, NULL);
+                           "ORDER BY TIME ASC;", -1, &stmt, NULL);
     }
     sqlite3_bind_int(stmt, 1, dialog_id);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
