@@ -250,6 +250,7 @@ char *mx_get_sock_by_user_id(sqlite3 *db, int user_id);
 char *mx_get_token_by_user_id(sqlite3 *db, int user_id);
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id);
 int mx_update_socket_by_user_id(sqlite3 *db, char *socket, int user_id);
+int mx_get_user_id_by_socket(sqlite3 *db, int sock);
 
 //PROFILES table
 int mx_add_profile(sqlite3 *db, t_profile *usr);
