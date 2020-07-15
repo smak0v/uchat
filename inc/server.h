@@ -92,6 +92,7 @@ struct s_msg {
 	bool read;
 	char *file;
 	char *forwarded;
+	char *username;
 };
 
 struct s_profile {
@@ -258,3 +259,4 @@ void mx_recv_file(SSL *ssl, char *filename);
 void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);
 SSL_CTX *mx_init_server_ctx(void);
 void mx_show_client_certs(SSL *ssl);
+
