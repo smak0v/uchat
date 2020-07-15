@@ -13,26 +13,25 @@
 
 // Structures
 
-typedef struct s_audata
+typedef struct s_audio
 {
     uint16_t format_type;
     uint8_t number_of_channels;
     uint32_t sample_rate;
     size_t size;
     float *recorded_samples;
-} t_audata;
+} t_audio;
 
-typedef struct s_ausnippet
+typedef struct s_sample_block
 {
     float *snippet;
     size_t size;
-} t_ausnippet;
+} t_sample_block;
 
 
 // Functions
 int mx_init_client(int argc, char **argv);
 
-t_audata *mx_init_audio_data(void);
 void mx_record_audio(void);
 
 // UI
