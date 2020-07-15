@@ -1,24 +1,21 @@
 #include "server.h"
 
 t_msg *mx_fill_msg(sqlite3_stmt *stmt) {
-    t_msg *m = malloc(sizeof(t_msg));
+    t_msg *m = mx_memalloc(sizeof(t_msg));
 
     m->id = sqlite3_column_int(stmt, 0);
     m->group_id = sqlite3_column_int(stmt, 1);
     m->dialog_id = sqlite3_column_int(stmt, 2);
     m->sender = sqlite3_column_int(stmt, 3);
-    m->msg = strdup((const char*)sqlite3_column_text(stmt, 4));
+    if (sqlite3_column_text(stmt, 4) != NULL)
+        m->msg = strdup((const char*)sqlite3_column_text(stmt, 4));
     m->time = sqlite3_column_int(stmt, 5);
     m->edited = sqlite3_column_int(stmt, 6);
     m->read = sqlite3_column_int(stmt, 7);
     if (sqlite3_column_text(stmt, 8) != NULL)
         m->file = strdup((const char*)sqlite3_column_text(stmt, 8));
-    else
-        m->file = NULL;
     if (sqlite3_column_text(stmt, 9) != NULL)
         m->forwarded = strdup((const char*)sqlite3_column_text(stmt, 9));
-    else
-        m->forwarded = NULL;
     return m;
 }
 
