@@ -5,14 +5,15 @@ static void search_user(GtkWidget *w, t_glade *g) {
     char *request = NULL;
     char *response = NULL;
 
+    mx_delete_childs(g->box8);
+
     if (input && strlen(input) > 0) {
         request = mx_json_string_search_user(g->token, g->uid, input);
 
         SSL_write(g->ssl, request, strlen(request));
         response = mx_read_server_response(g);
 
-        mx_printstr_endl(request);
-        mx_printstr_endl(response);
+        mx_parse_serach_user_response(response, g);
 
         mx_strdel(&request);
         mx_strdel(&response);

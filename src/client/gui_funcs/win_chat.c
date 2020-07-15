@@ -28,6 +28,7 @@ static void find_gtk_objects(t_glade *g) {
     g->l_chat_name = mx_get_gtk_obj(g, "l_chat_name");
     g->scrolledwindow1 = mx_get_gtk_obj(g, "scrolledwindow1");
     g->box5 = mx_get_gtk_obj(g, "box5");
+    g->box8 = mx_get_gtk_obj(g, "box8");
 }
 
 static void connect_signals(t_glade *g) {

@@ -119,6 +119,7 @@ struct s_glade {
     // add chat dialog
     GtkWidget *b_add_chat_cancel; // button cancel add chat
     GtkWidget *e_chat_search; // entry chat search
+    GtkWidget *box8; // box with search dialog results
 
     // add group dialog
     GtkWidget *b_add_group_ok; // button add group
@@ -178,6 +179,7 @@ void mx_parse_load_groups_response(char *response, t_glade *g);
 void mx_parse_load_messages_response(char *response, t_glade *g);
 int mx_parse_send_message_response(char *response);
 void mx_parse_get_profile_response(char *response, t_glade *g, bool current);
+void mx_parse_serach_user_response(char *response, t_glade *g);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
