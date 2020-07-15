@@ -1,20 +1,37 @@
 #include "client.h"
 
+// gtk_box_set_baseline_position!!!!!
+
 static void add_message_to_gui(t_glade *g, t_msg *msg) {
-    GtkWidget *event_box = gtk_event_box_new();
-    GtkWidget *msg_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *l_msg = gtk_label_new(msg->msg);
+    GtkWidget *l_username = gtk_label_new("username");
 
-    gtk_container_add(GTK_CONTAINER(event_box), msg_box);
-    gtk_label_set_line_wrap(GTK_LABEL(l_msg), TRUE);
-    gtk_box_pack_end(GTK_BOX(event_box), l_msg, FALSE, FALSE, 0);
+    char buff[20];
+    time_t time = msg->time;
+    strftime(buff, 20, "%Y-%m-%d %H:%M:%S", localtime(&time));
+    GtkWidget *l_time = gtk_label_new(buff);
 
-    gtk_style_context_add_class(gtk_widget_get_style_context(msg_box), "msg");
+    GtkWidget *msg_v_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *u_t_h_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *msg_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-    gtk_widget_realize(event_box);
-    gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
-    gtk_widget_show_all(event_box);
-    (void)g;
+    gtk_label_set_xalign(GTK_LABEL(l_username), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(l_time), 1);
+    gtk_label_set_xalign(GTK_LABEL(l_msg), 0.0);
+    gtk_box_pack_end(GTK_BOX(g->messages_area), msg_v_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(msg_v_box), u_t_h_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(msg_v_box), msg_vbox, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(u_t_h_box), l_username, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(u_t_h_box), l_time, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(msg_vbox), l_msg, FALSE, FALSE, 0);
+
+    gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);
+
+    gtk_style_context_add_class(gtk_widget_get_style_context(msg_v_box), "msg");
+    gtk_style_context_add_class(gtk_widget_get_style_context(l_username), "username");
+    gtk_style_context_add_class(gtk_widget_get_style_context(l_time), "time");
+    gtk_style_context_add_class(gtk_widget_get_style_context(l_msg), "msgtxt");
+    gtk_widget_show_all(msg_v_box);
 }
 
 static t_msg *build_msg(t_glade *g, char *user_message) {

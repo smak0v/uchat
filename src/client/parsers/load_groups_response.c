@@ -32,7 +32,7 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
 
     mx_strdel(&str_gid);
 
-    gtk_box_pack_end(GTK_BOX(g->groups_box), event_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(g->groups_box), event_box, FALSE, FALSE, 0);
     gtk_container_add(GTK_CONTAINER(event_box), group_box);
     gtk_box_pack_end(GTK_BOX(group_box), l_name, TRUE, TRUE, 0);
     gtk_box_pack_end(GTK_BOX(group_box), l_uid, TRUE, TRUE, 0);
