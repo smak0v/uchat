@@ -249,7 +249,7 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogs.c get_profile.c profile.c \
-						  message_input_utils.c messages.c
+						  message_input_utils.c messages.c open_dialog.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

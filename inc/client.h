@@ -227,3 +227,5 @@ void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
     GtkWidget *l_time, GtkWidget *l_msg);
 
 gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g);
+
+void mx_open_dialog(GtkWidget *w, t_glade *g);
