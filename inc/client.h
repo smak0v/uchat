@@ -182,12 +182,17 @@ int mx_parse_new_group_response(char *response, t_glade *g);
 void mx_parse_load_groups_response(char *response, t_glade *g);
 void mx_parse_load_messages_response(char *response, t_glade *g);
 int mx_parse_send_message_response(char *response);
-void mx_parse_get_profile_response(char *response, t_glade *g, bool current);
+void mx_parse_get_profile_response(char *response, t_glade *g);
 void mx_parse_serach_user_response(char *response, t_glade *g);
 
 // Processors
 void mx_check_response_type(char *response, t_glade *g);
 void mx_s_in(char *response, t_glade *g);
+void mx_reg(char *response, t_glade *g);
+void mx_s_out(char *response, t_glade *g);
+void mx_load_dialogues(char *response, t_glade *g);
+void mx_load_groups(char *response, t_glade *g);
+void mx_find_user(char *response, t_glade *g);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
@@ -211,6 +216,7 @@ void mx_entry_visibility(GtkButton *b, GtkWidget *entry);
 void mx_b_log(GtkButton *b, t_glade *g);
 void mx_b_reg_log(GtkButton *b, t_glade *g);
 void mx_b_logout(GtkButton *b, t_glade *g);
+void mx_login(t_glade *g);
 
 void mx_open_logwin(GtkWidget *sender, t_glade *g);
 void mx_open_regwin(GtkWidget *sender, t_glade *g);
@@ -219,7 +225,7 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g);
 void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);
 void mx_save_profile(GtkWidget *w, t_glade *g);
-void mx_get_profile(t_glade *g, bool current);
+void mx_get_profile(t_glade *g);
 
 void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);
@@ -227,8 +233,8 @@ void mx_add_group(GtkWidget *w, t_glade *g);
 void mx_send_msg(GtkWidget *w, t_glade *g);
 void mx_attach_file(GtkWidget *w, t_glade *g);
 
-void mx_load_dialogs(t_glade *g);
-void mx_load_groups(t_glade *g);
+void mx_load_dialogues_request(t_glade *g);
+void mx_load_groups_request(t_glade *g);
 
 void mx_load_messages(t_glade *g, time_t timestamp);
 void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,

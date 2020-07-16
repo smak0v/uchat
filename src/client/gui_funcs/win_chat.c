@@ -55,9 +55,9 @@ static void win_chat_utils(t_glade *g) {
 
     mx_delete_childs(g->dialogs_box);
     mx_delete_childs(g->groups_box);
-    // mx_load_dialogs(g);
-    // mx_load_groups(g);
-    // mx_get_profile(g, true);
+    mx_load_dialogues_request(g);
+    mx_load_groups_request(g);
+    mx_get_profile(g);
 }
 
 void mx_create_win_chat(t_glade *g) {

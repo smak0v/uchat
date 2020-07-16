@@ -18,8 +18,16 @@ static int get_response_type(char *response) {
 void mx_check_response_type(char *response, t_glade *g) {
     int type = get_response_type(response);
 
-    type = S_IN;
     if (type == S_IN)
         mx_s_in(response, g);
-
+    else if (type == REG)
+        mx_reg(response, g);
+    else if (type == S_OUT)
+        mx_s_out(response, g);
+    else if (type == LOAD_DIALOGUES)
+        mx_load_dialogues(response, g);
+    else if (type == LOAD_GROUPS)
+        mx_load_groups(response, g);
+    else if (type == FIND_USER)
+        mx_find_user(response, g);
 }

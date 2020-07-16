@@ -22,7 +22,7 @@ int mx_parse_new_group_response(char *response, t_glade *g) {
         if (j_code && json_object_get_type(j_code) == json_type_int) {
             if (!check_response_code(json_object_get_int(j_code), g)) {
                 mx_delete_childs(g->groups_box);
-                mx_load_groups(g);
+                mx_load_groups_request(g);
                 return mx_clear_jobj(&jobj, MX_SUCCESS);
             }
             else
