@@ -30,4 +30,10 @@ void mx_check_response_type(char *response, t_glade *g) {
         mx_load_groups(response, g);
     else if (type == FIND_USER)
         mx_find_user(response, g);
+    else if (type == N_GRP)
+        mx_n_grp(response, g);
+    else if (type == LOAD_MESSAGES)
+        mx_load_messages(response, g);
+    else if (type == EDIT_PROFILE)
+        mx_edit_profile(response, g);
 }

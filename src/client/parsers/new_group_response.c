@@ -6,7 +6,7 @@ static int check_response_code(int code, t_glade *g) {
     else if (code == 401 || code == 500) {
         gtk_label_set_text(GTK_LABEL(g->err_group_name_label),
             "Something were wrong! Try again later!");
-        mx_widget_visible(GTK_WIDGET(g->err_group_name_label), true);
+        g_idle_add(mx_show_widget, g->err_group_name_label);
         return MX_FAILURE;
     }
     else

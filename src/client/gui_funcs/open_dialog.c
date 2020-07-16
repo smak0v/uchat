@@ -23,7 +23,7 @@ void mx_open_dialog(GtkWidget *w, t_glade *g) {
 
     g->group = false;
     g->uid2 = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_id)));
-    mx_load_messages(g, time(NULL));
+    mx_load_messages_request(g, time(NULL));
 
     gtk_widget_hide(g->d_add_chat);
 

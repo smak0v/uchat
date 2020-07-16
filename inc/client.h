@@ -193,6 +193,9 @@ void mx_s_out(char *response, t_glade *g);
 void mx_load_dialogues(char *response, t_glade *g);
 void mx_load_groups(char *response, t_glade *g);
 void mx_find_user(char *response, t_glade *g);
+void mx_n_grp(char *response, t_glade *g);
+void mx_load_messages(char *response, t_glade *g);
+void mx_edit_profile(char *response, t_glade *g);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
@@ -236,7 +239,7 @@ void mx_attach_file(GtkWidget *w, t_glade *g);
 void mx_load_dialogues_request(t_glade *g);
 void mx_load_groups_request(t_glade *g);
 
-void mx_load_messages(t_glade *g, time_t timestamp);
+void mx_load_messages_request(t_glade *g, time_t timestamp);
 void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
     GtkWidget *l_time, GtkWidget *l_msg);
 

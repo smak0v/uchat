@@ -12,5 +12,5 @@ void mx_create_error_modal_window(char *first, char *second, GtkWidget *win) {
     gtk_window_set_transient_for(GTK_WINDOW(error), GTK_WINDOW(win));
     gtk_window_set_position(GTK_WINDOW(error), GTK_WIN_POS_CENTER_ON_PARENT);
     gtk_dialog_run(GTK_DIALOG(error));
-    gtk_widget_destroy(error);
+    g_idle_add(mx_destroy_widget, error);
 }
