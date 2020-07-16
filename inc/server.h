@@ -226,6 +226,7 @@ int mx_delete_grp_by_id(sqlite3 *db, int grp_id);
 int mx_rename_grp_by_id(sqlite3 *db, int grp_id, char *new_name);
 int mx_get_grp_id(sqlite3 *db, char *grp_name);
 char *mx_get_group_name_by_id(sqlite3 *db, int group_id);
+t_list *mx_get_all_user_groups(sqlite3 *db, int user_id);
 
 // DIALOG table
 int mx_add_dialog(sqlite3 *db, int user_id1, int user_id2);
