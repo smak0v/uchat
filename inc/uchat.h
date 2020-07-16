@@ -42,6 +42,7 @@ struct s_ft_data {
 	char *name;
 	int sock;
 	SSL_CTX *ctx;
+    char *status;
 };
 
 enum e_types {

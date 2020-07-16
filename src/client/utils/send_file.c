@@ -2,8 +2,9 @@
 
 static void *send_file_thread(void *void_data) {
     t_ft_data *data = (t_ft_data *)void_data;
-    SSL_CTX *ctx = mx_init_client_ctx();
-    SSL *ssl = SSL_new(ctx);
+    SSL_library_init();
+    // SSL_CTX *ctx = mx_init_client_ctx();
+    SSL *ssl = SSL_new(data->ctx);
 
     SSL_set_fd(ssl, data->sock);
     printf("hello\n");
