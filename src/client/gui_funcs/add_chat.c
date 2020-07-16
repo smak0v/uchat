@@ -18,7 +18,6 @@ static void search_user(GtkWidget *w, t_glade *g) {
         mx_strdel(&request);
         mx_strdel(&response);
     }
-
     (void)w;
 }
 
