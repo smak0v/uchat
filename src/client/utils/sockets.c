@@ -35,13 +35,16 @@ int mx_open_connection(char *ip, int port) {
 
 void *mx_listen_server(void *data) {
     t_thread_data *thread_data = (t_thread_data *)data;
-    thread_data++;
-    // char *response = NULL;
+    char *response = NULL;
 
-    // while (1) {
-    //     response = mx_read_server_response(thread_data->glade);
-    //     mx_printstr_endl(response);
-    // }
+    while (1) {
+        response = mx_read_server_response(thread_data->glade);
+
+        if (response)
+            mx_check_response_type(response, thread_data->glade);
+
+        mx_strdel(&response);
+    }
 
     return data;
 }

@@ -156,6 +156,10 @@ void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g);
 void mx_send_file(SSL *ssl, char *path);
 char *mx_get_time(time_t time);
 void mx_process_send_file(t_glade *g, char *path);
+gboolean mx_hide_widget(gpointer w);
+gboolean mx_show_widget(gpointer w);
+gboolean mx_show_all_widget(gpointer w);
+gboolean mx_destroy_widget(gpointer w);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
@@ -180,6 +184,10 @@ void mx_parse_load_messages_response(char *response, t_glade *g);
 int mx_parse_send_message_response(char *response);
 void mx_parse_get_profile_response(char *response, t_glade *g, bool current);
 void mx_parse_serach_user_response(char *response, t_glade *g);
+
+// Processors
+void mx_check_response_type(char *response, t_glade *g);
+void mx_s_in(char *response, t_glade *g);
 
 // GUI
 void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);

@@ -55,9 +55,9 @@ static void win_chat_utils(t_glade *g) {
 
     mx_delete_childs(g->dialogs_box);
     mx_delete_childs(g->groups_box);
-    mx_load_dialogs(g);
-    mx_load_groups(g);
-    mx_get_profile(g, true);
+    // mx_load_dialogs(g);
+    // mx_load_groups(g);
+    // mx_get_profile(g, true);
 }
 
 void mx_create_win_chat(t_glade *g) {
@@ -73,17 +73,17 @@ void mx_show_win_chat(GtkWidget *v, t_glade *g) {
 
     gtk_window_get_position(GTK_WINDOW(v), &x, &y);
     gtk_window_get_size(GTK_WINDOW(v), &w, &h);
-    gtk_widget_hide(GTK_WIDGET(v));
+    g_idle_add(mx_hide_widget, v);
 
     gtk_window_resize(GTK_WINDOW(g->w_chat), w, h);
     gtk_window_move(GTK_WINDOW(g->w_chat), x, y + 22.35);
-    gtk_widget_show_all(GTK_WIDGET(g->w_chat));
+    g_idle_add(mx_show_all_widget, g->w_chat);
 
-    gtk_widget_hide(GTK_WIDGET(g->profile_area));
-    gtk_widget_hide(GTK_WIDGET(g->messages_area));
-    gtk_widget_hide(GTK_WIDGET(g->box_message));
-    gtk_widget_hide(GTK_WIDGET(g->b_close_profile));
-    gtk_widget_hide(GTK_WIDGET(g->box5));
+    g_idle_add(mx_hide_widget, g->profile_area);
+    g_idle_add(mx_hide_widget, g->messages_area);
+    g_idle_add(mx_hide_widget, g->box_message);
+    g_idle_add(mx_hide_widget, g->b_close_profile);
+    g_idle_add(mx_hide_widget, g->box5);
 
     win_chat_utils(g);
 }

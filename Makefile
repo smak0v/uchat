@@ -202,8 +202,11 @@ BUILDERS_OBJD			= $(CLIENT_OBJD)/builders
 
 GUI_FUNCS_OBJD			= $(CLIENT_OBJD)/gui_funcs
 
+PROCESSORS_OBJD			= $(CLIENT_OBJD)/processors
+
 CLIENT_OBJ_DIRS			= $(CLIENT_OBJD) $(VALIDATORS_OBJD) $(UTILS_OBJD) \
-						  $(PARSERS_OBJD) $(BUILDERS_OBJD) $(GUI_FUNCS_OBJD)
+						  $(PARSERS_OBJD) $(BUILDERS_OBJD) $(GUI_FUNCS_OBJD) \
+						  $(PROCESSORS_OBJD)
 
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
@@ -216,11 +219,14 @@ CLIENT_UTILS_OBJS		= $(addprefix $(OBJD)/client/utils/, \
 CLIENT_PARSERS_OBJS		= $(addprefix $(OBJD)/client/parsers/, \
 						  $(PARSERS_SRCS:%.c=%.o))
 
-CLIENT_BUILDERSS_OBJS	= $(addprefix $(OBJD)/client/builders/, \
+CLIENT_BUILDERS_OBJS	= $(addprefix $(OBJD)/client/builders/, \
 						  $(BUILDERS_SRCS:%.c=%.o))
 
 CLIENT_GUI_FUNCS_OBJS	= $(addprefix $(OBJD)/client/gui_funcs/, \
 						  $(GUI_FUNCS_SRCS:%.c=%.o))
+
+CLIENT_PROCESSORS_OBJS	= $(addprefix $(OBJD)/client/processors/, \
+						  $(PROCESSORS_SRCS:%.c=%.o))
 
 #===================================SRC=======================================#
 CLIENT_SRCS				= main.c
@@ -242,6 +248,8 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  search_user_builder.c edit_profile_builder.c \
 						  send_file_builder.c
 
+PROCESSORS_SRCS			= main_processor.c s_in.c
+
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
 						  create_error_modal_window.c auth.c win_destroy.c \
@@ -249,7 +257,8 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogs.c get_profile.c profile.c \
-						  message_input_utils.c messages.c open_dialog.c
+						  message_input_utils.c messages.c open_dialog.c \
+						  show_hide_utils.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -259,12 +268,14 @@ $(CLIENT_OBJ_DIRS):
 
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS) $(CLIENT_VALIDATORS_OBJS) \
 					$(CLIENT_UTILS_OBJS) $(CLIENT_PARSERS_OBJS) \
-					$(CLIENT_BUILDERSS_OBJS) $(CLIENT_GUI_FUNCS_OBJS)
+					$(CLIENT_BUILDERS_OBJS) $(CLIENT_GUI_FUNCS_OBJS) \
+					$(CLIENT_PROCESSORS_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
 		$(CLIENT_OBJS) $(CLIENT_VALIDATORS_OBJS) $(CLIENT_UTILS_OBJS) \
-		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERSS_OBJS) \
-		$(CLIENT_GUI_FUNCS_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
-		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
+		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERS_OBJS) \
+		$(CLIENT_GUI_FUNCS_OBJS) $(CLIENT_PROCESSORS_OBJS) -L $(LIBMXD) \
+		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto \
+		-o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 

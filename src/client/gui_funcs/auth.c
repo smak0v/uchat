@@ -1,19 +1,11 @@
 #include "client.h"
 
-static void login(t_glade *g, GtkWidget *w) {
+static void login(t_glade *g) {
     char *request = mx_json_string_login_signup(S_IN, g->log, g->pass);
-    char *response = NULL;
 
     SSL_write(g->ssl, request, strlen(request));
-    response = mx_read_server_response(g);
-
-    if (!mx_parse_login_response(response, g))
-        mx_show_win_chat(w, g);
-
-    mx_clear_login_inputs(g);
 
     mx_strdel(&request);
-    mx_strdel(&response);
 }
 
 void mx_b_reg_log(GtkButton *b, t_glade *g) {
@@ -31,7 +23,7 @@ void mx_b_reg_log(GtkButton *b, t_glade *g) {
         SSL_write(g->ssl, request, strlen(request));
         response = mx_read_server_response(g);
         if (!mx_parse_signup_response(response, g))
-            login(g, g->w_reg);
+            login(g);
 
         mx_strdel(&request);
         mx_strdel(&response);
@@ -46,7 +38,7 @@ void mx_b_log(GtkButton *b, t_glade *g) {
     (void)b;
 
     if (!mx_validate_login_data(g))
-       login(g, g->w_log);
+       login(g);
 }
 
 void mx_logout(t_glade *g) {
