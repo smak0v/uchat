@@ -9,6 +9,8 @@ t_list *mx_get_all_user_groups(sqlite3 *db, int user_id) {
                        "GROUP BY GRP.GROUP_ID ORDER BY MSG.TIME DESC",
                        -1, &stmt, NULL);
 
+    if (rv == SQLITE_ERROR)
+        return NULL;
     sqlite3_bind_int(stmt, 1, user_id);
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         d = mx_memalloc(sizeof(t_all_gr_member));
