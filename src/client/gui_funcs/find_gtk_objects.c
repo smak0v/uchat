@@ -1,7 +1,7 @@
 #include "client.h"
 
 void mx_find_gtk_objects_1(t_glade *g) {
-    g->w_chat = mx_get_gtk_obj(g, "win_chat");
+    g->w_chat = mx_get_gtk_obj(g, "w_chat");
     g->b_logout = mx_get_gtk_obj(g, "b_logout");
     g->b_send_msg = mx_get_gtk_obj(g, "b_send_msg");
     g->b_username = mx_get_gtk_obj(g, "b_username");
