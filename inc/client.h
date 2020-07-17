@@ -1,6 +1,7 @@
 #pragma once
 
 // Includes
+#include "uchat.h"
 #include <gtk/gtk.h>
 #include "portaudio.h"
 #include "sndfile.h"
@@ -21,6 +22,7 @@ typedef struct s_audio
     uint32_t sample_rate;
     size_t size;
     float *recorded_samples;
+    char *file_name;
 } t_audio;
 
 typedef struct s_sample_block
@@ -34,6 +36,7 @@ typedef struct s_sample_block
 int mx_init_client(int argc, char **argv);
 
 void mx_record_audio(void);
+void mx_play_audio_file(char *path);
 
 // UI
 char *mx_build_ui_path(char *filename);

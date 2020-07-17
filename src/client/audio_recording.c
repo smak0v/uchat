@@ -8,6 +8,7 @@ t_audio *mx_init_audio_data() {
     data->sample_rate = SAMPLE_RATE;
     data->size = 0;
     data->recorded_samples = NULL;
+    data->file_name = NULL;
     return data;
 }
 
@@ -86,6 +87,7 @@ long mx_save_audio(t_audio *data) {
     err = data->size - wr;
     sf_write_sync(outfile);
     sf_close(outfile);
+    data->file_name = strdup(file_name);
     return err;
 }
 
@@ -127,6 +129,8 @@ void mx_record_audio() {
 
     if (data && data->recorded_samples)
         mx_save_audio(data);
+
+    mx_play_audio_file(data->file_name);
 
     // ToDo: send audio file to server (?)
 
