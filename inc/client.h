@@ -69,6 +69,7 @@ struct s_glade {
     GtkWidget *b_log_in; // button login
     GtkWidget *b_reg; // button register
     GtkWidget *b_eye; // eye button
+    GtkWidget *l_login_error; // label login error
 
     // register window
     GtkWidget *w_reg; // window register
@@ -78,6 +79,7 @@ struct s_glade {
     GtkWidget *b_reg_login; // button register and login
     GtkWidget *b_reg_back; // button back to login window
     GtkWidget *b_reye; // reg eye button
+    GtkWidget *l_signup_error; // label signup error
 
     // chat window
     GtkWidget *w_chat; // window chat
@@ -198,7 +200,6 @@ void mx_load_messages(char *response, t_glade *g);
 void mx_edit_profile(char *response, t_glade *g);
 
 // GUI
-void mx_create_error_modal_window(char *first, char *second, GtkWidget *win);
 void mx_clear_login_inputs(t_glade *g);
 void mx_clear_signup_inputs(t_glade *g);
 
@@ -246,3 +247,6 @@ void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
 gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g);
 
 void mx_open_dialog(GtkWidget *w, t_glade *g);
+
+void mx_find_gtk_objects_1(t_glade *g);
+void mx_find_gtk_objects_2(t_glade *g);

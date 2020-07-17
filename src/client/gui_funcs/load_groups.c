@@ -6,7 +6,5 @@ void mx_load_groups_request(t_glade *g) {
 
     SSL_write(g->ssl, request, strlen(request));
 
-    g->groups_box = mx_get_gtk_obj(g, "groups_box");
-
     mx_strdel(&request);
 }
