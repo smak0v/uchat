@@ -40,6 +40,8 @@ void *mx_listen_server(void *data) {
     while (1) {
         response = mx_read_server_response(thread_data->glade);
 
+        mx_printstr_endl(response);
+
         if (response)
             mx_check_response_type(response, thread_data->glade);
 

@@ -4,17 +4,23 @@ static int check_response_code(int code, t_glade *g) {
     if (code == 400)
         return MX_FAILURE;
     else if (code == 409) {
-        mx_create_error_modal_window("Username taken!",
-            "User with this username already exists. Try another!", g->w_reg);
+        gtk_label_set_text(GTK_LABEL(g->l_signup_error),
+            "Username taken!\n" \
+            "User with this username already exists. Try another!");
+        g_idle_add(mx_show_widget, g->l_login_error);
         return MX_FAILURE;
     }
     else if (code == 500) {
-        mx_create_error_modal_window("Error!",
-            "Something were wrong! Try again later!", g->w_reg);
+        gtk_label_set_text(GTK_LABEL(g->l_signup_error), "Error!\n" \
+            "Something were wrong! Try again later!");
+        g_idle_add(mx_show_widget, g->l_login_error);
         return MX_FAILURE;
     }
-    else
+    else {
+        gtk_label_set_text(GTK_LABEL(g->l_login_error), "");
+        g_idle_add(mx_hide_widget, g->l_login_error);
         return MX_SUCCESS;
+    }
 }
 
 int mx_parse_signup_response(char *response, t_glade *g) {

@@ -254,7 +254,7 @@ PROCESSORS_SRCS			= main_processor.c s_in.c reg.c s_out.c \
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
-						  create_error_modal_window.c auth.c win_destroy.c \
+						  auth.c win_destroy.c find_gtk_objects.c \
 						  edit_profile.c get_gtk_obj.c add_chat.c add_group.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
