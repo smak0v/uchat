@@ -10,5 +10,5 @@ char *mx_del_user(void *jobj, t_comm *connect) {
     else
         return mx_bad_request(NULL, NULL);
 
-    return "{\"code\": 200}";
+    return mx_json_string_code_type(200, DELETE_USER);
 }

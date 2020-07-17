@@ -4,7 +4,7 @@ char *mx_bad_request(void *jobj, t_comm *connect) {
     jobj = NULL;
     connect = NULL;
 
-    return "{\"code\": 400}";
+    return mx_json_string_code_type(401, BAD_REQUEST);
 }
 
 api_function mx_select_method(enum e_types type) {

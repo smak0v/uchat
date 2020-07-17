@@ -3,6 +3,7 @@
 static char *json_str_builder_get(t_profile *prof) {
     json_object *jobj = json_object_new_object();
 
+    mx_j_o_o_a(jobj, "type", json_object_new_int(GET_USER));
     mx_j_o_o_a(jobj, "code", json_object_new_int(200));
     if (!prof)
         mx_j_o_o_a(jobj, "prof", json_object_new_null());
@@ -16,6 +17,7 @@ static char *json_str_builder_find(t_list *users) {
     json_object *jobj = json_object_new_object();
     json_object *arr = NULL;
 
+    mx_j_o_o_a(jobj, "type", json_object_new_int(FIND_USER));
     mx_j_o_o_a(jobj, "code", json_object_new_int(200));
     if (!users)
         mx_j_o_o_a(jobj, "users", json_object_new_null());
@@ -51,15 +53,16 @@ char *mx_get_user(void *jobj, t_comm *connect) {
 
     if (parse_get_user((json_object *)jobj, &name, &uid))
         return mx_bad_request(NULL, NULL);
-
+    printf("%s\n", json_object_to_json_string(jobj));
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, GET_USER);
 
     if ((user = mx_get_user_by_login(connect->db, name)) == NULL)
-        return "{\"code\": 404}";
+        return mx_json_string_code_type(401, GET_USER);
 
     prof = mx_get_profile_by_id(connect->db, user->user_id);
-
+    // printf("id:%d\nbirth:%s\ncountry:%s\nemail:%s\nname:%status:%s\n\n\n", new_prof->user_id, new_prof->birth, new_prof->country, new_prof->email, new_prof->name, new_prof->status);
+    printf("%s\n", json_str_builder_get(prof));
     return json_str_builder_get(prof);
 }
 
@@ -72,7 +75,7 @@ char *mx_find_user(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, FIND_USER);
 
     prof = mx_find_user_by_char(connect->db, name);
 

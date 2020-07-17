@@ -25,6 +25,7 @@ char *mx_json_string_msg(t_msg *msg) {
 char *mx_json_string_s_in(int uid, char *tok) {
     json_object *jobj = json_object_new_object();
 
+    json_object_object_add(jobj, "type", json_object_new_int(S_IN));
     json_object_object_add(jobj, "code", json_object_new_int(200));
     json_object_object_add(jobj, "tok", json_object_new_string(tok));
     json_object_object_add(jobj, "uid", json_object_new_int(uid));

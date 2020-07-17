@@ -53,18 +53,18 @@ char *mx_del_group(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, DEL_GROUP);
 
     // Check admin status
     // 403
 
     if (delete_messages(connect->db, gid) != 0)
-        return "{\"code\": 500}";
+        return mx_json_string_code_type(500, DEL_GROUP);
 
     if (delete_members_and_group(connect->db, gid) != 0)
-        return "{\"code\": 500}";
+        return mx_json_string_code_type(500, DEL_GROUP);
 
-    return "{\"code\": 200}";
+    return mx_json_string_code_type(200, DEL_GROUP);
 }
 
 char *mx_leave_group(void *jobj, t_comm *connect) {
@@ -84,8 +84,8 @@ char *mx_leave_group(void *jobj, t_comm *connect) {
         mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, LEAVE_GROUP);
     if (mx_delete_user_from_group(connect->db, uid, gid) == -1)
-        return "{\"code\": 500}";
-    return "{\"code\": 200}";
+        return mx_json_string_code_type(401, LEAVE_GROUP);
+    return mx_json_string_code_type(200, LEAVE_GROUP);
 }
