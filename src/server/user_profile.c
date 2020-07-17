@@ -31,13 +31,13 @@ char *mx_edit_profile(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if ((new_prof = mx_get_profile_by_id(connect->db, uid)) == NULL)
-        return "{\"code\": 404}";
+        return mx_json_string_code_type(404, EDIT_PROFILE);
     if (parse_json(jobj, new_prof) == -1)
         return mx_bad_request(NULL, NULL);
     if (mx_change_profile_by_id(connect->db, new_prof, uid) == -1)
-        return "{\"code\": 500}";
+        return mx_json_string_code_type(500, EDIT_PROFILE);
 
-    return "{\"code\": 200}";
+    return mx_json_string_code_type(200, EDIT_PROFILE);
 }
 
 char *mx_del_user(void *jobj, t_comm *connect) {

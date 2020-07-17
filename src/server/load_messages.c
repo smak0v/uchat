@@ -47,9 +47,9 @@ char *mx_load_messages(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, LOAD_MESSAGES);
 
     m_list = mx_db_load_next_messages(connect->db, gid, did, 20, time);
 
-    return process_t_list(m_list);
+    return mx_add_type(process_t_list(m_list), LOAD_MESSAGES);
 }

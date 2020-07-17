@@ -66,7 +66,9 @@ enum e_types {
     FIND_USER,
     EDIT_PROFILE,
     NOTIF_ADD_TO_GR,
-    NOTIF_GR_RENAMED
+    NOTIF_GR_RENAMED,
+    FILE_TRANSFER,
+    BAD_REQUEST
 };
 
 // Functions

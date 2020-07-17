@@ -63,12 +63,12 @@ char *mx_sign_in(void *jobj, t_comm *connect) {
     if (mx_extract_name_passw((json_object *)jobj, &name, &pass) != 0)
         return mx_bad_request(NULL, NULL);
     if ((uid = validate_sign_in(connect->db, name, pass)) == -1)
-        return "{\"code\": 404}";
+        return mx_json_string_code_type(404, S_IN);
     if ((tk = mx_get_token_by_user_id(connect->db, uid)) == NULL)
         if ((tk = (char *)mx_generate_token()) == NULL)
-            return "{\"code\": 500}";
+            return mx_json_string_code_type(500, S_IN);
     if ((res = process_sockets(connect->db, connect->fd, uid, tk)) == NULL)
-        return "{\"code\": 500}";
+        return mx_json_string_code_type(500, S_IN);
     else
         res = mx_json_string_s_in(uid, tk);
     mx_strdel(&tk);

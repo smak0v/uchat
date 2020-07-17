@@ -22,13 +22,14 @@ static void *mx_receive_file(void *void_data) {
 }
 
 // TODO: REFACTOR
-char *mx_file_transfer(t_comm *connect, char *file, char *res) {
+char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id) {
     // int index = -1;
     // int port = -1;
     int socket = -1;
     pthread_t *thr = NULL;
     t_ft_data *data = NULL;
 
+    msg_id = 0; // TODO: ADD MSG_ID TO JSON
     // while (mx_get_free_thread(connect->status, &index) != 0)
     //     printf("waiting for a free thread\n");
     // port = index + 1000;

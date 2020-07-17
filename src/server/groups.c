@@ -42,14 +42,14 @@ char *mx_rename_group(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, RN_GR);
 
     if (mx_rename_grp_by_id(connect->db, grp_id, (char *)name) == -1)
-        return "{\"code\": 500}";
+        return mx_json_string_code_type(500, RN_GR);
 
     mx_notify_group_renamed(connect->db, grp_id, (char *)name);
 
-    return "{\"code\": 200}";
+    return mx_json_string_code_type(200, RN_GR);
 }
 
 char *mx_add_to_group(void *jobj, t_comm *connect) {
@@ -59,13 +59,13 @@ char *mx_add_to_group(void *jobj, t_comm *connect) {
     char *res = NULL;
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, INV);
     res = add_to_group(connect->db, j_add, gid, 0);
 
     if (res)
         mx_notify_add_to_group(connect->db, j_add, gid);
 
-    return res;
+    return mx_add_type(res, INV);
 }
 
 char *mx_new_group(void *jobj, t_comm *connect) {
@@ -85,8 +85,8 @@ char *mx_new_group(void *jobj, t_comm *connect) {
     j_name = json_object_array_get_idx(j_id, 0);
     uid = json_object_get_int(j_name);
     if (mx_validate_token(connect->db, uid, (json_object *)jobj) != 0)
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, N_GRP);
     if ((grp_id = mx_add_grp(connect->db, (char *)name)) == -1)
-        return "{\"code\": 500}";
-    return add_to_group(connect->db, j_id, grp_id, 1);
+        return mx_json_string_code_type(500, N_GRP);
+    return mx_add_type(add_to_group(connect->db, j_id, grp_id, 1), N_GRP);
 }

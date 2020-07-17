@@ -22,7 +22,7 @@ static char *send_private_message(t_msg *msg, sqlite3 *db) {
 
     if (msg->dialog_id == -2) {
         if ((d_id = mx_add_dialog(db, msg->sender, msg->recepient)) == -1)
-            return "{\"code\": 500}";
+            return mx_json_string_code_type(500, S_MES);
         msg->dialog_id = d_id;
     }
 
@@ -42,13 +42,13 @@ char *mx_send_message(void *jobj, t_comm *connect) {
     if (!message)
         return mx_bad_request(NULL, NULL);
     if (mx_validate_token(connect->db, message->sender, (json_object *)jobj))
-         return "{\"code\": 401}";
+         return mx_json_string_code_type(401, S_MES);
     if (message->group_id != -1)
         res = send_group_message(message, connect->db);
     else
         res = send_private_message(message, connect->db);
     if (message->file)
-        return mx_file_transfer(connect, message->file, res);
+        return mx_file_transfer(connect, message->file, res, message->id);
     return res;
 }
 
@@ -62,16 +62,16 @@ char *mx_edit_message(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, EDIT_MESSAGE);
 
     struct_msg = mx_get_msg_by_id(connect->db, msg_id);
     if (struct_msg->sender != uid)
-        return "{\"code\": 403}";
+        return mx_json_string_code_type(403, EDIT_MESSAGE);
 
     if (mx_update_msg_by_id(connect->db, msg, msg_id) == -1)
-        return "{\"code\": 500}";
+        return mx_json_string_code_type(500, EDIT_MESSAGE);
 
-    return "{\"code\": 200}";
+    return mx_json_string_code_type(200, EDIT_MESSAGE);
 }
 
 char *mx_delete_message(void *jobj, t_comm *connect) {
@@ -83,14 +83,14 @@ char *mx_delete_message(void *jobj, t_comm *connect) {
         return mx_bad_request(NULL, NULL);
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
-        return "{\"code\": 401}";
+        return mx_json_string_code_type(401, DELETE_MESSAGE);
 
     msg = mx_get_msg_by_id(connect->db, mid);
     if (msg->sender != uid)
-        return "{\"code\": 403}";
+        return mx_json_string_code_type(403, DELETE_MESSAGE);
 
     if (mx_delete_msg_by_id(connect->db, mid) != 0)
-        return "{\"code\": 500}";
+        return mx_json_string_code_type(500, DELETE_MESSAGE);
 
-    return "{\"code\": 201}";
+    return mx_json_string_code_type(201, DELETE_MESSAGE);
 }

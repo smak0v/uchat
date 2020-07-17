@@ -108,6 +108,16 @@ struct s_profile {
 	char *country;
 };
 
+// static char *add_to_group(sqlite3 *db, json_object *arr, int gr_id, int adm)
+struct s_groups_auditor {
+	sqlite3 *db;
+	json_object *arr;
+	char *birth;
+	char *email;
+	char *status;
+	char *country;
+};
+
 // Functions
 t_meta *mx_init_threads(sqlite3 *db, SSL_CTX *ctx);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
@@ -144,6 +154,8 @@ char *mx_json_string_load_dlg(t_ld_d *arrays, int len);
 char *mx_json_string_load_grp(t_ld_d *arrs, int len);
 char *mx_msg_json_builder(t_msg *msg);
 char *mx_json_string_notify_gr(int gid, char *gr_name, int type);
+char *mx_json_string_code_type(int code, int type);
+char *mx_add_type(char *j_str, int val);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
@@ -165,7 +177,7 @@ int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
 json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
 void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
-char *mx_file_transfer(t_comm *connect, char *file, char *res);
+char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id);
 int mx_get_free_thread(char *status, int *counter);
 
 // Notifications
