@@ -18,7 +18,7 @@ static void save_response_data(json_object *j_prof, t_glade *g) {
     json_object_object_get_ex(j_prof, "dob", &j_dob);
     json_object_object_get_ex(j_prof, "mail", &j_mail);
     json_object_object_get_ex(j_prof, "status", &j_status);
-    json_object_object_get_ex(j_prof, "statcountryus", &j_country);
+    json_object_object_get_ex(j_prof, "country", &j_country);
 
     gtk_entry_set_text(GTK_ENTRY(g->e_name), get_string(j_name));
     gtk_entry_set_text(GTK_ENTRY(g->e_birthday), get_string(j_dob));
