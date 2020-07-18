@@ -34,7 +34,17 @@ typedef struct s_sample_block
 
 // Functions
 int mx_init_client(int argc, char **argv);
+int mx_init_input_stream(PaStream **stream, t_audio *data);
+int mx_init_output_stream(PaStream **stream, t_audio *data);
+t_sample_block *mx_init_sample_block(t_audio *data);
+void mx_exit_stream(PaStream *stream);
+void mx_free_audio_data(t_audio **data, t_sample_block **sample_block);
+void mx_set_output_parameters(PaStreamParameters *output_parameters, 
+                              t_audio *data);
+void mx_set_input_parameters(PaStreamParameters *input_parameters,
+                             t_audio *data);
 
+t_audio *mx_init_audio_data();
 void mx_record_audio(void);
 void mx_play_audio_file(char *path);
 

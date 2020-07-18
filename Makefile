@@ -191,7 +191,8 @@ CLIENT_OBJ_DIRS			= $(CLIENT_OBJD)
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
 #===================================SRC=======================================#
-CLIENT_SRCS				= main.c init.c build_ui_path.c ssl_tls.c audio_recording.c audio_playback.c
+CLIENT_SRCS				= main.c init.c build_ui_path.c ssl_tls.c audio_recording.c \
+							audio_playback.c audio_utils.c audio_init.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
