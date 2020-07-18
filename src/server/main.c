@@ -107,7 +107,7 @@ int main(int argc, char **argv) {
     } else {
         if (!mx_check_port(argv[1]))
             mx_terminate("uchat_server: not valid port");
-        mx_start_server(mx_atoi(argv[1]));
+        mx_daemonize(mx_atoi(argv[1]));
     }
 
     pthread_exit(NULL);

@@ -119,11 +119,13 @@ struct s_groups_auditor {
 };
 
 // Functions
+int mx_start_server(int port);
 t_meta *mx_init_threads(sqlite3 *db, SSL_CTX *ctx);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
 char *mx_process_request(char *request, t_comm *connect);
 int mx_open_listener(int port);
+void mx_daemonize(int port);
 
 // Server API
 char *mx_bad_request(void *jobj, t_comm *connect);
