@@ -10,13 +10,15 @@ static void *mx_receive_file(void *void_data) {
     if (connect < 0)
         pthread_exit(NULL);
 
-    // SSL_CTX *ctx = ctx = mx_init_server_ctx();
+    SSL_CTX *ctx = ctx = mx_init_server_ctx();
+    mx_load_certificates(ctx, "./certs/cert.pem", "./certs/cert.pem");
     ssl = SSL_new(data->ctx);
     SSL_set_fd(ssl, connect);
 
     mx_recv_file(ssl, data->name);
 
     SSL_free(ssl);
+    SSL_CTX_free(ctx);
     // *(data->status) = 0;
     pthread_exit(NULL);
 }

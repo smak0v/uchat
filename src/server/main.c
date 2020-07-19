@@ -16,11 +16,18 @@ void *mx_communicate(void *data) {
             bytes_read = SSL_read(connect->ssl, buff, sizeof(buff));
             buff[bytes_read] = '\0';
             if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
+                // TODO MOVE TO SEPARATE FUNC
                 close(SSL_get_fd(connect->ssl));
                 *status = 0;
                 ERR_print_errors_fp(stderr);
+
+                int uid = mx_get_user_id_by_socket(connect->db, connect->fd);
+                char *sock = mx_remove_socket(connect->db, connect->fd, uid);
+                mx_update_socket_by_user_id(connect->db, sock, uid);
+                
                 mx_printstr_endl("Connection closed");
                 pthread_exit(NULL);
+                // ==========
             }
             response = mx_process_request(buff, connect);
             SSL_write(connect->ssl, response, strlen(response));
@@ -88,7 +95,7 @@ int mx_start_server(int port) {
     if (socket_fd < 0)
         mx_terminate("Socket creation error\n");
     db = mx_opendb("test.db");
-    mx_print_db(db, "PROFILES");
+    mx_print_db(db, "MSG");
     mx_accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);
@@ -107,7 +114,8 @@ int main(int argc, char **argv) {
     } else {
         if (!mx_check_port(argv[1]))
             mx_terminate("uchat_server: not valid port");
-        mx_daemonize(mx_atoi(argv[1]));
+        // mx_daemonize(mx_atoi(argv[1]));
+        mx_start_server(mx_atoi(argv[1]));
     }
 
     pthread_exit(NULL);
