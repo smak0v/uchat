@@ -5,8 +5,10 @@ int mx_validate_login_data(t_glade *g) {
     char *password = g->pass;
 
     if ((!username || !password) || (!strlen(username) || !strlen(password))) {
-        mx_create_error_modal_window("Fields can not be empty!",
-            "One of the fields or both fields is empty. Try again!", g->w_log);
+        gtk_label_set_text(GTK_LABEL(g->l_login_error),
+             "Fields can`t be empty!\n" \
+             "One of the fields or both fields is empty. Try again!");
+        g_idle_add(mx_show_widget, g->l_login_error);
         return -1;
     }
 

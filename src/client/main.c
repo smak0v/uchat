@@ -15,6 +15,7 @@ static void init_client(int argc, char **argv) {
 
     mx_connect_css("dark.css");
     mx_create_win_log(g);
+    mx_create_win_reg(g);
     mx_create_win_chat(g);
 
     mx_start_client(argv[1], mx_atoi(argv[2]), g);

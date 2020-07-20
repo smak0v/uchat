@@ -5,25 +5,27 @@ static void search_user(GtkWidget *w, t_glade *g) {
     char *request = NULL;
     char *response = NULL;
 
+    mx_delete_childs(g->box8);
+
     if (input && strlen(input) > 0) {
         request = mx_json_string_search_user(g->token, g->uid, input);
 
         SSL_write(g->ssl, request, strlen(request));
         response = mx_read_server_response(g);
 
-        mx_printstr_endl(request);
-        mx_printstr_endl(response);
+        mx_parse_serach_user_response(response, g);
 
         mx_strdel(&request);
         mx_strdel(&response);
     }
-
     (void)w;
 }
 
 static void cancel_add_chat(GtkWidget *w, t_glade *g) {
     gtk_entry_set_text(GTK_ENTRY(g->e_chat_search), "");
     gtk_widget_hide(GTK_WIDGET(g->d_add_chat));
+
+    mx_delete_childs(g->box8);
 
     (void)w;
 }
@@ -44,7 +46,6 @@ void mx_add_chat(GtkWidget *w, t_glade *g) {
 
     g->b_add_chat_cancel = mx_get_gtk_obj(g, "b_add_chat_cancel");
     g->e_chat_search = mx_get_gtk_obj(g, "e_chat_search");
-
     g_signal_connect(g->b_add_chat_cancel, "clicked",
         G_CALLBACK(cancel_add_chat), g);
     g_signal_connect(g->d_add_chat, "delete-event",
@@ -52,8 +53,9 @@ void mx_add_chat(GtkWidget *w, t_glade *g) {
     g_signal_connect(g->e_chat_search, "changed",
         G_CALLBACK(search_user), g);
 
+    mx_delete_childs(g->box8);
+    gtk_entry_set_text(GTK_ENTRY(g->e_chat_search), "");
     gtk_widget_show_all(g->d_add_chat);
     gtk_dialog_run(GTK_DIALOG(g->d_add_chat));
-
     (void)w;
 }

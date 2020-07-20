@@ -15,18 +15,13 @@ static t_profile *build_profile(t_glade *g) {
 void mx_save_profile(GtkWidget *w, t_glade *g) {
     t_profile *profile = build_profile(g);
     char *request = mx_json_string_edit_profile(g, profile);
-    char *response = NULL;
 
     SSL_write(g->ssl, request, strlen(request));
-    response = mx_read_server_response(g);
-
-    mx_printstr_endl(request);
-    mx_printstr_endl(response);
 
     free(profile);
     profile = NULL;
+
     mx_strdel(&request);
-    mx_strdel(&response);
 
     (void)w;
 }

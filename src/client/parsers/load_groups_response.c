@@ -9,15 +9,15 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     mx_clear_input_text(g);
     gtk_label_set_text(GTK_LABEL(g->l_chat_name),
         gtk_label_get_text(GTK_LABEL(g_list_nth_data(childs, 1))));
-    gtk_widget_show(GTK_WIDGET(g->messages_area));
-    gtk_widget_show(GTK_WIDGET(g->box_message));
-    gtk_widget_show(GTK_WIDGET(g->e_search));
-    gtk_widget_show(GTK_WIDGET(g->box5));
-    gtk_widget_hide(GTK_WIDGET(g->l_select_chat));
-    gtk_widget_hide(GTK_WIDGET(g->profile_area));
+    g_idle_add(mx_show_widget, g->messages_area);
+    g_idle_add(mx_show_widget, g->box_message);
+    g_idle_add(mx_show_widget, g->e_search);
+    g_idle_add(mx_show_widget, g->box5);
+    g_idle_add(mx_hide_widget, g->l_select_chat);
+    g_idle_add(mx_hide_widget, g->profile_area);
     g->group = true;
     g->dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_gid)));
-    mx_load_messages(g, time(NULL));
+    mx_load_messages_request(g, time(NULL));
     g_list_free(childs);
     childs = NULL;
     (void)e;
@@ -42,8 +42,8 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
         G_CALLBACK(open_group), g);
     gtk_widget_realize(event_box);
     gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
-    gtk_widget_show_all(event_box);
-    gtk_widget_hide(GTK_WIDGET(l_uid));
+    g_idle_add(mx_show_all_widget, event_box);
+    g_idle_add(mx_hide_widget, l_uid);
 }
 
 static void parse_arrays(t_glade *g,  int len, json_object *j_gids,

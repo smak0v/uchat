@@ -247,8 +247,6 @@
     <property name="width_request">1200</property>
     <property name="height_request">800</property>
     <property name="can_focus">False</property>
-    <property name="border_width">10</property>
-    <property name="visible">True</property>
     <property name="window_position">center</property>
     <child>
       <object class="GtkBox" id="box1">
@@ -257,7 +255,7 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox" id="w_chat">
-            <property name="visible">False</property>
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
@@ -1164,7 +1162,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -1355,10 +1353,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0.019999999552965164</property>
-                <style>
-                  <class name="error"/>
-                  <class name="login_signup_error"/>
-                </style>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1384,14 +1378,14 @@
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkGrid" id="w_signup">
-            <property name="visible">False</property>
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
@@ -1690,10 +1684,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0.019999999552965164</property>
-                <style>
-                  <class name="error"/>
-                  <class name="login_signup_error"/>
-                </style>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -1737,7 +1727,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
