@@ -8,15 +8,15 @@ static void *send_file_thread(void *void_data) {
 
     SSL_set_fd(ssl, data->sock);
     printf("hello\n");
-    if (SSL_connect(ssl) == MX_SSL_FAILURE) {
-        printf("some trouble here\n");
-        ERR_print_errors_fp(stderr);
-        pthread_exit(NULL);
-    }
-    else {
-        printf("Calling send file\n");
+    // if (SSL_connect(ssl) == MX_SSL_FAILURE) {
+    //     printf("some trouble here\n");
+    //     ERR_print_errors_fp(stderr);
+    //     pthread_exit(NULL);
+    // }
+    // else {
+    //     printf("Calling send file\n");
         mx_send_file(ssl, data->name);
-    }
+    // }
     pthread_exit(NULL);
 }
 
@@ -54,7 +54,7 @@ void mx_send_file(SSL *ssl, char *path) {
     while ((b = fread(buffer, sizeof(char), sizeof(buffer), file)) > 0) {
         printf("%s\n", buffer);
         json_str = mx_json_string_s_file(1, pack_num++, buffer, b);
-        SSL_write(ssl, json_str, strlen(json_str));
+        write(SSL_get_fd(ssl), json_str, strlen(json_str));
         mx_strdel(&json_str);
         usleep(1000);
         bzero(buffer, sizeof(buffer));

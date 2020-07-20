@@ -1,6 +1,7 @@
 #pragma once
 
 // Includes
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,6 +15,7 @@
 
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 #include <openssl/crypto.h>
 #include <openssl/ssl.h>

@@ -13,7 +13,7 @@ char *mx_json_string_msg(t_msg *msg) {
     json_object_object_add(jobj, "msg", json_object_new_string(s_msg));
     json_object_object_add(jobj, "time", json_object_new_int(msg->time));
     json_object_object_add(jobj, "file", json_object_new_string(file));
-
+    json_object_object_add(jobj, "nme", json_object_new_string(msg->username));
     if (msg->forwarded)
         mx_j_o_o_a(jobj, "frwd", json_object_new_string(msg->forwarded));
     else

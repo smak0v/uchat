@@ -67,7 +67,7 @@ void mx_recv_file(SSL *ssl, char *filename) {
     if (!(file = fopen(mx_strjoin("files/", path + 1), "w+")))
         mx_terminate("open");
 
-    while ((b = SSL_read(ssl, buffer, sizeof(buffer) - 1)) >= 0) {
+    while ((b = read(SSL_get_fd(ssl), buffer, sizeof(buffer) - 1)) >= 0) {
         data = get_pack_data(buffer);
         if (!data)
             mx_terminate("broken json");

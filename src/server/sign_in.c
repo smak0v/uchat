@@ -53,6 +53,15 @@ static char *process_sockets(sqlite3 *db, int fd, int uid, char *tk) {
     return "ok";
 }
 
+char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw) {
+    json_object *jobj = json_object_new_object();
+
+    mx_j_o_o_a(jobj, "name", json_object_new_string(name));
+    mx_j_o_o_a(jobj, "passw", json_object_new_string(passw));
+
+    return mx_sign_in((void *)jobj, connect);
+}
+
 char *mx_sign_in(void *jobj, t_comm *connect) {
     const char *name = NULL;
     const char *pass = NULL;

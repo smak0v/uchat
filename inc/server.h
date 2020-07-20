@@ -119,11 +119,13 @@ struct s_groups_auditor {
 };
 
 // Functions
+int mx_start_server(int port);
 t_meta *mx_init_threads(sqlite3 *db, SSL_CTX *ctx);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
 char *mx_process_request(char *request, t_comm *connect);
 int mx_open_listener(int port);
+void mx_daemonize(int port);
 
 // Server API
 char *mx_bad_request(void *jobj, t_comm *connect);
@@ -179,6 +181,7 @@ json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
 void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
 char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id);
 int mx_get_free_thread(char *status, int *counter);
+char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw);
 
 // Notifications
 void mx_notify_add_to_group(sqlite3 *db, json_object *cli_arr, int gid);
