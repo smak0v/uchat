@@ -248,19 +248,18 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  search_user_builder.c edit_profile_builder.c \
 						  send_file_builder.c
 
-PROCESSORS_SRCS			= main_processor.c s_in.c reg.c s_out.c \
+PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
 						  load_dialogues.c load_groups.c find_user.c n_grp.c \
 						  load_messages.c edit_profile.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
-						  auth.c win_destroy.c find_gtk_objects.c \
+						  auth.c find_gtk_objects.c show_hide_utils.c \
 						  edit_profile.c get_gtk_obj.c add_chat.c add_group.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogues.c get_profile.c profile.c \
-						  message_input_utils.c messages.c open_dialog.c \
-						  show_hide_utils.c
+						  message_input_utils.c messages.c open_dialog.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

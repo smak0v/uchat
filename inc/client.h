@@ -62,6 +62,9 @@ struct s_glade {
     // additional data
     char *filename;
 
+    // window
+    GtkWidget *window; //main window
+
     // log in window
     GtkWidget *w_log; // window login
     GtkWidget *e_name; // entry name
@@ -189,8 +192,7 @@ void mx_parse_serach_user_response(char *response, t_glade *g);
 
 // Processors
 void mx_check_response_type(char *response, t_glade *g);
-void mx_s_in(char *response, t_glade *g);
-void mx_reg(char *response, t_glade *g);
+void mx_s_in_s_up(char *response, t_glade *g, int type);
 void mx_s_out(char *response, t_glade *g);
 void mx_load_dialogues(char *response, t_glade *g);
 void mx_load_groups(char *response, t_glade *g);
@@ -205,7 +207,6 @@ void mx_clear_signup_inputs(t_glade *g);
 
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path);
-void mx_gtk_quit(GtkWidget *w, t_glade *g);
 void mx_delete_childs(GtkWidget *w);
 
 void mx_create_win_log(t_glade *g);
@@ -224,7 +225,7 @@ void mx_login(t_glade *g);
 
 void mx_open_logwin(GtkWidget *sender, t_glade *g);
 void mx_open_regwin(GtkWidget *sender, t_glade *g);
-void mx_show_win_chat(GtkWidget *v, t_glade *g);
+void mx_show_win_chat(t_glade *g);
 
 void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);

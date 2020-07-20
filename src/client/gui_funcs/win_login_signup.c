@@ -1,33 +1,5 @@
 #include "client.h"
 
-void mx_open_logwin(GtkWidget *sender, t_glade *g) {
-    (void)sender;
-
-    mx_clear_signup_inputs(g);
-
-    gtk_label_set_text(GTK_LABEL(g->l_login_error), "");
-    g_idle_add(mx_hide_widget, g->l_login_error);
-
-    g_idle_add(mx_hide_widget, g->w_reg);
-    g_idle_add(mx_hide_widget, g->w_chat);
-
-    g_idle_add(mx_show_all_widget, g->w_log);
-}
-
-void mx_open_regwin(GtkWidget *sender, t_glade *g) {
-    (void)sender;
-
-    mx_clear_login_inputs(g);
-
-    gtk_label_set_text(GTK_LABEL(g->l_signup_error), "");
-    g_idle_add(mx_hide_widget, g->l_signup_error);
-
-    g_idle_add(mx_hide_widget, g->w_log);
-    g_idle_add(mx_hide_widget, g->w_chat);
-
-    g_idle_add(mx_show_all_widget, g->w_reg);
-}
-
 static void entry_visibility(GtkButton *b, t_glade *g) {
     (void)b;
 
@@ -36,10 +8,39 @@ static void entry_visibility(GtkButton *b, t_glade *g) {
         gtk_entry_set_visibility(GTK_ENTRY(g->r_epass), false);
         gtk_entry_set_visibility(GTK_ENTRY(g->r_repass), false);
     }
+
     else {
         gtk_entry_set_visibility(GTK_ENTRY(g->r_epass), true);
         gtk_entry_set_visibility(GTK_ENTRY(g->r_repass), true);
     }
+}
+
+void mx_open_logwin(GtkWidget *sender, t_glade *g) {
+    (void)sender;
+
+    mx_clear_signup_inputs(g);
+
+    gtk_label_set_text(GTK_LABEL(g->l_login_error), "");
+    gdk_threads_add_idle(mx_hide_widget, g->l_login_error);
+
+    gdk_threads_add_idle(mx_hide_widget, g->w_reg);
+    gdk_threads_add_idle(mx_hide_widget, g->w_chat);
+
+    gdk_threads_add_idle(mx_show_all_widget, g->w_log);
+}
+
+void mx_open_regwin(GtkWidget *sender, t_glade *g) {
+    (void)sender;
+
+    mx_clear_login_inputs(g);
+
+    gtk_label_set_text(GTK_LABEL(g->l_signup_error), "");
+    gdk_threads_add_idle(mx_hide_widget, g->l_signup_error);
+
+    gdk_threads_add_idle(mx_hide_widget, g->w_log);
+    gdk_threads_add_idle(mx_hide_widget, g->w_chat);
+
+    gdk_threads_add_idle(mx_show_all_widget, g->w_reg);
 }
 
 void mx_create_win_reg(t_glade *g) {
@@ -53,13 +54,13 @@ void mx_create_win_reg(t_glade *g) {
     g->b_reye = mx_get_gtk_obj(g, "b_reye");
     g->l_signup_error = mx_get_gtk_obj(g, "l_signup_error");
 
-    g_signal_connect(g->w_reg, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
     g_signal_connect(g->b_reg_back, "clicked", G_CALLBACK(mx_open_logwin), g);
     g_signal_connect(g->b_reg_login, "clicked", G_CALLBACK(mx_b_reg_log), g);
     g_signal_connect(g->b_reye, "clicked", G_CALLBACK(entry_visibility), g);
 }
 
 void mx_create_win_log(t_glade *g) {
+    g->window = mx_get_gtk_obj(g, "win_chat");
     g->w_log = mx_get_gtk_obj(g, "w_login");
     g->e_name = mx_get_gtk_obj(g, "name_entry");
     g->e_pass = mx_get_gtk_obj(g, "pass_entry");
@@ -68,7 +69,7 @@ void mx_create_win_log(t_glade *g) {
     g->b_eye = mx_get_gtk_obj(g, "b_eye");
     g->l_login_error = mx_get_gtk_obj(g, "l_login_error");
 
-    g_signal_connect(g->w_log, "destroy", G_CALLBACK(mx_gtk_quit), NULL);
+    g_signal_connect(g->window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(g->b_reg, "clicked", G_CALLBACK(mx_open_regwin), g);
     g_signal_connect(g->b_log_in, "clicked", G_CALLBACK(mx_b_log), g);
     g_signal_connect(g->b_eye, "clicked",

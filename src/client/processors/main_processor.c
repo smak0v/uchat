@@ -19,9 +19,9 @@ void mx_check_response_type(char *response, t_glade *g) {
     int type = get_response_type(response);
 
     if (type == S_IN)
-        mx_s_in(response, g);
+        mx_s_in_s_up(response, g, S_IN);
     else if (type == REG)
-        mx_reg(response, g);
+        mx_s_in_s_up(response, g, REG);
     else if (type == S_OUT)
         mx_s_out(response, g);
     else if (type == LOAD_DIALOGUES)

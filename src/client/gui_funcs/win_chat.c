@@ -4,7 +4,6 @@ void mx_create_win_chat(t_glade *g) {
     mx_find_gtk_objects_1(g);
     mx_find_gtk_objects_2(g);
 
-    g_signal_connect(g->w_chat, "destroy", G_CALLBACK(mx_gtk_quit), g);
     g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);
     g_signal_connect(g->b_logout, "clicked", G_CALLBACK(mx_b_logout), g);
     g_signal_connect(g->b_username, "clicked", G_CALLBACK(mx_open_profile), g);
@@ -22,16 +21,17 @@ void mx_create_win_chat(t_glade *g) {
         G_CALLBACK(mx_scroll_to_bottom), g);
 }
 
-void mx_show_win_chat(GtkWidget *v, t_glade *g) {
-    g_idle_add(mx_hide_widget, v);
+void mx_show_win_chat(t_glade *g) {
+    gdk_threads_add_idle(mx_hide_widget, g->w_reg);
+    gdk_threads_add_idle(mx_hide_widget, g->w_log);
 
-    g_idle_add(mx_show_all_widget, g->w_chat);
+    gdk_threads_add_idle(mx_show_all_widget, g->w_chat);
 
-    g_idle_add(mx_hide_widget, g->profile_area);
-    g_idle_add(mx_hide_widget, g->messages_area);
-    g_idle_add(mx_hide_widget, g->box_message);
-    g_idle_add(mx_hide_widget, g->b_close_profile);
-    g_idle_add(mx_hide_widget, g->box5);
+    gdk_threads_add_idle(mx_hide_widget, g->profile_area);
+    gdk_threads_add_idle(mx_hide_widget, g->messages_area);
+    gdk_threads_add_idle(mx_hide_widget, g->box_message);
+    gdk_threads_add_idle(mx_hide_widget, g->b_close_profile);
+    gdk_threads_add_idle(mx_hide_widget, g->box5);
 
     gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
 
