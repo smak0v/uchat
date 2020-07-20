@@ -47,7 +47,7 @@ char *mx_rename_group(void *jobj, t_comm *connect) {
     if (mx_rename_grp_by_id(connect->db, grp_id, (char *)name) == -1)
         return mx_json_string_code_type(500, RN_GR);
 
-    mx_notify_group_renamed(connect->db, grp_id, (char *)name);
+    mx_notify_group_renamed(connect->ssl, connect->db, grp_id, (char *)name);
 
     return mx_json_string_code_type(200, RN_GR);
 }
@@ -63,7 +63,7 @@ char *mx_add_to_group(void *jobj, t_comm *connect) {
     res = add_to_group(connect->db, j_add, gid, 0);
 
     if (res)
-        mx_notify_add_to_group(connect->db, j_add, gid);
+        mx_notify_add_to_group(connect->ssl, connect->db, j_add, gid);
 
     return mx_add_type(res, INV);
 }

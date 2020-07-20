@@ -178,14 +178,14 @@ int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
 int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
 json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
-void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid);
+void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid, SSL *ssl);
 char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id);
 int mx_get_free_thread(char *status, int *counter);
 char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw);
 
 // Notifications
-void mx_notify_add_to_group(sqlite3 *db, json_object *cli_arr, int gid);
-void mx_notify_group_renamed(sqlite3 *db, int gid, char *name);
+void mx_notify_add_to_group(SSL *ssl, sqlite3 *db, json_object *arr, int gid);
+void mx_notify_group_renamed(SSL *ssl, sqlite3 *db, int gid, char *name);
 
 //Sockets
 char *mx_add_socket(char *sock, int fd);

@@ -9,7 +9,7 @@ static char *send_group_message(SSL *ssl, t_msg *message, sqlite3 *db) {
 
     for (int i = 0; group_members[i] != -1; i++)
         if (group_members[i] != message->sender)
-            mx_send_to_all_clients(db, js_str, group_members[i]);
+            mx_send_to_all_clients(db, js_str, group_members[i], ssl);
 
     mx_strdel(&js_str);
     return mx_msg_json_builder(message);
@@ -31,7 +31,7 @@ static char *send_private_message(SSL *ssl, t_msg *msg, sqlite3 *db) {
     mx_add_msg(db, msg);
     json_string = mx_json_string_msg(msg);
 
-    mx_send_to_all_clients(db, json_string, msg->recepient);
+    mx_send_to_all_clients(db, json_string, msg->recepient, ssl);
 
     mx_strdel(&json_string);
     return mx_msg_json_builder(msg);
