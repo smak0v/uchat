@@ -131,6 +131,12 @@ label {
     color: red;
 }
 
+.login_signup_error {
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .new_group_error {
     margin-right: 40px;
     margin-bottom: 30px;
@@ -203,4 +209,26 @@ label {
 
 .box5 {
     background-color: shade(@base_color, 0.75);
+}
+
+.l_not_users_found {
+    font-size: 20px;
+}
+
+.user_box {
+    background-color: shade(@base_color, 0.95);
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.user_box_open_dialog_btn {
+    border: none;
+    border-color: shade(@base_color, 0.95);
+    background-color: shade(@base_color, 0.95);
+    margin-right: 20px;
+}
+
+.user_box_username {
+    font-size: 18px;
 }

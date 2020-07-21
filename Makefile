@@ -157,7 +157,8 @@ SERVER_SRCS				= main.c threads.c request_processing.c register.c\
 						load_messages.c get_user.c groups2.c json_builders2.c \
 						user_profile.c send_to_all_clients.c sockets.c \
 						remove_socket.c profile_json.c notifications.c \
-						recv_file.c unpackers.c file_transfer.c daemonize.c
+						recv_file.c unpackers.c file_transfer.c daemonize.c \
+						ssl_list.c
 
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
@@ -202,8 +203,11 @@ BUILDERS_OBJD			= $(CLIENT_OBJD)/builders
 
 GUI_FUNCS_OBJD			= $(CLIENT_OBJD)/gui_funcs
 
+PROCESSORS_OBJD			= $(CLIENT_OBJD)/processors
+
 CLIENT_OBJ_DIRS			= $(CLIENT_OBJD) $(VALIDATORS_OBJD) $(UTILS_OBJD) \
-						  $(PARSERS_OBJD) $(BUILDERS_OBJD) $(GUI_FUNCS_OBJD)
+						  $(PARSERS_OBJD) $(BUILDERS_OBJD) $(GUI_FUNCS_OBJD) \
+						  $(PROCESSORS_OBJD)
 
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
@@ -216,11 +220,14 @@ CLIENT_UTILS_OBJS		= $(addprefix $(OBJD)/client/utils/, \
 CLIENT_PARSERS_OBJS		= $(addprefix $(OBJD)/client/parsers/, \
 						  $(PARSERS_SRCS:%.c=%.o))
 
-CLIENT_BUILDERSS_OBJS	= $(addprefix $(OBJD)/client/builders/, \
+CLIENT_BUILDERS_OBJS	= $(addprefix $(OBJD)/client/builders/, \
 						  $(BUILDERS_SRCS:%.c=%.o))
 
 CLIENT_GUI_FUNCS_OBJS	= $(addprefix $(OBJD)/client/gui_funcs/, \
 						  $(GUI_FUNCS_SRCS:%.c=%.o))
+
+CLIENT_PROCESSORS_OBJS	= $(addprefix $(OBJD)/client/processors/, \
+						  $(PROCESSORS_SRCS:%.c=%.o))
 
 #===================================SRC=======================================#
 CLIENT_SRCS				= main.c
@@ -234,22 +241,28 @@ PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \
 						  load_groups_response.c load_messages_response.c \
 						  send_message_response.c load_dialogs_response.c \
-						  get_profile_response.c
+						  get_profile_response.c search_user_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \
 						  send_message_builder.c load_messages_builder.c \
 						  search_user_builder.c edit_profile_builder.c \
-						  send_file_builder.c
+						  send_file_builder.c get_profile_builder.c
+
+PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
+						  load_dialogues.c load_groups.c find_user.c n_grp.c \
+						  load_messages.c edit_profile.c search_users.c \
+						  s_msg.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
-						  create_error_modal_window.c auth.c win_destroy.c \
+						  auth.c find_gtk_objects.c show_hide_utils.c \
 						  edit_profile.c get_gtk_obj.c add_chat.c add_group.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
-						  load_dialogs.c get_profile.c profile.c \
-						  message_input_utils.c messages.c
+						  load_dialogues.c get_profile.c profile.c \
+						  message_input_utils.c messages.c open_dialog.c \
+						  gtk_quit.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -259,12 +272,14 @@ $(CLIENT_OBJ_DIRS):
 
 $(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS) $(CLIENT_VALIDATORS_OBJS) \
 					$(CLIENT_UTILS_OBJS) $(CLIENT_PARSERS_OBJS) \
-					$(CLIENT_BUILDERSS_OBJS) $(CLIENT_GUI_FUNCS_OBJS)
+					$(CLIENT_BUILDERS_OBJS) $(CLIENT_GUI_FUNCS_OBJS) \
+					$(CLIENT_PROCESSORS_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
 		$(CLIENT_OBJS) $(CLIENT_VALIDATORS_OBJS) $(CLIENT_UTILS_OBJS) \
-		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERSS_OBJS) \
-		$(CLIENT_GUI_FUNCS_OBJS) -L $(LIBMXD) -L $(LIBJSOND) \
-		-L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto -o $@ $(GTK_LIBS)
+		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERS_OBJS) \
+		$(CLIENT_GUI_FUNCS_OBJS) $(CLIENT_PROCESSORS_OBJS) -L $(LIBMXD) \
+		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto \
+		-o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 

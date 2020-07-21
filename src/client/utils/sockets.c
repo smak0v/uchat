@@ -35,29 +35,19 @@ int mx_open_connection(char *ip, int port) {
 
 void *mx_listen_server(void *data) {
     t_thread_data *thread_data = (t_thread_data *)data;
-    thread_data++;
-    // TODO Forever llo that listen to the server and display all input responses
+    char *response = NULL;
 
-    // int bytes_read = 0;
-    // char buff[MX_MAX];
-    // // int n = 0;
+    while (1) {
+        response = mx_read_server_response(thread_data->glade);
 
-    // while (1) {
-    //     // mx_show_server_certs(thread_data->ssl);
-    //     // mx_printstr("Enter the string: ");
-    //     // while ((buff[n++] = getchar()) != '\n')
-    //     //     ;
-    //     // n = 0;
-    //     // SSL_write(thread_data->ssl, buff, strlen(buff));
-    //     bzero(buff, sizeof(buff));
-    //     bytes_read = SSL_read(thread_data->ssl, buff, sizeof(buff));
-    //     buff[bytes_read] = '\0';
-    //     if (bytes_read <= 0) {
-    //         mx_printstr_endl("Server not responding...");
-    //         close(SSL_get_fd(thread_data->ssl));
-    //     }
-    //     mx_printstr_endl(buff);
-    // }
+        mx_printstr_endl(response);
+
+        if (response)
+            mx_check_response_type(response, thread_data->glade);
+
+        mx_strdel(&response);
+    }
+
     return data;
 }
 

@@ -1,15 +1,14 @@
 #include "server.h"
 
-static char *send_group_message(SSL *ssl, t_msg *message, sqlite3 *db) {
+static char *send_group_message(t_comm *connect, t_msg *message, sqlite3 *db) {
     char *js_str = mx_json_string_msg(message);
     int *group_members = mx_get_all_id_group_members(db, message->group_id);
-    ssl = NULL;
 
     mx_add_msg(db, message);
 
     for (int i = 0; group_members[i] != -1; i++)
         if (group_members[i] != message->sender)
-            mx_send_to_all_clients(db, js_str, group_members[i]);
+            mx_send_to_all_clients(connect, js_str, group_members[i]);
 
     mx_strdel(&js_str);
     return mx_msg_json_builder(message);
@@ -17,10 +16,9 @@ static char *send_group_message(SSL *ssl, t_msg *message, sqlite3 *db) {
 
 // Dialog_id == -1: message is a group message; Dialog_id == -2: message is a
 // private message, but the chat doesn't exist yet;
-static char *send_private_message(SSL *ssl, t_msg *msg, sqlite3 *db) {
+static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
     int d_id = msg->dialog_id;
     char *json_string = NULL;
-    ssl = NULL;
 
     if (msg->dialog_id == -2) {
         if ((d_id = mx_add_dialog(db, msg->sender, msg->recepient)) == -1)
@@ -31,7 +29,7 @@ static char *send_private_message(SSL *ssl, t_msg *msg, sqlite3 *db) {
     mx_add_msg(db, msg);
     json_string = mx_json_string_msg(msg);
 
-    mx_send_to_all_clients(db, json_string, msg->recepient);
+    mx_send_to_all_clients(connect, json_string, msg->recepient);
 
     mx_strdel(&json_string);
     return mx_msg_json_builder(msg);
@@ -51,9 +49,9 @@ char *mx_send_message(void *jobj, t_comm *connect) {
     else
         msg->username = uname;
     if (msg->group_id != -1)
-        res = send_group_message(connect->ssl, msg, connect->db);
+        res = send_group_message(connect, msg, connect->db);
     else
-        res = send_private_message(connect->ssl, msg, connect->db);
+        res = send_private_message(connect, msg, connect->db);
     if (msg->file)
         return mx_file_transfer(connect, msg->file, res, msg->id);
     return res;

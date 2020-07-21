@@ -9,5 +9,5 @@ void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
     gtk_style_context_add_class(gtk_widget_get_style_context(l_time), "time");
     gtk_style_context_add_class(gtk_widget_get_style_context(l_msg), "msgtxt");
 
-    gtk_widget_show_all(msg_v_box);
+    gdk_threads_add_idle(mx_show_all_widget, msg_v_box);
 }

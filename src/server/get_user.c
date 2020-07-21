@@ -54,7 +54,6 @@ char *mx_get_user(void *jobj, t_comm *connect) {
 
     if (parse_get_user((json_object *)jobj, &name, &uid))
         return mx_bad_request(NULL, NULL);
-
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return mx_json_string_code_type(401, GET_USER);
 

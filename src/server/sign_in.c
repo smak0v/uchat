@@ -10,26 +10,6 @@ static int validate_sign_in(sqlite3 *db, const char *name, const char *passw) {
         return user->user_id;
 }
 
-int mx_extract_name_passw(json_object *json, const char **name,
-                              const char **passw) {
-    json_object *j_name = NULL;
-    json_object *j_passw = NULL;
-
-    json_object_object_get_ex(json, "name", &j_name);
-    json_object_object_get_ex(json, "passw", &j_passw);
-
-    if (j_name && j_passw && json_object_get_type(j_name) == json_type_string
-        && json_object_get_type(j_passw) == json_type_string) {
-        *name = json_object_get_string(j_name);
-        *passw = json_object_get_string(j_passw);
-    }
-
-    if (*name == NULL || *passw == NULL)
-        return 1;
-    else
-        return 0;
-}
-
 static char *process_sockets(sqlite3 *db, int fd, int uid, char *tk) {
     char *sock = mx_get_sock_by_user_id(db, uid);
     char *tmp = NULL;
@@ -51,6 +31,26 @@ static char *process_sockets(sqlite3 *db, int fd, int uid, char *tk) {
         return NULL;
 
     return "ok";
+}
+
+int mx_extract_name_passw(json_object *json, const char **name,
+                              const char **passw) {
+    json_object *j_name = NULL;
+    json_object *j_passw = NULL;
+
+    json_object_object_get_ex(json, "name", &j_name);
+    json_object_object_get_ex(json, "passw", &j_passw);
+
+    if (j_name && j_passw && json_object_get_type(j_name) == json_type_string
+        && json_object_get_type(j_passw) == json_type_string) {
+        *name = json_object_get_string(j_name);
+        *passw = json_object_get_string(j_passw);
+    }
+
+    if (*name == NULL || *passw == NULL)
+        return 1;
+    else
+        return 0;
 }
 
 char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw) {
