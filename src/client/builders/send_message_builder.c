@@ -22,7 +22,7 @@ static void get_dgid_uuid2(json_object *jobj, t_msg *msg, t_glade *g) {
     }
     else {
         json_object_object_add(jobj, "gid", json_object_new_int(-1));
-        json_object_object_add(jobj, "did", json_object_new_int(msg->dgid));
+        json_object_object_add(jobj, "did", json_object_new_int(-2));
         json_object_object_add(jobj, "uid2", json_object_new_int(msg->uid2));
     }
 }

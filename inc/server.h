@@ -29,7 +29,7 @@ struct s_communication {
     char *ft_status;
 	sqlite3 *db;
 	SSL *ssl;
-	SSL_CTX *ctx;
+	t_list **ssl_list;
 };
 
 struct s_metadata {
@@ -38,7 +38,7 @@ struct s_metadata {
     char *ft_status;
 	sqlite3 *db;
 	SSL *ssl;
-	SSL_CTX *ctx;
+	t_list **ssl_list;
 };
 
 struct s_user {
@@ -120,7 +120,7 @@ struct s_groups_auditor {
 
 // Functions
 int mx_start_server(int port);
-t_meta *mx_init_threads(sqlite3 *db, SSL_CTX *ctx);
+t_meta *mx_init_threads(sqlite3 *db);
 void mx_thread_manager(int connection_fd, t_meta **metadata);
 void *mx_communicate(void *data);
 char *mx_process_request(char *request, t_comm *connect);
@@ -178,14 +178,14 @@ int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
 int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
 json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
-void mx_send_to_all_clients(sqlite3 *db, char *j_str, int uid, SSL *ssl);
+void mx_send_to_all_clients(t_comm *connect, char *j_str, int uid);
 char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id);
 int mx_get_free_thread(char *status, int *counter);
 char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw);
 
 // Notifications
-void mx_notify_add_to_group(SSL *ssl, sqlite3 *db, json_object *arr, int gid);
-void mx_notify_group_renamed(SSL *ssl, sqlite3 *db, int gid, char *name);
+void mx_notify_add_to_group(t_comm *connect, json_object *arr, int gid);
+void mx_notify_group_renamed(t_comm *connect, int gid, char *name);
 
 //Sockets
 char *mx_add_socket(char *sock, int fd);
@@ -195,6 +195,10 @@ int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
 enum json_type mx_j_o_g_t(json_object *jso);
+
+// SSL List
+void mx_pop_from_ssl_list(t_list **ssl_list, int delete_fd);
+SSL *mx_find_ssl(t_list **ssl_list, int fd);
 
 // DB API
 sqlite3 *mx_opendb(char *name);
@@ -286,7 +290,7 @@ void mx_print_db(sqlite3 *db, char *table);
 void mx_print_list_members(t_list *mem);
 int mx_get_size_table(sqlite3 *db, char *table);
 void mx_delete_list(t_list *head);
-void mx_recv_file(SSL *ssl, char *filename);
+void mx_recv_file(char *filename, int fd);
 
 // TLS/SSL
 void mx_load_certificates(SSL_CTX *ctx, char *cert_file, char *key_file);
