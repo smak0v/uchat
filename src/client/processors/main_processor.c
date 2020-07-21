@@ -15,7 +15,7 @@ static int get_response_type(char *response) {
     return type;
 }
 
-static void check_response_type_1(int type, t_glade *g) {
+static void check_response_type_1(int type, char *response, t_glade *g) {
     if (type == EDIT_PROFILE)
         mx_edit_profile(response, g);
     else if (type == FIND_USER)
@@ -44,5 +44,5 @@ void mx_check_response_type(char *response, t_glade *g) {
     else if (type == LOAD_MESSAGES)
         mx_load_messages(response, g);
     else
-        check_response_type_1(type, g);
+        check_response_type_1(type, response, g);
 }
