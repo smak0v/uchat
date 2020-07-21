@@ -59,7 +59,7 @@ char *mx_get_user(void *jobj, t_comm *connect) {
         return mx_json_string_code_type(401, GET_USER);
 
     if ((user = mx_get_user_by_login(connect->db, name)) == NULL)
-        return mx_json_string_code_type(401, GET_USER);
+        return mx_json_string_code_type(404, GET_USER);
 
     prof = mx_get_profile_by_id(connect->db, user->user_id);
 
