@@ -1,10 +1,11 @@
 #include "server.h"
 
-static char *json_str_builder_get(t_profile *prof) {
+static char *json_str_builder_get(t_profile *prof, char *name) {
     json_object *jobj = json_object_new_object();
 
     mx_j_o_o_a(jobj, "type", json_object_new_int(GET_USER));
     mx_j_o_o_a(jobj, "code", json_object_new_int(200));
+    mx_j_o_o_a(jobj, "name", json_object_new_string(name));
     if (!prof)
         mx_j_o_o_a(jobj, "prof", json_object_new_null());
     else
@@ -53,7 +54,7 @@ char *mx_get_user(void *jobj, t_comm *connect) {
 
     if (parse_get_user((json_object *)jobj, &name, &uid))
         return mx_bad_request(NULL, NULL);
-    printf("%s\n", json_object_to_json_string(jobj));
+
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return mx_json_string_code_type(401, GET_USER);
 
@@ -61,9 +62,8 @@ char *mx_get_user(void *jobj, t_comm *connect) {
         return mx_json_string_code_type(401, GET_USER);
 
     prof = mx_get_profile_by_id(connect->db, user->user_id);
-    // printf("id:%d\nbirth:%s\ncountry:%s\nemail:%s\nname:%status:%s\n\n\n", new_prof->user_id, new_prof->birth, new_prof->country, new_prof->email, new_prof->name, new_prof->status);
-    printf("%s\n", json_str_builder_get(prof));
-    return json_str_builder_get(prof);
+
+    return json_str_builder_get(prof, name);
 }
 
 char *mx_find_user(void *jobj, t_comm *connect) {
