@@ -15,6 +15,7 @@ char *mx_sign_out(void *jobj, t_comm *connect) {
         return mx_json_string_code_type(401, S_OUT);
 
     mx_remove_socket(connect->db, connect->fd, id);
+    mx_pop_from_ssl_list(connect->ssl_list, connect->fd);
 
     return mx_json_string_code_type(200, S_OUT);
 }

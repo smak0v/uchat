@@ -15,7 +15,7 @@ void *mx_communicate(void *data) {
             bzero(buff, MX_MAX);
             bytes_read = SSL_read(connect->ssl, buff, sizeof(buff));
             buff[bytes_read] = '\0';
-            if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
+            if (bytes_read <= 0) {
                 // TODO MOVE TO SEPARATE FUNC
                 close(SSL_get_fd(connect->ssl));
                 *status = 0;
@@ -24,7 +24,9 @@ void *mx_communicate(void *data) {
                 int uid = mx_get_user_id_by_socket(connect->db, connect->fd);
                 char *sock = mx_remove_socket(connect->db, connect->fd, uid);
                 mx_update_socket_by_user_id(connect->db, sock, uid);
-                
+
+                // remove SSL from ssl t_list
+
                 mx_printstr_endl("Connection closed");
                 pthread_exit(NULL);
                 // ==========
@@ -40,7 +42,8 @@ void mx_accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
     int connect_fd = 0;
     unsigned int len = 0;
     struct sockaddr_in client_addr;
-    t_meta *trd_data = mx_init_threads(db, ctx);
+    t_meta *trd_data = mx_init_threads(db);
+    t_list *ssl_list = NULL;
 
     while (1) {
         mx_printstr_endl("Ready for new client");
@@ -52,6 +55,12 @@ void mx_accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
 
         ssl = SSL_new(ctx);
         SSL_set_fd(ssl, connect_fd);
+        if (!trd_data->ssl_list) {
+            ssl_list = mx_create_node((void *)ssl);
+            trd_data->ssl_list = &ssl_list;
+        }
+        else
+            mx_push_back(trd_data->ssl_list, ssl);
 
         trd_data->ssl = ssl;
         mx_thread_manager(connect_fd, &trd_data);
@@ -95,7 +104,7 @@ int mx_start_server(int port) {
     if (socket_fd < 0)
         mx_terminate("Socket creation error\n");
     db = mx_opendb("test.db");
-    mx_print_db(db, "MSG");
+    mx_print_db(db, "DIALOG");
     mx_accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);

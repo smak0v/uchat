@@ -56,7 +56,7 @@ static int get_data_len(char *buffer) {
     return len;
 }
 
-void mx_recv_file(SSL *ssl, char *filename) {
+void mx_recv_file(char *filename, int fd) {
     FILE *file;
     char buffer[10000];
     int b = 1;
@@ -67,7 +67,7 @@ void mx_recv_file(SSL *ssl, char *filename) {
     if (!(file = fopen(mx_strjoin("files/", path + 1), "w+")))
         mx_terminate("open");
 
-    while ((b = read(SSL_get_fd(ssl), buffer, sizeof(buffer) - 1)) >= 0) {
+    while ((b = read(fd, buffer, sizeof(buffer) - 1)) >= 0) {
         data = get_pack_data(buffer);
         if (!data)
             mx_terminate("broken json");
