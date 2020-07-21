@@ -20,9 +20,9 @@ void mx_open_dialog(GtkWidget *w, t_glade *g) {
     gtk_label_set_text(GTK_LABEL(g->l_chat_name),
         gtk_label_get_text(GTK_LABEL(g_list_nth_data(childs, 1))));
     hide_show_dialog_widgets(g);
-
     g->group = false;
     g->uid2 = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_id)));
+    g->dgid = -2;
     mx_load_messages_request(g, time(NULL));
 
     gdk_threads_add_idle(mx_hide_widget, g->d_add_chat);

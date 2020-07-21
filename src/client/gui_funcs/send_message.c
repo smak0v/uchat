@@ -32,7 +32,11 @@ void mx_add_message_to_gui(t_glade *g, char *response) {
     buld_msg_block(msg_v_box, j_msg, time);
     gtk_box_pack_start(GTK_BOX(g->messages_area), msg_v_box, FALSE, FALSE, 0);
 
-    gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);
+    if (mx_atoi(json_object_get_string(json_object_object_get(j_msg, "uid2")))
+        == g->uid)
+        gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_START);
+    else
+        gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);
 
     mx_strdel(&time);
     mx_clear_jobj(&jobj, MX_SUCCESS);

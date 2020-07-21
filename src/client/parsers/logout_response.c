@@ -16,6 +16,7 @@ void mx_parse_logout_response(char *response, t_glade *g) {
         if (j_code && json_object_get_type(j_code) == json_type_int) {
             if (!check_response_code(json_object_get_int(j_code))) {
                 mx_clear_jobj(&jobj, MX_SUCCESS);
+                mx_clear_login_inputs(g);
                 mx_open_logwin(g->w_chat, g);
             }
             else
