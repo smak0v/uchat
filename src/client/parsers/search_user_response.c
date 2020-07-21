@@ -38,8 +38,8 @@ static void add_user_box_to_gui(json_object *jobj, t_glade *g) {
     build_user_box(user_box, l_id, g);
     gtk_box_pack_start(GTK_BOX(g->box8), user_box, FALSE, FALSE, 0);
 
-    gtk_widget_show_all(user_box);
-    gtk_widget_hide(l_id);
+    gdk_threads_add_idle(mx_show_all_widget, user_box);
+    gdk_threads_add_idle(mx_hide_widget, l_id);
 
     mx_strdel(&id);
 }
@@ -59,11 +59,12 @@ static void parse_users(json_object *jobj, t_glade *g) {
         gtk_style_context_add_class(gtk_widget_get_style_context(
             l_not_users_found), "l_not_users_found");
         gtk_box_pack_start(GTK_BOX(g->box8), l_not_users_found, TRUE, TRUE, 0);
-        gtk_widget_show(l_not_users_found);
+        gdk_threads_add_idle(mx_show_widget, l_not_users_found);
     }
 }
 
 void mx_parse_serach_user_response(char *response, t_glade *g) {
+    mx_printstr_endl(response);
     json_object *jobj = json_tokener_parse(response);
     json_object *j_code = NULL;
 

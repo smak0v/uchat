@@ -10,7 +10,6 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
         json_object_object_get_ex(jobj, "len", &j_len);
         if (j_len && json_object_get_type(j_len) == json_type_int
             && (len = json_object_get_int(j_len)) > 0) {
-            mx_printstr_endl("hello");
             (void)g;
         }
         return MX_SUCCESS;

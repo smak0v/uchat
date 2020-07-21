@@ -39,5 +39,5 @@ void mx_show_win_chat(t_glade *g) {
     mx_delete_childs(g->groups_box);
     mx_load_dialogues_request(g);
     mx_load_groups_request(g);
-    // mx_get_profile(g);
+    mx_get_profile(g);
 }

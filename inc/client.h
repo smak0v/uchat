@@ -61,6 +61,7 @@ struct s_glade {
 
     // additional data
     char *filename;
+    pthread_t listener;
 
     // window
     GtkWidget *window; //main window
@@ -174,6 +175,7 @@ char *mx_json_string_load_dialogs_groups(enum e_types type, char *token,
     int uid);
 char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
+char *mx_json_string_get_profile(char *token, int uid, char *name);
 char *mx_json_string_search_user(char *token, int uid, char *name);
 char *mx_json_string_edit_profile(t_glade *g, t_profile *profile);
 char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
@@ -200,6 +202,8 @@ void mx_find_user(char *response, t_glade *g);
 void mx_n_grp(char *response, t_glade *g);
 void mx_load_messages(char *response, t_glade *g);
 void mx_edit_profile(char *response, t_glade *g);
+void mx_search_users(char *response, t_glade *g);
+void mx_s_msg(char *response, t_glade *g);
 
 // GUI
 void mx_clear_login_inputs(t_glade *g);
@@ -236,6 +240,7 @@ void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
+void mx_add_message_to_gui(t_glade *g, char *response);
 void mx_attach_file(GtkWidget *w, t_glade *g);
 
 void mx_load_dialogues_request(t_glade *g);
@@ -251,3 +256,5 @@ void mx_open_dialog(GtkWidget *w, t_glade *g);
 
 void mx_find_gtk_objects_1(t_glade *g);
 void mx_find_gtk_objects_2(t_glade *g);
+
+void mx_gtk_quit(t_glade *g);

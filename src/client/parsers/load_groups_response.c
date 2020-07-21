@@ -17,7 +17,7 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     gdk_threads_add_idle(mx_hide_widget, g->profile_area);
     g->group = true;
     g->dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_gid)));
-    // mx_load_messages_request(g, time(NULL));
+    mx_load_messages_request(g, time(NULL));
     g_list_free(childs);
     childs = NULL;
     (void)e;

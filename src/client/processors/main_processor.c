@@ -15,6 +15,15 @@ static int get_response_type(char *response) {
     return type;
 }
 
+static void check_response_type_1(int type, t_glade *g) {
+    if (type == EDIT_PROFILE)
+        mx_edit_profile(response, g);
+    else if (type == FIND_USER)
+        mx_search_users(response, g);
+    else if (type == S_MES)
+        mx_s_msg(response, g);
+}
+
 void mx_check_response_type(char *response, t_glade *g) {
     int type = get_response_type(response);
 
@@ -28,12 +37,12 @@ void mx_check_response_type(char *response, t_glade *g) {
         mx_load_dialogues(response, g);
     else if (type == LOAD_GROUPS)
         mx_load_groups(response, g);
-    else if (type == FIND_USER)
+    else if (type == GET_USER)
         mx_find_user(response, g);
     else if (type == N_GRP)
         mx_n_grp(response, g);
     else if (type == LOAD_MESSAGES)
         mx_load_messages(response, g);
-    else if (type == EDIT_PROFILE)
-        mx_edit_profile(response, g);
+    else
+        check_response_type_1(type, g);
 }

@@ -69,7 +69,7 @@ void mx_create_win_log(t_glade *g) {
     g->b_eye = mx_get_gtk_obj(g, "b_eye");
     g->l_login_error = mx_get_gtk_obj(g, "l_login_error");
 
-    g_signal_connect(g->window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(g->window, "destroy", G_CALLBACK(mx_gtk_quit), g);
     g_signal_connect(g->b_reg, "clicked", G_CALLBACK(mx_open_regwin), g);
     g_signal_connect(g->b_log_in, "clicked", G_CALLBACK(mx_b_log), g);
     g_signal_connect(g->b_eye, "clicked",
