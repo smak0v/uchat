@@ -15,7 +15,7 @@ void *mx_communicate(void *data) {
             bzero(buff, MX_MAX);
             bytes_read = SSL_read(connect->ssl, buff, sizeof(buff));
             buff[bytes_read] = '\0';
-            if (bytes_read <= 0 || mx_strcmp(buff, "exit\n") == 0) {
+            if (bytes_read <= 0) {
                 // TODO MOVE TO SEPARATE FUNC
                 close(SSL_get_fd(connect->ssl));
                 *status = 0;
@@ -24,7 +24,7 @@ void *mx_communicate(void *data) {
                 int uid = mx_get_user_id_by_socket(connect->db, connect->fd);
                 char *sock = mx_remove_socket(connect->db, connect->fd, uid);
                 mx_update_socket_by_user_id(connect->db, sock, uid);
-                
+
                 mx_printstr_endl("Connection closed");
                 pthread_exit(NULL);
                 // ==========
