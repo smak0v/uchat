@@ -18,18 +18,18 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
     else if (code == 404) {
         gtk_label_set_text(GTK_LABEL(g->l_login_error), "Wrong credentials!\n"\
             "User with this credentials not found. Try again!");
-        g_idle_add(mx_show_widget, g->l_login_error);
+        gdk_threads_add_idle(mx_show_widget, g->l_login_error);
         return MX_FAILURE;
     }
     else if (code == 500) {
         gtk_label_set_text(GTK_LABEL(g->l_login_error), "Error!\n" \
             "Something were wrong! Try again later!");
-        g_idle_add(mx_show_widget, g->l_login_error);
+        gdk_threads_add_idle(mx_show_widget, g->l_login_error);
         return MX_FAILURE;
     }
     else {
         gtk_label_set_text(GTK_LABEL(g->l_login_error), "");
-        g_idle_add(mx_hide_widget, g->l_login_error);
+        gdk_threads_add_idle(mx_hide_widget, g->l_login_error);
         save_response_data(jobj, g);
         return MX_SUCCESS;
     }

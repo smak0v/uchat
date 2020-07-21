@@ -32,7 +32,7 @@ static void add_message_to_gui(json_object *msg, t_glade *g) {
 
     if (mx_atoi(json_object_get_string(json_object_object_get(msg, "uid2")))
         != -1)
-        gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);
+        gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_START);
     else
         gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);
 
