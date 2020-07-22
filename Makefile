@@ -170,7 +170,8 @@ $(SERVER_OBJ_DIRS):
 $(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS) $(SERVER_DB_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITEA) \
 		$(COMMON_OBJS) $(SERVER_OBJS) $(SERVER_DB_OBJS) -L $(LIBMXD) \
-		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto  -o $@
+		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto \
+		-fsanitize=address,undefined -g3 -rdynamic -o $@
 
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
