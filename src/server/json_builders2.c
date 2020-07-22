@@ -36,3 +36,17 @@ char *mx_add_type(char *j_str, int val) {
 
     return (char *)json_object_to_json_string(jobj);
 }
+
+char *mx_add_field(char *j_str, int type, char *key, void *val) {
+    json_object *jobj = json_tokener_parse(j_str);
+    int *value = NULL;
+
+    if (type == 1)
+        mx_j_o_o_a(jobj, key, json_object_new_string((char *)val));
+    else if (type == 2) {
+        value = (int *)val;
+        mx_j_o_o_a(jobj, key, json_object_new_int(*value));
+    }
+
+    return (char *)json_object_to_json_string(jobj);
+}

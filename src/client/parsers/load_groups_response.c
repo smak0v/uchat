@@ -23,6 +23,12 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     (void)e;
 }
 
+static int tmp_kostyl(GtkWidget *data) {
+    gtk_widget_realize(data);
+
+    return 1;
+}
+
 static void add_group_to_gui(t_glade *g, int gid, char *name) {
     GtkWidget *event_box = gtk_event_box_new();
     GtkWidget *group_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -37,7 +43,8 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
         "chat_group_box");
     g_signal_connect(event_box, "button_press_event",
         G_CALLBACK(open_group), g);
-    gtk_widget_realize(event_box);
+    g_idle_add ((GSourceFunc)tmp_kostyl, event_box);
+    // gtk_widget_realize(event_box);
     gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
     gdk_threads_add_idle(mx_show_all_widget, event_box);
     gdk_threads_add_idle(mx_hide_widget, l_uid);

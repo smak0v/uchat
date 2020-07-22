@@ -54,6 +54,8 @@ char *mx_process_request(char *request, t_comm *connect) {
     int type = 0;
     char *output = NULL;
 
+    printf("%s\n", request);
+
     if (json_object_get_type(jobj) == json_type_object) {
         json_object_object_get_ex(jobj, "type", &j_type);
         if (j_type && json_object_get_type(j_type) == json_type_int)

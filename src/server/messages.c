@@ -19,9 +19,13 @@ static char *send_group_message(t_comm *connect, t_msg *message, sqlite3 *db) {
 static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
     int d_id = msg->dialog_id;
     char *json_string = NULL;
+    t_dialog *dialogue = NULL;
 
     if (msg->dialog_id == -2) {
-        if ((d_id = mx_add_dialog(db, msg->sender, msg->recepient)) == -1)
+        if ((dialogue = mx_get_dialog_by_id1_id2(connect->db, msg->sender,
+                                                 msg->recepient)) != NULL)
+            msg->dialog_id = dialogue->dialog_id;
+        else if ((d_id = mx_add_dialog(db, msg->sender, msg->recepient)) == -1)
             return mx_json_string_code_type(500, S_MES);
         msg->dialog_id = d_id;
     }

@@ -158,6 +158,7 @@ char *mx_msg_json_builder(t_msg *msg);
 char *mx_json_string_notify_gr(int gid, char *gr_name, int type);
 char *mx_json_string_code_type(int code, int type);
 char *mx_add_type(char *j_str, int val);
+char *mx_add_field(char *j_str, int type, char *key, void *val);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
