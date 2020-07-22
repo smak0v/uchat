@@ -6,7 +6,8 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg,
     GtkWidget *msg_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *l_msg = gtk_label_new(json_object_get_string(
         json_object_object_get(msg, "msg")));
-    GtkWidget *l_username = gtk_label_new("username");
+    GtkWidget *l_username = gtk_label_new(json_object_get_string(
+        json_object_object_get(msg, "nme")));
     GtkWidget *l_time = gtk_label_new(time);
 
     gtk_label_set_xalign(GTK_LABEL(l_username), 0);
@@ -30,11 +31,11 @@ static void add_message_to_gui(json_object *msg, t_glade *g) {
     buld_msg_block(msg_v_box, msg, time);
     gtk_box_pack_start(GTK_BOX(g->messages_area), msg_v_box, FALSE, FALSE, 0);
 
-    if (mx_atoi(json_object_get_string(json_object_object_get(msg, "uid2")))
-        != -1)
-        gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_START);
-    else
+    if (mx_atoi(json_object_get_string(json_object_object_get(msg, "uid")))
+        == g->uid)
         gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);
+    else
+        gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_START);
 
     mx_strdel(&time);
 }

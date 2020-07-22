@@ -1,5 +1,20 @@
 #include "client.h"
 
+static int check_uid2_in_dialogues(t_list *dialogues, char *uid2) {
+    t_dialogue *dialogue = NULL;
+
+    while (dialogues) {
+        dialogue = (t_dialogue *)dialogues->data;
+
+        if (dialogue->uid2 == mx_atoi(uid2))
+            return dialogue->did;
+
+        dialogues = dialogues->next;
+    }
+
+    return -1;
+}
+
 static void hide_show_dialog_widgets(t_glade *g) {
     gdk_threads_add_idle(mx_show_widget, g->messages_area);
     gdk_threads_add_idle(mx_show_widget, g->box_message);
@@ -22,7 +37,15 @@ void mx_open_dialog(GtkWidget *w, t_glade *g) {
     hide_show_dialog_widgets(g);
     g->group = false;
     g->uid2 = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_id)));
-    g->dgid = -2;
+
+    int did = check_uid2_in_dialogues(g->dialogues,
+        (char *)gtk_label_get_text(GTK_LABEL(l_id)));
+
+    if (did >= 0)
+        g->dgid = did;
+    else
+        g->dgid = -2;
+
     mx_load_messages_request(g, time(NULL));
 
     gdk_threads_add_idle(mx_hide_widget, g->d_add_chat);

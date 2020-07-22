@@ -60,7 +60,7 @@ void mx_fill_array_user(json_object *jobj, t_list *user_list) {
         user = user_list->data;
         j_user = json_object_new_object();
         mx_j_o_o_a(j_user, "id", json_object_new_int(user->user_id));
-        mx_j_o_o_a(j_user, "name", json_object_new_int(user->user_id));
+        mx_j_o_o_a(j_user, "name", json_object_new_string(user->user_login));
         json_object_array_add(jobj, j_user);
         user_list = user_list->next;
     }

@@ -16,6 +16,7 @@ typedef struct s_glade t_glade;
 typedef struct s_thread_data t_thread_data;
 typedef struct s_msg t_msg;
 typedef struct s_profile t_profile;
+typedef struct s_dialogue t_dialogue;
 
 struct s_thread_data {
     SSL *ssl;
@@ -40,6 +41,11 @@ struct s_profile {
     char *country;
 };
 
+struct s_dialogue {
+    int did;
+    int uid2;
+};
+
 struct s_glade {
     GtkBuilder *bd;
 
@@ -53,6 +59,7 @@ struct s_glade {
     char *token;
     int uid;
     SSL *ssl;
+    t_list *dialogues;
 
     // message data
     int dgid;
