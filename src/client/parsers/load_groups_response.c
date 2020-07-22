@@ -27,10 +27,7 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
     GtkWidget *event_box = gtk_event_box_new();
     GtkWidget *group_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *l_name = gtk_label_new(name);
-    char *str_gid = mx_itoa(gid);
-    GtkWidget *l_uid = gtk_label_new(str_gid);
-
-    mx_strdel(&str_gid);
+    GtkWidget *l_uid = gtk_label_new(mx_itoa(gid));
 
     gtk_box_pack_start(GTK_BOX(g->groups_box), event_box, FALSE, FALSE, 0);
     gtk_container_add(GTK_CONTAINER(event_box), group_box);

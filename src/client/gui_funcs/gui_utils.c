@@ -2,9 +2,9 @@
 
 void mx_widget_visible(GtkWidget *widget, gboolean is_visible) {
     if (is_visible)
-        gtk_widget_show(widget);
+        gdk_threads_add_idle(mx_show_widget, widget);
     else
-        gtk_widget_hide(widget);
+        gdk_threads_add_idle(mx_hide_widget, widget);
 }
 
 void mx_widget_set_visibility(GtkBuilder *bd, gchar *name,
