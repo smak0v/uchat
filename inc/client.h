@@ -172,7 +172,7 @@ void mx_process_send_file(t_glade *g, char *path, int port);
 gboolean mx_hide_widget(gpointer w);
 gboolean mx_show_widget(gpointer w);
 gboolean mx_show_all_widget(gpointer w);
-gboolean mx_destroy_widget(GtkWidget *w);
+gboolean mx_destroy_widget(gpointer w);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);

@@ -18,7 +18,7 @@ gboolean mx_show_all_widget(gpointer w) {
     return G_SOURCE_REMOVE;
 }
 
-gboolean mx_destroy_widget(GtkWidget* w) {
+gboolean mx_destroy_widget(gpointer w) {
     gtk_widget_destroy(w);
 
     return G_SOURCE_REMOVE;
