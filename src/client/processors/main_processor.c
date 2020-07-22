@@ -22,6 +22,8 @@ static void check_response_type_1(int type, char *response, t_glade *g) {
         mx_search_users(response, g);
     else if (type == S_MES)
         mx_s_msg(response, g);
+    else if (type == FILE_TRANSFER)
+        mx_cli_file_transfer(response, g);
 }
 
 void mx_check_response_type(char *response, t_glade *g) {

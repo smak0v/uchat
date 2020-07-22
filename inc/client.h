@@ -166,13 +166,13 @@ void mx_logout(t_glade *g);
 void mx_clear_input_text(t_glade *g);
 char *mx_get_input_text(t_glade *g);
 void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g);
-void mx_send_file(SSL *ssl, char *path);
+void *mx_send_file(void *data);
 char *mx_get_time(time_t time);
-void mx_process_send_file(t_glade *g, char *path);
+void mx_process_send_file(t_glade *g, char *path, int port);
 gboolean mx_hide_widget(gpointer w);
 gboolean mx_show_widget(gpointer w);
 gboolean mx_show_all_widget(gpointer w);
-gboolean mx_destroy_widget(gpointer w);
+gboolean mx_destroy_widget(GtkWidget *w);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
@@ -211,6 +211,7 @@ void mx_load_messages(char *response, t_glade *g);
 void mx_edit_profile(char *response, t_glade *g);
 void mx_search_users(char *response, t_glade *g);
 void mx_s_msg(char *response, t_glade *g);
+void mx_cli_file_transfer(char *response, t_glade *g);
 
 // GUI
 void mx_clear_login_inputs(t_glade *g);

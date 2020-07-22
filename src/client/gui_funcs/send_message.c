@@ -64,8 +64,8 @@ void mx_send_msg(GtkWidget *w, t_glade *g) {
     mx_printint_endl(g->uid);
     mx_printstr_endl(request);
     SSL_write(g->ssl, request, strlen(request));
-    if (g->filename)
-        mx_process_send_file(g, g->filename);
+    // if (g->filename)
+    //     mx_process_send_file(g, g->filename);
 
     mx_clear_input_text(g);
     free(msg);

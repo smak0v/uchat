@@ -37,7 +37,6 @@ char *mx_json_string_add_to_gr(int gid) {
     json_object *jobj = json_object_new_object();
 
     json_object_object_add(jobj, "code", json_object_new_int(200));
-    json_object_object_add(jobj, "name", json_object_new_int(200));
     json_object_object_add(jobj, "id", json_object_new_int(gid));
 
     return (char *)json_object_to_json_string(jobj);
