@@ -27,13 +27,8 @@ static void add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name) {
     GtkWidget *event_box = gtk_event_box_new();
     GtkWidget *dialogue_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *l_name = gtk_label_new(name);
-    char *str_did = mx_itoa(did);
-    char *str_uid2 = mx_itoa(uid2);
-    GtkWidget *l_did = gtk_label_new(str_did);
-    GtkWidget *l_uid2 = gtk_label_new(str_uid2);
-
-    mx_strdel(&str_did);
-    mx_strdel(&str_uid2);
+    GtkWidget *l_did = gtk_label_new(mx_itoa(did));
+    GtkWidget *l_uid2 = gtk_label_new(mx_itoa(uid2));
 
     gtk_box_pack_start(GTK_BOX(g->dialogs_box), event_box, FALSE, FALSE, 0);
     gtk_container_add(GTK_CONTAINER(event_box), dialogue_box);

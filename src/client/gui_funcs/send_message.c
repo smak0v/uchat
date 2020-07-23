@@ -22,6 +22,19 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg, char *time) {
     mx_set_message_style(msg_v_box, l_username, l_time, l_msg);
 }
 
+static t_msg *build_msg(t_glade *g, char *user_message) {
+    t_msg *msg = mx_memalloc(sizeof(t_msg));
+
+    msg->group = g->group;
+    msg->dgid = g->dgid;
+    msg->uid2 = g->uid2;
+    msg->msg = user_message;
+    msg->time = time(NULL);
+    msg->file = g->filename;
+
+    return msg;
+}
+
 void mx_add_message_to_gui(t_glade *g, char *response) {
     json_object *jobj = json_tokener_parse(response);
     json_object *j_msg = json_object_object_get(jobj, "msg");
@@ -40,19 +53,6 @@ void mx_add_message_to_gui(t_glade *g, char *response) {
 
     mx_strdel(&time);
     mx_clear_jobj(&jobj, MX_SUCCESS);
-}
-
-static t_msg *build_msg(t_glade *g, char *user_message) {
-    t_msg *msg = mx_memalloc(sizeof(t_msg));
-
-    msg->group = g->group;
-    msg->dgid = g->dgid;
-    msg->uid2 = g->uid2;
-    msg->msg = user_message;
-    msg->time = time(NULL);
-    msg->file = g->filename;
-
-    return msg;
 }
 
 void mx_send_msg(GtkWidget *w, t_glade *g) {

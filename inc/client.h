@@ -196,7 +196,7 @@ void mx_parse_load_dialogs_response(char *response, t_glade *g);
 int mx_parse_new_group_response(char *response, t_glade *g);
 void mx_parse_load_groups_response(char *response, t_glade *g);
 void mx_parse_load_messages_response(char *response, t_glade *g);
-int mx_parse_send_message_response(char *response);
+int mx_parse_send_message_response(char *response, t_glade *g);
 void mx_parse_get_profile_response(char *response, t_glade *g);
 void mx_parse_serach_user_response(char *response, t_glade *g);
 
