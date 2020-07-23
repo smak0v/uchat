@@ -44,7 +44,7 @@ static void add_group_to_gui(t_glade *g, int gid, char *name) {
     g_signal_connect(event_box, "button_press_event",
         G_CALLBACK(open_group), g);
     g_idle_add ((GSourceFunc)tmp_kostyl, event_box);
-    // gtk_widget_realize(event_box);
+    gtk_widget_realize(event_box);
     gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
     gdk_threads_add_idle(mx_show_all_widget, event_box);
     gdk_threads_add_idle(mx_hide_widget, l_uid);

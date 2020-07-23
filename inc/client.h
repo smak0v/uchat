@@ -69,6 +69,7 @@ struct s_glade {
     // additional data
     char *filename;
     pthread_t listener;
+    pthread_mutex_t mutex;
 
     // window
     GtkWidget *window; //main window
