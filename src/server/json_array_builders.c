@@ -26,6 +26,7 @@ json_object *mx_json_builder_msg(t_msg *msg) {
     json_object_object_add(jobj, "type", json_object_new_int(S_MES));
     json_object_object_add(jobj, "gid", json_object_new_int(msg->group_id));
     json_object_object_add(jobj, "did", json_object_new_int(msg->dialog_id));
+    json_object_object_add(jobj, "mid", json_object_new_int(msg->id));
     json_object_object_add(jobj, "uid", json_object_new_int(msg->sender));
     json_object_object_add(jobj, "uid2", json_object_new_int(msg->recepient));
     json_object_object_add(jobj, "msg", json_object_new_string(s_msg));
