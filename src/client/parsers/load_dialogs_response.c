@@ -1,26 +1,26 @@
 #include "client.h"
 
 static void open_dialogue(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
-    GtkWidget *group_box = gtk_bin_get_child(GTK_BIN(event_box));
-    GList *childs = gtk_container_get_children(GTK_CONTAINER(group_box));
-    GtkWidget *l_did = GTK_WIDGET(g_list_nth_data(childs, 1));
+    GList *childs = gtk_container_get_children(GTK_CONTAINER(
+        gtk_bin_get_child(GTK_BIN(event_box))));
+    GtkWidget *id = GTK_WIDGET(g_list_nth_data(childs, 1));
 
-    mx_delete_childs(g->messages_area);
-    mx_clear_input_text(g);
-    gtk_label_set_text(GTK_LABEL(g->l_chat_name),
-        gtk_label_get_text(GTK_LABEL(g_list_nth_data(childs, 2))));
-    gdk_threads_add_idle(mx_show_widget, g->messages_area);
-    gdk_threads_add_idle(mx_show_widget, g->box_message);
-    gdk_threads_add_idle(mx_show_widget, g->e_search);
-    gdk_threads_add_idle(mx_show_widget, g->box5);
-    gdk_threads_add_idle(mx_hide_widget, g->l_select_chat);
-    gdk_threads_add_idle(mx_hide_widget, g->profile_area);
-    g->group = false;
-    g->dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(l_did)));
-    mx_load_messages_request(g, time(NULL));
-    g_list_free(childs);
-    childs = NULL;
-    (void)e;
+    if (g->dgid != mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id))) && e++) {
+        mx_delete_childs(g->messages_area);
+        mx_clear_input_text(g);
+        gtk_label_set_text(GTK_LABEL(g->l_chat_name),
+            gtk_label_get_text(GTK_LABEL(g_list_nth_data(childs, 2))));
+        gdk_threads_add_idle(mx_show_widget, g->messages_area);
+        gdk_threads_add_idle(mx_show_widget, g->box_message);
+        gdk_threads_add_idle(mx_show_widget, g->e_search);
+        gdk_threads_add_idle(mx_show_widget, g->box5);
+        gdk_threads_add_idle(mx_hide_widget, g->l_select_chat);
+        gdk_threads_add_idle(mx_hide_widget, g->profile_area);
+        g->group = false;
+        g->dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id)));
+        mx_load_messages_request(g, time(NULL));
+        g_list_free(childs);
+    }
 }
 
 static void add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name) {

@@ -17,6 +17,8 @@ void mx_parse_logout_response(char *response, t_glade *g) {
             if (!check_response_code(json_object_get_int(j_code))) {
                 mx_clear_jobj(&jobj, MX_SUCCESS);
                 mx_clear_login_inputs(g);
+                g->dgid = MX_MISTERY;
+                g->group = false;
                 mx_open_logwin(g->w_chat, g);
             }
             else
@@ -25,6 +27,5 @@ void mx_parse_logout_response(char *response, t_glade *g) {
 
         mx_clear_jobj(&jobj, MX_FAILURE);
     }
-
     mx_clear_jobj(&jobj, MX_FAILURE);
 }

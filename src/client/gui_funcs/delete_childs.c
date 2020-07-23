@@ -1,7 +1,8 @@
 #include "client.h"
 
 static void delete_child(void *child, void *data) {
-    gdk_threads_add_idle(mx_destroy_widget, GTK_WIDGET(child));
+    if (child)
+        gdk_threads_add_idle(mx_destroy_widget, GTK_WIDGET(child));
 
     (void)data;
 }
