@@ -30,8 +30,10 @@ void mx_find_gtk_objects_2(t_glade *g) {
     g->e_status = mx_get_gtk_obj(g, "e_status");
     g->l_chat_name = mx_get_gtk_obj(g, "l_chat_name");
     g->scrolledwindow1 = mx_get_gtk_obj(g, "scrolledwindow1");
-    g->box5 = mx_get_gtk_obj(g, "box5");
+    g->box9 = mx_get_gtk_obj(g, "box9");
     g->box8 = mx_get_gtk_obj(g, "box8");
     g->dialogs_box = mx_get_gtk_obj(g, "dialogs_box");
     g->groups_box = mx_get_gtk_obj(g, "groups_box");
+    g->b_add_user = mx_get_gtk_obj(g, "b_add_user");
+    g->d_add_user = mx_get_gtk_obj(g, "d_add_user");
 }

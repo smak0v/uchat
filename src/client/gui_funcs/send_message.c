@@ -1,11 +1,11 @@
 #include "client.h"
 
-static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg, char *time) {
+static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg, char *tim) {
     GtkWidget *l_msg = gtk_label_new(json_object_get_string(
         json_object_object_get(msg, "msg")));
     GtkWidget *l_username = gtk_label_new(json_object_get_string(
         json_object_object_get(msg, "nme")));
-    GtkWidget *l_time = gtk_label_new(time);
+    GtkWidget *l_time = gtk_label_new(tim);
     GtkWidget *u_t_h_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     GtkWidget *msg_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
@@ -64,8 +64,6 @@ void mx_send_msg(GtkWidget *w, t_glade *g) {
     mx_printint_endl(g->uid);
     mx_printstr_endl(request);
     SSL_write(g->ssl, request, strlen(request));
-    // if (g->filename)
-    //     mx_process_send_file(g, g->filename);
 
     mx_clear_input_text(g);
     free(msg);

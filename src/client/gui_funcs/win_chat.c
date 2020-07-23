@@ -19,6 +19,7 @@ void mx_create_win_chat(t_glade *g) {
         G_CALLBACK(mx_attach_file), g);
     g_signal_connect(g->messages_area, "size-allocate",
         G_CALLBACK(mx_scroll_to_bottom), g);
+    g_signal_connect(g->b_add_user, "clicked", G_CALLBACK(mx_invite_user), g);
 }
 
 void mx_show_win_chat(t_glade *g) {
@@ -31,7 +32,8 @@ void mx_show_win_chat(t_glade *g) {
     gdk_threads_add_idle(mx_hide_widget, g->messages_area);
     gdk_threads_add_idle(mx_hide_widget, g->box_message);
     gdk_threads_add_idle(mx_hide_widget, g->b_close_profile);
-    gdk_threads_add_idle(mx_hide_widget, g->box5);
+    gdk_threads_add_idle(mx_hide_widget, g->box9);
+    gdk_threads_add_idle(mx_hide_widget, g->b_add_user);
 
     gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
 

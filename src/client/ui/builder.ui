@@ -246,7 +246,7 @@
   <object class="GtkDialog" id="d_add_user">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Add chat</property>
+    <property name="title" translatable="yes">Invite user</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>

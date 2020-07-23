@@ -110,7 +110,8 @@ struct s_glade {
     GtkWidget *gc_notebook; // left groups and chats notebook
     GtkWidget *l_chat_name; // label chat name
     GtkWidget *scrolledwindow1; // scrolled window with messages
-    GtkWidget *box5; // box with chat name and settings button
+    GtkWidget *box9; // box with chat name and settings button
+    GtkWidget *b_add_user; //button add user to group
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
@@ -129,6 +130,7 @@ struct s_glade {
     // dialogs
     GtkWidget *d_add_chat; // dialog for adding new chat
     GtkWidget *d_add_group; // dialog for adding new group
+    GtkWidget *d_add_user; // dialog for adding new user to group
 
     // add chat dialog
     GtkWidget *b_add_chat_cancel; // button cancel add chat
@@ -140,6 +142,11 @@ struct s_glade {
     GtkWidget *b_add_group_cancel; // button cancel add group
     GtkWidget *e_new_group_name; // entry group search
     GtkWidget *err_group_name_label; // label error group name
+
+    // invite user dialog
+    GtkWidget *b_add_user_cancel; // button cancel invite user
+    GtkWidget *e_user_search; // entry user search to invite
+    GtkWidget *box10; // box with search dialog results
 };
 
 
@@ -267,3 +274,7 @@ void mx_find_gtk_objects_1(t_glade *g);
 void mx_find_gtk_objects_2(t_glade *g);
 
 void mx_gtk_quit(t_glade *g);
+
+void mx_invite_user(GtkWidget *w, t_glade *g);
+
+void mx_show_hide_chat_group_utils(t_glade *g);
