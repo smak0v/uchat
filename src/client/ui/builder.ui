@@ -246,8 +246,8 @@
   <object class="GtkWindow" id="win_chat">
     <property name="width_request">1200</property>
     <property name="height_request">800</property>
-    <property name="can_focus">False</property>
     <property name="visible">True</property>
+    <property name="can_focus">False</property>
     <property name="window_position">center</property>
     <child>
       <object class="GtkBox" id="box1">
@@ -256,7 +256,6 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox" id="w_chat">
-            <property name="visible">False</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
@@ -598,19 +597,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="b_chat_settings">
+                          <object class="GtkButton" id="b_add_user">
+                            <property name="label" translatable="yes">Invite user</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <child>
-                              <object class="GtkImage" id="image10">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="xalign">0.99000000953674316</property>
-                                <property name="pixbuf">more.png</property>
-                              </object>
-                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -768,6 +760,9 @@
                                     <property name="width">1</property>
                                     <property name="height">1</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <placeholder/>
                                 </child>
                                 <child>
                                   <placeholder/>
@@ -1027,32 +1022,6 @@
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="b_sticker">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="has_tooltip">True</property>
-                            <property name="tooltip_markup" translatable="yes">Attach sticker</property>
-                            <property name="tooltip_text" translatable="yes">Attach sticker</property>
-                            <property name="relief">none</property>
-                            <style>
-                              <class name="box_message_button"/>
-                            </style>
-                            <child>
-                              <object class="GtkImage" id="image7">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="pixbuf">smile.png</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -1376,7 +1345,6 @@
         </child>
         <child>
           <object class="GtkGrid" id="w_signup">
-            <property name="visible">False</property>
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
