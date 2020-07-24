@@ -4,12 +4,14 @@ static void save_response_data(json_object *jobj, t_glade *g) {
     json_object *j_token = NULL;
     json_object *j_uid = NULL;
 
+    pthread_mutex_lock(&g->mutex);
     json_object_object_get_ex(jobj, "tok", &j_token);
     if (j_token && json_object_get_type(j_token) == json_type_string)
         g->token = (char *)json_object_get_string(j_token);
     json_object_object_get_ex(jobj, "uid", &j_uid);
     if (j_uid && json_object_get_type(j_uid) == json_type_int)
         g->uid = json_object_get_int(j_uid);
+    pthread_mutex_unlock(&g->mutex);
 }
 
 static int check_response_code(int code, json_object *jobj, t_glade *g) {

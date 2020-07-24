@@ -42,7 +42,7 @@ void mx_open_dialog(GtkWidget *w, t_glade *g) {
     GList *childs = gtk_container_get_children(GTK_CONTAINER(parent));
     GtkWidget *l_id = GTK_WIDGET(g_list_nth_data(childs, 0));
 
-    mx_delete_childs(g->messages_area);
+    mx_delete_childs(g->messages_area, true);
     mx_clear_input_text(g);
 
     gtk_label_set_text(GTK_LABEL(g->l_chat_name),

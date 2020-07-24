@@ -14,17 +14,17 @@ void mx_parse_logout_response(char *response, t_glade *g) {
     if (json_object_get_type(jobj) == json_type_object) {
         json_object_object_get_ex(jobj, "code", &j_code);
         if (j_code && json_object_get_type(j_code) == json_type_int) {
-            if (!check_response_code(json_object_get_int(j_code))) {
+            if (!check_response_code(json_object_get_int(j_code)))
                 mx_clear_jobj(&jobj, MX_SUCCESS);
                 mx_clear_login_inputs(g);
+                pthread_mutex_lock(&g->mutex);
                 g->dgid = MX_MISTERY;
                 g->group = false;
+                pthread_mutex_unlock(&g->mutex);
                 mx_open_logwin(g->w_chat, g);
             }
             else
                 mx_clear_jobj(&jobj, MX_FAILURE);
-        }
-
         mx_clear_jobj(&jobj, MX_FAILURE);
     }
     mx_clear_jobj(&jobj, MX_FAILURE);

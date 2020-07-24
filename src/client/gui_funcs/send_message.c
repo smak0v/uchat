@@ -61,8 +61,6 @@ void mx_send_msg(GtkWidget *w, t_glade *g) {
     t_msg *msg = build_msg(g, user_message);
 
     request = mx_json_string_send_message(g, msg);
-    mx_printint_endl(g->uid);
-    mx_printstr_endl(request);
     SSL_write(g->ssl, request, strlen(request));
 
     mx_clear_input_text(g);

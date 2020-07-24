@@ -52,6 +52,5 @@ void *mx_send_file(void *data) {
         bzero(buffer, sizeof(buffer));
     }
 
-    // if (fclose(file) < 0)
     pthread_exit(NULL);
 }

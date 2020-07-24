@@ -13,7 +13,7 @@ gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g) {
 
         gtk_label_set_text(GTK_LABEL(g->l_chat_name), "");
 
-        mx_delete_childs(g->messages_area);
+        mx_delete_childs(g->messages_area, true);
 
         g->group = false;
         g->dgid = MX_MISTERY;
