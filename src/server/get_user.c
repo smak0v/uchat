@@ -14,12 +14,16 @@ static char *json_str_builder_get(t_profile *prof, char *name) {
     return (char *)json_object_to_json_string(jobj);
 }
 
-static char *json_str_builder_find(t_list *users) {
+static char *json_str_builder_find(t_list *users, int type) {
     json_object *jobj = json_object_new_object();
     json_object *arr = NULL;
 
+    if (type != FIND_USER || type != INV)
+        return mx_bad_request(NULL, NULL);
+
     mx_j_o_o_a(jobj, "type", json_object_new_int(FIND_USER));
     mx_j_o_o_a(jobj, "code", json_object_new_int(200));
+    mx_j_o_o_a(jobj, "req", json_object_new_int(type));
     if (!users)
         mx_j_o_o_a(jobj, "users", json_object_new_null());
     else {
@@ -66,17 +70,20 @@ char *mx_get_user(void *jobj, t_comm *connect) {
 }
 
 char *mx_find_user(void *jobj, t_comm *connect) {
+    json_object *type = NULL;
     char *name = NULL;
     int uid = -1;
     t_list *prof = NULL;
 
     if (parse_get_user((json_object *)jobj, &name, &uid))
         return mx_bad_request(NULL, NULL);
-
+    json_object_object_get_ex(jobj, "req", &type);
+    if (!type || json_object_get_type(type) != json_type_int)
+        return mx_bad_request(NULL, NULL);
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return mx_json_string_code_type(401, FIND_USER);
 
     prof = mx_find_user_by_char(connect->db, name);
 
-    return json_str_builder_find(prof);
+    return json_str_builder_find(prof, json_object_get_int(type));
 }

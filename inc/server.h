@@ -183,6 +183,7 @@ void mx_send_to_all_clients(t_comm *connect, char *j_str, int uid);
 char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id);
 int mx_get_free_thread(char *status, int *counter);
 char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw);
+int mx_validate_invite(sqlite3 *db, json_object *arr, int gid);
 
 // Notifications
 void mx_notify_add_to_group(t_comm *connect, json_object *arr, int gid);
