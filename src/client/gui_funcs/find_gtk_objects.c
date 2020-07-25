@@ -36,4 +36,5 @@ void mx_find_gtk_objects_2(t_glade *g) {
     g->groups_box = mx_get_gtk_obj(g, "groups_box");
     g->b_add_user = mx_get_gtk_obj(g, "b_add_user");
     g->d_add_user = mx_get_gtk_obj(g, "d_add_user");
+    g->b_audio = mx_get_gtk_obj(g, "b_audio");
 }

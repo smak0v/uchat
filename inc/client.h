@@ -5,10 +5,17 @@
 
 #include "uchat.h"
 
+#include "portaudio.h"
+#include "sndfile.h"
+
 
 // Constants
 #define MX_UI_PATH "./src/client/ui/"
 #define MX_MISTERY -666
+
+#define FRAMES_PER_BUFFER 1024
+#define SAMPLE_RATE  (44100)
+#define SAMPLE_SILENCE  (0.0f)
 
 
 // Structures
@@ -17,6 +24,22 @@ typedef struct s_thread_data t_thread_data;
 typedef struct s_msg t_msg;
 typedef struct s_profile t_profile;
 typedef struct s_dialogue t_dialogue;
+typedef struct s_audio t_audio;
+typedef struct s_sample_block t_sample_block;
+
+struct s_audio {
+    uint16_t format_type;
+    uint8_t number_of_channels;
+    uint32_t sample_rate;
+    size_t size;
+    float *recorded_samples;
+    char *file_name;
+};
+
+struct s_sample_block {
+    float *snippet;
+    size_t size;
+};
 
 struct s_thread_data {
     SSL *ssl;
@@ -70,6 +93,7 @@ struct s_glade {
     char *filename;
     pthread_t listener;
     pthread_mutex_t mutex;
+    bool record_audio_pressed;
 
     // window
     GtkWidget *window; //main window
@@ -112,6 +136,7 @@ struct s_glade {
     GtkWidget *scrolledwindow1; // scrolled window with messages
     GtkWidget *box9; // box with chat name and settings button
     GtkWidget *b_add_user; //button add user to group
+    GtkWidget *b_audio; // button for audio recording
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
@@ -220,6 +245,21 @@ void mx_edit_profile(char *response, t_glade *g);
 void mx_search_users(char *response, t_glade *g);
 void mx_s_msg(char *response, t_glade *g);
 void mx_cli_file_transfer(char *response, t_glade *g);
+
+// Audio
+int mx_init_input_stream(PaStream **stream, t_audio *data);
+int mx_init_output_stream(PaStream **stream, t_audio *data);
+t_sample_block *mx_init_sample_block(t_audio *data);
+void mx_exit_stream(PaStream *stream);
+void mx_free_audio_data(t_audio **data, t_sample_block **sample_block);
+void mx_set_output_parameters(PaStreamParameters *output_parameters,
+                              t_audio *data);
+void mx_set_input_parameters(PaStreamParameters *input_parameters,
+                             t_audio *data);
+t_audio *mx_init_audio_data(void);
+gboolean mx_record_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
+gboolean mx_send_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
+void mx_play_audio_file(char *path);
 
 // GUI
 void mx_clear_login_inputs(t_glade *g);
