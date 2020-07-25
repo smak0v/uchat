@@ -242,7 +242,8 @@ PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \
 						  load_groups_response.c load_messages_response.c \
 						  send_message_response.c load_dialogs_response.c \
-						  get_profile_response.c search_user_response.c
+						  get_profile_response.c search_user_response.c \
+						  invite_user_to_group_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \
