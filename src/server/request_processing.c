@@ -44,6 +44,8 @@ api_function mx_select_method(enum e_types type) {
         return mx_find_user;
     else if (type == EDIT_PROFILE)
         return mx_edit_profile;
+    else if (type == LOAD_GR_MEMBERS)
+        return mx_load_group_members;
     else
         return mx_bad_request;
 }

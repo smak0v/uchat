@@ -159,7 +159,7 @@ SERVER_SRCS				= main.c threads.c request_processing.c register.c\
 						user_profile.c send_to_all_clients.c sockets.c \
 						remove_socket.c profile_json.c notifications.c \
 						recv_file.c unpackers.c file_transfer.c daemonize.c \
-						ssl_list.c
+						ssl_list.c groups3.c json_builders3.c
 
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))

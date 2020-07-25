@@ -57,9 +57,15 @@ char *mx_add_to_group(void *jobj, t_comm *connect) {
     int uid = -1;
     json_object *j_add = mx_unpack_addtogroup((json_object *)jobj, &gid, &uid);
     char *res = NULL;
+    int code = 0;
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return mx_json_string_code_type(401, INV);
+    if ((code = mx_validate_invite(connect->db, j_add, gid)) == -2)
+        return mx_json_string_code_type(500, INV);
+    else if (code == -1)
+        return mx_json_string_code_type(666, INV);
+
     res = add_to_group(connect->db, j_add, gid, 0);
 
     if (res)
@@ -87,5 +93,5 @@ char *mx_new_group(void *jobj, t_comm *connect) {
     if ((grp_id = mx_add_grp(connect->db, (char *)name)) == -1)
         return mx_json_string_code_type(500, N_GRP);
     return mx_add_field(mx_add_type(add_to_group(connect->db, j_id, grp_id, 1),
-           N_GRP), 1, "name", (void *)name);
+                        N_GRP), 1, "name", (void *)name);
 }
