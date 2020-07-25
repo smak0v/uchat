@@ -16,7 +16,8 @@ char *mx_load_group_members(void *jobj, t_comm *connect) {
     }
     else
         return mx_bad_request(NULL, NULL);
-    
+    if (mx_validate_token(connect->db, uid, (json_object *)jobj))
+        return mx_json_string_code_type(401, LOAD_GR_MEMBERS);
     members = mx_get_all_group_members(connect->db, gid);
     return mx_json_str_builder_get_members(connect->db, members, gid);
 }
