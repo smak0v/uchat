@@ -112,6 +112,7 @@ struct s_glade {
     GtkWidget *scrolledwindow1; // scrolled window with messages
     GtkWidget *box9; // box with chat name and settings button
     GtkWidget *b_add_user; //button add user to group
+    GtkWidget *b_audio; // button for audio recording
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
@@ -279,3 +280,6 @@ void mx_invite_user(GtkWidget *w, t_glade *g);
 
 void mx_show_hide_chat_group_utils(t_glade *g);
 void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);
+
+gboolean mx_record_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
+gboolean mx_send_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);

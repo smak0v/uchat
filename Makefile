@@ -264,7 +264,7 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogues.c get_profile.c profile.c \
 						  message_input_utils.c messages.c open_dialog.c \
-						  gtk_quit.c invite_user_to_group.c
+						  gtk_quit.c invite_user_to_group.c audio.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 

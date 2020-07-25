@@ -1,9 +1,6 @@
 #include "client.h"
 
-void mx_create_win_chat(t_glade *g) {
-    mx_find_gtk_objects_1(g);
-    mx_find_gtk_objects_2(g);
-
+static void connect_signals_1(t_glade *g) {
     g_signal_connect(g->b_send_msg, "clicked", G_CALLBACK(mx_send_msg), g);
     g_signal_connect(g->b_logout, "clicked", G_CALLBACK(mx_b_logout), g);
     g_signal_connect(g->b_username, "clicked", G_CALLBACK(mx_open_profile), g);
@@ -20,6 +17,17 @@ void mx_create_win_chat(t_glade *g) {
     g_signal_connect(g->messages_area, "size-allocate",
         G_CALLBACK(mx_scroll_to_bottom), g);
     g_signal_connect(g->b_add_user, "clicked", G_CALLBACK(mx_invite_user), g);
+    g_signal_connect(g->b_audio, "button-press-event",
+        G_CALLBACK(mx_record_audio), g);
+    g_signal_connect(g->b_audio, "button-release-event",
+        G_CALLBACK(mx_send_audio), g);
+}
+
+void mx_create_win_chat(t_glade *g) {
+    mx_find_gtk_objects_1(g);
+    mx_find_gtk_objects_2(g);
+
+    connect_signals_1(g);
 }
 
 void mx_show_win_chat(t_glade *g) {
