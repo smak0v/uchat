@@ -147,6 +147,7 @@ char *mx_del_user(void *jobj, t_comm *connect);
 char *mx_get_user(void *jobj, t_comm *connect);
 char *mx_find_user(void *jobj, t_comm *connect);
 char *mx_edit_profile(void *jobj, t_comm *connect);
+char *mx_load_group_members(void *jobj, t_comm *connect);
 
 // JSON builders
 char *mx_json_string_msg(t_msg *msg);
@@ -159,6 +160,7 @@ char *mx_json_string_notify_gr(int gid, char *gr_name, int type);
 char *mx_json_string_code_type(int code, int type);
 char *mx_add_type(char *j_str, int val);
 char *mx_add_field(char *j_str, int type, char *key, void *val);
+char *mx_json_str_builder_get_members(sqlite3 *db, t_list *list, int gid);
 
 void mx_fill_array_int(json_object *jobj, int *arr, int len);
 void mx_fill_array_str(json_object *jobj, char **arr, int len);
