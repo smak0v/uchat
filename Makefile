@@ -128,6 +128,7 @@ $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
 
 
 
+
 #*****************************************************************************#
 #**********************************SERVER*************************************#
 #*****************************************************************************#
@@ -141,6 +142,8 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD) $(DB_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 SERVER_DB_OBJS			= $(addprefix $(OBJD)/server/db/, $(DB_SRCS:%.c=%.o))
+
+SERVER_OBJS_FILES		= $(SERVER_OBJS) $(SERVER_DB_OBJS)
 
 #===================================SRC=======================================#
 DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
@@ -161,25 +164,27 @@ SERVER_SRCS				= main.c threads.c request_processing.c register.c\
 						recv_file.c unpackers.c file_transfer.c daemonize.c \
 						ssl_list.c groups3.c json_builders3.c
 
-
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
 #================================DEPENDENCIES=================================#
 $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
-$(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS) $(SERVER_DB_OBJS)
+$(SERVER_APP_NAME): $(COMMON_OBJS) $(SERVER_OBJS_FILES)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITEA) \
-		$(COMMON_OBJS) $(SERVER_OBJS) $(SERVER_DB_OBJS) -L $(LIBMXD) \
-		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto \
-		-fsanitize=address,undefined -g3 -rdynamic -o $@
+		$(COMMON_OBJS) $(SERVER_OBJS_FILES) \
+		-L $(LIBMXD) \
+		-L $(LIBJSOND) \
+		-L /usr/local/opt/openssl/lib \
+		-lmx \
+		-lssl \
+		-lcrypto \
+		-fsanitize=address,undefined -g3 -rdynamic \
+		-o $@
 
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(SERVER_OBJD)/db/%.o: $(SRCD)/server/db/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(SERVER_OBJS): | $(SERVER_OBJ_DIRS) $(COMMON_OBJ_DIRS)
@@ -236,6 +241,11 @@ CLIENT_PROCESSORS_OBJS	= $(addprefix $(OBJD)/client/processors/, \
 CLIENT_AUDIO_OBJS		= $(addprefix $(OBJD)/client/audio/, \
 						  $(AUDIO_SRCS:%.c=%.o))
 
+CLIENT_OBJS_FILES		= $(CLIENT_OBJS) $(CLIENT_UTILS_OBJS) \
+						  $(CLIENT_VALIDATORS_OBJS) $(CLIENT_PARSERS_OBJS) \
+						  $(CLIENT_BUILDERS_OBJS) $(CLIENT_GUI_FUNCS_OBJS) \
+						  $(CLIENT_PROCESSORS_OBJS) $(CLIENT_AUDIO_OBJS)
+
 #===================================SRC=======================================#
 CLIENT_SRCS				= main.c
 
@@ -282,43 +292,27 @@ CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 $(CLIENT_OBJ_DIRS):
 	@mkdir -p $@
 
-$(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS) $(CLIENT_VALIDATORS_OBJS) \
-					$(CLIENT_UTILS_OBJS) $(CLIENT_PARSERS_OBJS) \
-					$(CLIENT_BUILDERS_OBJS) $(CLIENT_GUI_FUNCS_OBJS) \
-					$(CLIENT_PROCESSORS_OBJS) $(CLIENT_AUDIO_OBJS)
+$(CLIENT_APP_NAME): $(CLIENT_OBJS_FILES) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
-		$(CLIENT_OBJS) $(CLIENT_VALIDATORS_OBJS) $(CLIENT_UTILS_OBJS) \
-		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERS_OBJS) $(CLIENT_AUDIO_OBJS) \
-		$(CLIENT_GUI_FUNCS_OBJS) $(CLIENT_PROCESSORS_OBJS) -L $(LIBMXD) \
-		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto \
-		libs/libportaudio/libportaudio.a -framework CoreAudio \
-		-framework AudioToolbox -framework AudioUnit -framework Carbon \
-		libs/libsndfile/libsndfile.a -o $@ $(GTK_LIBS)
+		$(CLIENT_OBJS_FILES) \
+		-L $(LIBMXD) \
+		-L $(LIBJSOND) \
+		-L /usr/local/opt/openssl/lib \
+		-lmx \
+		-lssl \
+		-lcrypto \
+		libs/libportaudio/libportaudio.a \
+		libs/libsndfile/libsndfile.a \
+		-framework CoreAudio \
+		-framework AudioToolbox \
+		-framework AudioUnit \
+		-framework Carbon \
+		-fsanitize=address,undefined -g3 -rdynamic \
+		-o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(VALIDATORS_OBJD)/validators/%.o: $(SRCD)/client/validators/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(UTILS_OBJD)/utils/%.o: $(SRCD)/client/utils/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(PARSERS_OBJD)/parsers/%.o: $(SRCD)/client/parsers/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(BUILDERS_OBJD)/builders/%.o: $(SRCD)/client/builders/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(GUI_FUNCS_OBJD)/gui_funcs/%.o: $(SRCD)/client/gui_funcs/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(PROCESSORS_OBJD)/processors/%.o: $(SRCD)/client/processors/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(AUDIO_OBJD)/audio/%.o: $(SRCD)/client/audio/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS) $(COMMON_OBJ_DIRS)
