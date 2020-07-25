@@ -5,6 +5,7 @@ void mx_client_thread_manager(t_glade *glade, SSL *ssl) {
     t_thread_data *data = malloc(sizeof(t_thread_data));
 
     pthread_mutex_init(&glade->mutex, NULL);
+    pthread_mutex_init(&glade->recorder_mutex, NULL);
 
     data->ssl = ssl;
     data->glade = glade;

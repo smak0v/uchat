@@ -92,7 +92,9 @@ struct s_glade {
     // additional data
     char *filename;
     pthread_t listener;
+    pthread_t recorder;
     pthread_mutex_t mutex;
+    pthread_mutex_t recorder_mutex;
     bool record_audio_pressed;
 
     // window
