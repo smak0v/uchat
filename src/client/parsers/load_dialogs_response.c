@@ -4,6 +4,7 @@ static void open_dialogue(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     GList *childs = gtk_container_get_children(GTK_CONTAINER(
         gtk_bin_get_child(GTK_BIN(event_box))));
     GtkWidget *id = GTK_WIDGET(g_list_nth_data(childs, 1));
+    GtkWidget *uid2 = GTK_WIDGET(g_list_nth_data(childs, 0));
 
     if (g->dgid != mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id))) && e++) {
         mx_delete_childs(g->messages_area, false);
@@ -11,6 +12,7 @@ static void open_dialogue(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
         gtk_label_set_text(GTK_LABEL(g->l_chat_name),
             gtk_label_get_text(GTK_LABEL(g_list_nth_data(childs, 2))));
         g->group = false;
+        g->uid2 = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(uid2)));
         g->dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id)));
         mx_show_hide_chat_group_utils(g);
         mx_load_messages_request(g, time(NULL));
@@ -18,7 +20,7 @@ static void open_dialogue(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     }
 }
 
-static void add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name) {
+void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name) {
     GtkWidget *event_box = gtk_event_box_new();
     GtkWidget *dialogue_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *l_name = gtk_label_new(name);
@@ -56,7 +58,7 @@ static void parse_arrays(t_glade *g,  int len, json_object *jobj) {
 
         mx_push_back(&g->dialogues, dialogue);
 
-        add_dialogue_to_gui(g, json_object_get_int(
+        mx_add_dialogue_to_gui(g, json_object_get_int(
             json_object_array_get_idx(j_dids, i)),
             json_object_get_int(json_object_array_get_idx(j_uids, i)),
             (char *)json_object_get_string(

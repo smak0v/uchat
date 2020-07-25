@@ -278,3 +278,4 @@ void mx_gtk_quit(t_glade *g);
 void mx_invite_user(GtkWidget *w, t_glade *g);
 
 void mx_show_hide_chat_group_utils(t_glade *g);
+void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);
