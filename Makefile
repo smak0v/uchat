@@ -242,7 +242,7 @@ CLIENT_SRCS				= main.c
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
-						  threads.c sockets.c send_file.c get_time.c
+						  threads.c sockets.c send_file.c get_time.c is_audio.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \
@@ -270,7 +270,8 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogues.c get_profile.c profile.c \
 						  message_input_utils.c messages.c open_dialog.c \
-						  gtk_quit.c invite_user_to_group.c audio.c
+						  gtk_quit.c invite_user_to_group.c audio.c \
+						  download_file.c append_file_to_msg_block.c
 
 AUDIO_SRCS				= audio_init.c audio_playback.c audio_recording.c \
 						  audio_utils.c

@@ -10,3 +10,9 @@ gboolean mx_send_audio(GtkWidget *w, GdkEventKey *e, t_glade *g) {
 
     return FALSE;
 }
+
+void mx_play(GtkWidget *w, t_glade *g) {
+
+    (void)w;
+    (void)g;
+}

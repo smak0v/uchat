@@ -204,6 +204,7 @@ void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g);
 void *mx_send_file(void *data);
 char *mx_get_time(time_t time);
 void mx_process_send_file(t_glade *g, char *path, int port);
+bool mx_is_audio(char *filename);
 gboolean mx_hide_widget(gpointer w);
 gboolean mx_show_widget(gpointer w);
 gboolean mx_show_all_widget(gpointer w);
@@ -262,6 +263,7 @@ t_audio *mx_init_audio_data(void);
 gboolean mx_record_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
 gboolean mx_send_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
 void mx_play_audio_file(char *path);
+void mx_play(GtkWidget *w, t_glade *g);
 
 // GUI
 void mx_clear_login_inputs(t_glade *g);
@@ -300,6 +302,7 @@ void mx_add_group(GtkWidget *w, t_glade *g);
 void mx_send_msg(GtkWidget *w, t_glade *g);
 void mx_add_message_to_gui(t_glade *g, char *response);
 void mx_attach_file(GtkWidget *w, t_glade *g);
+void mx_download(GtkWidget *w, t_glade *g);
 
 void mx_load_dialogues_request(t_glade *g);
 void mx_load_groups_request(t_glade *g);
@@ -321,3 +324,6 @@ void mx_invite_user(GtkWidget *w, t_glade *g);
 
 void mx_show_hide_chat_group_utils(t_glade *g);
 void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);
+
+void mx_append_file_to_msg_block(GtkWidget *msg_v_box, json_object *msg,
+    t_glade *g, GtkWidget *l_msg);

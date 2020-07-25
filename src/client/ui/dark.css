@@ -1,19 +1,14 @@
-@define-color base_color #243b53;
-@define-color second_color #334e68;
-@define_color label_color #f5f7fa;
-@define_color msg_color #92a1b0;
-
 window,
 dialog {
-    background: shade(@base_color, 0.75);
+    background: shade(#243b53, 0.75);
 }
 
 .error_modal {
-    background: shade(@base_color, 0.75);
+    background: shade(#243b53, 0.75);
 }
 
 .error_modal button {
-    background: shade(@second_color, 1);
+    background: shade(#334e68, 1);
 
     margin-top: 30px;
     margin-bottom: 30px;
@@ -32,22 +27,22 @@ dialog {
 }
 
 .notebook > header.top {
-    background: shade(@base_color, 0.75);
+    background: shade(#243b53, 0.75);
     border: none;
 }
 
 .btn_add_chat_group {
-    background: shade(@second_color, 0.9);
+    background: shade(#334e68, 0.9);
     border-radius: 50px;
 }
 
 button {
-    background: shade(@base_color, 0.75);
+    background: shade(#243b53, 0.75);
 }
 
 label {
     font-size: 15px;
-    color: @label_color;
+    color: #f5f7fa;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -56,11 +51,11 @@ label {
 }
 
 .panned {
-    background: shade(@base_color, 0.6);;
+    background: shade(#243b53, 0.6);;
 }
 
 .notebook_tab {
-    background-color: shade(@base_color, 0.75);
+    background-color: shade(#243b53, 0.75);
 }
 
 .tooltip * {
@@ -81,7 +76,7 @@ label {
 }
 
 .b_close_profile {
-    background: shade(@base_color, 0.6);
+    background: shade(#243b53, 0.6);
     margin-right: 10px;
     margin-top: 10px;
 }
@@ -91,13 +86,13 @@ label {
 }
 
 .username_button {
-    background: shade(@base_color, 0.75);
+    background: shade(#243b53, 0.75);
 }
 
 .save_profile_btn {
     margin-bottom: 100px;
-    background-color: shade(@second_color, 0.75);
-    border-color: shade(@second_color, 0.75);
+    background-color: shade(#334e68, 0.75);
+    border-color: shade(#334e68, 0.75);
     border-style: solid;
     border-width: 1px;
     padding-left: 30px;
@@ -107,7 +102,7 @@ label {
 }
 
 .save_profile_btn:hover {
-    background-color: shade(@second_color, 0.9);
+    background-color: shade(#334e68, 0.9);
 }
 
 .add_btn {
@@ -143,7 +138,7 @@ label {
 }
 
 .chat_group_box {
-    background: shade(@second_color, 0.85);
+    background: shade(#334e68, 0.85);
     border-radius: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -159,7 +154,7 @@ label {
     padding-bottom: 10px;
     padding-top: 10px;
     padding-left: 5px;
-    background-color: shade(@base_color, 0.75);
+    background-color: shade(#243b53, 0.75);
 }
 
 .box_message_button {
@@ -170,7 +165,7 @@ label {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 18px;
-    background-color: shade(@base_color, 0.75);
+    background-color: shade(#243b53, 0.75);
 }
 
 .msg {
@@ -187,7 +182,7 @@ label {
 }
 
 .message_input {
-    background-color: shade(@base_color, 0.75);
+    background-color: shade(#243b53, 0.75);
     padding: 10px;
     padding-left: 10px;
 }
@@ -208,7 +203,7 @@ label {
 }
 
 .box5 {
-    background-color: shade(@base_color, 0.75);
+    background-color: shade(#243b53, 0.75);
 }
 
 .l_not_users_found {
@@ -216,7 +211,7 @@ label {
 }
 
 .user_box {
-    background-color: shade(@base_color, 0.95);
+    background-color: shade(#243b53, 0.95);
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
@@ -224,11 +219,29 @@ label {
 
 .user_box_open_dialog_btn {
     border: none;
-    border-color: shade(@base_color, 0.95);
-    background-color: shade(@base_color, 0.95);
+    border-color: shade(#243b53, 0.95);
+    background-color: shade(#243b53, 0.95);
     margin-right: 20px;
 }
 
 .user_box_username {
     font-size: 18px;
+}
+
+.msg_margin_bottom {
+    margin-bottom: 10px;
+}
+
+.b_download,
+.b_download:hover,
+.b_download:active,
+.b_play,
+.b_play:hover,
+.b_play:active {
+    border: none;
+    border-radius: 25px;
+    border-color: #555f6b;
+    background: #555f6b;
+    margin-right: 20px;
+    padding: 8px;
 }

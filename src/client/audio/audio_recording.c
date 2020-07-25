@@ -41,7 +41,10 @@ static long mx_save_audio(t_audio *data) {
     err = data->size - wr;
     sf_write_sync(outfile);
     sf_close(outfile);
-    data->file_name = strdup(file_name);
+    char buf[PATH_MAX];
+    realpath(file_name, buf);
+    data->file_name = mx_strdup(buf);
+    mx_printstr_endl(data->file_name);
     return err;
 }
 
@@ -62,6 +65,9 @@ void *mx_thread_record_audio(void *thread_data) {
             break;
     }
     data->recorded_samples ? mx_save_audio(data) : 0;
+    ((t_thread_data *)thread_data)->glade->filename = data->file_name;
+    mx_send_msg(((t_thread_data *)thread_data)->glade->b_audio,
+        ((t_thread_data *)thread_data)->glade);
     mx_exit_stream(stream);
     mx_free_audio_data(&data, &sample_block);
     pthread_join(((t_thread_data *)thread_data)->glade->recorder, NULL);
