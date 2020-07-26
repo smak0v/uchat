@@ -10,12 +10,15 @@ static int validate_sign_in(sqlite3 *db, const char *name, const char *passw) {
         return user->user_id;
 }
 
-static char *process_sockets(sqlite3 *db, int fd, int uid, char *tk) {
-    char *sock = mx_get_sock_by_user_id(db, uid);
-    char *tmp = NULL;
+static char *process_sockets(t_comm *connect, int uid, char *tk) {
+    char *sock = mx_get_sock_by_user_id(connect->db, uid);
+    if (!sock)
+        printf("SOCK IS NULL\n");
+    SSL *ssl = mx_find_ssl(connect->ssl_list, connect->fd);
 
     if (!sock) {
-        if (mx_add_sock_user(db, uid, mx_itoa(fd), tk) == -1)
+        sock = mx_itoa(connect->fd);
+        if (mx_add_sock_user(connect->db, uid, sock, tk) == -1)
             return NULL;
     }
     else if (sock[0] == '\0') {
@@ -23,13 +26,11 @@ static char *process_sockets(sqlite3 *db, int fd, int uid, char *tk) {
         return NULL;
     }
     else {
-        tmp = sock;
-        sock = mx_add_socket(sock, fd);
+        sock = mx_add_socket(sock, connect->fd);
+        mx_update_socket_by_user_id(connect->db, sock, uid);
     }
-
-    if (mx_add_sock_user(db, uid, sock, tk) == -1)
-        return NULL;
-
+    if (!ssl)
+        mx_push_back(connect->ssl_list, connect->ssl);
     return "ok";
 }
 
@@ -76,7 +77,7 @@ char *mx_sign_in(void *jobj, t_comm *connect) {
     if ((tk = mx_get_token_by_user_id(connect->db, uid)) == NULL)
         if ((tk = (char *)mx_generate_token()) == NULL)
             return mx_json_string_code_type(500, S_IN);
-    if ((res = process_sockets(connect->db, connect->fd, uid, tk)) == NULL)
+    if ((res = process_sockets(connect, uid, tk)) == NULL)
         return mx_json_string_code_type(500, S_IN);
     else
         res = mx_json_string_s_in(uid, tk);
