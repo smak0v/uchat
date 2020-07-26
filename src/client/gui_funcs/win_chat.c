@@ -31,17 +31,17 @@ void mx_create_win_chat(t_glade *g) {
 }
 
 void mx_show_win_chat(t_glade *g) {
-    gdk_threads_add_idle(mx_hide_widget, g->w_reg);
-    gdk_threads_add_idle(mx_hide_widget, g->w_log);
+    gtk_widget_hide(g->w_reg);
+    gtk_widget_hide(g->w_log);
 
     gtk_widget_show_all(g->w_chat);
 
-    gdk_threads_add_idle(mx_hide_widget, g->profile_area);
-    gdk_threads_add_idle(mx_hide_widget, g->messages_area);
-    gdk_threads_add_idle(mx_hide_widget, g->box_message);
-    gdk_threads_add_idle(mx_hide_widget, g->b_close_profile);
-    gdk_threads_add_idle(mx_hide_widget, g->box9);
-    gdk_threads_add_idle(mx_hide_widget, g->b_add_user);
+    gtk_widget_hide(g->profile_area);
+    gtk_widget_hide(g->messages_area);
+    gtk_widget_hide(g->box_message);
+    gtk_widget_hide(g->b_close_profile);
+    gtk_widget_hide(g->box9);
+    gtk_widget_hide(g->b_add_user);
 
     gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
 

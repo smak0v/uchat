@@ -38,9 +38,9 @@ void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name) {
         G_CALLBACK(open_dialogue), g);
     gtk_widget_realize(event_box);
     gtk_widget_add_events(event_box, GDK_BUTTON_PRESS_MASK);
-    gdk_threads_add_idle(mx_show_all_widget, event_box);
-    gdk_threads_add_idle(mx_hide_widget, l_did);
-    gdk_threads_add_idle(mx_hide_widget, l_uid2);
+    gtk_widget_show_all(event_box);
+    gtk_widget_hide(l_did);
+    gtk_widget_hide(l_uid2);
 }
 
 static void parse_arrays(t_glade *g,  int len, json_object *jobj) {
@@ -82,14 +82,15 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
     }
 }
 
-void mx_parse_load_dialogs_response(char *response, t_glade *g) {
-    json_object *jobj = json_tokener_parse(response);
+gboolean mx_parse_load_dialogs_response(gpointer data) {
+    json_object *jobj = json_tokener_parse(((t_main_thread *)data)->response);
     json_object *j_code = NULL;
 
     if (json_object_get_type(jobj) == json_type_object) {
         json_object_object_get_ex(jobj, "code", &j_code);
         if (j_code && json_object_get_type(j_code) == json_type_int) {
-            if (!check_response_code(json_object_get_int(j_code), jobj, g))
+            if (!check_response_code(json_object_get_int(j_code), jobj,
+                ((t_main_thread *)data)->g))
                 mx_clear_jobj(&jobj, MX_SUCCESS);
             else
                 mx_clear_jobj(&jobj, MX_FAILURE);
@@ -99,4 +100,7 @@ void mx_parse_load_dialogs_response(char *response, t_glade *g) {
     }
 
     mx_clear_jobj(&jobj, MX_FAILURE);
+    mx_delete_main_thread_struct((t_main_thread **)&data);
+
+    return G_SOURCE_REMOVE;
 }
