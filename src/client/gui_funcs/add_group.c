@@ -61,7 +61,6 @@ void mx_add_group(GtkWidget *w, t_glade *g) {
     g_signal_connect(g->d_add_group, "delete-event",
         G_CALLBACK(destroy_dialog), g);
     gtk_widget_show_all(g->d_add_group);
-    gtk_dialog_run(GTK_DIALOG(g->d_add_group));
 
     (void)w;
 }

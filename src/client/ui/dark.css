@@ -126,6 +126,16 @@ label {
     color: red;
 }
 
+.success {
+    font-size: 15px;
+    color: green;
+}
+
+.invite_user_label {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
 .login_signup_error {
     margin-left: 5px;
     margin-top: 10px;

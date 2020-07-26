@@ -267,12 +267,13 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \
 						  send_message_builder.c load_messages_builder.c \
 						  search_user_builder.c edit_profile_builder.c \
-						  send_file_builder.c get_profile_builder.c
+						  send_file_builder.c get_profile_builder.c \
+						  invite_user_to_group.c
 
 PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
 						  load_dialogues.c load_groups.c find_user.c n_grp.c \
 						  load_messages.c edit_profile.c search_users.c \
-						  s_msg.c
+						  s_msg.c mx_inv.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \

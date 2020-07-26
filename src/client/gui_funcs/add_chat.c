@@ -54,6 +54,6 @@ void mx_add_chat(GtkWidget *w, t_glade *g) {
     mx_delete_childs(g->box8);
     gtk_entry_set_text(GTK_ENTRY(g->e_chat_search), "");
     gtk_widget_show_all(g->d_add_chat);
-    gtk_dialog_run(GTK_DIALOG(g->d_add_chat));
+
     (void)w;
 }

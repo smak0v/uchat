@@ -83,7 +83,6 @@ gboolean mx_parse_load_groups_response(gpointer data) {
             ((t_main_thread *)data)->g))
             mx_clear_jobj(&jobj, MX_SUCCESS);
 
-
     mx_clear_jobj(&jobj, MX_SUCCESS);
 
     mx_delete_main_thread_struct((t_main_thread **)&data);
