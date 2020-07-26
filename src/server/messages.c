@@ -31,7 +31,7 @@ static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
     }
 
     msg->id = mx_add_msg(db, msg);
-    json_string = mx_json_string_msg(msg);
+    json_string = mx_msg_json_builder(msg);
 
     mx_send_to_all_clients(connect, json_string, msg->recepient);
 
