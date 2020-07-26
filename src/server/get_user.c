@@ -18,7 +18,7 @@ static char *json_str_builder_find(t_list *users, int type) {
     json_object *jobj = json_object_new_object();
     json_object *arr = NULL;
 
-    if (type != FIND_USER || type != INV)
+    if (type != FIND_USER && type != INV)
         return mx_bad_request(NULL, NULL);
 
     mx_j_o_o_a(jobj, "type", json_object_new_int(FIND_USER));
