@@ -25,9 +25,19 @@ static void add_dialog_to_gui(t_glade *g, json_object *j_uid2,
         (char *)json_object_get_string(j_name));
 }
 
+static void add_dialog_to_dialogues(t_glade *g, json_object *j_id,
+    json_object *j_uid2) {
+    t_dialogue *dialogue = mx_memalloc(sizeof(t_dialogue));
+
+    dialogue->did = json_object_get_int(j_id);
+    dialogue->uid2 = json_object_get_int(j_uid2);
+
+    mx_push_back(&g->dialogues, dialogue);
+}
+
 static int check_response_code(int code, json_object *jobj, t_glade *g) {
     json_object *j_msg = NULL;
-    json_object *j_did = NULL;
+    json_object *j_id = NULL;
     json_object *j_uid2 = NULL;
     json_object *j_name = NULL;
 
@@ -35,15 +45,13 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
         return MX_FAILURE;
     else {
         json_object_object_get_ex(jobj, "msg", &j_msg);
-        json_object_object_get_ex(j_msg, "did", &j_did);
+        json_object_object_get_ex(j_msg, "did", &j_id);
         json_object_object_get_ex(j_msg, "uid2", &j_uid2);
         json_object_object_get_ex(j_msg, "nme", &j_name);
-
-        if (check_did_in_dialogues(g->dialogues, json_object_get_int(j_did)))
-            return MX_SUCCESS;
-        else
-            add_dialog_to_gui(g, j_uid2, j_did, j_name);
-
+        if (!check_did_in_dialogues(g->dialogues, json_object_get_int(j_id))) {
+            add_dialog_to_dialogues(g, j_id, j_uid2);
+            add_dialog_to_gui(g, j_uid2, j_id, j_name);
+        }
         return MX_SUCCESS;
     }
 }

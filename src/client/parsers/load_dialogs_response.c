@@ -50,7 +50,7 @@ static void parse_arrays(t_glade *g,  int len, json_object *jobj) {
     t_dialogue *dialogue = NULL;
 
     for (int i = 0; i < len; ++i) {
-        dialogue = mx_memalloc(sizeof(dialogue));
+        dialogue = mx_memalloc(sizeof(t_dialogue));
         dialogue->did = json_object_get_int(
             json_object_array_get_idx(j_dids, i));
         dialogue->uid2 = json_object_get_int(
