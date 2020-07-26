@@ -144,6 +144,7 @@ struct s_glade {
     GtkWidget *scrolledwindow1; // scrolled window with messages
     GtkWidget *box9; // box with chat name and settings button
     GtkWidget *b_add_user; //button add user to group
+    GtkWidget *b_leave_group; // button leave group
     GtkWidget *b_audio; // button for audio recording
 
     // profile window
@@ -230,6 +231,7 @@ char *mx_json_string_edit_profile(t_glade *g, t_profile *profile);
 char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
 char *mx_json_string_invite_user_to_group(char *token, int uid, int gid,
     int uid2);
+char *mx_json_string_leave_group(char *token, int uid, int gid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
@@ -334,6 +336,7 @@ void mx_gtk_quit(t_glade *g);
 
 void mx_invite_user(GtkWidget *w, t_glade *g);
 void mx_invite_user_to_group(GtkWidget *w, t_glade *g);
+void mx_leave_group(GtkWidget *w, t_glade *g);
 
 void mx_show_hide_chat_group_utils(t_glade *g);
 void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);

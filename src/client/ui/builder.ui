@@ -740,6 +740,20 @@
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkButton" id="b_leave_group">
+                            <property name="label" translatable="yes">Leave group</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkButton" id="b_add_user">
                             <property name="label" translatable="yes">Invite user</property>
                             <property name="visible">True</property>

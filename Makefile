@@ -268,7 +268,7 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  send_message_builder.c load_messages_builder.c \
 						  search_user_builder.c edit_profile_builder.c \
 						  send_file_builder.c get_profile_builder.c \
-						  invite_user_to_group.c
+						  invite_user_to_group.c leave_group_builder.c
 
 PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
 						  load_dialogues.c load_groups.c find_user.c n_grp.c \
@@ -284,7 +284,7 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  load_dialogues.c get_profile.c profile.c \
 						  message_input_utils.c messages.c open_dialog.c \
 						  gtk_quit.c invite_user_to_group.c audio.c \
-						  append_file_to_msg_block.c
+						  append_file_to_msg_block.c leave_group.c
 
 AUDIO_SRCS				= audio_init.c audio_playback.c audio_recording.c \
 						  audio_utils.c

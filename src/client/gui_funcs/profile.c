@@ -7,6 +7,7 @@ void mx_open_profile(GtkWidget *w, t_glade *g) {
     gtk_widget_hide(g->l_select_chat);
     gtk_widget_hide(g->box9);
     gtk_widget_hide(g->b_add_user);
+    gtk_widget_hide(g->b_leave_group);
 
     gtk_widget_show(g->profile_area);
     gtk_widget_show(g->b_close_profile);
