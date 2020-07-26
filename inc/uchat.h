@@ -71,6 +71,7 @@ enum e_types {
     NOTIF_GR_RENAMED,
     FILE_TRANSFER,
     LOAD_GR_MEMBERS,
+    DOWNLOAD,
     BAD_REQUEST
 };
 
