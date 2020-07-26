@@ -7,9 +7,9 @@ static void search_user(GtkWidget *w, t_glade *g) {
     mx_delete_childs(g->box10, true);
 
     if (input && strlen(input) > 0) {
-        // request = mx_json_string_search_user(g->token, g->uid, input);
+        request = mx_json_string_search_user(g->token, g->uid, input, INV);
 
-        // SSL_write(g->ssl, request, strlen(request));
+        SSL_write(g->ssl, request, strlen(request));
 
         mx_strdel(&request);
     }

@@ -219,7 +219,7 @@ char *mx_json_string_load_dialogs_groups(enum e_types type, char *token,
 char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 char *mx_json_string_get_profile(char *token, int uid, char *name);
-char *mx_json_string_search_user(char *token, int uid, char *name);
+char *mx_json_string_search_user(char *token, int uid, char *name, int req);
 char *mx_json_string_edit_profile(t_glade *g, t_profile *profile);
 char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
 
