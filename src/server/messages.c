@@ -4,7 +4,7 @@ static char *send_group_message(t_comm *connect, t_msg *message, sqlite3 *db) {
     char *js_str = mx_json_string_msg(message);
     int *group_members = mx_get_all_id_group_members(db, message->group_id);
 
-    mx_add_msg(db, message);
+    message->id = mx_add_msg(db, message);
 
     for (int i = 0; group_members[i] != -1; i++)
         if (group_members[i] != message->sender)
@@ -19,15 +19,19 @@ static char *send_group_message(t_comm *connect, t_msg *message, sqlite3 *db) {
 static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
     int d_id = msg->dialog_id;
     char *json_string = NULL;
+    t_dialog *dialogue = NULL;
 
     if (msg->dialog_id == -2) {
-        if ((d_id = mx_add_dialog(db, msg->sender, msg->recepient)) == -1)
+        if ((dialogue = mx_get_dialog_by_id1_id2(connect->db, msg->sender,
+                                                 msg->recepient)) != NULL)
+            msg->dialog_id = dialogue->dialog_id;
+        else if ((d_id = mx_add_dialog(db, msg->sender, msg->recepient)) == -1)
             return mx_json_string_code_type(500, S_MES);
         msg->dialog_id = d_id;
     }
 
-    mx_add_msg(db, msg);
-    json_string = mx_json_string_msg(msg);
+    msg->id = mx_add_msg(db, msg);
+    json_string = mx_msg_json_builder(msg);
 
     mx_send_to_all_clients(connect, json_string, msg->recepient);
 

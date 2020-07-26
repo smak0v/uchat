@@ -2,7 +2,6 @@
 ._.DS_Store
 *.o
 *.out
-*.a
 .vscode
 .idea
 uchat
@@ -12,3 +11,4 @@ uchat_server.dSYM
 *.db
 libmx
 files
+*.aif

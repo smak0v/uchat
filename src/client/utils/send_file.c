@@ -1,65 +1,56 @@
 #include "client.h"
 
-static void *send_file_thread(void *void_data) {
-    t_ft_data *data = (t_ft_data *)void_data;
-    SSL_library_init();
-    // SSL_CTX *ctx = mx_init_client_ctx();
-    SSL *ssl = SSL_new(data->ctx);
+void mx_cli_file_transfer(char *response, t_glade *g) {
+    json_object *jobj = json_tokener_parse(response);
+    json_object *j_value = NULL;
+    char *path = NULL;
+    int port = -1;
 
-    SSL_set_fd(ssl, data->sock);
-    printf("hello\n");
-    // if (SSL_connect(ssl) == MX_SSL_FAILURE) {
-    //     printf("some trouble here\n");
-    //     ERR_print_errors_fp(stderr);
-    //     pthread_exit(NULL);
-    // }
-    // else {
-    //     printf("Calling send file\n");
-        mx_send_file(ssl, data->name);
-    // }
-    pthread_exit(NULL);
+    json_object_object_get_ex(jobj, "path", &j_value);
+    if (j_value)
+        path = (char *)json_object_get_string(j_value);
+    json_object_object_get_ex(jobj, "port", &j_value);
+    if (json_object_get_type(j_value) == json_type_int)
+        port = json_object_get_int(j_value);
+
+    mx_process_send_file(g, path, port);
 }
 
-void mx_process_send_file(t_glade *g, char *path) {
-    printf("hi\n");
+void mx_process_send_file(t_glade *g, char *path, int port) {
     int connection_fd = -1;
     pthread_t *thr = NULL;
     t_ft_data *data = NULL;
 
-    printf("i'm in process send file\n");
-    connection_fd = mx_open_connection(g->ip, MX_FT_PORT);
+    connection_fd = mx_open_connection(g->ip, port);
     if (connection_fd < 0)
         return;
-    printf("connection fd: %d\n", connection_fd);
+
     thr = malloc(sizeof(pthread_t));
     data = malloc(sizeof(t_ft_data));
     data->name = path;
-    data->ctx = g->ctx;
     data->sock = connection_fd;
 
-    if (pthread_create(thr, NULL, send_file_thread, (void *)data) != 0)
+    if (pthread_create(thr, NULL, mx_send_file, (void *)data) != 0)
         printf("Thread creation error in process_send_file\n");
 }
 
-void mx_send_file(SSL *ssl, char *path) {
+void *mx_send_file(void *data) {
     FILE *file;
     char buffer[1024];
     int b = 1;
     char *json_str;
     int pack_num = 1;
-    printf("WTFFFFFFF\n");
-    if (!(file = fopen(path, "r")))
-        mx_terminate("open");
+
+    if (!(file = fopen(((t_ft_data *)(data))->name, "r")))
+        pthread_exit(NULL);
 
     while ((b = fread(buffer, sizeof(char), sizeof(buffer), file)) > 0) {
-        printf("%s\n", buffer);
         json_str = mx_json_string_s_file(1, pack_num++, buffer, b);
-        write(SSL_get_fd(ssl), json_str, strlen(json_str));
+        write(((t_ft_data *)(data))->sock, json_str, strlen(json_str));
         mx_strdel(&json_str);
         usleep(1000);
         bzero(buffer, sizeof(buffer));
     }
 
-    if (fclose(file) < 0)
-        mx_terminate("close");
+    pthread_exit(NULL);
 }

@@ -1,8 +1,8 @@
 #include "server.h"
 
-    void mx_daemonize(int port) {
+void mx_daemonize(int port) {
     pid_t process_id = fork();
-    
+
     if (process_id < 0)
         mx_terminate("Daemonization failure");
 

@@ -59,7 +59,8 @@ SRCD					= src
 define compile_dependency
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(GTK_CFLAGS) -c $(1) -o $(2) \
 		-I $(INCD) -I $(LIBMXI) -I $(LIBJSONI) -I $(SQLITEI) \
-		-I /usr/local/opt/openssl/include
+		-I /usr/local/opt/openssl/include -I libs/libportaudio/include \
+		-I libs/libsndfile/include
 
 	@printf "\r\33[2K$(DIR)\t\t\t\033[33;1mcompile\t\t\033[0m$(<:$(SRCD)%.c=%)"
 endef
@@ -127,6 +128,7 @@ $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
 
 
 
+
 #*****************************************************************************#
 #**********************************SERVER*************************************#
 #*****************************************************************************#
@@ -140,6 +142,8 @@ SERVER_OBJ_DIRS			= $(SERVER_OBJD) $(DB_OBJD)
 SERVER_OBJS				= $(addprefix $(OBJD)/, $(SERVER:%.c=%.o))
 
 SERVER_DB_OBJS			= $(addprefix $(OBJD)/server/db/, $(DB_SRCS:%.c=%.o))
+
+SERVER_OBJS_FILES		= $(SERVER_OBJS) $(SERVER_DB_OBJS)
 
 #===================================SRC=======================================#
 DB_SRCS					= dbfunc.c db_user.c db_group_members.c \
@@ -158,8 +162,7 @@ SERVER_SRCS				= main.c threads.c request_processing.c register.c\
 						user_profile.c send_to_all_clients.c sockets.c \
 						remove_socket.c profile_json.c notifications.c \
 						recv_file.c unpackers.c file_transfer.c daemonize.c \
-						ssl_list.c
-
+						ssl_list.c groups3.c json_builders3.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -167,17 +170,21 @@ SERVER					= $(addprefix server/, $(SERVER_SRCS))
 $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
-$(SERVER_APP_NAME): $(SERVER_OBJS) $(COMMON_OBJS) $(SERVER_DB_OBJS)
+$(SERVER_APP_NAME): $(COMMON_OBJS) $(SERVER_OBJS_FILES)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITEA) \
-		$(COMMON_OBJS) $(SERVER_OBJS) $(SERVER_DB_OBJS) -L $(LIBMXD) \
-		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto  -o $@
+		$(COMMON_OBJS) $(SERVER_OBJS_FILES) \
+		-L $(LIBMXD) \
+		-L $(LIBJSOND) \
+		-L /usr/local/opt/openssl/lib \
+		-lmx \
+		-lssl \
+		-lcrypto \
+		-fsanitize=address,undefined -g3 -rdynamic \
+		-o $@
 
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
 
 $(SERVER_OBJD)/%.o: $(SRCD)/server/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(SERVER_OBJD)/db/%.o: $(SRCD)/server/db/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(SERVER_OBJS): | $(SERVER_OBJ_DIRS) $(COMMON_OBJ_DIRS)
@@ -205,9 +212,11 @@ GUI_FUNCS_OBJD			= $(CLIENT_OBJD)/gui_funcs
 
 PROCESSORS_OBJD			= $(CLIENT_OBJD)/processors
 
+AUDIO_OBJD				= $(CLIENT_OBJD)/audio
+
 CLIENT_OBJ_DIRS			= $(CLIENT_OBJD) $(VALIDATORS_OBJD) $(UTILS_OBJD) \
 						  $(PARSERS_OBJD) $(BUILDERS_OBJD) $(GUI_FUNCS_OBJD) \
-						  $(PROCESSORS_OBJD)
+						  $(PROCESSORS_OBJD) $(AUDIO_OBJD)
 
 CLIENT_OBJS				= $(addprefix $(OBJD)/, $(CLIENT:%.c=%.o))
 
@@ -229,40 +238,56 @@ CLIENT_GUI_FUNCS_OBJS	= $(addprefix $(OBJD)/client/gui_funcs/, \
 CLIENT_PROCESSORS_OBJS	= $(addprefix $(OBJD)/client/processors/, \
 						  $(PROCESSORS_SRCS:%.c=%.o))
 
+CLIENT_AUDIO_OBJS		= $(addprefix $(OBJD)/client/audio/, \
+						  $(AUDIO_SRCS:%.c=%.o))
+
+CLIENT_OBJS_FILES		= $(CLIENT_OBJS) $(CLIENT_UTILS_OBJS) \
+						  $(CLIENT_VALIDATORS_OBJS) $(CLIENT_PARSERS_OBJS) \
+						  $(CLIENT_BUILDERS_OBJS) $(CLIENT_GUI_FUNCS_OBJS) \
+						  $(CLIENT_PROCESSORS_OBJS) $(CLIENT_AUDIO_OBJS)
+
 #===================================SRC=======================================#
 CLIENT_SRCS				= main.c
 
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
-						  threads.c sockets.c send_file.c get_time.c
+						  threads.c sockets.c send_file.c get_time.c \
+						  main_thread_struct_utils.c is_audio.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \
 						  load_groups_response.c load_messages_response.c \
 						  send_message_response.c load_dialogs_response.c \
-						  get_profile_response.c search_user_response.c
+						  get_profile_response.c search_user_response.c \
+						  invite_user_to_group_response.c \
+						  search_invite_user_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \
 						  send_message_builder.c load_messages_builder.c \
 						  search_user_builder.c edit_profile_builder.c \
-						  send_file_builder.c get_profile_builder.c
+						  send_file_builder.c get_profile_builder.c \
+						  invite_user_to_group.c leave_group_builder.c
 
 PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
 						  load_dialogues.c load_groups.c find_user.c n_grp.c \
 						  load_messages.c edit_profile.c search_users.c \
-						  s_msg.c
+						  s_msg.c inv.c notif_add_to_gr.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
-						  auth.c find_gtk_objects.c show_hide_utils.c \
+						  auth.c find_gtk_objects.c download_file.c \
 						  edit_profile.c get_gtk_obj.c add_chat.c add_group.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogues.c get_profile.c profile.c \
 						  message_input_utils.c messages.c open_dialog.c \
-						  gtk_quit.c
+						  gtk_quit.c invite_user_to_group.c audio.c \
+						  append_file_to_msg_block.c leave_group.c
+
+AUDIO_SRCS				= audio_init.c audio_playback.c audio_recording.c \
+						  audio_utils.c
 
 CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 
@@ -270,26 +295,27 @@ CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 $(CLIENT_OBJ_DIRS):
 	@mkdir -p $@
 
-$(CLIENT_APP_NAME): $(CLIENT_OBJS) $(COMMON_OBJS) $(CLIENT_VALIDATORS_OBJS) \
-					$(CLIENT_UTILS_OBJS) $(CLIENT_PARSERS_OBJS) \
-					$(CLIENT_BUILDERS_OBJS) $(CLIENT_GUI_FUNCS_OBJS) \
-					$(CLIENT_PROCESSORS_OBJS)
+$(CLIENT_APP_NAME): $(CLIENT_OBJS_FILES) $(COMMON_OBJS)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
-		$(CLIENT_OBJS) $(CLIENT_VALIDATORS_OBJS) $(CLIENT_UTILS_OBJS) \
-		$(CLIENT_PARSERS_OBJS) $(CLIENT_BUILDERS_OBJS) \
-		$(CLIENT_GUI_FUNCS_OBJS) $(CLIENT_PROCESSORS_OBJS) -L $(LIBMXD) \
-		-L $(LIBJSOND) -L /usr/local/opt/openssl/lib -lmx -lssl -lcrypto \
+		$(CLIENT_OBJS_FILES) \
+		-L $(LIBMXD) \
+		-L $(LIBJSOND) \
+		-L /usr/local/opt/openssl/lib \
+		-lmx \
+		-lssl \
+		-lcrypto \
+		libs/libportaudio/libportaudio.a \
+		libs/libsndfile/libsndfile.a \
+		-framework CoreAudio \
+		-framework AudioToolbox \
+		-framework AudioUnit \
+		-framework Carbon \
+		-fsanitize=address,undefined -g3 -rdynamic \
 		-o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
 
 $(CLIENT_OBJD)/%.o: $(SRCD)/client/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(VALIDATORS_OBJD)/validators/%.o: $(SRCD)/client/validators/%.c $(INCS)
-	$(call compile_dependency, $<, $@)
-
-$(UTILS_OBJD)/utils/%.o: $(SRCD)/client/utils/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
 $(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS) $(COMMON_OBJ_DIRS)

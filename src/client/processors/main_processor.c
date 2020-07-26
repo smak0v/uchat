@@ -22,6 +22,12 @@ static void check_response_type_1(int type, char *response, t_glade *g) {
         mx_search_users(response, g);
     else if (type == S_MES)
         mx_s_msg(response, g);
+    else if (type == FILE_TRANSFER)
+        mx_cli_file_transfer(response, g);
+    else if (type == INV)
+        mx_inv(response, g);
+    else if (type == NOTIF_ADD_TO_GR)
+        mx_notif_add_to_gr(response, g);
 }
 
 void mx_check_response_type(char *response, t_glade *g) {

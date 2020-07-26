@@ -70,6 +70,8 @@ enum e_types {
     NOTIF_ADD_TO_GR,
     NOTIF_GR_RENAMED,
     FILE_TRANSFER,
+    LOAD_GR_MEMBERS,
+    DOWNLOAD,
     BAD_REQUEST
 };
 

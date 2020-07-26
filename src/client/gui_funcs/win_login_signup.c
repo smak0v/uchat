@@ -21,12 +21,12 @@ void mx_open_logwin(GtkWidget *sender, t_glade *g) {
     mx_clear_signup_inputs(g);
 
     gtk_label_set_text(GTK_LABEL(g->l_login_error), "");
-    gdk_threads_add_idle(mx_hide_widget, g->l_login_error);
+    gtk_widget_hide(g->l_login_error);
 
-    gdk_threads_add_idle(mx_hide_widget, g->w_reg);
-    gdk_threads_add_idle(mx_hide_widget, g->w_chat);
+    gtk_widget_hide(g->w_reg);
+    gtk_widget_hide(g->w_chat);
 
-    gdk_threads_add_idle(mx_show_all_widget, g->w_log);
+    gtk_widget_show_all(g->w_log);
 }
 
 void mx_open_regwin(GtkWidget *sender, t_glade *g) {
@@ -35,12 +35,12 @@ void mx_open_regwin(GtkWidget *sender, t_glade *g) {
     mx_clear_login_inputs(g);
 
     gtk_label_set_text(GTK_LABEL(g->l_signup_error), "");
-    gdk_threads_add_idle(mx_hide_widget, g->l_signup_error);
+    gtk_widget_hide(g->l_signup_error);
 
-    gdk_threads_add_idle(mx_hide_widget, g->w_log);
-    gdk_threads_add_idle(mx_hide_widget, g->w_chat);
+    gtk_widget_hide(g->w_log);
+    gtk_widget_hide(g->w_chat);
 
-    gdk_threads_add_idle(mx_show_all_widget, g->w_reg);
+    gtk_widget_show_all(g->w_reg);
 }
 
 void mx_create_win_reg(t_glade *g) {

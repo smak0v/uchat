@@ -3,7 +3,7 @@
 void mx_notify_add_to_group(t_comm *connect, json_object *arr, int gid) {
     json_object *j_uid = NULL;
     char *gr_name = mx_get_group_name_by_id(connect->db, gid);
-    char *response = mx_json_string_notify_gr(gid, gr_name, NOTIF_ADD_TO_GR);;
+    char *response = mx_json_string_notify_gr(gid, gr_name, NOTIF_ADD_TO_GR);
     int uid = -1;
 
     for (size_t i = 0; i < json_object_array_length(arr); i++) {

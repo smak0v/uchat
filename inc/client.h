@@ -5,10 +5,17 @@
 
 #include "uchat.h"
 
+#include "portaudio.h"
+#include "sndfile.h"
+
 
 // Constants
 #define MX_UI_PATH "./src/client/ui/"
 #define MX_MISTERY -666
+
+#define FRAMES_PER_BUFFER 1024
+#define SAMPLE_RATE  (44100)
+#define SAMPLE_SILENCE  (0.0f)
 
 
 // Structures
@@ -16,6 +23,29 @@ typedef struct s_glade t_glade;
 typedef struct s_thread_data t_thread_data;
 typedef struct s_msg t_msg;
 typedef struct s_profile t_profile;
+typedef struct s_dialogue t_dialogue;
+typedef struct s_audio t_audio;
+typedef struct s_sample_block t_sample_block;
+typedef struct s_main_thread t_main_thread;
+
+struct s_audio {
+    uint16_t format_type;
+    uint8_t number_of_channels;
+    uint32_t sample_rate;
+    size_t size;
+    float *recorded_samples;
+    char *file_name;
+};
+
+struct s_main_thread {
+    char *response;
+    t_glade *g;
+};
+
+struct s_sample_block {
+    float *snippet;
+    size_t size;
+};
 
 struct s_thread_data {
     SSL *ssl;
@@ -40,6 +70,11 @@ struct s_profile {
     char *country;
 };
 
+struct s_dialogue {
+    int did;
+    int uid2;
+};
+
 struct s_glade {
     GtkBuilder *bd;
 
@@ -53,6 +88,7 @@ struct s_glade {
     char *token;
     int uid;
     SSL *ssl;
+    t_list *dialogues;
 
     // message data
     int dgid;
@@ -62,6 +98,10 @@ struct s_glade {
     // additional data
     char *filename;
     pthread_t listener;
+    pthread_t recorder;
+    pthread_mutex_t mutex;
+    pthread_mutex_t recorder_mutex;
+    bool record_audio_pressed;
 
     // window
     GtkWidget *window; //main window
@@ -102,7 +142,10 @@ struct s_glade {
     GtkWidget *gc_notebook; // left groups and chats notebook
     GtkWidget *l_chat_name; // label chat name
     GtkWidget *scrolledwindow1; // scrolled window with messages
-    GtkWidget *box5; // box with chat name and settings button
+    GtkWidget *box9; // box with chat name and settings button
+    GtkWidget *b_add_user; //button add user to group
+    GtkWidget *b_leave_group; // button leave group
+    GtkWidget *b_audio; // button for audio recording
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
@@ -121,6 +164,7 @@ struct s_glade {
     // dialogs
     GtkWidget *d_add_chat; // dialog for adding new chat
     GtkWidget *d_add_group; // dialog for adding new group
+    GtkWidget *d_add_user; // dialog for adding new user to group
 
     // add chat dialog
     GtkWidget *b_add_chat_cancel; // button cancel add chat
@@ -132,6 +176,13 @@ struct s_glade {
     GtkWidget *b_add_group_cancel; // button cancel add group
     GtkWidget *e_new_group_name; // entry group search
     GtkWidget *err_group_name_label; // label error group name
+
+    // invite user dialog
+    GtkWidget *b_add_user_cancel; // button cancel invite user
+    GtkWidget *e_user_search; // entry user search to invite
+    GtkWidget *box10; // box with search dialog results
+    GtkWidget *l_invite_user_error; // label invite user error
+    GtkWidget *l_invite_user_success; // label invite user success
 };
 
 
@@ -159,13 +210,12 @@ void mx_logout(t_glade *g);
 void mx_clear_input_text(t_glade *g);
 char *mx_get_input_text(t_glade *g);
 void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g);
-void mx_send_file(SSL *ssl, char *path);
+void *mx_send_file(void *data);
 char *mx_get_time(time_t time);
-void mx_process_send_file(t_glade *g, char *path);
-gboolean mx_hide_widget(gpointer w);
-gboolean mx_show_widget(gpointer w);
-gboolean mx_show_all_widget(gpointer w);
-gboolean mx_destroy_widget(gpointer w);
+void mx_process_send_file(t_glade *g, char *path, int port);
+bool mx_is_audio(char *filename);
+t_main_thread *mx_create_main_thread_struct(char *response, t_glade *g);
+void mx_delete_main_thread_struct(t_main_thread **main_thread);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
@@ -176,21 +226,26 @@ char *mx_json_string_load_dialogs_groups(enum e_types type, char *token,
 char *mx_json_string_send_message(t_glade *g, t_msg *msg);
 char *mx_json_string_load_messages(t_glade *g, int time, int dgid, bool group);
 char *mx_json_string_get_profile(char *token, int uid, char *name);
-char *mx_json_string_search_user(char *token, int uid, char *name);
+char *mx_json_string_search_user(char *token, int uid, char *name, int req);
 char *mx_json_string_edit_profile(t_glade *g, t_profile *profile);
 char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
+char *mx_json_string_invite_user_to_group(char *token, int uid, int gid,
+    int uid2);
+char *mx_json_string_leave_group(char *token, int uid, int gid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
 int mx_parse_signup_response(char *response, t_glade *g);
-void mx_parse_logout_response(char *response, t_glade *g);
-void mx_parse_load_dialogs_response(char *response, t_glade *g);
+gboolean mx_parse_logout_response(gpointer data);
+gboolean mx_parse_load_dialogs_response(gpointer data);
 int mx_parse_new_group_response(char *response, t_glade *g);
-void mx_parse_load_groups_response(char *response, t_glade *g);
-void mx_parse_load_messages_response(char *response, t_glade *g);
-int mx_parse_send_message_response(char *response);
-void mx_parse_get_profile_response(char *response, t_glade *g);
+gboolean mx_parse_load_groups_response(gpointer data);
+gboolean mx_parse_load_messages_response(gpointer data);
+int mx_parse_send_message_response(char *response, t_glade *g);
+gboolean mx_parse_get_profile_response(gpointer data);
 void mx_parse_serach_user_response(char *response, t_glade *g);
+gboolean mx_parse_invite_users(gpointer data);
+gboolean mx_invite_user_to_group_response(gpointer data);
 
 // Processors
 void mx_check_response_type(char *response, t_glade *g);
@@ -204,6 +259,25 @@ void mx_load_messages(char *response, t_glade *g);
 void mx_edit_profile(char *response, t_glade *g);
 void mx_search_users(char *response, t_glade *g);
 void mx_s_msg(char *response, t_glade *g);
+void mx_cli_file_transfer(char *response, t_glade *g);
+void mx_inv(char *response, t_glade *g);
+void mx_notif_add_to_gr(char *response, t_glade *g);
+
+// Audio
+int mx_init_input_stream(PaStream **stream, t_audio *data);
+int mx_init_output_stream(PaStream **stream, t_audio *data);
+t_sample_block *mx_init_sample_block(t_audio *data);
+void mx_exit_stream(PaStream *stream);
+void mx_free_audio_data(t_audio **data, t_sample_block **sample_block);
+void mx_set_output_parameters(PaStreamParameters *output_parameters,
+                              t_audio *data);
+void mx_set_input_parameters(PaStreamParameters *input_parameters,
+                             t_audio *data);
+t_audio *mx_init_audio_data(void);
+gboolean mx_record_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
+gboolean mx_send_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
+void mx_play_audio_file(char *path);
+void mx_play(GtkWidget *w, t_glade *g);
 
 // GUI
 void mx_clear_login_inputs(t_glade *g);
@@ -242,6 +316,7 @@ void mx_add_group(GtkWidget *w, t_glade *g);
 void mx_send_msg(GtkWidget *w, t_glade *g);
 void mx_add_message_to_gui(t_glade *g, char *response);
 void mx_attach_file(GtkWidget *w, t_glade *g);
+void mx_download(GtkWidget *w, t_glade *g);
 
 void mx_load_dialogues_request(t_glade *g);
 void mx_load_groups_request(t_glade *g);
@@ -258,3 +333,13 @@ void mx_find_gtk_objects_1(t_glade *g);
 void mx_find_gtk_objects_2(t_glade *g);
 
 void mx_gtk_quit(t_glade *g);
+
+void mx_invite_user(GtkWidget *w, t_glade *g);
+void mx_invite_user_to_group(GtkWidget *w, t_glade *g);
+void mx_leave_group(GtkWidget *w, t_glade *g);
+
+void mx_show_hide_chat_group_utils(t_glade *g);
+void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);
+
+void mx_append_file_to_msg_block(GtkWidget *msg_v_box, json_object *msg,
+    t_glade *g, GtkWidget *l_msg);

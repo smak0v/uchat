@@ -14,8 +14,8 @@ void mx_b_reg_log(GtkButton *b, t_glade *g) {
 
     (void)b;
 
-    g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_ename));
-    g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->r_epass));
+    g->log = mx_strdup((char *)gtk_entry_get_text(GTK_ENTRY(g->r_ename)));
+    g->pass = mx_strdup((char *)gtk_entry_get_text(GTK_ENTRY(g->r_epass)));
 
     if (!mx_validate_signup_data(g, repeat)) {
         request = mx_json_string_login_signup(REG, g->log, g->pass);
@@ -29,8 +29,8 @@ void mx_b_reg_log(GtkButton *b, t_glade *g) {
 }
 
 void mx_b_log(GtkButton *b, t_glade *g) {
-    g->log = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_name));
-    g->pass = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_pass));
+    g->log = mx_strdup((char *)gtk_entry_get_text(GTK_ENTRY(g->e_name)));
+    g->pass = mx_strdup((char *)gtk_entry_get_text(GTK_ENTRY(g->e_pass)));
 
     (void)b;
 

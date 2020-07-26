@@ -22,10 +22,9 @@ void *mx_communicate(void *data) {
                 ERR_print_errors_fp(stderr);
 
                 int uid = mx_get_user_id_by_socket(connect->db, connect->fd);
-                char *sock = mx_remove_socket(connect->db, connect->fd, uid);
-                mx_update_socket_by_user_id(connect->db, sock, uid);
+                mx_remove_socket(connect->db, connect->fd, uid);
 
-                // remove SSL from ssl t_list
+                mx_pop_from_ssl_list(connect->ssl_list, connect->fd);
 
                 mx_printstr_endl("Connection closed");
                 pthread_exit(NULL);

@@ -1,24 +1,32 @@
 #include "client.h"
 
 void mx_open_profile(GtkWidget *w, t_glade *g) {
-    gdk_threads_add_idle(mx_hide_widget, g->messages_area);
-    gdk_threads_add_idle(mx_hide_widget, g->box_message);
-    gdk_threads_add_idle(mx_hide_widget, g->e_search);
-    gdk_threads_add_idle(mx_hide_widget, g->l_select_chat);
-    gdk_threads_add_idle(mx_hide_widget, g->box5);
+    gtk_widget_hide(g->messages_area);
+    gtk_widget_hide(g->box_message);
+    gtk_widget_hide(g->e_search);
+    gtk_widget_hide(g->l_select_chat);
+    gtk_widget_hide(g->box9);
+    gtk_widget_hide(g->b_add_user);
+    gtk_widget_hide(g->b_leave_group);
 
-    gdk_threads_add_idle(mx_show_widget, g->profile_area);
-    gdk_threads_add_idle(mx_show_widget, g->b_close_profile);
+    gtk_widget_show(g->profile_area);
+    gtk_widget_show(g->b_close_profile);
+
+    g->group = false;
+    g->dgid = MX_MISTERY;
 
     (void)w;
 }
 
 void mx_close_profile(GtkWidget *w, t_glade *g) {
-    gdk_threads_add_idle(mx_hide_widget, g->profile_area);
-    gdk_threads_add_idle(mx_hide_widget, g->b_close_profile);
+    gtk_widget_hide(g->profile_area);
+    gtk_widget_hide(g->b_close_profile);
 
-    gdk_threads_add_idle(mx_show_widget, g->e_search);
-    gdk_threads_add_idle(mx_show_widget, g->l_select_chat);
+    gtk_widget_show(g->e_search);
+    gtk_widget_show(g->l_select_chat);
+
+    g->group = false;
+    g->dgid = MX_MISTERY;
 
     (void)w;
 }
