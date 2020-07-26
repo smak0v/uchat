@@ -72,6 +72,7 @@ char *mx_add_socket(char *sock, int fd) {
         tmp = mx_strjoin(sock, "\0");
         mx_strdel(&sock);
 
+        printf("returning sock %s\n", tmp);
         return tmp;
     }
 }
