@@ -213,10 +213,6 @@ void mx_process_send_file(t_glade *g, char *path, int port);
 bool mx_is_audio(char *filename);
 t_main_thread *mx_create_main_thread_struct(char *response, t_glade *g);
 void mx_delete_main_thread_struct(t_main_thread **main_thread);
-gboolean mx_hide_widget(gpointer w);
-gboolean mx_show_widget(gpointer w);
-gboolean mx_show_all_widget(gpointer w);
-gboolean mx_destroy_widget(gpointer w);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);
@@ -237,10 +233,10 @@ int mx_parse_signup_response(char *response, t_glade *g);
 gboolean mx_parse_logout_response(gpointer data);
 gboolean mx_parse_load_dialogs_response(gpointer data);
 int mx_parse_new_group_response(char *response, t_glade *g);
-void mx_parse_load_groups_response(char *response, t_glade *g);
-void mx_parse_load_messages_response(char *response, t_glade *g);
+gboolean mx_parse_load_groups_response(gpointer data);
+gboolean mx_parse_load_messages_response(gpointer data);
 int mx_parse_send_message_response(char *response, t_glade *g);
-void mx_parse_get_profile_response(char *response, t_glade *g);
+gboolean mx_parse_get_profile_response(gpointer data);
 void mx_parse_serach_user_response(char *response, t_glade *g);
 gboolean mx_parse_invite_users(gpointer data);
 
@@ -280,7 +276,7 @@ void mx_clear_signup_inputs(t_glade *g);
 
 char *mx_build_ui_path(char *filename);
 int mx_connect_css(char *path);
-void mx_delete_childs(GtkWidget *w, bool gtk_thread);
+void mx_delete_childs(GtkWidget *w);
 
 void mx_create_win_log(t_glade *g);
 void mx_create_win_reg(t_glade *g);

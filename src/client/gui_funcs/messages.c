@@ -9,18 +9,18 @@ void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
     gtk_style_context_add_class(gtk_widget_get_style_context(l_time), "time");
     gtk_style_context_add_class(gtk_widget_get_style_context(l_msg), "msgtxt");
 
-    gdk_threads_add_idle(mx_show_all_widget, msg_v_box);
+    gtk_widget_show_all(msg_v_box);
 }
 
 void mx_show_hide_chat_group_utils(t_glade *g) {
-    gdk_threads_add_idle(mx_show_widget, g->messages_area);
-    gdk_threads_add_idle(mx_show_widget, g->box_message);
-    gdk_threads_add_idle(mx_show_widget, g->e_search);
-    gdk_threads_add_idle(mx_show_widget, g->box9);
+    gtk_widget_show(g->messages_area);
+    gtk_widget_show(g->box_message);
+    gtk_widget_show(g->e_search);
+    gtk_widget_show(g->box9);
 
     if (g->group)
-        gdk_threads_add_idle(mx_show_widget, g->b_add_user);
+        gtk_widget_show(g->b_add_user);
 
-    gdk_threads_add_idle(mx_hide_widget, g->l_select_chat);
-    gdk_threads_add_idle(mx_hide_widget, g->profile_area);
+    gtk_widget_hide(g->l_select_chat);
+    gtk_widget_hide(g->profile_area);
 }

@@ -7,8 +7,7 @@ static int check_response_code(int code) {
         return MX_SUCCESS;
 }
 
-static void logout(json_object *jobj, gpointer data) {
-    mx_clear_jobj(&jobj, MX_SUCCESS);
+static void logout(gpointer data) {
     mx_clear_login_inputs(((t_main_thread *)data)->g);
 
     pthread_mutex_lock(&((t_main_thread *)data)->g->mutex);
@@ -23,18 +22,14 @@ gboolean mx_parse_logout_response(gpointer data) {
 
     if (json_object_get_type(jobj) == json_type_object) {
         json_object_object_get_ex(jobj, "code", &j_code);
-        if (j_code && json_object_get_type(j_code) == json_type_int) {
+        if (j_code && json_object_get_type(j_code) == json_type_int)
             if (!check_response_code(json_object_get_int(j_code)))
-                logout(jobj, data);
+                logout(data);
                 mx_open_logwin(((t_main_thread *)data)->g->w_chat,
                     ((t_main_thread *)data)->g);
-            }
-            else
-                mx_clear_jobj(&jobj, MX_FAILURE);
-        mx_clear_jobj(&jobj, MX_FAILURE);
     }
 
-    mx_clear_jobj(&jobj, MX_FAILURE);
+    mx_clear_jobj(&jobj, MX_SUCCESS);
     mx_delete_main_thread_struct((t_main_thread **)&data);
 
     return G_SOURCE_REMOVE;
