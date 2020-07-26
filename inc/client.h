@@ -259,6 +259,7 @@ void mx_search_users(char *response, t_glade *g);
 void mx_s_msg(char *response, t_glade *g);
 void mx_cli_file_transfer(char *response, t_glade *g);
 void mx_inv(char *response, t_glade *g);
+void mx_notif_add_to_gr(char *response, t_glade *g);
 
 // Audio
 int mx_init_input_stream(PaStream **stream, t_audio *data);

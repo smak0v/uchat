@@ -5,7 +5,8 @@ static void open_group(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
         gtk_bin_get_child(GTK_BIN(event_box))));
     GtkWidget *id = GTK_WIDGET(g_list_nth_data(childs, 0));
 
-    if (g->dgid != mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id))) && e++) {
+    if ((g->dgid != mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id)))
+        || g->group == false) && e++) {
         mx_delete_childs(g->messages_area);
         mx_clear_input_text(g);
         gtk_label_set_text(GTK_LABEL(g->l_chat_name),
