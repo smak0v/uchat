@@ -5,11 +5,12 @@ static void *mx_receive_file(void *void_data) {
     struct sockaddr_in cli_addr;
     unsigned int len = sizeof(cli_addr);
     int connect = accept(data->sock, (MX_SA *)&cli_addr, &len);
+    char *path = mx_memrchr(data->name, '/', strlen(data->name));
 
     if (connect < 0)
         pthread_exit(NULL);
 
-    mx_recv_file(data->name, connect);
+    mx_recv_file(path + 1, connect);
 
     *(data->status) = 0;
     pthread_exit(NULL);

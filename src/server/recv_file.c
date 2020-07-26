@@ -15,7 +15,7 @@ static const char *get_pack_data(char *buffer) {
 }
 
 static int get_pack_num(char *buffer) {
-    json_object *jobj = json_tokener_parse(buffer);;
+    json_object *jobj = json_tokener_parse(buffer);
     json_object *json_data;
     int package_num = 0;
 
@@ -63,22 +63,17 @@ void mx_recv_file(char *filename, int fd) {
     const char *data;
     int pack_num = 0;
 
-    char *path = mx_memrchr(filename, '/', strlen(filename));
-    if (!(file = fopen(mx_strjoin("files/", path + 1), "w+")))
-        mx_terminate("open");
-
-    while ((b = read(fd, buffer, sizeof(buffer) - 1)) >= 0) {
-        data = get_pack_data(buffer);
-        if (!data)
-            mx_terminate("broken json");
-        fwrite(data, 1, get_data_len(buffer), file);
-        if (is_package_last(buffer))
-            break;
-        if (++pack_num != get_pack_num(buffer))
-            mx_terminate("broken file");
-        bzero(buffer, sizeof(buffer));
+    if ((file = mx_open_file(filename, "w+"))) {
+        while ((b = read(fd, buffer, sizeof(buffer) - 1)) >= 0) {
+            if ((data = get_pack_data(buffer)))
+                fwrite(data, 1, get_data_len(buffer), file);
+            if (is_package_last(buffer))
+                break;
+            if (++pack_num != get_pack_num(buffer))
+                break;
+            bzero(buffer, sizeof(buffer));
+        }
     }
-
     if (fclose(file) < 0)
-        mx_terminate("close");
+        return;
 }
