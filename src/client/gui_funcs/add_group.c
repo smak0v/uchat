@@ -14,13 +14,14 @@ static void prepare_add_group(GtkWidget *w, t_glade *g) {
     if (name && strlen(name) >= 1) {
         add_new_group(g, name);
         gtk_label_set_text(GTK_LABEL(g->err_group_name_label), "");
-        gdk_threads_add_idle(mx_hide_widget, g->err_group_name_label);
+        gtk_widget_hide(g->err_group_name_label);
     }
+
     else {
         gtk_label_set_text(GTK_LABEL(g->err_group_name_label),
             "The name of the group must be at least\n1 character long." \
             "Try another name!");
-        gdk_threads_add_idle(mx_show_widget, g->err_group_name_label);
+        gtk_widget_show(g->err_group_name_label);
     }
 
     (void)w;
@@ -29,7 +30,8 @@ static void prepare_add_group(GtkWidget *w, t_glade *g) {
 static void cancel_add_group(GtkWidget *w, t_glade *g) {
     gtk_entry_set_text(GTK_ENTRY(g->e_new_group_name), "");
     gtk_label_set_text(GTK_LABEL(g->err_group_name_label), "");
-    gdk_threads_add_idle(mx_hide_widget, g->d_add_group);
+
+    gtk_widget_hide(g->d_add_group);
 
     (void)w;
 }
@@ -58,7 +60,7 @@ void mx_add_group(GtkWidget *w, t_glade *g) {
         G_CALLBACK(cancel_add_group), g);
     g_signal_connect(g->d_add_group, "delete-event",
         G_CALLBACK(destroy_dialog), g);
-    gdk_threads_add_idle(mx_show_all_widget, g->d_add_group);
+    gtk_widget_show_all(g->d_add_group);
     gtk_dialog_run(GTK_DIALOG(g->d_add_group));
 
     (void)w;

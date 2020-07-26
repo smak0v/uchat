@@ -45,8 +45,8 @@ void mx_show_win_chat(t_glade *g) {
 
     gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
 
-    mx_delete_childs(g->dialogs_box, true);
-    mx_delete_childs(g->groups_box, true);
+    mx_delete_childs(g->dialogs_box);
+    mx_delete_childs(g->groups_box);
     mx_load_dialogues_request(g);
     mx_load_groups_request(g);
     mx_get_profile(g);

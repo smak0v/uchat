@@ -276,14 +276,14 @@ PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
-						  auth.c find_gtk_objects.c show_hide_utils.c \
+						  auth.c find_gtk_objects.c download_file.c \
 						  edit_profile.c get_gtk_obj.c add_chat.c add_group.c \
 						  send_message.c load_groups.c delete_childs.c \
 						  load_messages.c close_chat.c attach_file.c \
 						  load_dialogues.c get_profile.c profile.c \
 						  message_input_utils.c messages.c open_dialog.c \
 						  gtk_quit.c invite_user_to_group.c audio.c \
-						  download_file.c append_file_to_msg_block.c
+						  append_file_to_msg_block.c
 
 AUDIO_SRCS				= audio_init.c audio_playback.c audio_recording.c \
 						  audio_utils.c

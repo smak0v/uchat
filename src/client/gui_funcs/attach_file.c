@@ -12,7 +12,7 @@ void mx_attach_file(GtkWidget *w, t_glade *g) {
         g_free(filename);
     }
 
-    gdk_threads_add_idle(mx_destroy_widget, dialog);
+    gtk_widget_destroy(dialog);
 
     (void)w;
 }

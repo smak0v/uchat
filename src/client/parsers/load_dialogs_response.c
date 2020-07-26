@@ -7,7 +7,7 @@ static void open_dialogue(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     GtkWidget *uid2 = GTK_WIDGET(g_list_nth_data(childs, 0));
 
     if (g->dgid != mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id))) && e++) {
-        mx_delete_childs(g->messages_area, false);
+        mx_delete_childs(g->messages_area);
         mx_clear_input_text(g);
         gtk_label_set_text(GTK_LABEL(g->l_chat_name),
             gtk_label_get_text(GTK_LABEL(g_list_nth_data(childs, 2))));
@@ -86,20 +86,15 @@ gboolean mx_parse_load_dialogs_response(gpointer data) {
     json_object *jobj = json_tokener_parse(((t_main_thread *)data)->response);
     json_object *j_code = NULL;
 
-    if (json_object_get_type(jobj) == json_type_object) {
-        json_object_object_get_ex(jobj, "code", &j_code);
-        if (j_code && json_object_get_type(j_code) == json_type_int) {
-            if (!check_response_code(json_object_get_int(j_code), jobj,
-                ((t_main_thread *)data)->g))
-                mx_clear_jobj(&jobj, MX_SUCCESS);
-            else
-                mx_clear_jobj(&jobj, MX_FAILURE);
-        }
+    json_object_object_get_ex(jobj, "code", &j_code);
 
-        mx_clear_jobj(&jobj, MX_FAILURE);
-    }
+    if (j_code && json_object_get_type(j_code) == json_type_int)
+        if (!check_response_code(json_object_get_int(j_code), jobj,
+            ((t_main_thread *)data)->g))
+            mx_clear_jobj(&jobj, MX_SUCCESS);
 
-    mx_clear_jobj(&jobj, MX_FAILURE);
+    mx_clear_jobj(&jobj, MX_SUCCESS);
+
     mx_delete_main_thread_struct((t_main_thread **)&data);
 
     return G_SOURCE_REMOVE;

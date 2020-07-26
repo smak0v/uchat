@@ -16,12 +16,13 @@ static int check_uid2_in_dialogues(t_list *dialogues, char *uid2) {
 }
 
 static void hide_show_dialog_widgets(t_glade *g) {
-    gdk_threads_add_idle(mx_show_widget, g->messages_area);
-    gdk_threads_add_idle(mx_show_widget, g->box_message);
-    gdk_threads_add_idle(mx_show_widget, g->e_search);
-    gdk_threads_add_idle(mx_show_widget, g->box9);
-    gdk_threads_add_idle(mx_hide_widget, g->l_select_chat);
-    gdk_threads_add_idle(mx_hide_widget, g->profile_area);
+    gtk_widget_show(g->messages_area);
+    gtk_widget_show(g->box_message);
+    gtk_widget_show(g->e_search);
+    gtk_widget_show(g->box9);
+
+    gtk_widget_hide(g->l_select_chat);
+    gtk_widget_hide(g->profile_area);
 }
 
 static void setup_g_data(t_glade *g, GtkWidget *l_uid2) {
@@ -42,7 +43,7 @@ void mx_open_dialog(GtkWidget *w, t_glade *g) {
     GList *childs = gtk_container_get_children(GTK_CONTAINER(parent));
     GtkWidget *l_uid2 = GTK_WIDGET(g_list_nth_data(childs, 0));
 
-    mx_delete_childs(g->messages_area, true);
+    mx_delete_childs(g->messages_area);
     mx_clear_input_text(g);
 
     gtk_label_set_text(GTK_LABEL(g->l_chat_name),
@@ -52,7 +53,7 @@ void mx_open_dialog(GtkWidget *w, t_glade *g) {
 
     mx_load_messages_request(g, time(NULL));
 
-    gdk_threads_add_idle(mx_hide_widget, g->d_add_chat);
+    gtk_widget_hide(g->d_add_chat);
 
     g_list_free(childs);
     childs = NULL;

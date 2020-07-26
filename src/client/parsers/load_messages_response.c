@@ -50,28 +50,30 @@ static int check_response_code(int code, json_object *jobj, t_glade *g) {
     else {
         j_msgs = json_object_object_get(jobj, "msg");
         len = json_object_array_length(j_msgs);
+
         for (int i = 0; i < len; ++i)
             add_message_to_gui(json_object_array_get_idx(j_msgs, i), g);
+
         gtk_widget_set_vexpand(g->messages_area, TRUE);
+
         return MX_SUCCESS;
     }
 }
 
-void mx_parse_load_messages_response(char *response, t_glade *g) {
-    json_object *jobj = json_tokener_parse(response);
+gboolean mx_parse_load_messages_response(gpointer data) {
+    json_object *jobj = json_tokener_parse(((t_main_thread *)data)->response);
     json_object *j_code = NULL;
 
-    if (json_object_get_type(jobj) == json_type_object) {
-        json_object_object_get_ex(jobj, "code", &j_code);
-        if (j_code && json_object_get_type(j_code) == json_type_int) {
-            if (!check_response_code(json_object_get_int(j_code), jobj, g))
-                mx_clear_jobj(&jobj, MX_SUCCESS);
-            else
-                mx_clear_jobj(&jobj, MX_FAILURE);
-        }
+    json_object_object_get_ex(jobj, "code", &j_code);
 
-        mx_clear_jobj(&jobj, MX_FAILURE);
-    }
+    if (j_code && json_object_get_type(j_code) == json_type_int)
+        if (!check_response_code(json_object_get_int(j_code), jobj,
+            ((t_main_thread *)data)->g))
+            mx_clear_jobj(&jobj, MX_SUCCESS);
 
-    mx_clear_jobj(&jobj, MX_FAILURE);
+    mx_clear_jobj(&jobj, MX_SUCCESS);
+
+    mx_delete_main_thread_struct((t_main_thread **)&data);
+
+    return G_SOURCE_REMOVE;
 }
