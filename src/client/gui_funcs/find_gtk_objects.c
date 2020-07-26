@@ -32,6 +32,7 @@ void mx_find_gtk_objects_2(t_glade *g) {
     g->scrolledwindow1 = mx_get_gtk_obj(g, "scrolledwindow1");
     g->box9 = mx_get_gtk_obj(g, "box9");
     g->box8 = mx_get_gtk_obj(g, "box8");
+    g->box10 = mx_get_gtk_obj(g, "box10");
     g->dialogs_box = mx_get_gtk_obj(g, "dialogs_box");
     g->groups_box = mx_get_gtk_obj(g, "groups_box");
     g->b_add_user = mx_get_gtk_obj(g, "b_add_user");

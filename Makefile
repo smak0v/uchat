@@ -252,14 +252,16 @@ CLIENT_SRCS				= main.c
 VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
-						  threads.c sockets.c send_file.c get_time.c is_audio.c
+						  threads.c sockets.c send_file.c get_time.c \
+						  main_thread_struct_utils.c is_audio.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \
 						  load_groups_response.c load_messages_response.c \
 						  send_message_response.c load_dialogs_response.c \
 						  get_profile_response.c search_user_response.c \
-						  invite_user_to_group_response.c
+						  invite_user_to_group_response.c \
+						  search_invite_user_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \

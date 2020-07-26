@@ -26,6 +26,7 @@ typedef struct s_profile t_profile;
 typedef struct s_dialogue t_dialogue;
 typedef struct s_audio t_audio;
 typedef struct s_sample_block t_sample_block;
+typedef struct s_main_thread t_main_thread;
 
 struct s_audio {
     uint16_t format_type;
@@ -34,6 +35,11 @@ struct s_audio {
     size_t size;
     float *recorded_samples;
     char *file_name;
+};
+
+struct s_main_thread {
+    char *response;
+    t_glade *g;
 };
 
 struct s_sample_block {
@@ -205,6 +211,8 @@ void *mx_send_file(void *data);
 char *mx_get_time(time_t time);
 void mx_process_send_file(t_glade *g, char *path, int port);
 bool mx_is_audio(char *filename);
+t_main_thread *mx_create_main_thread_struct(char *response, t_glade *g);
+void mx_delete_main_thread_struct(t_main_thread **main_thread);
 gboolean mx_hide_widget(gpointer w);
 gboolean mx_show_widget(gpointer w);
 gboolean mx_show_all_widget(gpointer w);
@@ -234,6 +242,7 @@ void mx_parse_load_messages_response(char *response, t_glade *g);
 int mx_parse_send_message_response(char *response, t_glade *g);
 void mx_parse_get_profile_response(char *response, t_glade *g);
 void mx_parse_serach_user_response(char *response, t_glade *g);
+gboolean mx_parse_invite_users(gpointer data);
 
 // Processors
 void mx_check_response_type(char *response, t_glade *g);
@@ -321,6 +330,7 @@ void mx_find_gtk_objects_2(t_glade *g);
 void mx_gtk_quit(t_glade *g);
 
 void mx_invite_user(GtkWidget *w, t_glade *g);
+void mx_invite_user_to_group(GtkWidget *w, t_glade *g);
 
 void mx_show_hide_chat_group_utils(t_glade *g);
 void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);

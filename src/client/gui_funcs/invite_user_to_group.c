@@ -19,7 +19,7 @@ static void search_user(GtkWidget *w, t_glade *g) {
 
 static void cancel_add_user(GtkWidget *w, t_glade *g) {
     gtk_entry_set_text(GTK_ENTRY(g->e_user_search), "");
-    gdk_threads_add_idle(mx_hide_widget, g->d_add_user);
+    gtk_widget_hide(g->d_add_user);
 
     mx_delete_childs(g->box10, true);
 
@@ -31,6 +31,11 @@ static void destroy_dialog(GtkWidget *w, t_glade *g) {
     (void)g;
 
     return;
+}
+
+void mx_invite_user_to_group(GtkWidget *w, t_glade *g) {
+    (void)w;
+    (void)g;
 }
 
 void mx_invite_user(GtkWidget *w, t_glade *g) {
@@ -50,7 +55,7 @@ void mx_invite_user(GtkWidget *w, t_glade *g) {
 
     mx_delete_childs(g->box10, true);
     gtk_entry_set_text(GTK_ENTRY(g->e_user_search), "");
-    gdk_threads_add_idle(mx_show_all_widget, g->d_add_user);
+    gtk_widget_show_all(g->d_add_user);
     gtk_dialog_run(GTK_DIALOG(g->d_add_user));
     (void)w;
 }
