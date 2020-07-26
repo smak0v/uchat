@@ -162,7 +162,7 @@ SERVER_SRCS				= main.c threads.c request_processing.c register.c\
 						user_profile.c send_to_all_clients.c sockets.c \
 						remove_socket.c profile_json.c notifications.c \
 						recv_file.c unpackers.c file_transfer.c daemonize.c \
-						ssl_list.c groups3.c json_builders3.c
+						ssl_list.c groups3.c json_builders3.c send_file_serv.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 
@@ -253,7 +253,7 @@ VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
 						  threads.c sockets.c send_file.c get_time.c \
-						  main_thread_struct_utils.c is_audio.c
+						  main_thread_struct_utils.c is_audio.c recv_file_cli.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \

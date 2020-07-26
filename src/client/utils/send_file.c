@@ -5,6 +5,7 @@ void mx_cli_file_transfer(char *response, t_glade *g) {
     json_object *j_value = NULL;
     char *path = NULL;
     int port = -1;
+    bool mode = -1;
 
     json_object_object_get_ex(jobj, "path", &j_value);
     if (j_value)
@@ -12,26 +13,38 @@ void mx_cli_file_transfer(char *response, t_glade *g) {
     json_object_object_get_ex(jobj, "port", &j_value);
     if (json_object_get_type(j_value) == json_type_int)
         port = json_object_get_int(j_value);
+    json_object_object_get_ex(jobj, "mode", &j_value);
+    if (json_object_get_type(j_value) == json_type_boolean)
+        mode = json_object_get_boolean(j_value);
 
-    mx_process_send_file(g, path, port);
+    mx_process_send_file(g->ip, path, port, mode);
 }
 
-void mx_process_send_file(t_glade *g, char *path, int port) {
+// TODO REFACTOR
+void mx_process_send_file(char *ip, char *path, int port, bool mode) {
     int connection_fd = -1;
     pthread_t *thr = NULL;
     t_ft_data *data = NULL;
 
-    connection_fd = mx_open_connection(g->ip, port);
+    connection_fd = mx_open_connection(ip, port);
     if (connection_fd < 0)
         return;
+
+    if (mode)
+        path = mx_strjoin("~/Downloads", path);
 
     thr = malloc(sizeof(pthread_t));
     data = malloc(sizeof(t_ft_data));
     data->name = path;
     data->sock = connection_fd;
 
-    if (pthread_create(thr, NULL, mx_send_file, (void *)data) != 0)
-        printf("Thread creation error in process_send_file\n");
+    if (!mode) {
+        if (pthread_create(thr, NULL, mx_send_file, (void *)data) != 0)
+            printf("Thread creation error in process_send_file\n");
+    }
+    else
+        if (pthread_create(thr, NULL, mx_recv_file, (void *)data) != 0)
+            printf("Thread creation error in process_send_file\n");
 }
 
 void *mx_send_file(void *data) {

@@ -1,4 +1,4 @@
-#include "server.h"
+#include "client.h"
 
 static const char *get_pack_data(char *buffer) {
     json_object *jobj = json_tokener_parse(buffer);
@@ -63,8 +63,6 @@ void *mx_recv_file(void *void_data) {
     int pack_num = 0;
     t_ft_data *struct_data = (t_ft_data *)void_data;
 
-    printf("%s\n", struct_data->name);
-
     if (!(file = fopen(struct_data->name, "w+")))
         mx_terminate("open");
 
@@ -82,6 +80,6 @@ void *mx_recv_file(void *void_data) {
     mx_strdel(&(struct_data->name));
     if (fclose(file) < 0)
         mx_terminate("close");
-
     return NULL;
 }
+

@@ -45,6 +45,7 @@ struct s_ft_data {
 	int sock;
 	SSL_CTX *ctx;
     char *status;
+    bool type;
 };
 
 enum e_types {
@@ -79,3 +80,5 @@ enum e_types {
 //Utils
 bool mx_check_port(char *port);
 bool mx_check_ip(char *ip);
+void *mx_send_file(void *data);
+void *mx_recv_file(void *void_data);
