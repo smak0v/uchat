@@ -2,21 +2,11 @@
 
 static char *process_strarr(char **split, int fd) {
     char *sock = NULL;
-    char *add = NULL;
-    int index = -1;
 
-    for (int i = 0; split[i]; i++)
-        if (fd == mx_atoi(split[i])) {
-            index = i;
-            break;
-        }
     for (int i = 0; split[i]; i++) {
-        if (i != index) {
-            add = sock;
-            sock = mx_add_socket(sock, mx_atoi(split[i]));
-            if (add)
-                mx_strdel(&add);
-        }
+        if (fd == mx_atoi(split[i]))
+            continue;
+        sock = mx_add_socket(sock, mx_atoi(split[i]));
     }
 
     return sock;
