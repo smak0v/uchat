@@ -234,7 +234,7 @@ char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
 int mx_parse_signup_response(char *response, t_glade *g);
-void mx_parse_logout_response(char *response, t_glade *g);
+gboolean mx_parse_logout_response(gpointer data);
 void mx_parse_load_dialogs_response(char *response, t_glade *g);
 int mx_parse_new_group_response(char *response, t_glade *g);
 void mx_parse_load_groups_response(char *response, t_glade *g);

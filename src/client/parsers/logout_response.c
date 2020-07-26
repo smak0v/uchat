@@ -7,25 +7,35 @@ static int check_response_code(int code) {
         return MX_SUCCESS;
 }
 
-void mx_parse_logout_response(char *response, t_glade *g) {
-    json_object *jobj = json_tokener_parse(response);
+static void logout(json_object *jobj, gpointer data) {
+    mx_clear_jobj(&jobj, MX_SUCCESS);
+    mx_clear_login_inputs(((t_main_thread *)data)->g);
+
+    pthread_mutex_lock(&((t_main_thread *)data)->g->mutex);
+    ((t_main_thread *)data)->g->dgid = MX_MISTERY;
+    ((t_main_thread *)data)->g->group = false;
+    pthread_mutex_unlock(&((t_main_thread *)data)->g->mutex);
+}
+
+gboolean mx_parse_logout_response(gpointer data) {
+    json_object *jobj = json_tokener_parse(((t_main_thread *)data)->response);
     json_object *j_code = NULL;
 
     if (json_object_get_type(jobj) == json_type_object) {
         json_object_object_get_ex(jobj, "code", &j_code);
         if (j_code && json_object_get_type(j_code) == json_type_int) {
             if (!check_response_code(json_object_get_int(j_code)))
-                mx_clear_jobj(&jobj, MX_SUCCESS);
-                mx_clear_login_inputs(g);
-                pthread_mutex_lock(&g->mutex);
-                g->dgid = MX_MISTERY;
-                g->group = false;
-                pthread_mutex_unlock(&g->mutex);
-                mx_open_logwin(g->w_chat, g);
+                logout(jobj, data);
+                mx_open_logwin(((t_main_thread *)data)->g->w_chat,
+                    ((t_main_thread *)data)->g);
             }
             else
                 mx_clear_jobj(&jobj, MX_FAILURE);
         mx_clear_jobj(&jobj, MX_FAILURE);
     }
+
     mx_clear_jobj(&jobj, MX_FAILURE);
+    mx_delete_main_thread_struct((t_main_thread **)&data);
+
+    return G_SOURCE_REMOVE;
 }
