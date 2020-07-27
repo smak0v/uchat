@@ -1,14 +1,14 @@
 window,
 dialog {
-    background: shade(#243b53, 0.75);
+    background: shade(#E3F2FD, 0.75);
 }
 
 .error_modal {
-    background: shade(#243b53, 0.75);
+    background: shade(#E3F2FD, 0.75);
 }
 
 .error_modal button {
-    background: shade(#334e68, 1);
+    background: shade(rgb(175, 222, 255), 1);
 
     margin-top: 30px;
     margin-bottom: 30px;
@@ -27,22 +27,22 @@ dialog {
 }
 
 .notebook > header.top {
-    background: shade(#243b53, 0.75);
+    background: shade(#E3F2FD, 0.75);
     border: none;
 }
 
 .btn_add_chat_group {
-    background: shade(#334e68, 0.9);
+    background: shade(rgb(175, 222, 255), 0.9);
     border-radius: 50px;
 }
 
 button {
-    background: shade(#243b53, 0.75);
+    background: shade(#E3F2FD, 0.75);
 }
 
 label {
     font-size: 15px;
-    color: #f5f7fa;
+    color: #34343a;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -51,11 +51,11 @@ label {
 }
 
 .panned {
-    background: shade(#243b53, 0.6);;
+    background: shade(#E3F2FD, 0.6);;
 }
 
 .notebook_tab {
-    background-color: shade(#243b53, 0.75);
+    background-color: shade(#E3F2FD, 0.75);
 }
 
 .tooltip * {
@@ -76,7 +76,7 @@ label {
 }
 
 .b_close_profile {
-    background: shade(#243b53, 0.6);
+    background: shade(#E3F2FD, 0.6);
     margin-right: 10px;
     margin-top: 10px;
 }
@@ -86,15 +86,15 @@ label {
 }
 
 .username_button {
-    background: shade(#243b53, 0.75);
+    background: shade(#E3F2FD, 0.75);
 }
 
 .save_profile_btn,
 .b_delete_account,
 .b_change_theme {
     margin-bottom: 100px;
-    background: shade(#334e68, 0.75);
-    border-color: shade(#334e68, 0.75);
+    background: shade(rgb(175, 222, 255), 0.75);
+    border-color: shade(rgb(175, 222, 255), 0.75);
     border-style: solid;
     border-width: 1px;
     padding-left: 30px;
@@ -106,7 +106,7 @@ label {
 .save_profile_btn:hover,
 .b_delete_account:hover,
 .b_change_theme:hover {
-    background: shade(#334e68, 0.9);
+    background: shade(#E3F2FD, 0.9);
 }
 
 .add_btn {
@@ -152,7 +152,7 @@ label {
 }
 
 .chat_group_box {
-    background: shade(#334e68, 0.85);
+    background: rgba(70, 232, 238, 0.856);
     border-radius: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -168,7 +168,7 @@ label {
     padding-bottom: 10px;
     padding-top: 10px;
     padding-left: 5px;
-    background-color: shade(#243b53, 0.75);
+    background-color: shade(#E3F2FD, 0.75);
 }
 
 .box_message_button {
@@ -179,15 +179,15 @@ label {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 18px;
-    background-color: shade(#243b53, 0.75);
+    background-color: shade(#E3F2FD, 0.75);
 }
 
 .box9 {
-    background-color: shade(#243b53, 0.75);
+    background-color: shade(#E3F2FD, 0.75);
 }
 
 .msg {
-    background-color: rgba(94, 113, 133, 0.5);
+    background-color: rgba(70, 232, 238, 0.856);
     border-radius: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -200,7 +200,7 @@ label {
 }
 
 .message_input {
-    background-color: shade(#243b53, 0.75);
+    background-color: shade(#E3F2FD, 0.75);
     padding: 10px;
     padding-left: 10px;
 }
@@ -221,7 +221,7 @@ label {
 }
 
 .box5 {
-    background-color: shade(#243b53, 0.75);
+    background-color: shade(#E3F2FD, 0.75);
 }
 
 .l_not_users_found {
@@ -229,7 +229,7 @@ label {
 }
 
 .user_box {
-    background-color: shade(#243b53, 0.95);
+    background-color: shade(#E3F2FD, 0.95);
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
@@ -237,8 +237,8 @@ label {
 
 .user_box_open_dialog_btn {
     border: none;
-    border-color: shade(#243b53, 0.95);
-    background-color: shade(#243b53, 0.95);
+    border-color: shade(#E3F2FD, 0.95);
+    background-color: shade(#E3F2FD, 0.95);
     margin-right: 20px;
 }
 
@@ -258,13 +258,13 @@ label {
 .b_play:active {
     border: none;
     border-radius: 25px;
-    border-color: #555f6b;
-    background: #555f6b;
+    border-color: rgba(45, 184, 189, 0.856);
+    background: rgba(45, 184, 189, 0.856);
     margin-right: 20px;
     padding: 8px;
 }
 
 .b_group_buttons:hover {
-    border-color: #414852;
-    background: #414852;
+    border-color: rgba(43, 238, 245, 0.856);
+    background: rgba(43, 238, 245, 0.856);
 }

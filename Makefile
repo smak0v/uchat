@@ -287,7 +287,7 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  message_input_utils.c messages.c open_dialog.c \
 						  gtk_quit.c invite_user_to_group.c audio.c \
 						  append_file_to_msg_block.c leave_group.c \
-						  delete_account.c
+						  delete_account.c change_theme.c
 
 AUDIO_SRCS				= audio_init.c audio_playback.c audio_recording.c \
 						  audio_utils.c

@@ -734,6 +734,9 @@
                       <object class="GtkBox" id="box9">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <style>
+                          <class name="box9"/>
+                        </style>
                         <child>
                           <object class="GtkLabel" id="l_chat_name">
                             <property name="visible">True</property>
@@ -756,6 +759,9 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
+                            <style>
+                              <class name="group_buttons"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -770,6 +776,9 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
+                            <style>
+                              <class name="group_buttons"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1143,6 +1152,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="has_tooltip">True</property>
+                                <property name="tooltip_markup" translatable="yes">Delete account</property>
                                 <property name="tooltip_text" translatable="yes">Delete account</property>
                                 <property name="halign">center</property>
                                 <property name="relief">none</property>
@@ -1159,7 +1169,7 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="b_change_theme">
-                                <property name="label" translatable="yes">Chande theme</property>
+                                <property name="label" translatable="yes">Light theme</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -1167,9 +1177,12 @@
                                 <property name="tooltip_text" translatable="yes">Change theme</property>
                                 <property name="halign">center</property>
                                 <property name="relief">none</property>
+                                <style>
+                                  <class name="b_change_theme"/>
+                                </style>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
+                                <property name="expand">True</property>
                                 <property name="fill">True</property>
                                 <property name="position">2</property>
                               </packing>

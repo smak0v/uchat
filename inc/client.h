@@ -102,6 +102,7 @@ struct s_glade {
     pthread_mutex_t mutex;
     pthread_mutex_t recorder_mutex;
     bool record_audio_pressed;
+    bool light_theme;
 
     // window
     GtkWidget *window; //main window
@@ -155,6 +156,7 @@ struct s_glade {
     GtkWidget *e_profile_name; // entry profile name
     GtkWidget *e_status; // entry status
     GtkWidget *b_delete_account; // butoon delete account
+    GtkWidget *b_change_theme; // button change theme
 
     // GUI blocks (chat)
     GtkWidget *common_area;
@@ -349,3 +351,5 @@ void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);
 
 void mx_append_file_to_msg_block(GtkWidget *msg_v_box, json_object *msg,
     t_glade *g, GtkWidget *l_msg);
+
+void mx_change_theme(GtkWidget *w, t_glade *g);

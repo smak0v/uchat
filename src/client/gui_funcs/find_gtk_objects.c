@@ -42,4 +42,5 @@ void mx_find_gtk_objects_2(t_glade *g) {
     g->l_invite_user_success = mx_get_gtk_obj(g, "l_invite_user_success");
     g->b_leave_group = mx_get_gtk_obj(g, "b_leave_group");
     g->b_delete_account = mx_get_gtk_obj(g, "b_delete_account");
+    g->b_change_theme = mx_get_gtk_obj(g, "b_change_theme");
 }
