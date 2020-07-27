@@ -103,7 +103,7 @@ int mx_start_server(int port) {
     if (socket_fd < 0)
         mx_terminate("Socket creation error\n");
     db = mx_opendb("test.db");
-    mx_print_db(db, "DIALOG");
+    mx_print_db(db, "MSG");
     mx_accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);

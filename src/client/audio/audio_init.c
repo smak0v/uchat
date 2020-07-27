@@ -5,7 +5,7 @@ t_audio *mx_init_audio_data(void) {
 
     data->format_type = paFloat32;
     data->number_of_channels = 0;
-    data->sample_rate = SAMPLE_RATE;
+    data->sample_rate = MX_SAMPLE_RATE;
     data->size = 0;
     data->recorded_samples = NULL;
     data->file_name = NULL;
@@ -18,12 +18,12 @@ t_sample_block *mx_init_sample_block(t_audio *data) {
 
     if (sample_block) {
         sample_block->size =
-            FRAMES_PER_BUFFER * sizeof(float) * data->number_of_channels;
+            MX_FRAMES_PER_BUFFER * sizeof(float) * data->number_of_channels;
 
         if ((sample_block->snippet = malloc(sample_block->size)) == NULL)
             return NULL;
 
-        memset(sample_block->snippet, SAMPLE_SILENCE, sample_block->size);
+        memset(sample_block->snippet, MX_SAMPLE_SILENCE, sample_block->size);
     }
 
     return sample_block;
@@ -39,7 +39,7 @@ int mx_init_input_stream(PaStream **stream, t_audio *data) {
     mx_set_input_parameters(&input_parameters, data);
 
     err = Pa_OpenStream(stream, &input_parameters, NULL,
-                        SAMPLE_RATE, FRAMES_PER_BUFFER, paClipOff, NULL, NULL);
+        MX_SAMPLE_RATE, MX_FRAMES_PER_BUFFER, paClipOff, NULL, NULL);
 
     if (err != paNoError)
         return err;
@@ -57,7 +57,7 @@ int mx_init_output_stream(PaStream **stream, t_audio *data) {
     mx_set_output_parameters(&output_parameters, data);
 
     err = Pa_OpenStream(stream, NULL, &output_parameters,
-                        SAMPLE_RATE, FRAMES_PER_BUFFER, paClipOff, NULL, NULL);
+        MX_SAMPLE_RATE, MX_FRAMES_PER_BUFFER, paClipOff, NULL, NULL);
 
     if (err != paNoError)
         return err;

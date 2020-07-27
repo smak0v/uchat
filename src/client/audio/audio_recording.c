@@ -7,7 +7,7 @@ static int mx_record_sample(PaStream *stream, t_audio *data,
     char *destination;
 
     ++i;
-    err = Pa_ReadStream(stream, sample_block->snippet, FRAMES_PER_BUFFER);
+    err = Pa_ReadStream(stream, sample_block->snippet, MX_FRAMES_PER_BUFFER);
     if (err != paNoError)
         return err;
 
@@ -65,7 +65,7 @@ void *mx_thread_record_audio(void *thread_data) {
         return thread_data;
     }
     sample_block = mx_init_sample_block(data);
-    for (int i = 0; i < (60 * SAMPLE_RATE) / FRAMES_PER_BUFFER; ++i) {
+    for (int i = 0; i < (60 * MX_SAMPLE_RATE) / MX_FRAMES_PER_BUFFER; ++i) {
         if (!((t_thread_data *)thread_data)->glade->record_audio_pressed)
             break;
         if (mx_record_sample(stream, data, sample_block, i) != paNoError)

@@ -254,7 +254,8 @@ VALIDATORS_SRCS			= validate_login_data.c validate_signup_data.c
 
 UTILS_SRCS				= clear_jobj.c read_server_response.c ssl_tls.c \
 						  threads.c sockets.c send_file.c get_time.c \
-						  main_thread_struct_utils.c is_audio.c recv_file_cli.c
+						  main_thread_struct_utils.c is_audio.c \
+						  play_audio_thread.c recv_file_cli.c
 
 PARSERS_SRCS			= login_response.c signup_response.c \
 						  logout_response.c new_group_response.c \

@@ -53,15 +53,13 @@ void *mx_listen_server(void *data) {
 
 void mx_start_client(char *ip, int port, t_glade *g) {
     int socket_fd = -1;
-    SSL_CTX *ctx = NULL;
     SSL *ssl = NULL;
 
     SSL_library_init();
-    ctx = mx_init_client_ctx();
-    g->ctx = ctx;
+    g->ctx = mx_init_client_ctx();
     if ((socket_fd = mx_open_connection(ip, port)) < 0)
-        mx_terminate("Connection error"); // change this to try to reconnect
-    ssl = SSL_new(ctx);
+        mx_terminate("Connection error");
+    ssl = SSL_new(g->ctx);
     SSL_set_fd(ssl, socket_fd);
     if (SSL_connect(ssl) == MX_SSL_FAILURE)
         ERR_print_errors_fp(stderr);
@@ -72,5 +70,5 @@ void mx_start_client(char *ip, int port, t_glade *g) {
         SSL_free(ssl);
     }
     close(socket_fd);
-    SSL_CTX_free(ctx);
+    SSL_CTX_free(g->ctx);
 }

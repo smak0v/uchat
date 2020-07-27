@@ -21,7 +21,7 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg, char *time,
     mx_append_file_to_msg_block(msg_v_box, msg, g, l_msg);
 
     mx_set_message_style(msg_v_box, l_username, l_time, l_msg);
-    mx_add_id_to_msg_block(msg, msg_vbox);
+    mx_add_id_to_msg_block(msg, msg_vbox, g, true);
 }
 
 static t_msg *build_msg(t_glade *g, char *user_message) {
@@ -63,10 +63,10 @@ void mx_add_message_to_gui(t_glade *g, char *response) {
         "time")));
         msg_v_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
         buld_msg_block(msg_v_box, j_msg, time, g);
-        gtk_box_pack_start(GTK_BOX(g->messages_area), msg_v_box, FALSE, FALSE, 0);
-
-        if (mx_atoi(json_object_get_string(json_object_object_get(j_msg, "uid2")))
-            == g->uid)
+        gtk_box_pack_start(GTK_BOX(g->messages_area), msg_v_box, FALSE,
+            FALSE, 0);
+        if (mx_atoi(json_object_get_string(
+            json_object_object_get(j_msg, "uid2"))) == g->uid)
             gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_START);
         else
             gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);

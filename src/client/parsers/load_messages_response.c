@@ -21,7 +21,7 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg,
     mx_append_file_to_msg_block(msg_v_box, msg, g, l_msg);
 
     mx_set_message_style(msg_v_box, l_username, l_time, l_msg);
-    mx_add_id_to_msg_block(msg, msg_vbox);
+    mx_add_id_to_msg_block(msg, msg_vbox, g, false);
 }
 
 static void add_message_to_gui(json_object *msg, t_glade *g) {

@@ -13,9 +13,11 @@
 #define MX_UI_PATH "./src/client/ui/"
 #define MX_MISTERY -666
 
-#define FRAMES_PER_BUFFER 1024
-#define SAMPLE_RATE  (44100)
-#define SAMPLE_SILENCE  (0.0f)
+#define MX_FRAMES_PER_BUFFER 1024
+#define MX_SAMPLE_RATE  (44100)
+#define MX_SAMPLE_SILENCE  (0.0f)
+
+#define MX_DILIN_PATH "./src/client/ui/dilin.aif"
 
 
 // Structures
@@ -99,6 +101,7 @@ struct s_glade {
     char *filename;
     pthread_t listener;
     pthread_t recorder;
+    pthread_t player;
     pthread_mutex_t mutex;
     pthread_mutex_t recorder_mutex;
     bool record_audio_pressed;
@@ -208,6 +211,7 @@ int mx_validate_signup_data(t_glade *g, char *repeat);
 
 // Threads
 void mx_client_thread_manager(t_glade *glade, SSL *ssl);
+void mx_play_audio_thread(t_glade *g, char *path);
 
 // Utils
 void mx_start_client(char *ip, int port, t_glade *g);
@@ -293,7 +297,7 @@ void mx_set_input_parameters(PaStreamParameters *input_parameters,
 t_audio *mx_init_audio_data(void);
 gboolean mx_record_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
 gboolean mx_send_audio(GtkWidget *w, GdkEventKey *e, t_glade *g);
-void mx_play_audio_file(char *path);
+void *mx_play_audio_file(void *path);
 void mx_play(GtkWidget *w, t_glade *g);
 
 // GUI
@@ -333,7 +337,8 @@ void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
 void mx_add_message_to_gui(t_glade *g, char *response);
-void mx_add_id_to_msg_block(json_object *msg, GtkWidget *msg_vbox);
+void mx_add_id_to_msg_block(json_object *msg, GtkWidget *msg_vbox, t_glade *g,
+    bool play);
 void mx_attach_file(GtkWidget *w, t_glade *g);
 void mx_download(GtkWidget *w, t_glade *g);
 

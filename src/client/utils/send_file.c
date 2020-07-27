@@ -1,5 +1,14 @@
 #include "client.h"
 
+static char *get_path(char *filename) {
+    char *tmp = mx_strjoin(getpwuid(getuid())->pw_dir, "/Downloads/");
+    char *path = mx_strjoin(tmp, filename);
+
+    mx_strdel(&tmp);
+
+    return path;
+}
+
 void mx_cli_file_transfer(char *response, t_glade *g) {
     json_object *jobj = json_tokener_parse(response);
     json_object *j_value = NULL;
@@ -10,9 +19,11 @@ void mx_cli_file_transfer(char *response, t_glade *g) {
     json_object_object_get_ex(jobj, "path", &j_value);
     if (j_value)
         path = (char *)json_object_get_string(j_value);
+
     json_object_object_get_ex(jobj, "port", &j_value);
     if (json_object_get_type(j_value) == json_type_int)
         port = json_object_get_int(j_value);
+
     json_object_object_get_ex(jobj, "mode", &j_value);
     if (json_object_get_type(j_value) == json_type_boolean)
         mode = json_object_get_boolean(j_value);
@@ -20,34 +31,27 @@ void mx_cli_file_transfer(char *response, t_glade *g) {
     mx_process_send_file(g->ip, path, port, mode);
 }
 
-// TODO REFACTOR
 void mx_process_send_file(char *ip, char *path, int port, bool mode) {
     int connection_fd = -1;
     pthread_t *thr = NULL;
     t_ft_data *data = NULL;
-    char *tmp = NULL;
 
-    connection_fd = mx_open_connection(ip, port);
-    if (connection_fd < 0)
+    if ((connection_fd = mx_open_connection(ip, port)) < 0)
         return;
-
-    if (mode) {
-        tmp = mx_strjoin(getpwuid(getuid())->pw_dir, "/Downloads/");
-        path = mx_strjoin(tmp, path);
-    }
-
+    if (mode)
+        path = get_path(path);
     thr = malloc(sizeof(pthread_t));
     data = malloc(sizeof(t_ft_data));
-    data->name = path;
+    data->name = mx_strdup(path);
     data->sock = connection_fd;
-
     if (!mode) {
         if (pthread_create(thr, NULL, mx_send_file_cli, (void *)data) != 0)
-            printf("Thread creation error in process_send_file\n");
+            mx_print_error("Thread creation error in process_send_file\n");
     }
     else
         if (pthread_create(thr, NULL, mx_recv_file_cli, (void *)data) != 0)
-            printf("Thread creation error in process_send_file\n");
+            mx_print_error("Thread creation error in process_send_file\n");
+    mx_strdel(&path);
 }
 
 void *mx_send_file_cli(void *data) {
