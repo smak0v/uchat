@@ -1,15 +1,14 @@
 window,
 dialog {
-    background: shade(#E3F2FD, 0.75);
+    background: #e6d6c5;
 }
 
 .error_modal {
-    background: shade(#E3F2FD, 0.75);
+    background: #e6d6c5;
 }
 
 .error_modal button {
-    background: shade(rgb(175, 222, 255), 1);
-
+    background: #e6d6c5;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: 60px;
@@ -27,17 +26,17 @@ dialog {
 }
 
 .notebook > header.top {
-    background: shade(#E3F2FD, 0.75);
+    background: #f1d7bb;
     border: none;
 }
 
 .btn_add_chat_group {
-    background: shade(rgb(175, 222, 255), 0.9);
+    background: #e6d6c5;
     border-radius: 50px;
 }
 
 button {
-    background: shade(#E3F2FD, 0.75);
+    background: #f1d7bb;
 }
 
 label {
@@ -48,14 +47,15 @@ label {
 
 .header {
     padding: 15px;
+    background: #765b58;
 }
 
 .panned {
-    background: shade(#E3F2FD, 0.6);;
+    background: #fae0c2;
 }
 
 .notebook_tab {
-    background-color: shade(#E3F2FD, 0.75);
+    background: #f1d7bb;
 }
 
 .tooltip * {
@@ -76,7 +76,7 @@ label {
 }
 
 .b_close_profile {
-    background: shade(#E3F2FD, 0.6);
+    background: #e6d6c5;
     margin-right: 10px;
     margin-top: 10px;
 }
@@ -86,15 +86,15 @@ label {
 }
 
 .username_button {
-    background: shade(#E3F2FD, 0.75);
+    background: #e6d6c5;
 }
 
 .save_profile_btn,
 .b_delete_account,
 .b_change_theme {
     margin-bottom: 100px;
-    background: shade(rgb(175, 222, 255), 0.75);
-    border-color: shade(rgb(175, 222, 255), 0.75);
+    background: #e6d6c5;
+    border-color: #e6d6c5;
     border-style: solid;
     border-width: 1px;
     padding-left: 30px;
@@ -106,7 +106,7 @@ label {
 .save_profile_btn:hover,
 .b_delete_account:hover,
 .b_change_theme:hover {
-    background: shade(#E3F2FD, 0.9);
+    background: #e6d6c5;
 }
 
 .add_btn {
@@ -152,7 +152,7 @@ label {
 }
 
 .chat_group_box {
-    background: rgba(70, 232, 238, 0.856);
+    background: #b9a195;
     border-radius: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -168,7 +168,7 @@ label {
     padding-bottom: 10px;
     padding-top: 10px;
     padding-left: 5px;
-    background-color: shade(#E3F2FD, 0.75);
+    background-color: #f1d7bb;
 }
 
 .box_message_button {
@@ -179,15 +179,15 @@ label {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 18px;
-    background-color: shade(#E3F2FD, 0.75);
+    background-color: #f1d7bb;
 }
 
 .box9 {
-    background-color: shade(#E3F2FD, 0.75);
+    background-color: #e6d6c5;
 }
 
 .msg {
-    background-color: rgba(70, 232, 238, 0.856);
+    background-color: #b9a195;
     border-radius: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -200,7 +200,7 @@ label {
 }
 
 .message_input {
-    background-color: shade(#E3F2FD, 0.75);
+    background-color: #f1d7bb;
     padding: 10px;
     padding-left: 10px;
 }
@@ -221,7 +221,7 @@ label {
 }
 
 .box5 {
-    background-color: shade(#E3F2FD, 0.75);
+    background: #f1d7bb;
 }
 
 .l_not_users_found {
@@ -229,7 +229,7 @@ label {
 }
 
 .user_box {
-    background-color: shade(#E3F2FD, 0.95);
+    background-color: #e6d6c5;
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
@@ -237,8 +237,8 @@ label {
 
 .user_box_open_dialog_btn {
     border: none;
-    border-color: shade(#E3F2FD, 0.95);
-    background-color: shade(#E3F2FD, 0.95);
+    border-color: #e6d6c5;
+    background-color: #e6d6c5;
     margin-right: 20px;
 }
 
@@ -258,13 +258,17 @@ label {
 .b_play:active {
     border: none;
     border-radius: 25px;
-    border-color: rgba(45, 184, 189, 0.856);
-    background: rgba(45, 184, 189, 0.856);
+    border-color: #b9a195;
+    background: #b9a195;
     margin-right: 20px;
     padding: 8px;
 }
 
 .b_group_buttons:hover {
-    border-color: rgba(43, 238, 245, 0.856);
-    background: rgba(43, 238, 245, 0.856);
+    border-color: #b9a195;
+    background: #b9a195;
+}
+
+.b_username {
+    margin-left: 30px;
 }

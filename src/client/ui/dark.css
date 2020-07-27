@@ -48,6 +48,7 @@ label {
 
 .header {
     padding: 15px;
+    background: shade(#243b53, 0.75);
 }
 
 .panned {
@@ -267,4 +268,8 @@ label {
 .b_group_buttons:hover {
     border-color: #414852;
     background: #414852;
+}
+
+.b_username {
+    margin-left: 30px;
 }

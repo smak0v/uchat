@@ -453,9 +453,12 @@
                         <property name="tooltip_text" translatable="yes">Username</property>
                         <property name="relief">none</property>
                         <property name="focus_on_click">False</property>
+                        <style>
+                          <class name="b_username"/>
+                        </style>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
+                        <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
