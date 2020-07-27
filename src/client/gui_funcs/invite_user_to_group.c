@@ -19,6 +19,9 @@ static void search_user(GtkWidget *w, t_glade *g) {
 
 static void cancel_add_user(GtkWidget *w, t_glade *g) {
     gtk_entry_set_text(GTK_ENTRY(g->e_user_search), "");
+
+    gtk_widget_hide(g->l_invite_user_error);
+    gtk_widget_hide(g->l_invite_user_success);
     gtk_widget_hide(g->d_add_user);
 
     mx_delete_childs(g->box10);
@@ -34,7 +37,19 @@ static void destroy_dialog(GtkWidget *w, t_glade *g) {
 }
 
 void mx_invite_user_to_group(GtkWidget *w, t_glade *g) {
-    (void)w;
+    GtkWidget *parent = gtk_widget_get_parent(w);
+    GList *childs = gtk_container_get_children(GTK_CONTAINER(parent));
+    GtkWidget *l_uid = GTK_WIDGET(g_list_nth_data(childs, 0));
+    char *request = mx_json_string_invite_user_to_group(g->token, g->uid,
+        g->dgid, mx_atoi(gtk_label_get_text(GTK_LABEL(l_uid))));
+
+    SSL_write(g->ssl, request, strlen(request));
+
+    mx_strdel(&request);
+
+    g_list_free(childs);
+    childs = NULL;
+
     (void)g;
 }
 
@@ -52,11 +67,12 @@ void mx_invite_user(GtkWidget *w, t_glade *g) {
         G_CALLBACK(destroy_dialog), g);
     g_signal_connect(g->e_user_search, "changed",
         G_CALLBACK(search_user), g);
-
     mx_delete_childs(g->box10);
     gtk_entry_set_text(GTK_ENTRY(g->e_user_search), "");
     gtk_widget_show_all(g->d_add_user);
-    gtk_dialog_run(GTK_DIALOG(g->d_add_user));
+
+    gtk_widget_hide(g->l_invite_user_error);
+    gtk_widget_hide(g->l_invite_user_success);
     (void)w;
 }
 

@@ -18,8 +18,10 @@ void mx_show_hide_chat_group_utils(t_glade *g) {
     gtk_widget_show(g->e_search);
     gtk_widget_show(g->box9);
 
-    if (g->group)
+    if (g->group) {
         gtk_widget_show(g->b_add_user);
+        gtk_widget_show(g->b_leave_group);
+    }
 
     gtk_widget_hide(g->l_select_chat);
     gtk_widget_hide(g->profile_area);

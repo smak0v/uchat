@@ -7,6 +7,7 @@ gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g) {
         gtk_widget_hide(g->profile_area);
         gtk_widget_hide(g->box9);
         gtk_widget_hide(g->b_add_user);
+        gtk_widget_hide(g->b_leave_group);
 
         gtk_widget_show(g->l_select_chat);
 

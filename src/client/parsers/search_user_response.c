@@ -47,6 +47,7 @@ static gboolean parse_users(gpointer data) {
     json_object *j_users = json_object_object_get(jobj, "users");
     GtkWidget *l_not_users_found = NULL;
 
+    mx_delete_childs(((t_main_thread *)data)->g->box8);
     if (json_object_get_type(j_users) != json_type_null) {
         for (size_t i = 0; i < json_object_array_length(j_users); ++i)
             add_user_box_to_gui(json_object_array_get_idx(j_users, i),
@@ -61,7 +62,6 @@ static gboolean parse_users(gpointer data) {
         gtk_widget_show(l_not_users_found);
     }
     mx_delete_main_thread_struct((t_main_thread **)&data);
-
     return G_SOURCE_REMOVE;
 }
 

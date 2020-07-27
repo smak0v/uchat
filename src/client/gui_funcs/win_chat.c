@@ -23,11 +23,17 @@ static void connect_signals_1(t_glade *g) {
         G_CALLBACK(mx_send_audio), g);
 }
 
+static void connect_signals_2(t_glade *g) {
+    g_signal_connect(g->b_leave_group, "clicked",
+        G_CALLBACK(mx_leave_group), g);
+}
+
 void mx_create_win_chat(t_glade *g) {
     mx_find_gtk_objects_1(g);
     mx_find_gtk_objects_2(g);
 
     connect_signals_1(g);
+    connect_signals_2(g);
 }
 
 void mx_show_win_chat(t_glade *g) {
@@ -42,6 +48,7 @@ void mx_show_win_chat(t_glade *g) {
     gtk_widget_hide(g->b_close_profile);
     gtk_widget_hide(g->box9);
     gtk_widget_hide(g->b_add_user);
+    gtk_widget_hide(g->b_leave_group);
 
     gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);
 

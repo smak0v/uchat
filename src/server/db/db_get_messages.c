@@ -54,14 +54,12 @@ int mx_get_msg(sqlite3 *db, t_msg *m) {
     sqlite3_stmt *stmt = NULL;
     int id = -1;
     int rv = sqlite3_prepare_v2(db,
-            "SELECT * FROM MSG WHERE GROUP_ID = ?1 AND MSG_BODY = ?2 AND\
-            SENDER = ?3 AND TIME = ?4 AND DIALOG_ID = ?5", -1, &stmt, NULL);
+            "SELECT * FROM MSG WHERE SENDER = ?1 AND MSG_BODY = ?2 AND "\
+            "TIME = ?3", -1, &stmt, NULL);
 
-    sqlite3_bind_int(stmt, 1, m->group_id);
+    sqlite3_bind_int(stmt, 1, m->sender);
     sqlite3_bind_text(stmt, 2, m->msg, -1, SQLITE_STATIC);
-    sqlite3_bind_int(stmt, 3, m->sender);
-    sqlite3_bind_int(stmt, 4, m->time);
-    sqlite3_bind_int(stmt, 5, m->dialog_id);
+    sqlite3_bind_int(stmt, 3, m->time);
     if (rv != SQLITE_OK)
         return -1;
     if ((rv = sqlite3_step(stmt)) != SQLITE_ROW)

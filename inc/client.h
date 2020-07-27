@@ -144,6 +144,7 @@ struct s_glade {
     GtkWidget *scrolledwindow1; // scrolled window with messages
     GtkWidget *box9; // box with chat name and settings button
     GtkWidget *b_add_user; //button add user to group
+    GtkWidget *b_leave_group; // button leave group
     GtkWidget *b_audio; // button for audio recording
 
     // profile window
@@ -180,6 +181,8 @@ struct s_glade {
     GtkWidget *b_add_user_cancel; // button cancel invite user
     GtkWidget *e_user_search; // entry user search to invite
     GtkWidget *box10; // box with search dialog results
+    GtkWidget *l_invite_user_error; // label invite user error
+    GtkWidget *l_invite_user_success; // label invite user success
 };
 
 
@@ -225,6 +228,9 @@ char *mx_json_string_get_profile(char *token, int uid, char *name);
 char *mx_json_string_search_user(char *token, int uid, char *name, int req);
 char *mx_json_string_edit_profile(t_glade *g, t_profile *profile);
 char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
+char *mx_json_string_invite_user_to_group(char *token, int uid, int gid,
+    int uid2);
+char *mx_json_string_leave_group(char *token, int uid, int gid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
@@ -238,6 +244,7 @@ int mx_parse_send_message_response(char *response, t_glade *g);
 gboolean mx_parse_get_profile_response(gpointer data);
 void mx_parse_serach_user_response(char *response, t_glade *g);
 gboolean mx_parse_invite_users(gpointer data);
+gboolean mx_invite_user_to_group_response(gpointer data);
 
 // Processors
 void mx_check_response_type(char *response, t_glade *g);
@@ -252,6 +259,8 @@ void mx_edit_profile(char *response, t_glade *g);
 void mx_search_users(char *response, t_glade *g);
 void mx_s_msg(char *response, t_glade *g);
 void mx_cli_file_transfer(char *response, t_glade *g);
+void mx_inv(char *response, t_glade *g);
+void mx_notif_add_to_gr(char *response, t_glade *g);
 
 // Audio
 int mx_init_input_stream(PaStream **stream, t_audio *data);
@@ -326,6 +335,7 @@ void mx_gtk_quit(t_glade *g);
 
 void mx_invite_user(GtkWidget *w, t_glade *g);
 void mx_invite_user_to_group(GtkWidget *w, t_glade *g);
+void mx_leave_group(GtkWidget *w, t_glade *g);
 
 void mx_show_hide_chat_group_utils(t_glade *g);
 void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);

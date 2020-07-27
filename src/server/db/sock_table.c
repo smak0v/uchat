@@ -1,6 +1,11 @@
 #include "server.h"
 
 void mx_new_table_socket(sqlite3 *database) {
+    sqlite3_stmt *stmt = NULL;
+    
+    sqlite3_prepare_v2(database, "DELETE FROM SOCKETS", -1, &stmt, NULL);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
     sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS SOCKETS(" \
                  "USER_ID INTEGER PRIMARY KEY NOT NULL," \
                  "SOCKET_FD TEXT NOT NULL," \

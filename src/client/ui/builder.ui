@@ -316,6 +316,30 @@
               </packing>
             </child>
             <child>
+              <object class="GtkLabel" id="l_invite_user_error">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0.019999999552965164</property>
+                <property name="label" translatable="yes">User already in group!</property>
+                <style>
+                  <class name="error"/>
+                  <class name="invite_user_label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="l_invite_user_success">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0.019999999552965164</property>
+                <property name="label" translatable="yes">User invited successfully!</property>
+                <style>
+                  <class name="success"/>
+                  <class name="invite_user_label"/>
+                </style>
+              </object>
+            </child>
+            <child>
               <object class="GtkScrolledWindow" id="scrolledwindow4">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -713,6 +737,20 @@
                             <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="b_leave_group">
+                            <property name="label" translatable="yes">Leave group</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
