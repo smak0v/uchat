@@ -11,10 +11,11 @@ static void *mx_init_transfer(void *void_data) {
         pthread_exit(NULL);
 
     data->sock = connect;
-    if (!data->type)
+    if (!data->type) {
         mx_recv_file(void_data);
+    }
     else
-        mx_send_file(void_data);
+        mx_send_file_serv(void_data);
 
     *(data->status) = 0;
     close(connect);
@@ -67,7 +68,7 @@ char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id, bool 
     mx_j_o_o_a(jobj, "mid", json_object_new_int(msg_id));
     mx_j_o_o_a(jobj, "port", json_object_new_int(port));
     mx_j_o_o_a(jobj, "path", json_object_new_string(file));
-    mx_j_o_o_a(jobj, "mode", json_object_new_int(type));
+    mx_j_o_o_a(jobj, "mode", json_object_new_boolean(type));
 
     char *j_str = (char *)json_object_to_json_string(jobj);
     SSL *ssl = mx_find_ssl(connect->ssl_list, connect->fd);
@@ -76,7 +77,7 @@ char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id, bool 
     char *itoa_str = NULL;
     char *tmp = NULL;
     char *path = NULL;
-    mx_printint_endl(msg_id);
+
     itoa_str = mx_itoa(msg_id);
     tmp = mx_strjoin(itoa_str, "_");
     mx_strdel(&itoa_str);
@@ -84,16 +85,12 @@ char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id, bool 
         itoa_str = mx_memrchr(file, '/', (size_t)mx_strlen(file));
         itoa_str += 1;
         path = mx_strjoin(tmp, itoa_str);
-        path += 1;
     }
     else
         path = mx_strjoin(tmp, file);
 
     mx_strdel(&tmp);
     tmp = mx_strjoin("files/", path);
-
-    if (type == 0)
-        path -= 1;
     mx_strdel(&path);
 
     if (socket > 0) {

@@ -38,10 +38,8 @@ void mx_process_send_file(char *ip, char *path, int port, bool mode) {
     data->name = path;
     data->sock = connection_fd;
 
-    printf("MODE IS == %d\n", mode);
     if (!mode) {
-        printf("hi\n");
-        if (pthread_create(thr, NULL, mx_send_file, (void *)data) != 0)
+        if (pthread_create(thr, NULL, mx_send_file_cli, (void *)data) != 0)
             printf("Thread creation error in process_send_file\n");
     }
     else
@@ -49,7 +47,7 @@ void mx_process_send_file(char *ip, char *path, int port, bool mode) {
             printf("Thread creation error in process_send_file\n");
 }
 
-void *mx_send_file(void *data) {
+void *mx_send_file_cli(void *data) {
     FILE *file;
     char buffer[1024];
     int b = 1;
@@ -63,9 +61,10 @@ void *mx_send_file(void *data) {
         json_str = mx_json_string_s_file(1, pack_num++, buffer, b);
         write(((t_ft_data *)(data))->sock, json_str, strlen(json_str));
         mx_strdel(&json_str);
-        usleep(1000);
+        usleep(10000);
         bzero(buffer, sizeof(buffer));
     }
 
+    fclose(file);
     pthread_exit(NULL);
 }

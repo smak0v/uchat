@@ -13,7 +13,7 @@ static char *json_string_s_file(int id, int num, char *buff, int buf_size) {
     return (char *)json_object_to_json_string(jobj);
 }
 
-void *mx_send_file(void *data) {
+void *mx_send_file_serv(void *data) {
     FILE *file;
     char buffer[1024];
     int b = 1;

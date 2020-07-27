@@ -189,6 +189,7 @@ char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw);
 int mx_validate_invite(sqlite3 *db, json_object *arr, int gid);
 FILE *mx_open_file(char *filename, char *mode);
 void *mx_recv_file(void *void_data);
+void *mx_send_file_serv(void *data);
 
 // Notifications
 void mx_notify_add_to_group(t_comm *connect, json_object *arr, int gid);
