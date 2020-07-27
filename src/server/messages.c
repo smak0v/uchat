@@ -32,17 +32,17 @@ static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
 
     msg->id = mx_add_msg(db, msg);
     json_string = mx_msg_json_builder(msg);
-
     mx_send_to_all_clients(connect, json_string, msg->recepient);
 
-    mx_strdel(&json_string);
-    return mx_msg_json_builder(msg);
+    return json_string;
 }
 
+// TODO: REFACTOR
 char *mx_send_message(void *jobj, t_comm *connect) {
     t_msg *msg = mx_extract_message(jobj);
     char *res = NULL;
     char *uname = NULL;
+    char *tmp = NULL;
 
     if (!msg)
         return mx_bad_request(NULL, NULL);
@@ -52,12 +52,18 @@ char *mx_send_message(void *jobj, t_comm *connect) {
         return mx_json_string_code_type(500, S_MES);
     else
         msg->username = uname;
+
+    if (msg->file) {
+        tmp = msg->file;
+        msg->file = mx_memrchr(tmp, '/', sizeof(char) * mx_strlen(tmp));
+        msg->file += 1;
+    }
     if (msg->group_id != -1)
         res = send_group_message(connect, msg, connect->db);
     else
         res = send_private_message(connect, msg, connect->db);
     if (msg->file)
-        return mx_file_transfer(connect, msg->file, res, msg->id);
+        return mx_file_transfer(connect, tmp, res, msg->id, 0);
     return res;
 }
 

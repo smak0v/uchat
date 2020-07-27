@@ -22,30 +22,37 @@ static int mx_record_sample(PaStream *stream, t_audio *data,
     return err;
 }
 
-static long mx_save_audio(t_audio *data) {
+static long mx_save_audio(t_audio *data, char *filename) {
     uint8_t err = SF_ERR_NO_ERROR;
-    char file_name[100];
     SNDFILE *outfile = NULL;
     long wr = 0;
     SF_INFO sfinfo = {
         .channels = data->number_of_channels,
         .samplerate = data->sample_rate,
-        .format = SF_FORMAT_AIFF | SF_FORMAT_FLOAT
-    };
+        .format = SF_FORMAT_AIFF | SF_FORMAT_FLOAT};
 
-    snprintf(file_name, 100, "rec_%d.aif", rand());
-    if (!(outfile = sf_open(file_name, SFM_WRITE, &sfinfo)))
+    if (!(outfile = sf_open(filename, SFM_WRITE, &sfinfo)))
         return -1;
 
     wr = sf_writef_float(outfile, data->recorded_samples, data->size / 8);
     err = data->size - wr;
     sf_write_sync(outfile);
     sf_close(outfile);
-    char buf[PATH_MAX];
-    realpath(file_name, buf);
-    data->file_name = mx_strdup(buf);
-    mx_printstr_endl(data->file_name);
     return err;
+}
+
+static void handle_recorded_audio(t_audio *data, t_glade *g) {
+    char buf[PATH_MAX];
+    char filename[100];
+
+    snprintf(filename, 100, "rec_%d.aif", rand());
+    if (data->recorded_samples) {
+        mx_save_audio(data, filename);
+
+        realpath(filename, buf);
+        g->filename = strdup(buf);
+        mx_send_msg(g->b_audio, g);
+    }
 }
 
 void *mx_thread_record_audio(void *thread_data) {
@@ -58,16 +65,13 @@ void *mx_thread_record_audio(void *thread_data) {
         return thread_data;
     }
     sample_block = mx_init_sample_block(data);
-    for (int i = 0; i < (15 * SAMPLE_RATE) / FRAMES_PER_BUFFER; ++i) {
+    for (int i = 0; i < (60 * SAMPLE_RATE) / FRAMES_PER_BUFFER; ++i) {
         if (!((t_thread_data *)thread_data)->glade->record_audio_pressed)
             break;
         if (mx_record_sample(stream, data, sample_block, i) != paNoError)
             break;
     }
-    data->recorded_samples ? mx_save_audio(data) : 0;
-    ((t_thread_data *)thread_data)->glade->filename = data->file_name;
-    mx_send_msg(((t_thread_data *)thread_data)->glade->b_audio,
-        ((t_thread_data *)thread_data)->glade);
+    handle_recorded_audio(data, ((t_thread_data *)thread_data)->glade);
     mx_exit_stream(stream);
     mx_free_audio_data(&data, &sample_block);
     pthread_join(((t_thread_data *)thread_data)->glade->recorder, NULL);

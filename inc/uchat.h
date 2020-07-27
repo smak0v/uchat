@@ -36,6 +36,8 @@
 #define MX_MAX 10500
 #define MX_FT_PORT 7777
 
+#define MX_DOWNLOADS "./files/"
+
 
 // Structures
 typedef struct s_ft_data t_ft_data;
@@ -45,6 +47,7 @@ struct s_ft_data {
 	int sock;
 	SSL_CTX *ctx;
     char *status;
+    bool type;
 };
 
 enum e_types {

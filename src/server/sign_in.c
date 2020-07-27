@@ -12,8 +12,6 @@ static int validate_sign_in(sqlite3 *db, const char *name, const char *passw) {
 
 static char *process_sockets(t_comm *connect, int uid, char *tk) {
     char *sock = mx_get_sock_by_user_id(connect->db, uid);
-    if (!sock)
-        printf("SOCK IS NULL\n");
     SSL *ssl = mx_find_ssl(connect->ssl_list, connect->fd);
 
     if (!sock) {

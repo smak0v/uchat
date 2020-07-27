@@ -3,8 +3,8 @@
 static api_function select_method3(enum e_types type) {
     if (type == LOAD_GR_MEMBERS)
         return mx_load_group_members;
-    // else if (type == DOWNLOAD)
-    //     return mx_download;
+    else if (type == DOWNLOAD)
+        return mx_download;
     else
         return mx_bad_request;
 }

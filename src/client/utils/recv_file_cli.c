@@ -1,4 +1,4 @@
-#include "server.h"
+#include "client.h"
 
 static const char *get_pack_data(char *buffer) {
     json_object *jobj = json_tokener_parse(buffer);
@@ -15,7 +15,7 @@ static const char *get_pack_data(char *buffer) {
 }
 
 static int get_pack_num(char *buffer) {
-    json_object *jobj = json_tokener_parse(buffer);
+    json_object *jobj = json_tokener_parse(buffer);;
     json_object *json_data;
     int package_num = 0;
 
@@ -56,15 +56,16 @@ static int get_data_len(char *buffer) {
     return len;
 }
 
-void *mx_recv_file(void *void_data) {
+void *mx_recv_file_cli(void *void_data) {
     FILE *file;
     char buffer[10000];
     const char *data;
     int pack_num = 0;
     t_ft_data *struct_data = (t_ft_data *)void_data;
+    int b = 1;
 
     if ((file = fopen(struct_data->name, "w+"))) {
-        while (read(struct_data->sock, buffer, sizeof(buffer) - 1) >= 0) {
+        while ((b = read(struct_data->sock, buffer, sizeof(buffer) - 1)) >= 0) {
             if ((data = get_pack_data(buffer)))
                 fwrite(data, 1, get_data_len(buffer), file);
             if (is_package_last(buffer))
