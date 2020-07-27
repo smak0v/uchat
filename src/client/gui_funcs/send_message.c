@@ -56,20 +56,19 @@ void mx_add_message_to_gui(t_glade *g, char *response) {
     json_object *jobj = json_tokener_parse(response);
     json_object *j_msg = json_object_object_get(jobj, "msg");
     char *time = NULL;
-    GtkWidget *msg_v_box = NULL;
+    GtkWidget *msg = NULL;
 
     if (check_did_gid(g, j_msg)) {
         time = mx_get_time(json_object_get_int(json_object_object_get(j_msg,
         "time")));
-        msg_v_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-        buld_msg_block(msg_v_box, j_msg, time, g);
-        gtk_box_pack_start(GTK_BOX(g->messages_area), msg_v_box, FALSE,
-            FALSE, 0);
+        msg = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+        buld_msg_block(msg, j_msg, time, g);
+        gtk_box_pack_start(GTK_BOX(g->messages_area), msg, FALSE, FALSE, 0);
         if (mx_atoi(json_object_get_string(
             json_object_object_get(j_msg, "uid2"))) == g->uid)
-            gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_START);
+            gtk_widget_set_halign(GTK_WIDGET(msg), GTK_ALIGN_START);
         else
-            gtk_widget_set_halign(GTK_WIDGET(msg_v_box), GTK_ALIGN_END);
+            gtk_widget_set_halign(GTK_WIDGET(msg), GTK_ALIGN_END);
         mx_strdel(&time);
         mx_clear_jobj(&jobj, MX_SUCCESS);
     }
