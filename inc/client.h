@@ -262,6 +262,7 @@ void mx_s_msg(char *response, t_glade *g);
 void mx_cli_file_transfer(char *response, t_glade *g);
 void mx_inv(char *response, t_glade *g);
 void mx_notif_add_to_gr(char *response, t_glade *g);
+void mx_leave_group_processor(char *response, t_glade *g);
 
 // Audio
 int mx_init_input_stream(PaStream **stream, t_audio *data);
@@ -326,6 +327,7 @@ void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
     GtkWidget *l_time, GtkWidget *l_msg);
 
 gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g);
+void mx_close(t_glade *g);
 
 void mx_open_dialog(GtkWidget *w, t_glade *g);
 
