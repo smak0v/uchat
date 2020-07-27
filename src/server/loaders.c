@@ -47,36 +47,30 @@ static t_ld_d *create_arrays_grp(t_list *lst, int len) {
     return arrays;
 }
 
-// TODO: REFACTOR
 char *mx_load_dialogues(void *jobj, t_comm *connect) {
     json_object *j_uid = NULL;
     t_list *d_lst = NULL;
     t_ld_d *arrays = NULL;
     char *res = NULL;
     int len = 0;
-    int uid = 0;
 
     json_object_object_get_ex(jobj, "id", &j_uid);
     if (!j_uid || json_object_get_type(j_uid) != json_type_int)
         return mx_bad_request(NULL, NULL);
-    uid = json_object_get_int(j_uid);
-    if (mx_validate_token(connect->db, uid, (json_object *)jobj))
+    if (mx_validate_token(connect->db, json_object_get_int(j_uid), jobj))
         return mx_json_string_code_type(401, LOAD_DIALOGUES);
-    d_lst = mx_get_dialog_users(connect->db, uid, &len);
+    d_lst = mx_get_dialog_users(connect->db, json_object_get_int(j_uid), &len);
     if (d_lst)
         arrays = create_arrays_dlg(d_lst, len);
     res = mx_json_string_load_dlg(arrays, len);
-    // free_arrays(arrays);
 
     return mx_add_type(res, LOAD_DIALOGUES);
 }
 
-// TODO: REFACTOR
 char *mx_load_groups(void *jobj, t_comm *connect) {
     json_object *j_uid = NULL;
     t_list *g_lst = NULL;
     t_ld_d *arrays = NULL;
-    char *res = NULL;
     int len = 0;
     int uid = 0;
 
@@ -89,8 +83,6 @@ char *mx_load_groups(void *jobj, t_comm *connect) {
     g_lst = mx_get_groups(connect->db, uid, &len);
     if (g_lst)
         arrays = create_arrays_grp(g_lst, len);
-    res = mx_json_string_load_grp(arrays, len);
-    // free_arrays(arrays);
 
-    return mx_add_type(res, LOAD_GROUPS);
+    return mx_add_type(mx_json_string_load_grp(arrays, len), LOAD_GROUPS);
 }

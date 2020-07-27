@@ -112,7 +112,7 @@ COMMON_OBJ_DIRS			= $(COMMON_OBJD)
 COMMON_OBJS				= $(addprefix $(OBJD)/, $(COMMON:%.c=%.o))
 
 #===================================SRC=======================================#
-COMMON_SRCS				= check_port.c check_ip.c
+COMMON_SRCS				= check_port.c check_ip.c mkdir.c
 
 COMMON					= $(addprefix common/, $(COMMON_SRCS))
 
@@ -162,8 +162,8 @@ SERVER_SRCS				= main.c threads.c request_processing.c register.c\
 						user_profile.c send_to_all_clients.c sockets.c \
 						remove_socket.c profile_json.c notifications.c \
 						recv_file.c unpackers.c file_transfer.c daemonize.c \
-						ssl_list.c groups3.c json_builders3.c \
-						send_file_serv.c utils.c
+						ssl_list.c groups3.c json_builders3.c utils.c \
+						utils2.c send_file_serv.c
 
 SERVER					= $(addprefix server/, $(SERVER_SRCS))
 

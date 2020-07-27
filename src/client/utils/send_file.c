@@ -20,24 +20,20 @@ void mx_cli_file_transfer(char *response, t_glade *g) {
     mx_process_send_file(g->ip, path, port, mode);
 }
 
-// TODO REFACTOR
 void mx_process_send_file(char *ip, char *path, int port, bool mode) {
     int connection_fd = -1;
-    pthread_t *thr = NULL;
+    pthread_t *thr = malloc(sizeof(pthread_t));
     t_ft_data *data = NULL;
 
     connection_fd = mx_open_connection(ip, port);
     if (connection_fd < 0)
         return;
-
-    if (mode)
-        path = mx_strjoin("~/Downloads", path);
-
-    thr = malloc(sizeof(pthread_t));
+    if (mode) {
+        mx_mkdir("~/Downloads/uchat_files");
+    }
     data = malloc(sizeof(t_ft_data));
-    data->name = path;
+    data->name = mx_strjoin("~/Downloads/.uchat_files", path);;
     data->sock = connection_fd;
-
     if (!mode) {
         if (pthread_create(thr, NULL, mx_send_file_cli, (void *)data) != 0)
             printf("Thread creation error in process_send_file\n");
@@ -61,7 +57,7 @@ void *mx_send_file_cli(void *data) {
         json_str = mx_json_string_s_file(1, pack_num++, buffer, b);
         write(((t_ft_data *)(data))->sock, json_str, strlen(json_str));
         mx_strdel(&json_str);
-        usleep(10000);
+        usleep(1000);
         bzero(buffer, sizeof(buffer));
     }
 

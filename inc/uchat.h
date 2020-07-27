@@ -7,6 +7,8 @@
 #include <string.h>
 #include <stdarg.h>
 #include <time.h>
+#include <dirent.h>
+#include <errno.h>
 
 #include <pthread.h>
 #include <netdb.h>
@@ -82,3 +84,5 @@ enum e_types {
 //Utils
 bool mx_check_port(char *port);
 bool mx_check_ip(char *ip);
+
+void mx_mkdir(char *filename);
