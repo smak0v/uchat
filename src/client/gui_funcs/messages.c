@@ -19,6 +19,7 @@ void mx_show_hide_chat_group_utils(t_glade *g) {
     gtk_widget_show(g->box9);
 
     if (g->group) {
+        gtk_widget_show(g->b_group_members);
         gtk_widget_show(g->b_add_user);
         gtk_widget_show(g->b_leave_group);
     }

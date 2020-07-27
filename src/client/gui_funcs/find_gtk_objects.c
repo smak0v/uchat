@@ -43,4 +43,11 @@ void mx_find_gtk_objects_2(t_glade *g) {
     g->b_leave_group = mx_get_gtk_obj(g, "b_leave_group");
     g->b_delete_account = mx_get_gtk_obj(g, "b_delete_account");
     g->b_change_theme = mx_get_gtk_obj(g, "b_change_theme");
+    g->b_group_members = mx_get_gtk_obj(g, "b_show_group_members");
+}
+
+void mx_find_gtk_objects_3(t_glade *g) {
+    g->d_show_group_members = mx_get_gtk_obj(g, "d_show_group_members");
+    g->b_close_members = mx_get_gtk_obj(g, "b_close_members");
+    g->box13 = mx_get_gtk_obj(g, "box13");
 }

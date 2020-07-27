@@ -147,6 +147,7 @@ struct s_glade {
     GtkWidget *b_add_user; //button add user to group
     GtkWidget *b_leave_group; // button leave group
     GtkWidget *b_audio; // button for audio recording
+    GtkWidget *b_group_members; // button open group members window
 
     // profile window
     GtkWidget *b_save_profile; // button save profile
@@ -168,6 +169,7 @@ struct s_glade {
     GtkWidget *d_add_chat; // dialog for adding new chat
     GtkWidget *d_add_group; // dialog for adding new group
     GtkWidget *d_add_user; // dialog for adding new user to group
+    GtkWidget *d_show_group_members; // dialog with group members
 
     // add chat dialog
     GtkWidget *b_add_chat_cancel; // button cancel add chat
@@ -186,6 +188,10 @@ struct s_glade {
     GtkWidget *box10; // box with search dialog results
     GtkWidget *l_invite_user_error; // label invite user error
     GtkWidget *l_invite_user_success; // label invite user success
+
+    // group members dialog
+    GtkWidget *b_close_members; // button close group members dialog
+    GtkWidget *box13; // box with group members
 };
 
 
@@ -236,6 +242,7 @@ char *mx_json_string_invite_user_to_group(char *token, int uid, int gid,
     int uid2);
 char *mx_json_string_leave_group(char *token, int uid, int gid);
 char *mx_json_string_delete_account(char *token, int uid);
+char *mx_json_string_load_group_members(char *token, int uid, int gid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
@@ -250,6 +257,7 @@ gboolean mx_parse_get_profile_response(gpointer data);
 void mx_parse_serach_user_response(char *response, t_glade *g);
 gboolean mx_parse_invite_users(gpointer data);
 gboolean mx_invite_user_to_group_response(gpointer data);
+gboolean mx_parse_load_group_members_response(gpointer data);
 
 // Processors
 void mx_check_response_type(char *response, t_glade *g);
@@ -268,6 +276,7 @@ void mx_inv(char *response, t_glade *g);
 void mx_notif_add_to_gr(char *response, t_glade *g);
 void mx_leave_group_processor(char *response, t_glade *g);
 void mx_finish_deleting_account(char *response, t_glade *g);
+void mx_load_gr_members(char *response, t_glade *g);
 
 // Audio
 int mx_init_input_stream(PaStream **stream, t_audio *data);
@@ -339,12 +348,15 @@ void mx_open_dialog(GtkWidget *w, t_glade *g);
 
 void mx_find_gtk_objects_1(t_glade *g);
 void mx_find_gtk_objects_2(t_glade *g);
+void mx_find_gtk_objects_3(t_glade *g);
 
 void mx_gtk_quit(t_glade *g);
 
 void mx_invite_user(GtkWidget *w, t_glade *g);
 void mx_invite_user_to_group(GtkWidget *w, t_glade *g);
 void mx_leave_group(GtkWidget *w, t_glade *g);
+void mx_open_group_members_dialog(GtkWidget *w, t_glade *g);
+void mx_close_members_window(GtkWidget *w, t_glade *g);
 
 void mx_show_hide_chat_group_utils(t_glade *g);
 void mx_add_dialogue_to_gui(t_glade *g, int did, int uid2, char *name);

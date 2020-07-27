@@ -261,7 +261,8 @@ PARSERS_SRCS			= login_response.c signup_response.c \
 						  send_message_response.c load_dialogs_response.c \
 						  get_profile_response.c search_user_response.c \
 						  invite_user_to_group_response.c \
-						  search_invite_user_response.c
+						  search_invite_user_response.c \
+						  parse_load_group_members_response.c
 
 BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  new_group_builder.c load_dialogs_groups_builder.c \
@@ -269,13 +270,14 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  search_user_builder.c edit_profile_builder.c \
 						  send_file_builder.c get_profile_builder.c \
 						  invite_user_to_group_builder.c \
-						  leave_group_builder.c delete_account_builder.c
+						  leave_group_builder.c delete_account_builder.c \
+						  group_members_builder.c
 
 PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
 						  load_dialogues.c load_groups.c find_user.c n_grp.c \
 						  load_messages.c edit_profile.c search_users.c \
 						  s_msg.c inv.c notif_add_to_gr.c leave_group.c \
-						  delete_account.c
+						  delete_account.c load_gr_members.c
 
 GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  win_login_signup.c win_chat.c gui_utils.c \
@@ -287,7 +289,8 @@ GUI_FUNCS_SRCS			= clear_login_inputs.c clear_signup_inputs.c \
 						  message_input_utils.c messages.c open_dialog.c \
 						  gtk_quit.c invite_user_to_group.c audio.c \
 						  append_file_to_msg_block.c leave_group.c \
-						  delete_account.c change_theme.c
+						  delete_account.c change_theme.c \
+						  open_group_members_dialog.c
 
 AUDIO_SRCS				= audio_init.c audio_playback.c audio_recording.c \
 						  audio_utils.c

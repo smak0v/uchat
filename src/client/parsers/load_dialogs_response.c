@@ -6,13 +6,15 @@ static void open_dialogue(GtkWindow *event_box, GdkEvent *e, t_glade *g) {
     GtkWidget *id = GTK_WIDGET(g_list_nth_data(childs, 1));
     GtkWidget *uid2 = GTK_WIDGET(g_list_nth_data(childs, 0));
 
+    gtk_widget_hide(g->b_group_members);
+    gtk_widget_hide(g->b_add_user);
+    gtk_widget_hide(g->b_leave_group);
     if ((g->dgid != mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id)))
-        || g->group == true) && e++) {
+        || g->group == true) && e++ && !(g->group = false)) {
         mx_delete_childs(g->messages_area);
         mx_clear_input_text(g);
         gtk_label_set_text(GTK_LABEL(g->l_chat_name),
             gtk_label_get_text(GTK_LABEL(g_list_nth_data(childs, 2))));
-        g->group = false;
         g->uid2 = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(uid2)));
         g->dgid = mx_atoi((char *)gtk_label_get_text(GTK_LABEL(id)));
         mx_show_hide_chat_group_utils(g);

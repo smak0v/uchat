@@ -229,7 +229,7 @@ label {
 }
 
 .user_box {
-    background-color: #e6d6c5;
+    background-color: #b9a195;
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
@@ -267,6 +267,7 @@ label {
 .b_group_buttons:hover {
     border-color: #b9a195;
     background: #b9a195;
+    margin-right: 20px;
 }
 
 .b_username {

@@ -39,6 +39,7 @@ static void destroy_dialog(GtkWidget *w, t_glade *g) {
 }
 
 static void reset_grop_subwindow(t_glade *g) {
+    gtk_widget_hide(g->b_group_members);
     gtk_widget_hide(g->b_add_user);
     gtk_widget_hide(g->b_leave_group);
     gtk_widget_hide(g->box9);

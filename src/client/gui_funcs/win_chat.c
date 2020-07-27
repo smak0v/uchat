@@ -30,28 +30,33 @@ static void connect_signals_2(t_glade *g) {
         G_CALLBACK(mx_delete_account), g);
     g_signal_connect(g->b_change_theme, "clicked",
         G_CALLBACK(mx_change_theme), g);
+    g_signal_connect(g->b_group_members, "clicked",
+        G_CALLBACK(mx_open_group_members_dialog), g);
+    g_signal_connect(g->b_close_members, "clicked",
+        G_CALLBACK(mx_close_members_window), g);
 }
 
 void mx_create_win_chat(t_glade *g) {
     mx_find_gtk_objects_1(g);
     mx_find_gtk_objects_2(g);
+    mx_find_gtk_objects_3(g);
 
     connect_signals_1(g);
     connect_signals_2(g);
 }
 
 void mx_show_win_chat(t_glade *g) {
-    gtk_widget_hide(g->w_reg);
-    gtk_widget_hide(g->w_log);
-
     gtk_widget_show_all(g->w_chat);
 
+    gtk_widget_hide(g->w_reg);
+    gtk_widget_hide(g->w_log);
     gtk_widget_hide(g->profile_area);
     gtk_widget_hide(g->messages_area);
     gtk_widget_hide(g->box_message);
     gtk_widget_hide(g->b_close_profile);
     gtk_widget_hide(g->box9);
     gtk_widget_hide(g->b_add_user);
+    gtk_widget_hide(g->b_group_members);
     gtk_widget_hide(g->b_leave_group);
 
     gtk_button_set_label(GTK_BUTTON(g->b_username), g->log);

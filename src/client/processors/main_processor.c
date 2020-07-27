@@ -32,6 +32,8 @@ static void check_response_type_1(int type, char *response, t_glade *g) {
         mx_leave_group_processor(response, g);
     else if (type == DELETE_USER)
         mx_finish_deleting_account(response, g);
+    else if (type == LOAD_GR_MEMBERS)
+        mx_load_gr_members(response, g);
 }
 
 void mx_check_response_type(char *response, t_glade *g) {

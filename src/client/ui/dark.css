@@ -268,6 +268,7 @@ label {
 .b_group_buttons:hover {
     border-color: #414852;
     background: #414852;
+    margin-left: 20px;
 }
 
 .b_username {
