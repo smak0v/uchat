@@ -56,7 +56,7 @@ static int get_data_len(char *buffer) {
     return len;
 }
 
-void *mx_recv_file(void *void_data) {
+void *mx_recv_file_cli(void *void_data) {
     FILE *file;
     char buffer[10000];
     const char *data;

@@ -215,6 +215,7 @@ void mx_process_send_file(char *ip, char *path, int port, bool mode);
 bool mx_is_audio(char *filename);
 t_main_thread *mx_create_main_thread_struct(char *response, t_glade *g);
 void mx_delete_main_thread_struct(t_main_thread **main_thread);
+void *mx_recv_file_cli(void *void_data);
 
 // JSON builders
 char *mx_json_string_login_signup(enum e_types type, char *log, char *passw);

@@ -38,12 +38,14 @@ void mx_process_send_file(char *ip, char *path, int port, bool mode) {
     data->name = path;
     data->sock = connection_fd;
 
+    printf("MODE IS == %d\n", mode);
     if (!mode) {
+        printf("hi\n");
         if (pthread_create(thr, NULL, mx_send_file, (void *)data) != 0)
             printf("Thread creation error in process_send_file\n");
     }
     else
-        if (pthread_create(thr, NULL, mx_recv_file, (void *)data) != 0)
+        if (pthread_create(thr, NULL, mx_recv_file_cli, (void *)data) != 0)
             printf("Thread creation error in process_send_file\n");
 }
 
