@@ -374,3 +374,5 @@ void mx_append_file_to_msg_block(GtkWidget *msg_v_box, json_object *msg,
 
 void mx_change_theme(GtkWidget *w, t_glade *g);
 void mx_pilin_pilin(t_glade *g, json_object *j_msg);
+
+gboolean mx_send_by_enter(GtkWidget *w, GdkEventKey *e, t_glade *g);

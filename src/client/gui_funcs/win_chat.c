@@ -34,6 +34,8 @@ static void connect_signals_2(t_glade *g) {
         G_CALLBACK(mx_open_group_members_dialog), g);
     g_signal_connect(g->b_close_members, "clicked",
         G_CALLBACK(mx_close_members_window), g);
+    g_signal_connect(g->e_message, "key_press_event",
+        G_CALLBACK(mx_send_by_enter), g);
 }
 
 void mx_create_win_chat(t_glade *g) {
