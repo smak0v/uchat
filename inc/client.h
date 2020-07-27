@@ -244,6 +244,7 @@ char *mx_json_string_invite_user_to_group(char *token, int uid, int gid,
 char *mx_json_string_leave_group(char *token, int uid, int gid);
 char *mx_json_string_delete_account(char *token, int uid);
 char *mx_json_string_load_group_members(char *token, int uid, int gid);
+char *mx_json_string_download_file(char *token, int uid, int mid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
@@ -332,6 +333,7 @@ void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
 void mx_add_message_to_gui(t_glade *g, char *response);
+void mx_add_id_to_msg_block(json_object *msg, GtkWidget *msg_vbox);
 void mx_attach_file(GtkWidget *w, t_glade *g);
 void mx_download(GtkWidget *w, t_glade *g);
 

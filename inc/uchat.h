@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <time.h>
+#include <pwd.h>
 
 #include <pthread.h>
 #include <netdb.h>

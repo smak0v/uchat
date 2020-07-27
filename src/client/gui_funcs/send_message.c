@@ -13,7 +13,6 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg, char *time,
     gtk_label_set_xalign(GTK_LABEL(l_username), 0);
     gtk_label_set_xalign(GTK_LABEL(l_time), 1);
     gtk_label_set_xalign(GTK_LABEL(l_msg), 0);
-
     gtk_box_pack_start(GTK_BOX(msg_v_box), u_t_h_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(msg_v_box), msg_vbox, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(u_t_h_box), l_username, FALSE, FALSE, 0);
@@ -22,6 +21,7 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg, char *time,
     mx_append_file_to_msg_block(msg_v_box, msg, g, l_msg);
 
     mx_set_message_style(msg_v_box, l_username, l_time, l_msg);
+    mx_add_id_to_msg_block(msg, msg_vbox);
 }
 
 static t_msg *build_msg(t_glade *g, char *user_message) {

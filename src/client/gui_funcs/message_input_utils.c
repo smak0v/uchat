@@ -30,3 +30,12 @@ void mx_scroll_to_bottom(GtkWidget *w,  GdkRectangle *a, t_glade *g) {
     (void)w;
     (void)a;
 }
+
+void mx_add_id_to_msg_block(json_object *msg, GtkWidget *msg_vbox) {
+    GtkWidget *l_msg_id = gtk_label_new(json_object_get_string(
+        json_object_object_get(msg, "mid")));
+
+    gtk_box_pack_start(GTK_BOX(msg_vbox), l_msg_id, FALSE, FALSE, 0);
+
+    gtk_widget_hide(l_msg_id);
+}

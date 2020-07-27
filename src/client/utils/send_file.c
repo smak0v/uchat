@@ -25,13 +25,16 @@ void mx_process_send_file(char *ip, char *path, int port, bool mode) {
     int connection_fd = -1;
     pthread_t *thr = NULL;
     t_ft_data *data = NULL;
+    char *tmp = NULL;
 
     connection_fd = mx_open_connection(ip, port);
     if (connection_fd < 0)
         return;
 
-    if (mode)
-        path = mx_strjoin("~/Downloads", path);
+    if (mode) {
+        tmp = mx_strjoin(getpwuid(getuid())->pw_dir, "/Downloads/");
+        path = mx_strjoin(tmp, path);
+    }
 
     thr = malloc(sizeof(pthread_t));
     data = malloc(sizeof(t_ft_data));

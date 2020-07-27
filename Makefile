@@ -272,7 +272,7 @@ BUILDERS_SRCS			= login_signup_builder.c logout_builder.c \
 						  send_file_builder.c get_profile_builder.c \
 						  invite_user_to_group_builder.c \
 						  leave_group_builder.c delete_account_builder.c \
-						  group_members_builder.c
+						  group_members_builder.c download_file_builder.c
 
 PROCESSORS_SRCS			= main_processor.c s_in_s_up.c s_out.c \
 						  load_dialogues.c load_groups.c find_user.c n_grp.c \
