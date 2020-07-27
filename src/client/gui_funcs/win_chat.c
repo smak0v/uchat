@@ -26,6 +26,8 @@ static void connect_signals_1(t_glade *g) {
 static void connect_signals_2(t_glade *g) {
     g_signal_connect(g->b_leave_group, "clicked",
         G_CALLBACK(mx_leave_group), g);
+    g_signal_connect(g->b_delete_account, "clicked",
+        G_CALLBACK(mx_delete_account), g);
 }
 
 void mx_create_win_chat(t_glade *g) {

@@ -30,6 +30,8 @@ static void check_response_type_1(int type, char *response, t_glade *g) {
         mx_notif_add_to_gr(response, g);
     else if (type == LEAVE_GROUP)
         mx_leave_group_processor(response, g);
+    else if (type == DELETE_USER)
+        mx_finish_deleting_account(response, g);
 }
 
 void mx_check_response_type(char *response, t_glade *g) {

@@ -1145,6 +1145,9 @@
                                 <property name="tooltip_text" translatable="yes">Delete account</property>
                                 <property name="halign">center</property>
                                 <property name="relief">none</property>
+                                <style>
+                                  <class name="b_delete_account"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="expand">True</property>

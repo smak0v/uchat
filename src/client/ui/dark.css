@@ -89,9 +89,10 @@ label {
     background: shade(#243b53, 0.75);
 }
 
-.save_profile_btn {
+.save_profile_btn,
+.b_delete_account {
     margin-bottom: 100px;
-    background-color: shade(#334e68, 0.75);
+    background: shade(#334e68, 0.75);
     border-color: shade(#334e68, 0.75);
     border-style: solid;
     border-width: 1px;
@@ -101,8 +102,9 @@ label {
     padding-top: 5px;
 }
 
-.save_profile_btn:hover {
-    background-color: shade(#334e68, 0.9);
+.save_profile_btn:hover,
+.b_delete_account:hover {
+    background: shade(#334e68, 0.9);
 }
 
 .add_btn {

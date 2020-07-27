@@ -154,6 +154,7 @@ struct s_glade {
     GtkWidget *e_email; // entry email
     GtkWidget *e_profile_name; // entry profile name
     GtkWidget *e_status; // entry status
+    GtkWidget *b_delete_account; // butoon delete account
 
     // GUI blocks (chat)
     GtkWidget *common_area;
@@ -232,6 +233,7 @@ char *mx_json_string_s_file(int id, int num, char *buff, int buf_size);
 char *mx_json_string_invite_user_to_group(char *token, int uid, int gid,
     int uid2);
 char *mx_json_string_leave_group(char *token, int uid, int gid);
+char *mx_json_string_delete_account(char *token, int uid);
 
 // JSON parsers
 int mx_parse_login_response(char *response, t_glade *g);
@@ -263,6 +265,7 @@ void mx_cli_file_transfer(char *response, t_glade *g);
 void mx_inv(char *response, t_glade *g);
 void mx_notif_add_to_gr(char *response, t_glade *g);
 void mx_leave_group_processor(char *response, t_glade *g);
+void mx_finish_deleting_account(char *response, t_glade *g);
 
 // Audio
 int mx_init_input_stream(PaStream **stream, t_audio *data);
@@ -310,6 +313,7 @@ void mx_open_profile(GtkWidget *w, t_glade *g);
 void mx_close_profile(GtkWidget *w, t_glade *g);
 void mx_save_profile(GtkWidget *w, t_glade *g);
 void mx_get_profile(t_glade *g);
+void mx_delete_account(GtkWidget *w, t_glade *g);
 
 void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);
