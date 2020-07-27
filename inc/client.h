@@ -347,6 +347,7 @@ void mx_load_groups_request(t_glade *g);
 void mx_load_messages_request(t_glade *g, time_t timestamp);
 void mx_set_message_style(GtkWidget *msg_v_box, GtkWidget *l_username,
     GtkWidget *l_time, GtkWidget *l_msg);
+void mx_set_message_wrap(GtkWidget *l_msg);
 
 gboolean mx_close_chat(GtkWidget *w, GdkEventKey *e, t_glade *g);
 void mx_close(t_glade *g);

@@ -10,6 +10,7 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg,
         json_object_object_get(msg, "nme")));
     GtkWidget *l_time = gtk_label_new(time);
 
+    mx_set_message_wrap(l_msg);
     gtk_label_set_xalign(GTK_LABEL(l_username), 0);
     gtk_label_set_xalign(GTK_LABEL(l_time), 1);
     gtk_label_set_xalign(GTK_LABEL(l_msg), 0);
@@ -19,7 +20,6 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg,
     gtk_box_pack_end(GTK_BOX(u_t_h_box), l_time, FALSE, FALSE, 0);
     gtk_box_pack_end(GTK_BOX(msg_vbox), l_msg, FALSE, FALSE, 0);
     mx_append_file_to_msg_block(msg_v_box, msg, g, l_msg);
-
     mx_set_message_style(msg_v_box, l_username, l_time, l_msg);
     mx_add_id_to_msg_block(msg, msg_vbox);
 }
