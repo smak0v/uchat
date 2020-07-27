@@ -337,8 +337,7 @@ void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
 void mx_add_message_to_gui(t_glade *g, char *response);
-void mx_add_id_to_msg_block(json_object *msg, GtkWidget *msg_vbox, t_glade *g,
-    bool play);
+void mx_add_id_to_msg_block(json_object *msg, GtkWidget *msg_vbox);
 void mx_attach_file(GtkWidget *w, t_glade *g);
 void mx_download(GtkWidget *w, t_glade *g);
 
@@ -373,3 +372,4 @@ void mx_append_file_to_msg_block(GtkWidget *msg_v_box, json_object *msg,
     t_glade *g, GtkWidget *l_msg);
 
 void mx_change_theme(GtkWidget *w, t_glade *g);
+void mx_pilin_pilin(t_glade *g, json_object *j_msg);

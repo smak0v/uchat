@@ -21,7 +21,7 @@ static void buld_msg_block(GtkWidget *msg_v_box, json_object *msg, char *time,
     mx_append_file_to_msg_block(msg_v_box, msg, g, l_msg);
 
     mx_set_message_style(msg_v_box, l_username, l_time, l_msg);
-    mx_add_id_to_msg_block(msg, msg_vbox, g, true);
+    mx_add_id_to_msg_block(msg, msg_vbox);
 }
 
 static t_msg *build_msg(t_glade *g, char *user_message) {
@@ -73,6 +73,7 @@ void mx_add_message_to_gui(t_glade *g, char *response) {
         mx_strdel(&time);
         mx_clear_jobj(&jobj, MX_SUCCESS);
     }
+    mx_pilin_pilin(g, j_msg);
 }
 
 void mx_send_msg(GtkWidget *w, t_glade *g) {
