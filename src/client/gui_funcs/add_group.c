@@ -1,5 +1,14 @@
 #include "client.h"
 
+static void cancel_add_group(GtkWidget *w, t_glade *g) {
+    gtk_entry_set_text(GTK_ENTRY(g->e_new_group_name), "");
+    gtk_label_set_text(GTK_LABEL(g->err_group_name_label), "");
+
+    gtk_widget_hide(g->d_add_group);
+
+    (void)w;
+}
+
 static void prepare_add_group(GtkWidget *w, t_glade *g) {
     char *name = (char *)gtk_entry_get_text(GTK_ENTRY(g->e_new_group_name));
     char *request = NULL;
@@ -10,6 +19,7 @@ static void prepare_add_group(GtkWidget *w, t_glade *g) {
         mx_strdel(&request);
         gtk_label_set_text(GTK_LABEL(g->err_group_name_label), "");
         gtk_widget_hide(g->err_group_name_label);
+        cancel_add_group(w, g);
     }
 
     else {
@@ -18,15 +28,6 @@ static void prepare_add_group(GtkWidget *w, t_glade *g) {
             "Try another name!");
         gtk_widget_show(g->err_group_name_label);
     }
-
-    (void)w;
-}
-
-static void cancel_add_group(GtkWidget *w, t_glade *g) {
-    gtk_entry_set_text(GTK_ENTRY(g->e_new_group_name), "");
-    gtk_label_set_text(GTK_LABEL(g->err_group_name_label), "");
-
-    gtk_widget_hide(g->d_add_group);
 
     (void)w;
 }
