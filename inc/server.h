@@ -201,7 +201,7 @@ void *mx_send_file_serv(void *data);
 t_auditor *mx_auditor_kostyl(int mid, int port, char *file, bool type);
 t_ft_data *mx_init_ft_data(t_comm *connect, int socket, t_auditor *kostyl);
 void mx_close_connection(t_comm *connect, char *status);
-void mx_process_new_ssl(SSL_CTX *ctx, int connect_fd, t_meta *trd_data);
+void mx_process_new_ssl(SSL *ctx, int connect_fd, t_meta *trd_data);
 char *mx_add_dialog_name(sqlite3 *db, int code, char *j_str, int uid);
 
 // Notifications

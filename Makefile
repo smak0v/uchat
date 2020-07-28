@@ -180,7 +180,6 @@ $(SERVER_APP_NAME): $(COMMON_OBJS) $(SERVER_OBJS_FILES)
 		-lmx \
 		-lssl \
 		-lcrypto \
-		-fsanitize=address,undefined -g3 -rdynamic \
 		-o $@
 
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
@@ -319,7 +318,6 @@ $(CLIENT_APP_NAME): $(CLIENT_OBJS_FILES) $(COMMON_OBJS)
 		-framework AudioToolbox \
 		-framework AudioUnit \
 		-framework Carbon \
-		-fsanitize=address,undefined -g3 -rdynamic \
 		-o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"
