@@ -1,6 +1,5 @@
 #include "server.h"
 
-// TODO REFACTOR
 void *mx_communicate(void *data) {
     t_comm *connect = (t_comm *)data;
     char buff[MX_MAX];
@@ -15,21 +14,8 @@ void *mx_communicate(void *data) {
             bzero(buff, MX_MAX);
             bytes_read = SSL_read(connect->ssl, buff, sizeof(buff));
             buff[bytes_read] = '\0';
-            if (bytes_read <= 0) {
-                // TODO MOVE TO SEPARATE FUNC
-                close(SSL_get_fd(connect->ssl));
-                *status = 0;
-                ERR_print_errors_fp(stderr);
-
-                int uid = mx_get_user_id_by_socket(connect->db, connect->fd);
-                mx_remove_socket(connect->db, connect->fd, uid);
-
-                mx_pop_from_ssl_list(connect->ssl_list, connect->fd);
-
-                mx_printstr_endl("Connection closed");
-                pthread_exit(NULL);
-                // ==========
-            }
+            if (bytes_read <= 0)
+                mx_close_connection(connect, status);
             response = mx_process_request(buff, connect);
             SSL_write(connect->ssl, response, strlen(response));
         }
@@ -37,31 +23,19 @@ void *mx_communicate(void *data) {
 }
 
 void mx_accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
-    SSL *ssl = NULL;
     int connect_fd = 0;
     unsigned int len = 0;
     struct sockaddr_in client_addr;
     t_meta *trd_data = mx_init_threads(db);
-    t_list *ssl_list = NULL;
 
     while (1) {
-        mx_printstr_endl("Ready for new client");
         len = sizeof(client_addr);
 
         connect_fd = accept(socket_fd, (MX_SA *)&client_addr, &len);
         if (connect_fd < 0)
             mx_terminate("Server acccept failed!");
 
-        ssl = SSL_new(ctx);
-        SSL_set_fd(ssl, connect_fd);
-        if (!trd_data->ssl_list) {
-            ssl_list = mx_create_node((void *)ssl);
-            trd_data->ssl_list = &ssl_list;
-        }
-        else
-            mx_push_back(trd_data->ssl_list, ssl);
-
-        trd_data->ssl = ssl;
+        mx_process_new_ssl(ctx, connect_fd, trd_data);
         mx_thread_manager(connect_fd, &trd_data);
     }
 }
@@ -103,7 +77,6 @@ int mx_start_server(int port) {
     if (socket_fd < 0)
         mx_terminate("Socket creation error\n");
     db = mx_opendb("test.db");
-    mx_print_db(db, "MSG");
     mx_accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);

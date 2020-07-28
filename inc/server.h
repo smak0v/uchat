@@ -22,6 +22,7 @@ typedef struct s_dialog_sorted t_dialog_sorted;
 typedef struct s_dialog_users t_dialog_users;
 typedef struct s_msg t_msg;
 typedef struct s_profile t_profile;
+typedef struct s_auditor t_auditor;
 
 struct s_communication {
     int fd;
@@ -108,7 +109,6 @@ struct s_profile {
 	char *country;
 };
 
-// static char *add_to_group(sqlite3 *db, json_object *arr, int gr_id, int adm)
 struct s_groups_auditor {
 	sqlite3 *db;
 	json_object *arr;
@@ -116,6 +116,13 @@ struct s_groups_auditor {
 	char *email;
 	char *status;
 	char *country;
+};
+
+struct s_auditor {
+	int mid;
+	int port;
+	char *file;
+	bool mode;
 };
 
 // Functions
@@ -190,6 +197,11 @@ int mx_validate_invite(sqlite3 *db, json_object *arr, int gid);
 FILE *mx_open_file(char *filename, char *mode);
 void *mx_recv_file(void *void_data);
 void *mx_send_file_serv(void *data);
+t_auditor *mx_auditor_kostyl(int mid, int port, char *file, bool type);
+t_ft_data *mx_init_ft_data(t_comm *connect, int socket, t_auditor *kostyl);
+void mx_close_connection(t_comm *connect, char *status);
+void mx_process_new_ssl(SSL_CTX *ctx, int connect_fd, t_meta *trd_data);
+char *mx_add_dialog_name(sqlite3 *db, int code, char *j_str, int uid);
 
 // Notifications
 void mx_notify_add_to_group(t_comm *connect, json_object *arr, int gid);
@@ -203,6 +215,7 @@ int *mx_parse_sock_str(sqlite3 *db, int uid, int *len);
 // Wrappers
 int mx_j_o_o_a(json_object *jso, const char *key, json_object *val);
 enum json_type mx_j_o_g_t(json_object *jso);
+char *mx_j_s_c_t(int code, int type);
 
 // SSL List
 void mx_pop_from_ssl_list(t_list **ssl_list, int delete_fd);

@@ -9,9 +9,9 @@ static void *mx_init_transfer(void *void_data) {
 
     if (connect < 0)
         pthread_exit(NULL);
-
     data->sock = connect;
     if (!data->type) {
+        mx_mkdir("files");
         mx_recv_file(void_data);
     }
     else
@@ -43,69 +43,48 @@ char *mx_download(void *jobj, t_comm *connect) {
     if (!msg->file)
         return mx_json_string_code_type(404, DOWNLOAD);
     return mx_file_transfer(connect, msg->file,
-                            mx_json_string_code_type(200, DOWNLOAD), msg->id, 1);
+                            mx_j_s_c_t(200, DOWNLOAD), msg->id, 1);
 }
 
-// TODO: REFACTOR !!!!!!!!!!!!!!!!!
-char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id, bool type) {
-    int index = -1;
-    int port = -1;
-    int socket = -2;
-    pthread_t *thr = NULL;
-    t_ft_data *data = NULL;
-
-    while (socket == -2) {
-        while (mx_get_free_thread(connect->status, &index) != 0)
-            usleep(1);
-        port = index + 7200;
-        socket = mx_open_listener(port);
-    }
-
+static void send_data_to_client(t_comm *connect, t_auditor *data) {
     json_object *jobj = json_object_new_object();
+    SSL *ssl = NULL;
 
     mx_j_o_o_a(jobj, "code", json_object_new_int(200));
     mx_j_o_o_a(jobj, "type", json_object_new_int(FILE_TRANSFER));
-    mx_j_o_o_a(jobj, "mid", json_object_new_int(msg_id));
-    mx_j_o_o_a(jobj, "port", json_object_new_int(port));
-    mx_j_o_o_a(jobj, "path", json_object_new_string(file));
-    mx_j_o_o_a(jobj, "mode", json_object_new_boolean(type));
+    mx_j_o_o_a(jobj, "mid", json_object_new_int(data->mid));
+    mx_j_o_o_a(jobj, "port", json_object_new_int(data->port));
+    mx_j_o_o_a(jobj, "path", json_object_new_string(data->file));
+    mx_j_o_o_a(jobj, "mode", json_object_new_boolean(data->mode));
 
     char *j_str = (char *)json_object_to_json_string(jobj);
-    SSL *ssl = mx_find_ssl(connect->ssl_list, connect->fd);
+    ssl = mx_find_ssl(connect->ssl_list, connect->fd);
     SSL_write(ssl, j_str, (sizeof(char) * strlen(j_str)));
 
-    char *itoa_str = NULL;
-    char *tmp = NULL;
-    char *path = NULL;
+    free(data);
+}
 
-    itoa_str = mx_itoa(msg_id);
-    tmp = mx_strjoin(itoa_str, "_");
-    mx_strdel(&itoa_str);
-    if (type == 0) {
-        itoa_str = mx_memrchr(file, '/', (size_t)mx_strlen(file));
-        itoa_str += 1;
-        path = mx_strjoin(tmp, itoa_str);
+char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id,
+                       bool type) {
+    int port = -1;
+    int socket = -2;
+    t_ft_data *data = NULL;
+    pthread_t *thr = malloc(sizeof(pthread_t));;
+
+    while (socket == -2) {
+        while (mx_get_free_thread(connect->status, &port) != 0)
+            usleep(1);
+        port += 7200;
+        socket = mx_open_listener(port);
     }
-    else
-        path = mx_strjoin(tmp, file);
-
-    mx_strdel(&tmp);
-    tmp = mx_strjoin("files/", path);
-    mx_strdel(&path);
-
+    send_data_to_client(connect, mx_auditor_kostyl(msg_id, port, file, type));
     if (socket > 0) {
-        thr = malloc(sizeof(pthread_t));
-        data = malloc(sizeof(t_ft_data));
-        data->name = tmp;
-        data->sock = socket;
-        data->status = &((connect->status)[index]);
-        data->type = type;
-
+        data = mx_init_ft_data(connect, socket,
+                               mx_auditor_kostyl(msg_id, port, file, type));
         if (pthread_create(thr, NULL, mx_init_transfer, (void *)data) != 0)
             return "{\"code\": 666}";
         return res;
     }
-    else
-        return "{\"code\": 666}";
+    return "{\"code\": 666}";
 }
 

@@ -33,7 +33,7 @@ void mx_cli_file_transfer(char *response, t_glade *g) {
 
 void mx_process_send_file(char *ip, char *path, int port, bool mode) {
     int connection_fd = -1;
-    pthread_t *thr = NULL;
+    pthread_t *thr = malloc(sizeof(pthread_t));
     t_ft_data *data = NULL;
 
     if ((connection_fd = mx_open_connection(ip, port)) < 0)
@@ -68,7 +68,7 @@ void *mx_send_file_cli(void *data) {
         json_str = mx_json_string_s_file(1, pack_num++, buffer, b);
         write(((t_ft_data *)(data))->sock, json_str, strlen(json_str));
         mx_strdel(&json_str);
-        usleep(10000);
+        usleep(1000);
         bzero(buffer, sizeof(buffer));
     }
 

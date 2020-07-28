@@ -18,8 +18,9 @@ static char *send_group_message(t_comm *connect, t_msg *message, sqlite3 *db) {
 // private message, but the chat doesn't exist yet;
 static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
     int d_id = msg->dialog_id;
-    char *json_string = NULL;
+    char *j_str = NULL;
     t_dialog *dialogue = NULL;
+    int code = 0;
 
     if (msg->dialog_id == -2) {
         if ((dialogue = mx_get_dialog_by_id1_id2(connect->db, msg->sender,
@@ -28,36 +29,29 @@ static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
         else if ((d_id = mx_add_dialog(db, msg->sender, msg->recepient)) == -1)
             return mx_json_string_code_type(500, S_MES);
         msg->dialog_id = d_id;
+        code = 1;
     }
-
     msg->id = mx_add_msg(db, msg);
-    json_string = mx_msg_json_builder(msg);
-    mx_send_to_all_clients(connect, json_string, msg->recepient);
+    j_str = mx_msg_json_builder(msg);
+    mx_send_to_all_clients(connect, j_str, msg->recepient);
+    j_str = mx_add_dialog_name(connect->db, code, j_str, msg->recepient);
 
-    return json_string;
+    return j_str;
 }
 
-// TODO: REFACTOR
 char *mx_send_message(void *jobj, t_comm *connect) {
     t_msg *msg = mx_extract_message(jobj);
     char *res = NULL;
-    char *uname = NULL;
-    char *tmp = NULL;
+    char *tmp = msg ? msg->file : NULL;
 
     if (!msg)
         return mx_bad_request(NULL, NULL);
     if (mx_validate_token(connect->db, msg->sender, (json_object *)jobj))
          return mx_json_string_code_type(401, S_MES);
-    if ((uname = mx_get_user_login_by_id(connect->db, msg->sender)) == NULL)
+    if (!(msg->username = mx_get_user_login_by_id(connect->db, msg->sender)))
         return mx_json_string_code_type(500, S_MES);
-    else
-        msg->username = uname;
-
-    if (msg->file) {
-        tmp = msg->file;
-        msg->file = mx_memrchr(tmp, '/', sizeof(char) * mx_strlen(tmp));
-        msg->file += 1;
-    }
+    if (msg->file)
+        msg->file = (char *)mx_memrchr(tmp, '/', mx_strlen(tmp)) + 1;
     if (msg->group_id != -1)
         res = send_group_message(connect, msg, connect->db);
     else
