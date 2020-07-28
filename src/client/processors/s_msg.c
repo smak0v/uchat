@@ -5,9 +5,11 @@ static gboolean s_msg(gpointer data) {
 
     if (!mx_parse_send_message_response(maint_thread->response,
         maint_thread->g)) {
+        json_object *jobj = json_tokener_parse(maint_thread->response);
 
-        mx_add_message_to_gui(maint_thread->g,
-            maint_thread->response);
+        mx_add_message_to_gui(maint_thread->g, jobj);
+
+        mx_clear_jobj(&jobj, MX_SUCCESS);
     }
 
     mx_delete_main_thread_struct((t_main_thread **)&data);

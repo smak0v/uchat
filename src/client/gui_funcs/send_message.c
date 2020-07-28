@@ -52,27 +52,27 @@ static bool check_did_gid(t_glade *g, json_object *j_msg) {
         return false;
 }
 
-void mx_add_message_to_gui(t_glade *g, char *response) {
-    json_object *jobj = json_tokener_parse(response);
-    json_object *j_msg = json_object_object_get(jobj, "msg");
+void mx_add_message_to_gui(t_glade *g, json_object *jobj) {
     char *time = NULL;
     GtkWidget *msg = NULL;
 
-    if (check_did_gid(g, j_msg)) {
-        time = mx_get_time(json_object_get_int(json_object_object_get(j_msg,
-        "time")));
+    if (check_did_gid(g, json_object_object_get(jobj, "msg"))) {
+        time = mx_get_time(json_object_get_int(json_object_object_get(
+            json_object_object_get(jobj, "msg"), "time")));
         msg = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-        buld_msg_block(msg, j_msg, time, g);
+        buld_msg_block(msg, json_object_object_get(jobj, "msg"), time, g);
         gtk_box_pack_start(GTK_BOX(g->messages_area), msg, FALSE, FALSE, 0);
-        if (mx_atoi(json_object_get_string(
-            json_object_object_get(j_msg, "uid2"))) == g->uid)
+        if (mx_atoi(json_object_get_string(json_object_object_get(
+            json_object_object_get(jobj, "msg"), "uid2"))) == g->uid)
+            gtk_widget_set_halign(GTK_WIDGET(msg), GTK_ALIGN_START);
+        else if (mx_atoi(json_object_get_string(json_object_object_get(
+            json_object_object_get(jobj, "msg"), "uid"))) != g->uid)
             gtk_widget_set_halign(GTK_WIDGET(msg), GTK_ALIGN_START);
         else
             gtk_widget_set_halign(GTK_WIDGET(msg), GTK_ALIGN_END);
         mx_strdel(&time);
-        mx_clear_jobj(&jobj, MX_SUCCESS);
     }
-    mx_pilin_pilin(g, j_msg);
+    mx_pilin_pilin(g, json_object_object_get(jobj, "msg"));
 }
 
 void mx_send_msg(GtkWidget *w, t_glade *g) {
