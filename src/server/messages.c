@@ -37,9 +37,9 @@ static char *send_private_message(t_comm *connect, t_msg *msg, sqlite3 *db) {
     }
     msg->id = mx_add_msg(db, msg);
     j_str = mx_msg_json_builder(msg);
-    mx_send_to_all_clients(connect, j_str, msg->recepient);
+    mx_send_to_all_clients(connect, mx_add_field(j_str, 1, "i",
+                           (void *)&(msg->sender)), msg->recepient);
     j_str = mx_add_dialog_name(connect->db, code, j_str, msg->recepient);
-
     return j_str;
 }
 
