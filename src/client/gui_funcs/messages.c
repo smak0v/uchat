@@ -30,6 +30,6 @@ void mx_show_hide_chat_group_utils(t_glade *g) {
 
 void mx_set_message_wrap(GtkWidget *l_msg) {
     gtk_label_set_line_wrap(GTK_LABEL(l_msg), TRUE);
-    gtk_label_set_max_width_chars(GTK_LABEL(l_msg), 0);
+    gtk_label_set_max_width_chars(GTK_LABEL(l_msg), 60);
     gtk_label_set_line_wrap_mode(GTK_LABEL(l_msg), PANGO_WRAP_CHAR);
 }
