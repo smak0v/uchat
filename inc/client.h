@@ -336,7 +336,7 @@ void mx_add_chat(GtkWidget *w, t_glade *g);
 void mx_add_group(GtkWidget *w, t_glade *g);
 
 void mx_send_msg(GtkWidget *w, t_glade *g);
-void mx_add_message_to_gui(t_glade *g, char *response);
+void mx_add_message_to_gui(t_glade *g, json_object *jobj);
 void mx_add_id_to_msg_block(json_object *msg, GtkWidget *msg_vbox);
 void mx_attach_file(GtkWidget *w, t_glade *g);
 void mx_download(GtkWidget *w, t_glade *g);

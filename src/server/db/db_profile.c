@@ -13,8 +13,8 @@ void mx_new_table_profiles(sqlite3 *database) {
 int mx_add_profile(sqlite3 *db, t_profile *usr) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db,
-            "INSERT INTO PROFILES(USER_ID, NAME, BIRTH, EMAIL, STATUS, \
-            COUNTRY)VALUES(?1, ?2, ?3, ?4, ?5, ?6);", -1, &stmt, NULL);
+        "INSERT INTO PROFILES(USER_ID, NAME, BIRTH, EMAIL, STATUS, \
+        COUNTRY)VALUES(?1, ?2, ?3, ?4, ?5, ?6);", -1, &stmt, NULL);
 
     if (rv == SQLITE_ERROR)
         return -1;
@@ -36,7 +36,7 @@ int mx_add_profile(sqlite3 *db, t_profile *usr) {
 int mx_delete_profile(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db,
-            "DELETE FROM PROFILES WHERE USER_ID = ?1;", -1, &stmt, NULL);
+        "DELETE FROM PROFILES WHERE USER_ID = ?1;", -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, user_id);
 

@@ -40,7 +40,7 @@ static t_msg *take_msg(sqlite3_stmt *stmt) {
 t_msg *mx_get_msg_by_id(sqlite3 *db, int id) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db, "SELECT * FROM MSG WHERE ID = ?1",
-                       -1, &stmt, NULL);
+        -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, id);
 
@@ -54,8 +54,7 @@ int mx_get_msg(sqlite3 *db, t_msg *m) {
     sqlite3_stmt *stmt = NULL;
     int id = -1;
     int rv = sqlite3_prepare_v2(db,
-            "SELECT * FROM MSG WHERE SENDER = ?1 AND TIME = ?2", 
-            -1, &stmt, NULL);
+        "SELECT * FROM MSG WHERE SENDER = ?1 AND TIME = ?2", -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, m->sender);
     sqlite3_bind_int(stmt, 2, m->time);

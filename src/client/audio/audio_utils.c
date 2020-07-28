@@ -33,9 +33,11 @@ void mx_set_input_parameters(PaStreamParameters *input_parameters,
 }
 
 void mx_exit_stream(PaStream *stream) {
-    Pa_StopStream(stream);
-    Pa_CloseStream(stream);
-    Pa_Terminate();
+    PaError err = paNoError;
+
+    if ((err = Pa_StopStream(stream)) == paNoError)
+        if ((err = Pa_CloseStream(stream)) == paNoError)
+            Pa_Terminate();
 }
 
 void mx_free_audio_data(t_audio **data, t_sample_block **sample_block) {

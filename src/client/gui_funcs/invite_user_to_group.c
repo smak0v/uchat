@@ -12,8 +12,6 @@ static void search_user(GtkWidget *w, t_glade *g) {
         SSL_write(g->ssl, request, strlen(request));
 
         mx_strdel(&request);
-
-        gtk_entry_set_text(GTK_ENTRY(g->e_user_search), "");
     }
 
     (void)w;

@@ -17,7 +17,8 @@ void *mx_communicate(void *data) {
             if (bytes_read <= 0)
                 mx_close_connection(connect, status);
             response = mx_process_request(buff, connect);
-            SSL_write(connect->ssl, response, strlen(response));
+            if (response)
+                SSL_write(connect->ssl, response, strlen(response));
         }
     }
 }

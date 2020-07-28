@@ -70,7 +70,7 @@ int mx_check_group_member(sqlite3 *db, int user_id, int group_id) {
     sqlite3_stmt *stmt = NULL;
     int grp_mem = -1;
     int rv = sqlite3_prepare_v2(db, "SELECT * FROM GROUP_MEMBERS WHERE "
-            "USER_ID = ?1 AND GROUP_ID = ?2", -1, &stmt, NULL);
+        "USER_ID = ?1 AND GROUP_ID = ?2", -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, user_id);
     sqlite3_bind_int(stmt, 2, group_id);

@@ -47,8 +47,7 @@ int mx_get_time_dialog(sqlite3 *db, int dialog_id, int user_id) {
     sqlite3_stmt *stmt;
     int time = -1;
     int rv = sqlite3_prepare_v2(db, "SELECT TIME FROM MSG WHERE \
-            DIALOG_ID = ?1 AND SENDER = ?2 ORDER BY TIME DESC",
-            -1, &stmt, NULL);
+        DIALOG_ID = ?1 AND SENDER = ?2 ORDER BY TIME DESC", -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, dialog_id);
     sqlite3_bind_int(stmt, 2, user_id);
