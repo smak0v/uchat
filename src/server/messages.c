@@ -1,14 +1,18 @@
 #include "server.h"
 
 static char *send_group_message(t_comm *connect, t_msg *message, sqlite3 *db) {
-    char *js_str = mx_json_string_msg(message);
+    char *js_str = NULL;
     int *group_members = mx_get_all_id_group_members(db, message->group_id);
 
     message->id = mx_add_msg(db, message);
+    js_str = mx_msg_json_builder(message);
 
     for (int i = 0; group_members[i] != -1; i++)
-        if (group_members[i] != message->sender)
+        if (group_members[i] != message->sender) {
+            printf("group_members[i] == %d && message->sender == %d\n", group_members[i], message->sender);
+            mx_printint_endl(group_members[i]);
             mx_send_to_all_clients(connect, js_str, group_members[i]);
+        }
 
     mx_strdel(&js_str);
     return mx_msg_json_builder(message);
@@ -54,7 +58,7 @@ char *mx_send_message(void *jobj, t_comm *connect) {
         msg->file = (char *)mx_memrchr(tmp, '/', mx_strlen(tmp)) + 1;
     if (msg->group_id != -1)
         res = send_group_message(connect, msg, connect->db);
-    else
+    else if (msg->dialog_id != -1)
         res = send_private_message(connect, msg, connect->db);
     if (msg->file)
         return mx_file_transfer(connect, tmp, res, msg->id, 0);

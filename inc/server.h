@@ -150,7 +150,7 @@ char *mx_delete_message(void *jobj, t_comm *connect);
 char *mx_load_dialogues(void *jobj, t_comm *connect);
 char *mx_load_groups(void *jobj, t_comm *connect);
 char *mx_load_messages(void *jobj, t_comm *connect);
-char *mx_del_user(void *jobj, t_comm *connect);
+char *mx_delete_user(void *jobj, t_comm *connect);
 char *mx_get_user(void *jobj, t_comm *connect);
 char *mx_find_user(void *jobj, t_comm *connect);
 char *mx_edit_profile(void *jobj, t_comm *connect);

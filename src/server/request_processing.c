@@ -20,8 +20,8 @@ static api_function select_method2(enum e_types type) {
         return mx_load_groups;
     else if (type == LOAD_MESSAGES)
         return mx_load_messages;
-    // else if (type == DELETE_USER)
-    //     return mx_del_user;
+    else if (type == DELETE_USER)
+        return mx_delete_user;
     else if (type == GET_USER)
         return mx_get_user;
     else if (type == FIND_USER)
