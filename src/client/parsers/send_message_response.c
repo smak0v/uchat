@@ -41,20 +41,28 @@ static void parse_message_response(json_object *jobj, t_glade *g) {
     json_object *j_uid2 = NULL;
     json_object *j_name = NULL;
     json_object *j_dnme = NULL;
+    json_object *j_i = NULL;
 
     json_object_object_get_ex(jobj, "msg", &j_msg);
     json_object_object_get_ex(jobj, "dnme", &j_dnme);
     json_object_object_get_ex(j_msg, "did", &j_id);
     json_object_object_get_ex(j_msg, "uid2", &j_uid2);
     json_object_object_get_ex(j_msg, "nme", &j_name);
+    json_object_object_get_ex(jobj, "i", &j_i);
 
     if (!check_did_in_dialogues(g->dialogues, json_object_get_int(j_id))
         && !g->group) {
-        add_dialog_to_dialogues(g, j_id, j_uid2);
+        if (j_i)
+            add_dialog_to_dialogues(g, j_id, j_i);
+        else
+            add_dialog_to_dialogues(g, j_id, j_uid2);
         if (j_dnme)
             add_dialog_to_gui(g, j_uid2, j_id, j_dnme);
         else
-            add_dialog_to_gui(g, j_uid2, j_id, j_name);
+            if (j_i)
+                add_dialog_to_gui(g, j_i, j_id, j_name);
+            else
+                add_dialog_to_gui(g, j_uid2, j_id, j_name);
     }
 }
 
