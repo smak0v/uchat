@@ -45,6 +45,8 @@ void mx_play(GtkWidget *w, t_glade *g) {
 
     download(childs0, g);
 
+    sleep(3);
+
     path = mx_strjoin(tmp, filename);
 
     mx_play_audio_thread(g, mx_strdup(path));

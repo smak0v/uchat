@@ -1,7 +1,7 @@
 #include "server.h"
 
 static t_comm *init_data(int connection_fd, char *status, t_meta **metadata) {
-    t_comm *data = malloc(sizeof(t_comm));
+    t_comm *data = mx_memalloc(sizeof(t_comm));
 
     data->fd = connection_fd;
     data->status = status;
@@ -25,10 +25,10 @@ int mx_get_free_thread(char *status, int *counter) {
 }
 
 t_meta *mx_init_threads(sqlite3 *db) {
-    pthread_t *threads = malloc(sizeof(pthread_t) * MX_MAX_THREADS);
-    char *status = malloc(sizeof(char) * MX_MAX_THREADS);
-    char *ft_status = malloc(sizeof(char) * MX_MAX_THREADS);
-    t_meta *data = malloc(sizeof(t_meta));
+    pthread_t *threads = mx_memalloc(sizeof(pthread_t) * MX_MAX_THREADS);
+    char *status = mx_memalloc(sizeof(char) * MX_MAX_THREADS);
+    char *ft_status = mx_memalloc(sizeof(char) * MX_MAX_THREADS);
+    t_meta *data = mx_memalloc(sizeof(t_meta));
 
     mx_memset(status, 0, MX_MAX_THREADS);
     mx_memset(ft_status, 0, MX_MAX_THREADS);

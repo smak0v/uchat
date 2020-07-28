@@ -36,7 +36,7 @@ void mx_accept_clients(int socket_fd, sqlite3 *db, SSL_CTX *ctx) {
         if (connect_fd < 0)
             mx_terminate("Server acccept failed!");
 
-        mx_process_new_ssl(ctx, connect_fd, trd_data);
+        mx_process_new_ssl(SSL_new(ctx), connect_fd, trd_data);
         mx_thread_manager(connect_fd, &trd_data);
     }
 }
@@ -77,7 +77,7 @@ int mx_start_server(int port) {
     socket_fd = mx_open_listener(port);
     if (socket_fd < 0)
         mx_terminate("Socket creation error\n");
-    db = mx_opendb("test.db");
+    db = mx_opendb("uchat.db");
     mx_accept_clients(socket_fd, db, ctx);
 
     mx_closedb(db);
@@ -96,8 +96,8 @@ int main(int argc, char **argv) {
     } else {
         if (!mx_check_port(argv[1]))
             mx_terminate("uchat_server: not valid port");
-        // mx_daemonize(mx_atoi(argv[1]));
-        mx_start_server(mx_atoi(argv[1]));
+        mx_daemonize(mx_atoi(argv[1]));
+        // mx_start_server(mx_atoi(argv[1]));
     }
 
     pthread_exit(NULL);

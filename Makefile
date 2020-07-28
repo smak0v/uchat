@@ -123,7 +123,7 @@ $(COMMON_OBJ_DIRS):
 $(COMMON_OBJD)/%.o: $(SRCD)/common/%.c $(INCS)
 	$(call compile_dependency, $<, $@)
 
-$(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)]
+$(CLIENT_OBJS): | $(CLIENT_OBJ_DIRS)
 
 
 
@@ -171,7 +171,8 @@ SERVER					= $(addprefix server/, $(SERVER_SRCS))
 $(SERVER_OBJ_DIRS):
 	@mkdir -p $@
 
-$(SERVER_APP_NAME): $(COMMON_OBJS) $(SERVER_OBJS_FILES)
+$(SERVER_APP_NAME): $(SQLITED) $(LIBMXD) $(LIBJSOND) \
+	$(COMMON_OBJ_DIRS) $(COMMON_OBJS) $(COMMON_OBJD) $(SERVER_OBJS_FILES)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(SQLITEA) \
 		$(COMMON_OBJS) $(SERVER_OBJS_FILES) \
 		-L $(LIBMXD) \
@@ -180,7 +181,6 @@ $(SERVER_APP_NAME): $(COMMON_OBJS) $(SERVER_OBJS_FILES)
 		-lmx \
 		-lssl \
 		-lcrypto \
-		-fsanitize=address,undefined -g3 -rdynamic \
 		-o $@
 
 	@printf "\r\33[2K$@\t\t\033[32;1mcreated\033[0m\n"
@@ -304,7 +304,8 @@ CLIENT					= $(addprefix client/, $(CLIENT_SRCS))
 $(CLIENT_OBJ_DIRS):
 	@mkdir -p $@
 
-$(CLIENT_APP_NAME): $(CLIENT_OBJS_FILES) $(COMMON_OBJS)
+$(CLIENT_APP_NAME): $(SQLITED) $(LIBMXD) $(LIBJSOND) \
+	$(COMMON_OBJ_DIRS) $(COMMON_OBJS) $(COMMON_OBJD) $(CLIENT_OBJS_FILES)
 	@$(CC) $(C_FLAGS) $(ADD_FLAGS) $(LINKER_FLAGS) $(LIBJSONA) $(COMMON_OBJS) \
 		$(CLIENT_OBJS_FILES) \
 		-L $(LIBMXD) \
@@ -319,7 +320,6 @@ $(CLIENT_APP_NAME): $(CLIENT_OBJS_FILES) $(COMMON_OBJS)
 		-framework AudioToolbox \
 		-framework AudioUnit \
 		-framework Carbon \
-		-fsanitize=address,undefined -g3 -rdynamic \
 		-o $@ $(GTK_LIBS)
 
 	@printf "\r\33[2K$@\t\t\t\033[32;1mcreated\033[0m\n"

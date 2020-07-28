@@ -34,7 +34,6 @@ static int delete_members_and_group(sqlite3 *db, int gid) {
     int *members = mx_get_all_id_group_members(db, gid);
 
     for (int i = 0; members[i] != -1; i++) {
-        // Notify online clients?
         if (mx_delete_user_from_group(db, members[i], gid) != 0)
             return -1;
     }
@@ -54,9 +53,6 @@ char *mx_del_group(void *jobj, t_comm *connect) {
 
     if (mx_validate_token(connect->db, uid, (json_object *)jobj))
         return mx_json_string_code_type(401, DEL_GROUP);
-
-    // Check admin status
-    // 403
 
     if (delete_messages(connect->db, gid) != 0)
         return mx_json_string_code_type(500, DEL_GROUP);

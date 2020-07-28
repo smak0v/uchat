@@ -1,12 +1,5 @@
 #include "server.h"
 
-// static void free_arrays(t_ld_d *arrays) {
-//     free(arrays->dialog_id);
-//     free(arrays->user_id);
-//     free(arrays->username);
-//     free(arrays);
-// }
-
 static t_ld_d *create_arrays_dlg(t_list *lst, int len) {
     t_ld_d *arrays = malloc(sizeof(t_ld_d));
     t_dialog_users *dialogue = lst->data;

@@ -190,7 +190,8 @@ int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
 json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
 void mx_send_to_all_clients(t_comm *connect, char *j_str, int uid);
-char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id, bool type);
+char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id,
+	bool type);
 int mx_get_free_thread(char *status, int *counter);
 char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw);
 int mx_validate_invite(sqlite3 *db, json_object *arr, int gid);
@@ -200,7 +201,7 @@ void *mx_send_file_serv(void *data);
 t_auditor *mx_auditor_kostyl(int mid, int port, char *file, bool type);
 t_ft_data *mx_init_ft_data(t_comm *connect, int socket, t_auditor *kostyl);
 void mx_close_connection(t_comm *connect, char *status);
-void mx_process_new_ssl(SSL_CTX *ctx, int connect_fd, t_meta *trd_data);
+void mx_process_new_ssl(SSL *ctx, int connect_fd, t_meta *trd_data);
 char *mx_add_dialog_name(sqlite3 *db, int code, char *j_str, int uid);
 
 // Notifications
