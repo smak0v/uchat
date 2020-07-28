@@ -190,7 +190,8 @@ int mx_extract_name_passw(json_object *json, const char **name,
                               const char **passw);
 json_object *mx_unpack_addtogroup(json_object *jobj, int *gid, int *uid);
 void mx_send_to_all_clients(t_comm *connect, char *j_str, int uid);
-char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id, bool type);
+char *mx_file_transfer(t_comm *connect, char *file, char *res, int msg_id,
+	bool type);
 int mx_get_free_thread(char *status, int *counter);
 char *mx_post_reg_sign_in(t_comm *connect, char *name, char *passw);
 int mx_validate_invite(sqlite3 *db, json_object *arr, int gid);

@@ -30,5 +30,3 @@ char *mx_remove_socket(sqlite3 *db, int fd, int uid) {
         mx_update_socket_by_user_id(db, sock, uid);
     return sock;
 }
-// i should check for a mistake in the last lines and handle it but idgaf
-
