@@ -18,8 +18,8 @@ int mx_add_sock_user(sqlite3 *db, int user_id,
                      char *sock_fd, char *token) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db,
-            "INSERT INTO SOCKETS(USER_ID, SOCKET_FD, TOKEN)" \
-            "VALUES(?1, ?2, ?3);", -1, &stmt, NULL);
+        "INSERT INTO SOCKETS(USER_ID, SOCKET_FD, TOKEN)" \
+        "VALUES(?1, ?2, ?3);", -1, &stmt, NULL);
 
     if (rv == SQLITE_ERROR)
         return -1;
@@ -38,7 +38,7 @@ char *mx_get_sock_by_user_id(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt = NULL;
     char *socket_fd = NULL;
     int rv = sqlite3_prepare_v2(db,
-            "SELECT * FROM SOCKETS WHERE USER_ID = ?1", -1, &stmt, NULL);
+        "SELECT * FROM SOCKETS WHERE USER_ID = ?1", -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, user_id);
 
@@ -59,7 +59,7 @@ char *mx_get_token_by_user_id(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt = NULL;
     char *token = NULL;
     int rv = sqlite3_prepare_v2(db,
-            "SELECT * FROM SOCKETS WHERE USER_ID = ?1", -1, &stmt, NULL);
+        "SELECT * FROM SOCKETS WHERE USER_ID = ?1", -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, user_id);
 
@@ -79,7 +79,7 @@ char *mx_get_token_by_user_id(sqlite3 *db, int user_id) {
 int mx_delete_sock_by_user_id(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db, "DELETE FROM SOCKETS WHERE USER_ID = ?1;",
-            -1, &stmt, NULL);
+        -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, user_id);
 

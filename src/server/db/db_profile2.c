@@ -32,7 +32,7 @@ static t_profile *take_profile(sqlite3_stmt *stmt) {
 t_profile *mx_get_profile_by_id(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db,
-            "SELECT * FROM PROFILES WHERE USER_ID = ?1", -1, &stmt, NULL);
+        "SELECT * FROM PROFILES WHERE USER_ID = ?1", -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, user_id);
 

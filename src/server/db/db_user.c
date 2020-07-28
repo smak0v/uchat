@@ -33,7 +33,7 @@ int mx_add_user(sqlite3 *db, char *login, char *pass) {
         return -2;
 
     rv = sqlite3_prepare_v2(db, "INSERT INTO USER(LOGIN, PASSWORD)"\
-                            "VALUES(?1, ?2);", -1, &stmt, NULL);
+        "VALUES(?1, ?2);", -1, &stmt, NULL);
 
     if (rv == SQLITE_ERROR)
         return -1;
@@ -51,7 +51,7 @@ int mx_add_user(sqlite3 *db, char *login, char *pass) {
 t_user *mx_get_user_by_login(sqlite3 *db, char *user_login) {
     sqlite3_stmt *stmt = NULL;
     int rv = sqlite3_prepare_v2(db, "SELECT * FROM USER WHERE LOGIN = ?1",
-                                -1, &stmt, NULL);
+        -1, &stmt, NULL);
 
     sqlite3_bind_text(stmt, 1, user_login, -1, SQLITE_STATIC);
 
@@ -64,7 +64,7 @@ t_user *mx_get_user_by_login(sqlite3 *db, char *user_login) {
 t_user *mx_get_user_by_user_id(sqlite3 *db, int user_id) {
     sqlite3_stmt *stmt;
     int rv = sqlite3_prepare_v2(db, "SELECT * FROM USER WHERE USER_ID = ?1",
-                                -1, &stmt, NULL);
+        -1, &stmt, NULL);
 
     sqlite3_bind_int(stmt, 1, user_id);
 
@@ -78,7 +78,7 @@ int mx_get_user_id_by_login(sqlite3 *db, char *login) {
     sqlite3_stmt *stmt = NULL;
     int id = -1;
     int rv = sqlite3_prepare_v2(db, "SELECT * FROM USER WHERE LOGIN = ?1",
-                                -1, &stmt, NULL);
+        -1, &stmt, NULL);
 
     sqlite3_bind_text(stmt, 1, login, -1, SQLITE_STATIC);
 
