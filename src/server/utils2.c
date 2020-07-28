@@ -14,3 +14,16 @@ void mx_process_new_ssl(SSL_CTX *ctx, int connect_fd, t_meta *trd_data) {
 
     trd_data->ssl = ssl;
 }
+
+char *mx_add_dialog_name(sqlite3 *db, int code, char *j_str, int uid) {
+    t_user *u = NULL;
+
+    if (code) {
+        u = mx_get_user_by_user_id(db, uid);
+        if (!u)
+            return mx_json_string_code_type(500, S_MES);
+        j_str = mx_add_field(j_str, 1, "dnme", (void *)u->user_login);
+    }
+
+    return j_str;
+}
